@@ -1,0 +1,155 @@
+{% extends "ProyectoPrincipalBundle:Default:base.html.twig" %}
+
+{%block scripts%}
+
+<script type="text/javascript" src="{{ asset('sistema/scripts/confirmacion.js')}}"></script> 
+
+<script type="text/javascript">
+
+var direccionConfirmacionGuardar = "{{path('proyecto_principal_pago_confirmacion_guardar')}}";
+
+</script>
+
+
+{%endblock%}
+
+{%block contenedorbase%}
+<div class="wrapper">
+
+	{% include 'ProyectoPrincipalBundle:Helpers:top.html.twig'  with {'clase': 'verde'}  %}
+	{% include 'ProyectoPrincipalBundle:Default:sesion.html.twig'  with {'datos': datos} %}
+
+	<div id="work">
+		<div >
+			<h3 > Confirmación de la Reserva </h3>
+			<p>
+				Comprueba los detalles de la reserva para terminar el proceso:
+			</p>
+			<p>
+				&nbsp;
+			</p>
+			<div id="contenido">
+				<table width="800" border="0">
+					<tr>
+						<td width="151"><strong>Fecha</strong></td>
+						<td width="227"><strong>Hora de Comienzo</strong></td>
+						<td width="200"><strong>Hora de finalización</strong></td>
+						<td width="71"><strong>Horas </strong></td>
+						<td width="129"><strong>Precio</strong></td>
+					</tr>
+					<tr>
+						<td>&nbsp;</td>
+						<td>&nbsp;</td>
+						<td>&nbsp;</td>
+						<td>&nbsp;</td>
+						<td>&nbsp;</td>
+					</tr>
+					{%for element in data%}
+					<tr>
+						<td>{{element.fecha}} <input type="hidden" class="confirmacion" id="reserva_{{loop.index}}" value="{{element.id}}"></td>
+						<td>{{element.horaComienzo}}</td>
+						<td>{{element.horaFinalización}}</td>
+						<td>{{element.horas}}h</td>
+						<td>{{element.precio}} EUR</td>
+					</tr>
+					{%endfor%}
+					<tr>
+						<td colspan="5">
+						<p>
+							&nbsp;
+						</p>
+						<hr>
+						</td>
+					</tr>
+
+					<tr>
+						<td>&nbsp;</td>
+						<td>&nbsp;</td>
+						<td><strong>Total</strong></td>
+						<td><strong>{{total.horas}}h</strong></td>
+						<td><strong>{{total.precio}} EUR</strong></td>
+					</tr>
+				</table>
+
+				<p>
+					&nbsp;
+				</p>
+				<p>
+					&nbsp;
+				</p>
+
+				<div class="sede"  >
+					<ul>
+						<textarea name="message" title="Añade información adicional para el propietario" id="informacionAdicional"></textarea>
+						<p>
+							<input name="condiciones" type="checkbox" id="condiciones" class="confirmacion">
+							<a href="javascript:void(0)"> Acepto las condiciones de reserva</a>
+						</p>
+						<div class="clearfix"></div>
+						<div class="enviar" style="float: left;">
+							<a href="{{path('proyecto_principal_espacio_reservar',{'id':object.id})}}" title="Regresar">Regresar y ajustar los tiempos </a>
+						</div>
+						<div class="enviar">
+							<a href="javascript:void(0)" id="botonRealizarPago" title="Realizar Pago">Realizar Pago </a>
+						</div>
+						<div>
+
+
+							<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+								<input type="hidden" name="cmd" value="_s-xclick">
+								<input type="hidden" name="hosted_button_id" value="2JSCSBAVUV8P6">
+								<input type="image" src="https://www.paypalobjects.com/es_XC/i/btn/btn_buynowCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+								<img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
+							</form>
+
+						</div>
+
+
+
+						<div id="error"></div>
+						<div class="clearfix"></div>
+						</li>
+					</ul>
+					<!--Category-->
+					<div class="clearfix"></div>
+					<div class="clearfix"></div>
+
+				</div>
+				<p>
+					&nbsp;
+				</p>
+				<p>
+					&nbsp;
+				</p>
+
+			</div>
+
+			<div id="loader" style="display:none;height:260px;">
+				<p style="text-align:center;width: 100%;margin-top: 168px;"><img src="{{ asset('sistema/images/loader-negro.gif')}}" title="Realizando confirmacion" style="width:80px;">
+				</p>
+			</div>
+
+			<div id="campos">
+				<input type="hidden" class="confirmacion" id="cantidadReservas" value="{{data|length}}">
+				<input type="hidden" class="confirmacion" id="horas" value="{{total.horas}}">
+				<input type="hidden" class="confirmacion" id="precioTotal" value="{{total.precio}}">
+				<input type="hidden" class="confirmacion" id="tipo" value="espacio">
+				<input type="hidden" class="confirmacion" id="idTipo" value="{{object.id}}">
+			</div>
+
+
+
+
+		</div>
+	</div>
+
+	<div class="clearfix"></div>
+
+	<div class="clearfix"></div>
+
+</div>
+
+<!-- TO MAKE THE PHP FORM WORK, ALL YOU NEED TO DO IS OPEN UP THE FILE CALLED 'submitemail.php' AND CHANGE WHERE IT SAYS 'your email goes here' -->
+
+<!-- DON'T TOUCH THIS SECTION -->
+{%endblock%} 

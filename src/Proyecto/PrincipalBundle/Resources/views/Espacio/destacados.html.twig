@@ -1,0 +1,33 @@
+<!-- destacados Section -->
+	<div id="destacados">
+		<h2 > Destacados </h2>
+		<div class="clearfix"></div>
+		{%for element in destacados%}
+		<div class="item">
+			<a href="{{ path('proyecto_principal_espacio_individual',{'id':element.id}) }}">
+				<img src="{{ asset('uploads/espacios/'~ element.path  ) }}" alt="image 1" style="width:180px;height:135px;">
+			<!-- Image must be 400px by 300px -->
+		    </a>
+			<h3>{{element.nombre|title}}</h3>
+			<!--Title-->
+			<ul>
+				<li class="izquierda">
+					{{element.localidad|title}}
+				</li>
+				<li class="izquierda">
+					{{element.superficie}} m2
+				</li>
+				<li class="derecha">
+					{{element.precioPorHora}} &euro;
+				</li>
+			</ul>
+			<!--Category-->
+		</div>
+	    <!--/item-->
+		{%endfor%}
+
+
+		</div>
+		<div class="clearfix"></div>
+	</div>
+<!-- destacados Section End -->

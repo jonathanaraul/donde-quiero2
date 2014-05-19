@@ -1,0 +1,10 @@
+@font-face {
+	font-family: 'BAUHS93';
+	src: url('./BAUHS93.eot');
+	src: local('BAUHS93'), url('./BAUHS93.woff') format('woff'), url('./BAUHS93.ttf') format('truetype');
+}
+@font-face {
+	font-family: 'BRLNSR';
+	src: url('./BRLNSR.eot');
+	src: local('BRLNSR'), url('./BRLNSR.woff') format('woff'), url('./BRLNSR.ttf') format('truetype');
+}

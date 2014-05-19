@@ -1,0 +1,183 @@
+<script type="text/javascript" src="{{ asset('sistema/scripts/reservas.js')}}"></script> 
+<script src='{{ asset('sistema/fullcalendar-1.6.4/lib/jquery.min.js')}}'></script>
+<script src='{{ asset('sistema/fullcalendar-1.6.4/lib/jquery-ui.custom.min.js')}}'></script>
+<script src='{{ asset('sistema/fullcalendar-1.6.4/fullcalendar/fullcalendar.min.js')}}'></script>
+
+<script type="text/javascript">
+
+var direccionProcesarReserva = "{{path('proyecto_principal_pago_procesar_reserva')}}";
+var direccionBorrarReservas = "{{path('proyecto_principal_pago_borrar_reservas')}}";
+
+var direccionReservarEspacio = "{{direccionReservar}}";
+
+
+</script>
+
+<script>
+	$(document).ready(function() {
+
+		var date = new Date();
+		var d = date.getDate();
+		var m = date.getMonth();
+		var y = date.getFullYear();
+
+		$('#external-events div.external-event').each(function() {
+
+			// create an Event Object (http://arshaw.com/fullcalendar/docs/event_data/Event_Object/)
+			// it doesn't need to have a start or end
+			var eventObject = {
+				title : $.trim($(this).text()) // use the element's text as the event title
+			};
+
+			// store the Event Object in the DOM element so we can get to it later
+			$(this).data('eventObject', eventObject);
+
+			// make the event draggable using jQuery UI
+			$(this).draggable({
+				zIndex : 999,
+				revert : true, // will cause the event to go back to its
+				revertDuration : 0 //  original position after the drag
+			});
+
+		});
+		$('#calendar').fullCalendar({
+			header : {
+				left : 'prev,next today',
+				center : 'title',
+				right : 'month,agendaDay'
+			},
+			editable : true,
+			droppable : true, // this allows things to be dropped onto the calendar !!!
+			allDayText : 'Todo el día (24 horas)',
+			buttonText : {
+
+				today : 'Hoy',
+				month : 'Mes',
+				week : 'Semana',
+				day : 'Día'
+			},
+			dayNames : ['Domingo', 'Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes', 'Sabado'],
+			dayNamesShort : ['Dom', 'Lun', 'Mar', 'Mie', 'Jue', 'Vie', 'Sab'],
+			monthNamesShort : ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'],
+			events : [
+            {%for element in reservas%}
+			{
+				title : '{{element.titulo}}',
+				start : new Date({{element.fechaInicio.format('Y')}}, {{element.fechaInicio.format('m')}} -1, {{element.fechaInicio.format('d')}}),
+				end : new Date({{element.fechaFin.format('Y')}}, {{element.fechaInicio.format('m')}} -1, {{element.fechaFin.format('d')}}),
+				editable : false,
+				allDay : true,
+				color : 'Red', // an option!
+				textColor : 'White'
+			},
+            {%endfor%}
+ 
+			{
+				title : 'Día no laborable',
+				start : new Date(y, m, d + 5, 17, 0),
+				end : new Date(y, m, d + 5, 18, 0),
+				editable : false,
+				allDay : true,
+				color : 'Yellow', // an option!
+				textColor : 'Black'
+			}],
+
+			drop : function(date, allDay) {// this function is called when something is dropped
+
+				// retrieve the dropped element's stored Event Object
+				var originalEventObject = $(this).data('eventObject');
+				// we need to copy it, so that multiple events don't have a reference to the same object
+				var evento = $.extend({}, originalEventObject);
+				// assign it the date that was reported
+				evento.start = date;
+				evento.allDay = allDay;
+
+				$('#titulo').attr('value',evento.title);
+
+				$('#anioInicio').attr('value',evento.start.getFullYear());
+				$('#mesInicio').attr('value',evento.start.getMonth());
+				$('#diaInicio').attr('value',evento.start.getDate());
+				$('#horaInicio').attr('value',evento.start.getHours());
+				$('#minInicio').attr('value',evento.start.getMinutes());
+
+				$('#anioFin').attr('value',evento.start.getFullYear());
+				$('#mesFin').attr('value',evento.start.getMonth());
+				$('#diaFin').attr('value',evento.start.getDate());
+				$('#horaFin').attr('value',23);
+				$('#minFin').attr('value',59);
+
+				$('#todoDia').attr('value',true);
+
+				$('#numeroReservacion').attr('value',$(this).attr('numeroReservacion'));
+
+
+				
+				$('#calendar').fullCalendar('renderEvent', evento, true);
+                console.dir(evento);
+
+				$(this).remove();
+                actualizaBD();
+			},
+			eventDrop : function(event, delta) {
+				var evento = event;
+				console.dir(delta);
+
+				console.dir(event);
+
+				$('#anioInicio').attr('value',evento.start.getFullYear());
+				$('#mesInicio').attr('value',evento.start.getMonth());
+				$('#diaInicio').attr('value',evento.start.getDate());
+				$('#horaInicio').attr('value',evento.start.getHours());
+				$('#minInicio').attr('value',evento.start.getMinutes());
+
+                if(evento.end != null){
+				$('#mesFin').attr('value',evento.end.getMonth());
+				$('#diaFin').attr('value',evento.end.getDate());
+				$('#horaFin').attr('value',evento.end.getHours());
+				$('#minFin').attr('value',evento.end.getMinutes());
+                }
+                else{
+				$('#mesFin').attr('value',evento.start.getMonth());
+				$('#diaFin').attr('value',evento.start.getDate());
+				$('#horaFin').attr('value',evento.start.getHours());
+				$('#minFin').attr('value',evento.start.getMinutes());
+                }
+
+
+				actualizaBD();
+
+				console.log(event.title + ' was moved ' + delta + ' days\n' +'(should probably update your database) el dia de inicio'+diaInicio);
+			},
+			eventResize: function(event,dayDelta,minuteDelta,revertFunc) {
+
+				var evento = event;
+				console.dir(event);
+
+				$('#anioInicio').attr('value',evento.start.getFullYear());
+				$('#mesInicio').attr('value',evento.start.getMonth());
+				$('#diaInicio').attr('value',evento.start.getDate());
+				$('#horaInicio').attr('value',evento.start.getHours());
+				$('#minInicio').attr('value',evento.start.getMinutes());
+                
+                if(evento.end != null){
+				$('#anioFin').attr('value',evento.end.getFullYear());
+				$('#mesFin').attr('value',evento.end.getMonth());
+				$('#diaFin').attr('value',evento.end.getDate());
+				$('#horaFin').attr('value',evento.end.getHours());
+				$('#minFin').attr('value',evento.end.getMinutes());
+                }
+                else{
+				$('#mesFin').attr('value',evento.start.getMonth());
+				$('#diaFin').attr('value',evento.start.getDate());
+				$('#horaFin').attr('value',evento.start.getHours());
+				$('#minFin').attr('value',evento.start.getMinutes());
+                }
+
+				actualizaBD();
+
+			},
+		});
+
+	});
+
+</script>

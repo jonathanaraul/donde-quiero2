@@ -1,0 +1,43 @@
+<?php
+
+namespace Proyecto\PrincipalBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+
+/**
+ * ConfirmacionElemento
+ *
+ * @ORM\Table(name="confirmacion_elemento")
+ * @ORM\Entity
+ */
+class ConfirmacionElemento
+{
+	/**
+     * @ORM\Column(type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+ 
+    /**
+     * @var \Confirmacion
+     *
+     * @ORM\ManyToOne(targetEntity="Confirmacion")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="confirmacion", referencedColumnName="id", nullable=false)
+     * })
+     */
+    private $confirmacion;
+
+    /**
+     * @var \Reserva
+     *
+     * @ORM\ManyToOne(targetEntity="Reserva")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="reserva", referencedColumnName="id", nullable=false)
+     * })
+     */
+    private $reserva;
+
+}

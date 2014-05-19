@@ -1,0 +1,132 @@
+{% extends "ProyectoPrincipalBundle:Default:base.html.twig" %}
+
+{%block estilos%}
+	{% include 'ProyectoPrincipalBundle:Helpers:estilosReserva.html.twig'  with {'color': 'rgb(172, 24, 154)'}  %}
+{%endblock%}
+
+{%block scripts%}
+	{% include 'ProyectoPrincipalBundle:Helpers:scriptsReserva.html.twig'  with {'reservas': reservas,'direccionReservar':path('proyecto_principal_evento_reservar',{'id':object.id}) }  %}
+{%endblock%}
+
+{%block contenedorbase%}
+<div class="wrapper">
+
+	{% include 'ProyectoPrincipalBundle:Helpers:top.html.twig'  with {'clase': 'rosa'}  %}
+	{% include 'ProyectoPrincipalBundle:Default:sesion.html.twig'  with {'datos': datos} %}
+
+	<aside id="about" class=" left">
+		<!-- Text Section Start -->
+		<!-- Replace all text with what you want -->
+		<div style="position:relative;">
+			<ul id="gallery">
+				<li>
+					<img src="{{ asset('uploads/eventos/'~ object.path  ) }}" alt="" style="width:270px;height:230px;">
+
+				</li>
+				<li>
+					{#<img src="{{ asset('sistema/images/work/thumbs/triangulo2.png')}}" alt="" />#}
+				</li>
+				<li>
+					{#<img src="{{ asset('sistema/images/work/thumbs/triangulo3.png')}}"  alt="" />#}
+				</li>
+
+			</ul>
+		</div>
+		<div class="clearfix"></div>
+
+	</aside>
+	<aside class="right">
+
+		<div class="fichaizq">
+			<h3>{{object.nombre|title}}</h3>
+			{#
+			<ul>
+				<li class="izquierda">
+					<h4><a href="sede.html">La Sede del Coam.</a></h4>
+				</li>
+				<li class="derecha">
+					<h4><a href="sede.html" style="margin-left:5px">Cómo llegar.</a></h4>
+				</li>
+			</ul><!--Category-->
+			#}
+			<div class="clearfix"></div>
+			<p>
+				{{object.descripcionGeneral}}
+
+			</p>
+
+		</div>
+
+		<div class="clearfix"></div>
+
+		<div class="clearfix"></div>
+
+		<!-- Text Section End -->
+	</aside>
+	<div class="clearfix" ></div>
+	<!-- Text Section End -->
+
+	<div class="rosa rejilla-espacios" id="work" paginacion="">
+
+        {% include 'ProyectoPrincipalBundle:Helpers:camposOcultosReserva.html.twig'  with {'tipo': 'evento','numeroReservacion':numeroReservacion,'object':object,'colorFicha':'rosa'}  %}
+        
+		<!-- Work Links Section Start -->
+		<div class="añadir">
+			<a href="javascript:void(0)">Reserva</a><!--/item-->
+		</div>
+		<!--/item-->
+		<div class="buscador" style="height: 42px;float: right;margin-right: 27px;width: 300px;">
+			<div id='external-events'>
+				<h4>Seleccione y arrastre al calendario su reserva</h4>
+				<div class='external-event' user="{{datos.usuario}}" numeroReservacion="{{numeroReservacion}}">
+					Mi Reserva
+				</div>
+			</div>
+		</div>
+		<!--/item-->
+
+		<!--/item-->
+
+		<!--/item--><!--/item--><!--/item-->
+
+		<!--/item-->
+
+		<!--/item-->
+
+		<!--/item-->
+		<div class="clearfix" ></div>
+		<div id="elementos-espacio-rosa">
+
+			<div id='calendar'></div>
+			<div style='clear:both'></div>
+		</div>
+		<div class="clearfix"></div>
+
+		<div class="buscador" style="float: left;width: 218px;margin-left: 27px;">
+			<div class="enviar">
+				<a href="javascript:void(0)" title="Borrar reservas" id="botonBorrarReservas" >Borrar todas mis reservas</a>
+			</div>
+		</div>
+		<div class="buscador" style="float: left;width: 218px;margin-left: 70px;">
+			<div class="enviar">
+				<a href="{{path('proyecto_principal_evento_reservar',{'id':object.id})}}" title="Reservar ahora" >Reservar fecha adicional</a>
+			</div>
+		</div>
+
+		<div class="buscador" style="float: right;width: 126px;margin-right: 27px;">
+			<div class="enviar">
+				<a href="{{ path('proyecto_principal_evento_confirmacion', {'id': object.id }) }}" title="Siguiente" id="botonContinuarReserva">Siguiente</a>
+			</div>
+		</div>
+		<div class="clearfix"></div>
+		<div id="loader-widget-rosa" style="display:none;height:260px;">
+			<p style="text-align:center;width: 100%;margin-top: 168px;"><img src="{{ asset('sistema/images/loader-rosa.gif')}}" title="Procesando" style="width:80px;">
+			</p>
+		</div>
+	</div>
+	<!-- Work Links Section End -->
+
+	<div class="clearfix"></div>
+</div><!--/html_carousel-->
+
+{%endblock%} 

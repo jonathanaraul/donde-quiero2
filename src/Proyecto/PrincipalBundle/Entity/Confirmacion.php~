@@ -1,0 +1,97 @@
+<?php
+
+namespace Proyecto\PrincipalBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+
+/**
+ * Confirmacion
+ *
+ * @ORM\Table(name="confirmacion")
+ * @ORM\Entity
+ */
+class Confirmacion
+{
+	/**
+     * @ORM\Column(type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+    /**
+     * @var \User
+     *
+     * @ORM\ManyToOne(targetEntity="User")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="user", referencedColumnName="id", nullable=false)
+     * })
+     */
+    private $user;
+
+     /**
+     * @ORM\Column(type="text")
+     */
+    public $informacionAdicional;
+
+    /**
+     * @ORM\Column(name="horas",type="integer", nullable=true)
+     */
+    private $horas;
+
+    /**
+     * @ORM\Column(name="precioTotal",type="float", nullable=false)
+     */
+    private $precioTotal;
+
+    /**
+     * @ORM\Column(name="pagado",type="boolean", nullable=false)
+     */
+    private $pagado;
+
+    /**
+     * @ORM\Column(name="cancelado",type="boolean", nullable=false)
+     */
+    private $cancelado;
+
+    /**
+     * @var \Espacio
+     *
+     * @ORM\ManyToOne(targetEntity="Espacio")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="espacio", referencedColumnName="id", nullable=true)
+     * })
+     */
+    private $espacio;
+
+    /**
+     * @var \Sede
+     *
+     * @ORM\ManyToOne(targetEntity="Sede")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="sede", referencedColumnName="id", nullable=true)
+     * })
+     */
+    private $sede;
+
+     /**
+     * @var \Servicio
+     *
+     * @ORM\ManyToOne(targetEntity="Servicio")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="servicio", referencedColumnName="id", nullable=true)
+     * })
+     */
+    private $servicio;
+
+    /**
+     * @var \Evento
+     *
+     * @ORM\ManyToOne(targetEntity="Evento")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="evento", referencedColumnName="id", nullable=true)
+     * })
+     */
+    private $evento;
+
+}

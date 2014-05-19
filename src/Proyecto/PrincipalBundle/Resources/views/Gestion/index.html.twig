@@ -1,0 +1,127 @@
+{% extends "ProyectoPrincipalBundle:Default:base.html.twig" %}
+
+{%block scripts%}
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+
+<script src="{{ asset('bundles/obhighcharts/js/highcharts/highcharts.js') }}"></script>
+<script src="{{ asset('bundles/obhighcharts/js/highcharts/modules/exporting.js') }}"></script>
+<script type="text/javascript">
+	{{
+			chart(chart)
+		}}
+</script>
+{%endblock%}
+
+{%block contenedorbase%}
+<div class="wrapper">
+
+	{% include 'ProyectoPrincipalBundle:Helpers:top.html.twig'  with {'clase': 'azul'}  %}
+	{% include 'ProyectoPrincipalBundle:Default:sesion.html.twig'  with {'datos': datos} %}
+
+	<h3>Administracion</h3>
+
+	<div class="clearfix"></div>
+	<p>
+		Aqui ud podra hacer tal cosa
+	</p>
+	<div class="clearfix" ></div>
+	<!-- Text Section End -->
+
+	<div id="work" class="azul" style="width: 820px;height: 480px;">
+		<!-- Work Links Section Start -->
+		<div class="añadir" style="width: 251px;">
+			<a href="javascript:void(0)">Registros de usuarios</a><!--/item-->
+		</div>
+		</br>
+		<div style="margin-top: 20px;padding-top: 20px;">
+			<!--/item-->
+			<div id="linechart" style="min-width: 400px; height: 400px; margin: 0 auto"></div>
+		</div>
+		<div class="clearfix"></div>
+	</div>
+	<div class="clearfix"></div>
+</div><!--/html_carousel-->
+
+<div id="work" class="azul" style="width: 820px;">
+	<!-- Work Links Section Start -->
+	<div class="añadir" >
+		<a href="javascript:void(0)">Usuarios</a><!--/item-->
+	</div>
+	<div class="buscador">
+		<input type="text" placeholder="Usuario" class="input-gestion">
+	</div>
+	<div class="buscador">
+		<input type="text" placeholder="Correo" class="input-gestion">
+	</div>
+	<div class="buscador">
+		<input type="text" placeholder="Localidad" class="input-gestion">
+	</div>
+	<div class="añadir">
+		<ul>
+			<li>
+				<a href="/donde-quiero2/web/app_dev.php/registrar/evento"><img class="icon" src="/donde-quiero2/web/sistema/images/icons/mas.png" width="27" height="27" title="Añadir Gratis"></a>
+			</li>
+			<li style="float:right;">
+				<a href="javascript:void(0)" id="buscarEvento" numresults="8"><img class="icon" src="/donde-quiero2/web/sistema/images/icons/buscar.png" width="27" height="27" alt="Buscar"></a>
+			</li>
+		</ul>
+	</div>
+	<div class="buscador">
+		<select name="precio" class="formstyle">
+			<option value="0"> Estado </option>
+			<option value="0"> Activo </option>
+			<option value="1"> Inactivo </option>
+		</select>
+	</div>
+	<div class="buscador">
+		<select name="precio" class="formstyle">
+			<option value="0"> Rol </option>
+			<option value="0"> Administrador </option>
+			<option value="1"> Usuario </option>
+		</select>
+	</div>
+	<div class="buscador">
+		<select name="precio" class="formstyle">
+			<option value="0"> Facturado </option>
+			<option value="0"> Hasta 1000 E </option>
+			<option value="1"> Mas de 1000 E </option>
+		</select>
+	</div>
+	<div class="clearfix"></div>
+	<div style="margin-top: 9px;">
+
+		<!--/item-->
+		<table class="t-gestion">
+			<tr>
+				<td class="t-titulo t-azul">{{ knp_pagination_sortable(pagination, 'Id', 'o.id') }}</td>
+				<td class="t-titulo t-azul" ><a href="javascript:void(0)">Foto</a></td>
+				<td class="t-titulo t-azul">{{ knp_pagination_sortable(pagination, 'Usuario', 'o.username') }}</td>
+				<td class="t-titulo t-azul">{{ knp_pagination_sortable(pagination, 'Correo', 'o.email') }}</td>
+				<td class="t-titulo t-azul">{{ knp_pagination_sortable(pagination, 'Localidad', 'o.localidad') }}</td>
+				<td class="t-titulo t-azul">{{ knp_pagination_sortable(pagination, 'Fecha Registro', 'o.fechaRegistro') }}</td>
+				<td class="t-titulo t-azul">{{ knp_pagination_sortable(pagination, 'Estado', 'o.estado') }}</td>
+				<td class="t-titulo t-azul">{{ knp_pagination_sortable(pagination, 'Rol', 'o.rol') }}</td>
+			</tr>
+			{% for element in pagination %}
+			<tr {% if loop.index is odd %}style="background-color: #F1F1F0;"{% endif %}>
+				<td>{{ element.id }}</td>
+				<td ><img src="{{ element.getWebPath | apply_filter('gestion') }}"></td>
+				<td>{{ element.username }}</td>
+				<td>{{ element.email }}</td>
+				<td>{{ element.localidad.nombre }}</td>
+				<td>{{ element.fechaRegistro.format('d/m/Y') }}</td>
+				<td>{%if element.estado %}Activo{%else%}Inactivo{%endif%}</td>
+				<td>{%if element.rol %}Administrador{%else%}Usuario{%endif%}</td>
+			</tr>
+			{%endfor%}
+		</table>
+	</div>
+	<div class="clearfix"></div>
+	<div id="contador" class="paginacion-rosa">
+		<span style="color:" class=""> {{ knp_pagination_render(pagination) }}</span>
+		<span style="color: #000;" class="">  {{ pagination.getTotalItemCount }} Resultados</span>
+	</div>
+</div>
+<div class="clearfix"></div>
+</div><!--/html_carousel-->
+{%endblock%} 

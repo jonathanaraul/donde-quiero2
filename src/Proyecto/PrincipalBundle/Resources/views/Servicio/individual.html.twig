@@ -1,0 +1,107 @@
+{% extends "ProyectoPrincipalBundle:Default:base.html.twig" %}
+
+{%block estilos%}
+	{% include 'ProyectoPrincipalBundle:Helpers:estilosIndividual.html.twig' %}
+{%endblock%}
+
+{%block scripts%}
+	{% include 'ProyectoPrincipalBundle:Helpers:scriptsIndividual.html.twig'  with {'clase': 'rosa'}  %}
+{%endblock%}
+
+{%block contenedorbase%}
+<div class="wrapper">
+
+	{% include 'ProyectoPrincipalBundle:Helpers:top.html.twig'   with {'clase': 'azul'}  %}
+	{% include 'ProyectoPrincipalBundle:Default:sesion.html.twig'  with {'datos': datos} %}
+
+	<aside id="about" class=" left">
+		<!-- Text Section Start -->
+
+		<!-- Replace all text with what you want -->
+
+		<div class="leftid">
+			Organiza
+			<a href="#"><img src="{{ asset(object.user.getWebPath ) }}" alt="{{object.user.nombre}}" width="400" height="300" style="width:78px;height:78px;"></a>
+		</div>
+
+		<div class="leftimg">
+			<img src="{{ asset(object.getWebPath) }}" alt="" style="width:270px;height:230px;">
+		</div>
+
+		<div style="text-align:left; margin-top:50px;" >
+			<a href="{{path('proyecto_principal_servicio_reservar',{'id':object.id})}}" title="Reservar">
+				<div id='calendar'></div>
+			</a>
+		</div>
+
+	</aside>
+
+	<aside class="right">
+
+		<div class="fichaizq">
+			<h3>{{object.nombre|title}}</h3>
+
+			<ul>
+				<li class="izquierda">
+					<h4>Subtitulo¿?</h4>
+				</li>
+				<li class="derecha"></li>
+			</ul><!--Category-->
+
+			<div class="clearfix"></div>
+			<p>
+				{{object.descripcionGeneral}}
+			</p>
+
+			<h4>Incluye¿?</h4>
+			<div class="clearfix"></div>
+			<div class="atributos">
+
+				<ul>
+
+					<li>
+						Diseño de 1 página
+					</li>
+					<li>
+						Invitación html
+					</li>
+					<li>
+						Confirmación de Invitados
+					</li>
+					<li>
+						Dominio
+					</li>
+
+				</ul><!--Category-->
+			</div>
+			<div class="clearfix"></div>
+		</div>
+
+		<div class="fichader">
+			<div id="precio" class="azul">
+				<h3> {{object.precioPorHora}} </h3>
+				<h4> € </h4>
+			</div>
+			<a href="{{path('proyecto_principal_servicio_reservar',{'id':object.id})}}">Reservar</a>
+		</div>
+	<div class="clearfix"></div>
+	<h4>Detalles</h4>
+	<div class="clearfix"></div>
+	<div class="atributos">
+
+	</div>
+	<div class="clearfix"></div>
+
+
+	</aside>
+	<div class="clearfix"></div>
+	<!-- Text Section End -->
+	{% render controller('ProyectoPrincipalBundle:Servicio:widget', {  'titulo':'Servicios','numResults': 8,'paginacion':false,'proveedor':false,'cliente':false,'idRelacionado':0 }) %}
+	<div class="clearfix"></div>
+</div>
+<!-- Work Links Section End -->
+<!-- Work Links Section End -->
+
+<div class="clearfix"></div>
+
+{%endblock%} 

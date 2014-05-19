@@ -1,0 +1,96 @@
+{% extends "ProyectoPrincipalBundle:Default:base.html.twig" %}
+{%block scripts%}
+<script type="text/javascript">var direccionBuscarCiudad = "{{path('proyecto_users_buscar_ciudad')}}";</script>
+{%endblock%}
+
+{%block contenedorbase%}
+<div class="wrapper">
+
+	{% include 'ProyectoPrincipalBundle:Helpers:top.html.twig'  with {'clase': 'gris'}  %}
+	<!-- Text Section End -->
+
+	<header>
+		<!-- Header Title Start -->
+		<h1>&nbsp;</h1>
+
+	</header>
+	<!-- Header Title End -->
+
+	<div class="inicio">
+		<div id="forminicio">
+			<form action="{{ url }}" method="post" {{ form_enctype(form) }} id="usuarioRegistroFormulario">
+
+				<h3 > Inscríbete gratis</h3>
+				<h4>{{ form_errors(form) }}</h4>
+
+				<p>
+					Rellena los siguientes datos para crear un perfil de usuario
+				</p>
+
+				{{ form_widget(form.email, { 'attr': {'class': 'formstyle','placeholder': 'E-Mail'} }) }}
+				{{ form_widget(form.nombre, { 'attr': {'class': 'formstyle','placeholder': 'Nombre'} }) }}
+				{{ form_widget(form.apellido, { 'attr': {'class': 'formstyle','placeholder': 'Apellidos'} }) }}
+
+				{{ form_widget(form.telefono, { 'attr': {'class': 'formstyle','placeholder': 'Telefono'} }) }}
+				<p>
+					Datos de acceso
+				</p>
+				{{ form_widget(form.username, { 'attr': {'class': 'formstyle','placeholder': 'Usuario'} }) }}
+				{{ form_widget(form.password, { 'attr': {'class': 'formstyle','placeholder': 'Contraseña'} }) }}
+
+				<p style="float:left">
+					Foto de perfil
+				</p><!-- <div class="enviar">Buscar imagen .. Examinar</div>-->
+
+				{{ form_widget(form.file, { 'attr': {'class': 'formstyle','accept':'image/*'} }) }}
+				{{ form_widget(form.descripcion, { 'attr': {'placeholder': 'Descripcion'} }) }}
+				{{ form_widget(form.pais, { 'attr': {'class': 'formstyle','placeholder': 'Pais','value': 'España','readonly': ''} }) }}
+				<p>
+					Provincia
+				</p>
+				{{ form_widget(form.provincia, { 'attr': {'class': 'formstyle'} }) }}
+				<p>
+					Localidad
+				</p>
+				{{ form_widget(form.localidad, { 'attr': {'class': 'formstyle'} }) }}
+				<p>
+					¿Cómo nos ha conocido?
+				</p>
+				{{ form_widget(form.marketing, { 'attr': {'class': 'formstyle'} }) }}
+
+				<p>
+					{{ form_widget(form.eventos) }}Disponible para organizar eventos
+				</p>
+
+				<input type="submit" class="botonSubmitFormulario formstyle ">
+
+				{{ form_rest(form) }}
+
+				<p>
+					&nbsp;
+				</p>
+				<div class="clearfix"></div>
+			</form>
+		</div>
+
+		<div id="loader" style="display:none">
+			<p style="text-align:center">
+				<img src="{{asset('sistema/images/loader.gif')}}" style="width: 100px;">
+			</p>
+		</div>
+		<div id="error"></div>
+		<div class="clearfix"></div>
+		<!--  <p> <input name="condiciones" type="checkbox" >
+		<a href="ayuda.html"> Acepto las condiciones de uso y la política de privacidad</a></p></div>-->
+	</div>
+	<div class="clearfix"></div>
+	<div id="espacios" ></div>
+	<div id="eventos" ></div>
+	<div id="servicios" ></div>
+	<div class="clearfix"></div>
+
+	<!-- TO MAKE THE PHP FORM WORK, ALL YOU NEED TO DO IS OPEN UP THE FILE CALLED 'submitemail.php' AND CHANGE WHERE IT SAYS 'your email goes here' -->
+
+	<!-- DON'T TOUCH THIS SECTION -->
+</div>
+{%endblock%} 

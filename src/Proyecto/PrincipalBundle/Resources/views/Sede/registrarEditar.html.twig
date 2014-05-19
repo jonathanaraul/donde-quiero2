@@ -1,0 +1,633 @@
+{% extends "ProyectoPrincipalBundle:Default:base.html.twig" %}
+{%block scripts%}
+<script type="text/javascript" src="{{ asset('sistema/scripts/registrar-editar-sede.js')}}"></script>
+<script type="text/javascript">var direccionBuscarCiudad = "{{path('proyecto_users_buscar_ciudad')}}";
+</script>
+
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCUY1Omfl_gVZyliOZWXKUYaLG3O0JIleI&sensor=false"></script>
+
+<script>
+// In the following example, markers appear when the user clicks on the map.
+// The markers are stored in an array.
+// The user can then click an option to hide, show or delete the markers.
+var map;
+var markers = [];
+
+function initialize() {
+  var centro =  new google.maps.LatLng({{latitud}}, {{longitud}});
+  var mapOptions = {
+    zoom: 5,
+    center: centro,
+    mapTypeId: google.maps.MapTypeId.ROADMAP
+  };
+  map = new google.maps.Map(document.getElementById('map-canvas'),
+      mapOptions);
+
+  google.maps.event.addListener(map, 'click', function(event) {
+    addMarker(event.latLng);
+  });
+
+   var marker = new google.maps.Marker({
+    position: centro,
+    map: map
+  });
+     markers.push(marker);
+}
+
+// Add a marker to the map and push to the array.
+function addMarker(location) {
+   deleteMarkers();
+  var marker = new google.maps.Marker({
+    position: location,
+    map: map
+  });
+  console.log('latitud'+marker.position.lat());
+  console.log('longitud'+marker.position.lng());
+  $('#form_latitud').val(marker.position.lat())
+  $('#form_longitud').val(marker.position.lng())
+  markers.push(marker);
+}
+
+// Sets the map on all markers in the array.
+function setAllMap(map) {
+  for (var i = 0; i < markers.length; i++) {
+    markers[i].setMap(map);
+  }
+}
+
+// Removes the markers from the map, but keeps them in the array.
+function clearMarkers() {
+  setAllMap(null);
+}
+
+// Shows any markers currently in the array.
+function showMarkers() {
+  setAllMap(map);
+}
+
+// Deletes all markers in the array by removing references to them.
+function deleteMarkers() {
+  clearMarkers();
+  markers = [];
+}
+
+google.maps.event.addDomListener(window, 'load', initialize);
+
+
+</script>
+{%endblock%}
+
+{%block estilos%}
+    <style>
+      #map-canvas {
+        width:311px;
+        #width:200px;
+        height:200px;
+        margin: 0px;
+        padding: 0px
+      }
+    </style>
+
+{%endblock%}
+
+
+
+
+{%block contenedorbase%}
+<div class="wrapper">
+
+	{% include 'ProyectoPrincipalBundle:Helpers:top.html.twig'  with {'clase': 'amarillo'}  %}
+
+	<div class="amarillo work mostrar" id="work-primero"  >
+		<div class="aviso"   >
+			<h2 class="izquierda">registrando tu sede.... </h2><h2 class="derecha">(1/5) </h2>
+			<div class="clearfix"></div>
+			<p>
+				- No pagas nada.  </br>
+				- Te alquilarán y pagarán online. </br>
+				- Gestionarás tu calendario de reservas y cancelaciones gratis. </br>
+				- Tendrás difusión y posicionamiento gratuito en internet.
+			</p>
+
+			<h2 class="izquierda">a cambio.... </h2>
+			<div class="clearfix"></div>
+			<p>
+				- Esfuérzate definiendo bien con datos, fotos,.. ¡Tendrás más éxito!.   </br>
+				- Lee las <a href="condiciones.html">Condiciones detalladas</a> que aceptas al registrar el sede. </br>
+				- Nuestro premio es un  % ¡Sólo de las contrataciones reales que te consigamos! .
+			</p>
+		</div>
+	</div>
+	<!-- Text Section End -->
+
+	<div class="amarillo work" id=""  >
+		<form action="{{ url }}" method="post" {{ form_enctype(form) }} id="formulario-registro">
+			<div class="nuevo">
+
+				<p>
+					{{ form_errors(form) }}
+				</p>
+
+				<div class="formnuevo mostrar">
+
+					<div class="clearfix"></div>
+
+					<p>
+						<strong>Registrar un nuevo sede como:</strong>
+					</p></br>
+
+					<p></p>
+
+					<p>
+						{{ form_widget(form.propietarioEmpleado, { 'attr': {'class': 'check-registrar-como'}}) }}Propietario/a ó Empleado
+					</p>
+
+					<p>
+						{{ form_widget(form.agenteComercial, { 'attr': {'class': 'check-registrar-como'}}) }}Agente Comercial
+					</p>
+
+					<p>
+						{{ form_widget(form.administradorWeb, { 'attr': {'class': 'check-registrar-como'}}) }}Administrador de la Web
+					</p>
+
+					<p>
+						&nbsp;
+					</p>
+
+					<div class="clearfix"></div>
+
+					<div class="enviar">
+						<a href="javascript:void(0)" class="siguiente-formulario" referencia="segundo" actual="primero">Siguiente</a>
+					</div>
+
+					<div class="clearfix"></div>
+
+				</div>
+				<div class="formnuevo ocultar">
+
+					<h2 > Registrar nuevo sede (2/5)</h2>
+					<p >
+						&nbsp;
+					</p>
+					<p>
+						Rellena los siguientes datos para registrar del nuevo sede:
+					</p>
+
+					<p>
+						&nbsp;
+					</p>
+
+					{{ form_widget(form.nombre, { 'attr': {'class': 'formstyle','title': 'Nombre del Sede (Max 20 carácteres)'} }) }}
+
+					<div class="clearfix"></div>
+
+					{{ form_widget(form.descripcionGeneral, { 'attr': {'title': 'Descripción general'} }) }}
+
+					<p>
+						Provincia
+					</p>
+					<select required="required" class="formstyle" id="form_provincia">
+						{%for element in provincias%}
+						<option value="{{element.id}}" {%if idProvincia ==element.id%}selected=""{%endif%}>{{element.nombre}}</option>
+						{%endfor%}
+					</select>
+
+					<p>
+						Localidad
+					</p>
+					{{ form_widget(form.localidad, { 'attr': {'class': 'formstyle'} }) }}
+                    {{ form_widget(form.latitud) }}
+                    {{ form_widget(form.longitud) }}
+
+					<p>
+						Situa el marcador en la ubicación de la sede
+					</p>
+                    <div id="mapa" style="width:311px;height:200px;">
+                      <div id="map-canvas"></div>
+                    </div>
+
+
+
+
+
+
+
+
+
+
+					<p>
+						&nbsp;
+					</p>
+					<p style="float:left">
+						Añadir Imágenes
+					</p>
+					{{ form_widget(form.file, { 'attr': {'class': 'formstyle','accept':'image/*'} }) }}
+
+					<div class="clearfix"></div>
+					<!--<div class="enviar">
+					+
+					</div>
+					<div class="clearfix"></div>
+					<p style="float:left">
+					Añadir Planos Jpeg
+					</p>
+					<div class="enviar">
+					Buscar imagen ...
+					</div>
+					<div class="clearfix"></div>
+					<div class="enviar">
+					+
+					</div>-->
+					<div class="clearfix"></div>
+					{{ form_widget(form.enlaceVideo, { 'attr': {'class': 'formstyle','title': 'Añadir enlace a Video'} }) }}
+
+					<!--
+					<div class="clearfix"></div>
+					<div class="enviar">
+					+
+					</div>-->
+					<div class="clearfix"></div>
+
+					<p>
+						&nbsp;
+					</p>
+					<p>
+						&nbsp;
+					</p>
+					<div class="clearfix"></div>
+
+					<div class="enviar">
+						<a href="javascript:void(0)" class="siguiente-formulario" referencia="tercero" actual="segundo">Siguiente</a>
+					</div>
+					<div class="enviar">
+						<a href="javascript:void(0)" class="anterior-formulario" referencia="primero" actual="segundo">Anterior</a>
+					</div>
+
+					<div class="clearfix"></div>
+				</div>
+
+
+				<div class="formnuevo ocultar">
+
+					<h2 > Registrar nuevo sede (3/5)</h2>
+					<p>
+						&nbsp;
+					</p>
+
+
+					<p>
+						<strong>Accesibilidad:</strong>
+					</p>
+
+
+
+					<p class="parrafo-registro">
+						{{ form_widget(form.enCentroCiudad, { 'attr': {'class': 'check-accesibilidad'}}) }}
+						En centro ciudad
+					</p>
+					<p class="parrafo-registro">
+						{{ form_widget(form.cercaAutobus, { 'attr': {'class': 'check-accesibilidad'}}) }}
+						Cerca de Autobús
+					</p>
+					<p class="parrafo-registro">
+						{{ form_widget(form.cercaAeropuerto, { 'attr': {'class': 'check-accesibilidad'}}) }}
+						Cerca de aeropuerto
+					</p>
+					<p class="parrafo-registro">
+						{{ form_widget(form.accesibleMovilidadReducida, { 'attr': {'class': 'check-accesibilidad'}}) }}
+						Accesible para Movilidad Reducida
+					</p>
+
+					<p>
+						<strong>Tido de Sede:</strong>
+					</p>
+
+
+
+					<p class="parrafo-registro">
+						{{ form_widget(form.colegioInstituto, { 'attr': {'class': 'check-tipo-sede'}}) }}
+						Colegio/Instituto
+					</p>
+					<p class="parrafo-registro">
+						{{ form_widget(form.universidad, { 'attr': {'class': 'check-tipo-sede'}}) }}
+						Universidad
+					</p>
+					<p class="parrafo-registro">
+						{{ form_widget(form.otrosCentrosFormacion, { 'attr': {'class': 'check-tipo-sede'}}) }}
+						Otros Centros de Formación
+					</p>
+					<p class="parrafo-registro">
+						{{ form_widget(form.coWorking, { 'attr': {'class': 'check-tipo-sede'}}) }}
+						Coworking
+					</p>
+					<p class="parrafo-registro">
+						{{ form_widget(form.centroNegocios, { 'attr': {'class': 'check-tipo-sede'}}) }}
+						Centro de Negocios
+					</p>
+					<p class="parrafo-registro">
+						{{ form_widget(form.oficinaProfesional, { 'attr': {'class': 'check-tipo-sede'}}) }}
+						Oficina Profesional
+					</p>
+					<p class="parrafo-registro">
+						{{ form_widget(form.hotel, { 'attr': {'class': 'check-tipo-sede'}}) }}
+						Hotel
+					</p>
+					<p class="parrafo-registro">
+						{{ form_widget(form.restauranteBarDiscoteca, { 'attr': {'class': 'check-tipo-sede'}}) }}
+						Restaurante, bar, discoteca
+					</p>
+					<p class="parrafo-registro">
+						{{ form_widget(form.finca, { 'attr': {'class': 'check-tipo-sede'}}) }}
+						Finca
+					</p>
+					<p class="parrafo-registro">
+						{{ form_widget(form.colegioProfesional, { 'attr': {'class': 'check-tipo-sede'}}) }}
+						Colegio Profesional
+					</p>
+					<p class="parrafo-registro">
+						{{ form_widget(form.fundacionCentroCultural, { 'attr': {'class': 'check-tipo-sede'}}) }}
+						Fundación, Centro Cultural
+					</p>
+					<p class="parrafo-registro">
+						{{ form_widget(form.clubPrivadoAsociacion, { 'attr': {'class': 'check-tipo-sede'}}) }}
+						Club privado o asociación
+					</p>
+					<p class="parrafo-registro">
+						{{ form_widget(form.cineTeatro, { 'attr': {'class': 'check-tipo-sede'}}) }}
+						Cine o teatro
+					</p>
+					<p class="parrafo-registro">
+						{{ form_widget(form.centroDeportivo, { 'attr': {'class': 'check-tipo-sede'}}) }}
+						Centro Deportivo
+					</p>
+					<p class="parrafo-registro">
+						{{ form_widget(form.centroFerial, { 'attr': {'class': 'check-tipo-sede'}}) }}
+						Centro Ferial
+					</p>
+					<p class="parrafo-registro">
+						{{ form_widget(form.centroRecreativo, { 'attr': {'class': 'check-tipo-sede'}}) }}
+						Centro Recreativo
+					</p>
+					<p class="parrafo-registro">
+						{{ form_widget(form.centroComercial, { 'attr': {'class': 'check-tipo-sede'}}) }}
+						Centro Comercial
+					</p>
+
+					<p>
+						&nbsp;
+					</p>
+					<p>
+						&nbsp;
+					</p>
+					</br>
+
+					<div class="clearfix"></div>
+
+					<div class="clearfix"></div>
+					<p>
+						&nbsp;
+					</p>
+
+					<div class="enviar">
+						<a href="javascript:void(0)" class="siguiente-formulario" referencia="cuarto" actual="tercero">Siguiente</a>
+					</div>
+					<div class="enviar">
+						<a href="javascript:void(0)" class="anterior-formulario" referencia="segundo" actual="tercero">Anterior</a>
+					</div>
+
+					<div id="error"></div>
+					<div class="clearfix"></div>
+				</div>
+
+				<div class="formnuevo ocultar">
+
+					<h2 > Registrar nuevo sede (4/5)</h2>
+					<p >
+						&nbsp;
+					</p>
+
+					<p>
+						&nbsp;
+					</p>
+					<p>
+						<strong>Permite las siguientes configuraciones:</strong>
+					</p>
+					<div>	
+					<p class="left">
+						{{ form_widget(form.modoAula, { 'attr': {'class': 'check-configuracion'}}) }}
+						<strong> Modo Aula (Sillas)</strong>
+					<p class="right">
+						hasta
+						{{ form_widget(form.modoAulaCapacidad, { 'attr': {'class': 'formstyle3','title':'...','min':'0','step':'1','value':'0'} }) }}
+						personas
+					</p>
+
+					<p class="left">
+						{{ form_widget(form.modoBanquete, { 'attr': {'class': 'check-configuracion'}}) }}
+						<strong> Modo Banquete</strong>
+					<p class="right">
+						hasta
+						{{ form_widget(form.modoBanqueteCapacidad, { 'attr': {'class': 'formstyle3','title':'...','min':'0','step':'1','value':'0'} }) }}
+						personas
+					</p>
+
+					<p class="left">
+						{{ form_widget(form.modoCocktail, { 'attr': {'class': 'check-configuracion'}}) }}
+						<strong> Modo Cocktail</strong>
+					<p class="right">
+						hasta
+						{{ form_widget(form.modoCocktailCapacidad, { 'attr': {'class': 'formstyle3','title':'...','min':'0','step':'1','value':'0'} }) }}
+						personas
+					</p>
+
+					<p class="left">
+						{{ form_widget(form.modoEscenario, { 'attr': {'class': 'check-configuracion'}}) }}
+						<strong> Modo Escenario</strong>
+					<p class="right">
+						hasta
+						{{ form_widget(form.modoEscenarioCapacidad, { 'attr': {'class': 'formstyle3','title':'...','min':'0','step':'1','value':'0'} }) }}
+						personas
+					</p>
+
+					<p class="left">
+						{{ form_widget(form.modoExposicion, { 'attr': {'class': 'check-configuracion'}}) }}
+						<strong> Modo Exposición</strong>
+					<p class="right">
+						hasta
+						{{ form_widget(form.modoExposicionCapacidad, { 'attr': {'class': 'formstyle3','title':'...','min':'0','step':'1','value':'0'} }) }}
+						personas
+					</p>
+                    </div>
+                    <div class="clearfix"></div>
+                    <div class="clearfix"></div>
+                </br>
+
+                    <p>
+						<strong>Señala las actividades permitidas:</strong>
+					</p>
+
+
+					<p >
+						{{ form_widget(form.formacionTeorica, { 'attr': {'class': 'check-actividad-permitida'}}) }}
+						Formación Teórica
+					</p>
+
+					<p >
+						{{ form_widget(form.formacionInformatica, { 'attr': {'class': 'check-actividad-permitida'}}) }}
+						Formación Informática
+					</p>
+
+					<p >
+						{{ form_widget(form.formacionTaller, { 'attr': {'class': 'check-actividad-permitida'}}) }}
+						Formación Taller
+					</p>
+
+					<p >
+						{{ form_widget(form.exposicion, { 'attr': {'class': 'check-actividad-permitida'}}) }}
+						Exposición
+					</p>
+
+					<p >
+						{{ form_widget(form.ventaFeria, { 'attr': {'class': 'check-actividad-permitida'}}) }}
+						Venta, feria
+					</p>
+
+					<p >
+						{{ form_widget(form.deporte, { 'attr': {'class': 'check-actividad-permitida'}}) }}
+						Deporte
+					</p>
+
+					<p >
+						{{ form_widget(form.espectaculo, { 'attr': {'class': 'check-actividad-permitida'}}) }}
+						Espectáculo
+					</p>
+
+					<p >
+						{{ form_widget(form.reunionAsamblea, { 'attr': {'class': 'check-actividad-permitida'}}) }}
+						Reunión o asamblea
+					</p>
+
+					<p >
+						{{ form_widget(form.boda, { 'attr': {'class': 'check-actividad-permitida'}}) }}
+						Boda
+					</p>
+
+					<p >
+						{{ form_widget(form.fiesta, { 'attr': {'class': 'check-actividad-permitida'}}) }}
+						Fiesta
+					</p>
+					<p >
+						{{ form_widget(form.jardineria, { 'attr': {'class': 'check-actividad-permitida'}}) }}
+						Jardineria
+					</p>
+					<div class="clearfix"></div>
+
+					<p>
+						&nbsp;
+					</p>
+
+
+					</br>
+
+					<div class="clearfix"></div>
+					<p>
+						&nbsp;
+					</p>
+
+					<div class="enviar">
+						<a href="javascript:void(0)" class="siguiente-formulario" referencia="quinto" actual="cuarto">Siguiente</a>
+					</div>
+					<div class="enviar">
+						<a href="javascript:void(0)" class="anterior-formulario" referencia="tercero" actual="cuarto">Anterior</a>
+					</div>
+
+					<div id="error"></div>
+					<div class="clearfix"></div>
+				</div>
+
+				<div class="formnuevo ocultar">
+
+					<h2 > Registrar nuevo sede (5/5)</h2>
+					<p >
+						&nbsp;
+					</p>
+
+					<p>
+						<strong>Detalles de la reserva:</strong>
+					</p>
+
+					<p>
+						{{ form_widget(form.aceptacionReservaAutomatica, { 'attr': {'class': 'check-aceptacion-reserva'}}) }}
+						Aceptación de la reserva automática
+					</p>
+
+					<p >
+						{{ form_widget(form.tiempoMaximoAceptacionReservaAutomatica24h, { 'attr': {'class': 'check-aceptacion-reserva'}}) }}
+						Tiempo máximo de aceptación de reserva 24h
+					</p>
+
+					<p >
+						{{ form_widget(form.tiempoMaximoAceptacionReservaAutomatica48, { 'attr': {'class': 'check-aceptacion-reserva'}}) }}
+						Tiempo máximo de aceptación de reserva 48h
+					</p>
+
+					<p >
+						&nbsp;
+					</p>
+
+					<p >
+						{{ form_widget(form.datosFacturacionPagoDelUsuario, { 'attr': {'class': 'check-facturacion-pago'}}) }}
+						Los datos de facturación y pago son los del usuario
+					</p>
+
+					<p >
+						{{ form_widget(form.anadirDatosFacturacionPago, { 'attr': {'class': 'check-facturacion-pago'}}) }}
+						<a href="#"> Añadir datos de facturación y pago</a>
+					</p>
+					<p >
+						&nbsp;
+					</p>
+
+					
+					<h3 > Precio</h3>
+
+					<p>
+
+						{{ form_widget(form.precioPorHora, { 'attr': {'class': 'formstyle','title':'Precio por Hora (Euros)','min':'0','step':'1','value':'0'} }) }}
+					</p>
+					<p>
+						&nbsp;
+					</p>
+					<div class="clearfix"></div>
+					<p>
+						{{ form_widget(form.aceptoCondicionesUsoPoliticaPrivacidad) }}
+						<a href="#"> Acepto las condiciones de uso y la política de privacidad</a>
+					</p>
+
+					<div class="clearfix"></div>
+
+					<div class="enviar">
+						<a href="javascript:void(0)" class="siguiente-formulario" referencia="envio" actual="quinto">Siguiente</a>
+					</div>
+					<div class="enviar">
+						<a href="javascript:void(0)" class="anterior-formulario" referencia="cuarto" actual="quinto">Anterior</a>
+					</div>
+
+					<div class="clearfix"></div>
+
+				</div>
+
+			</div>
+
+			<div id="oculto" style="display:block">
+
+				{{ form_rest(form) }}
+			</div>
+		</form>
+		<!-- Work Links Section End -->
+		<!-- Last Words Section End-->
+		<div id="sedes" ></div>
+	</div>
+
+</div>
+{%endblock%}

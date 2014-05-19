@@ -1,0 +1,149 @@
+{% extends "ProyectoPrincipalBundle:Default:base.html.twig" %}
+
+{%block contenedorbase%}
+<div class="wrapper">
+
+	{% include 'ProyectoPrincipalBundle:Helpers:top.html.twig'  with {'clase': 'amarillo'} %}
+	{% include 'ProyectoPrincipalBundle:Default:sesion.html.twig'  with {'datos': datos} %}
+	<div id="destacados">
+		<h2 > Destacados </h2>
+		<div class="clearfix"></div>
+		<div class="item">
+			<a href="sede.html"><img src="{{ asset('sistema/images/work/thumbs/sede2.png')}}" alt="image 1"></a><!-- Image must be 400px by 300px -->
+			<h3>La Sede del Coam</h3><!--Title-->
+			<ul>
+				<li class="izquierda">
+					Madrid
+				</li>
+				<li class="derecha">
+					15 espacios
+				</li>
+			</ul><!--Category-->
+		</div><!--/item-->
+
+		<div class="item">
+			<a href="sede.html"><img src="{{ asset('sistema/images/work/thumbs/espacio11.png')}}" alt="image 2"></a><!-- Image must be 400px by 300px -->
+
+			<h3>El Arca de Babel</h3><!--Title-->
+			<ul>
+				<li class="izquierda">
+					Gran Canaria
+				</li>
+				<li class="derecha">
+					4 espacios
+				</li>
+			</ul><!--Category-->
+		</div><!--/item-->
+
+		<div class="item">
+			<a href="sede.html"><img src="{{ asset('sistema/images/work/thumbs/sede3.png')}}" alt="image 3"></a><!-- Image must be 400px by 300px -->
+
+			<h3>CENP Coruña</h3><!--Title-->
+			<ul>
+				<li class="izquierda">
+					A Coruña
+				</li>
+				<li class="derecha">
+					6 espacios
+				</li>
+			</ul><!--Category-->
+		</div><!--/item-->
+
+		<div class="item">
+			<a href="sede.html"><img src="{{ asset('sistema/images/work/thumbs/espacio6.png')}}" alt="image 4"></a><!-- Image must be 400px by 300px -->
+
+			<h3>Matadero Mad</h3><!--Title-->
+			<ul>
+				<li class="izquierda">
+					Madrid
+				</li>
+				<li class="derecha">
+					18 espacios
+				</li>
+			</ul><!--Category-->
+		</div><!--/item-->
+		<div class="clearfix"></div>
+	</div>
+	<!-- destacados Section End -->
+	<div id="work"  class="amarillo">
+		<!-- Work Links Section Start -->
+		<div class="añadir">
+			<a href="sedes.html">Sedes</a><!--/item-->
+		</div>
+		<div class="buscador">
+			<select name="Ciudades..." title="Ciudad.." class="formstyle">
+				<option value="Madrid"> Ciudad... </option>
+				<option value="Madrid"> Madrid </option>
+				<option value="Barcelona"> Barcelona </option>
+				<option value="Tenerife"> Tenerife </option>
+			</select>
+		</div><!--/item-->
+
+		<div class="buscador">
+			<select name="Fecha..." title="Fecha.." class="formstyle">
+				<option value="Madrid"> Hoy... </option>
+				<option value="Madrid"> Mañana </option>
+				<option value="Barcelona"> Pasado... </option>
+
+			</select>
+		</div><!--/item-->
+
+		<div class="buscador">
+			<select name="Ciudades..." title="Ciudades.." class="formstyle">
+				<option value="Madrid"> Servicios de diseño... </option>
+				<option value="Madrid"> Catering </option>
+				<option value="Barcelona"> Personal</option>
+				<option value="Tenerife"> Material </option>
+			</select>
+		</div><!--/item-->
+
+		<div class="añadir">
+			<ul>
+				<li>
+					<a href="registro.html"><img class="icon" src="{{ asset('sistema/images/icons/mas.png')}}" width="27" height="27" alt="Añadir"></a>
+				</li>
+				<li style="float:right;">
+					<a href="sedes.html"><img class="icon" src="{{ asset('sistema/images/icons/buscar.png')}}" width="27" height="27" alt="Buscar"></a></a>
+			</ul>
+		</div>
+		<div class="buscador">
+			<select name="Ciudades..." title="Ciudades.." class="formstyle">
+				<option value="Madrid"> Precio... </option>
+				<option value="Madrid"> de menos de 20 E/h </option>
+				<option value="Barcelona"> Entre 20 y 50 </option>
+				<option value="Tenerife">Entre 50 y 50 </option>
+			</select>
+		</div><!--/item-->
+
+		<div class="buscador">
+			<select name="Fecha..." title="Fecha.." class="formstyle">
+				<option value="Madrid"> M2... </option>
+				<option value="Madrid"> Menos de 15 m2 </option>
+				<option value="Barcelona"> Entre 15 y 30 m2 </option>
+
+			</select>
+		</div><!--/item-->
+
+		<div class="buscador">
+			<select name="Ciudades..." title="Ciudades.." class="formstyle">
+				<option value="Madrid"> Aforo... </option>
+				<option value="Madrid"> Menos de 10 </option>
+				<option value="Barcelona">Entre 10 y 30</option>
+				<option value="Tenerife"> Entre 30 y 50</option>
+			</select>
+		</div><!--/item-->
+
+		<!--/item-->
+		<div class="itemmapgr">
+			<iframe width="770" height="650" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.es/maps?f=q&amp;source=s_q&amp;hl=es&amp;geocode=&amp;q=espa%C3%B1a&amp;aq=&amp;sll=37.333351,-4.576501&amp;sspn=8.66189,18.314209&amp;ie=UTF8&amp;hq=&amp;hnear=Espa%C3%B1a&amp;t=m&amp;ll=39.656456,-3.493652&amp;spn=5.919918,17.138672&amp;z=6&amp;output=embed"></iframe>
+			<br />
+			<small><a href="https://maps.google.es/maps?f=q&amp;source=embed&amp;hl=es&amp;geocode=&amp;q=espa%C3%B1a&amp;aq=&amp;sll=37.333351,-4.576501&amp;sspn=8.66189,18.314209&amp;ie=UTF8&amp;hq=&amp;hnear=Espa%C3%B1a&amp;t=m&amp;ll=39.656456,-3.493652&amp;spn=5.919918,17.138672&amp;z=6" style="color:#0000FF;text-align:left">Ver mapa más grande</a></small>
+		</div>
+		<!--/item-->
+		<div id="contador">
+			<a href="sedes.html">Ampliar</a>
+		</div>
+	</div>
+</div>
+
+{%endblock%} 

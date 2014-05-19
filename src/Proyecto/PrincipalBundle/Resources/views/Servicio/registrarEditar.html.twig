@@ -1,0 +1,567 @@
+{% extends "ProyectoPrincipalBundle:Default:base.html.twig" %}
+{%block scripts%}
+<script type="text/javascript" src="{{ asset('sistema/scripts/registrar-editar-servicio.js')}}"></script>
+<script type="text/javascript">var direccionBuscarCiudad = "{{path('proyecto_users_buscar_ciudad')}}";</script>
+
+{%endblock%}
+
+{%block contenedorbase%}
+<div class="wrapper">
+
+	{% include 'ProyectoPrincipalBundle:Helpers:top.html.twig'  with {'clase': 'azul'}  %}
+
+	<div class="azul work mostrar" id="work-primero"  >
+		<div class="aviso"   >
+			<h2 class="izquierda">registrando tu servicio.... </h2><h2 class="derecha">(1/5) </h2>
+			<div class="clearfix"></div>
+			<p>
+				- No pagas nada.  </br>
+				- Te alquilarán y pagarán online. </br>
+				- Gestionarás tu calendario de reservas y cancelaciones gratis. </br>
+				- Tendrás difusión y posicionamiento gratuito en internet.
+			</p>
+
+			<h2 class="izquierda">a cambio.... </h2>
+			<div class="clearfix"></div>
+			<p>
+				- Esfuérzate definiendo bien con datos, fotos,.. ¡Tendrás más éxito!.   </br>
+				- Lee las <a href="condiciones.html">Condiciones detalladas</a> que aceptas al registrar el servicio. </br>
+				- Nuestro premio es un  % ¡Sólo de las contrataciones reales que te consigamos! .
+			</p>
+		</div>
+	</div>
+	<!-- Text Section End -->
+
+	<div class="azul work" id=""  >
+		<form action="{{ url }}" method="post" {{ form_enctype(form) }} id="formulario-registro">
+			<div class="nuevo">
+
+				<p>
+					{{ form_errors(form) }}
+				</p>
+
+				<div class="formnuevo mostrar">
+
+					<div class="clearfix"></div>
+
+					<p>
+						<strong>Registrar un nuevo servicio como:</strong>
+					</p></br>
+
+					<p></p>
+
+					<p>
+						{{ form_widget(form.propietarioEmpleado, { 'attr': {'class': 'check-registrar-como'}}) }}Propietario/a ó Empleado
+					</p>
+
+					<p>
+						{{ form_widget(form.agenteComercial, { 'attr': {'class': 'check-registrar-como'}}) }}Agente Comercial
+					</p>
+
+					<p>
+						{{ form_widget(form.administradorWeb, { 'attr': {'class': 'check-registrar-como'}}) }}Administrador de la Web
+					</p>
+
+					<p>
+						&nbsp;
+					</p>
+
+					<div class="clearfix"></div>
+
+					<div class="enviar">
+						<a href="javascript:void(0)" class="siguiente-formulario" referencia="segundo" actual="primero">Siguiente</a>
+					</div>
+
+					<div class="clearfix"></div>
+
+				</div>
+
+				<div class="formnuevo ocultar">
+
+					<h2 > Registrar nuevo servicio (2/5)</h2>
+					<p >
+						&nbsp;
+					</p>
+					<p>
+						Rellena los siguientes datos para registrar del nuevo servicio:
+					</p>
+
+					<p>
+						&nbsp;
+					</p>
+
+					{{ form_widget(form.nombre, { 'attr': {'class': 'formstyle','title': 'Nombre del Servicio (Max 20 carácteres)'} }) }}
+
+					<div class="clearfix"></div>
+
+					{{ form_widget(form.descripcionGeneral, { 'attr': {'title': 'Descripción general'} }) }}
+
+					<p>
+						&nbsp;
+					</p>
+					<p style="float:left">
+						Añadir Imágenes
+					</p>
+					{{ form_widget(form.file, { 'attr': {'class': 'formstyle','accept':'image/*'} }) }}
+
+					<div class="clearfix"></div>
+					<!--<div class="enviar">
+					+
+					</div>
+					<div class="clearfix"></div>
+					<p style="float:left">
+					Añadir Planos Jpeg
+					</p>
+					<div class="enviar">
+					Buscar imagen ...
+					</div>
+					<div class="clearfix"></div>
+					<div class="enviar">
+					+
+					</div>-->
+					<div class="clearfix"></div>
+					{{ form_widget(form.enlaceVideo, { 'attr': {'class': 'formstyle','title': 'Añadir enlace a Video'} }) }}
+
+					<!--
+					<div class="clearfix"></div>
+					<div class="enviar">
+					+
+					</div>-->
+					<p>
+						<strong>Ofrecidos por :</strong>
+					</p>
+
+					<p class="parrafo-registro">
+						{{ form_widget(form.ofrecidosTodos, { 'attr': {'class': 'check-ofrecidos-por'}}) }}
+						Todos
+					</p>
+
+					</br>
+					<p class="parrafo-registro">
+						{{ form_widget(form.sedePropiosEventos, { 'attr': {'class': 'check-ofrecidos-por'}}) }}
+						Una sede para sus propios eventos
+					</p>
+					</br>
+					<p class="parrafo-registro">
+						{{ form_widget(form.empresaEventosOtros, { 'attr': {'class': 'check-ofrecidos-por'}}) }}
+						Una empresa para eventos de otros
+					</p>
+					<div class="clearfix"></div>
+
+					<p>
+						&nbsp;
+					</p>
+					<p>
+						&nbsp;
+					</p>
+					<div class="clearfix"></div>
+
+					<div class="enviar">
+						<a href="javascript:void(0)" class="siguiente-formulario" referencia="tercero" actual="segundo">Siguiente</a>
+					</div>
+					<div class="enviar">
+						<a href="javascript:void(0)" class="anterior-formulario" referencia="primero" actual="segundo">Anterior</a>
+					</div>
+
+					<div class="clearfix"></div>
+				</div>
+
+				<div class="formnuevo ocultar">
+
+					<h2 > Registrar nuevo servicio (3/5)</h2>
+					<p>
+						&nbsp;
+					</p>
+
+					<p>
+						<strong>Servicios Multimedia:</strong>
+					</p>
+
+					<p class="parrafo-registro">
+						{{ form_widget(form.todosMultimedia, { 'attr': {'class': 'check-tipo-servicio check-multimedia'}}) }}
+						Todos
+					</p>				
+					<p class="parrafo-registro">
+						{{ form_widget(form.grabacionEdicionVideo, { 'attr': {'class': 'check-tipo-servicio check-multimedia'}}) }}
+						Grabación y edición vídeo
+					</p>
+					<p class="parrafo-registro">
+						{{ form_widget(form.fotografoEvento, { 'attr': {'class': 'check-tipo-servicio check-multimedia'}}) }}
+						Fotógrafo del evento
+					</p>
+					<p class="parrafo-registro">
+						{{ form_widget(form.alquilerCamaras, { 'attr': {'class': 'check-tipo-servicio check-multimedia'}}) }}
+						Alquiler cámaras
+					</p>				
+					<p class="parrafo-registro">
+						{{ form_widget(form.alquilerPortatiles, { 'attr': {'class': 'check-tipo-servicio check-multimedia'}}) }}
+						Alquiler portátiles
+					</p>
+					<p class="parrafo-registro">
+						{{ form_widget(form.alquilerProyectoresPantallas, { 'attr': {'class': 'check-tipo-servicio check-multimedia'}}) }}
+						Alquiler proyectores y pantallas
+					</p>
+					<p class="parrafo-registro">
+						{{ form_widget(form.sonidoMicrofonoAltavoces, { 'attr': {'class': 'check-tipo-servicio check-multimedia'}}) }}
+						Sonido, Micrófono y altavoces
+					</p>				
+					<p class="parrafo-registro">
+						{{ form_widget(form.iluminacion, { 'attr': {'class': 'check-tipo-servicio check-multimedia'}}) }}
+						Iluminación
+					</p>
+
+					</p>
+
+					<p>
+						&nbsp;
+					</p>
+					<p>
+						&nbsp;
+					</p>
+					<div class="clearfix"></div>
+					<p>
+						<strong>Servicios de Mejora de Espacios:</strong>
+					</p>
+					<p class="parrafo-registro">
+						{{ form_widget(form.todosMejoraEspacios, { 'attr': {'class': 'check-tipo-servicio check-mejora-espacios'}}) }}
+						Todos
+					</p>
+					<p class="parrafo-registro">
+						{{ form_widget(form.decoracionAccesorios, { 'attr': {'class': 'check-tipo-servicio check-mejora-espacios'}}) }}
+						Decoración con accesorios
+					</p>
+					<p class="parrafo-registro">
+						{{ form_widget(form.floristeria, { 'attr': {'class': 'check-tipo-servicio check-mejora-espacios'}}) }}
+						Floristería
+					</p>
+					<p class="parrafo-registro">
+						{{ form_widget(form.disenioExposicionesTemporales, { 'attr': {'class': 'check-tipo-servicio check-mejora-espacios'}}) }}
+						Diseño de exposiciones temporales
+					</p>
+					<p class="parrafo-registro">
+						{{ form_widget(form.montajeExposicion, { 'attr': {'class': 'check-tipo-servicio check-mejora-espacios'}}) }}
+						Montaje de exposición
+					</p>
+					<p class="parrafo-registro">
+						{{ form_widget(form.escenografia, { 'attr': {'class': 'check-tipo-servicio check-mejora-espacios'}}) }}
+						Escenografía
+					</p>
+					<p class="parrafo-registro">
+						{{ form_widget(form.rehabilitacionArquitectnica, { 'attr': {'class': 'check-tipo-servicio check-mejora-espacios'}}) }}
+						Rehabilitación arquitectónica
+					</p>
+					<p class="parrafo-registro">
+						{{ form_widget(form.limpiezaNormalIntensivo, { 'attr': {'class': 'check-tipo-servicio check-mejora-espacios'}}) }}
+						Limpieza (uso normal e intensivo)
+					</p>
+					<p class="parrafo-registro">
+						{{ form_widget(form.seguros, { 'attr': {'class': 'check-tipo-servicio check-mejora-espacios'}}) }}
+						Seguros
+					</p>
+
+					<p>
+						&nbsp;
+					</p>
+					<p>
+						&nbsp;
+					</p>
+										<p >
+						&nbsp;
+					</p>
+
+					<p>
+						<strong>Servicios de Mejora de Contenidos:</strong>
+					</p>
+					<p class="parrafo-registro">
+						{{ form_widget(form.todosMejoradeContenidos, { 'attr': {'class': 'check-tipo-servicio check-mejora-contenidos'}}) }}
+						Todos
+					</p>
+					<p class="parrafo-registro">
+						{{ form_widget(form.impresionGrabacionDocs, { 'attr': {'class': 'check-tipo-servicio check-mejora-contenidos'}}) }}
+						Impresión y grabación docs
+					</p>
+					<p class="parrafo-registro">
+						{{ form_widget(form.transporteMercancias, { 'attr': {'class': 'check-tipo-servicio check-mejora-contenidos'}}) }}
+						Transporte de mercancías
+					</p>
+					<p class="parrafo-registro">
+						{{ form_widget(form.envios, { 'attr': {'class': 'check-tipo-servicio check-mejora-contenidos'}}) }}
+						Envíos
+					</p>
+					<p class="parrafo-registro">
+						{{ form_widget(form.mobiliarioAulaTallerRecepcion, { 'attr': {'class': 'check-tipo-servicio check-mejora-contenidos'}}) }}
+						Mobiliario aula, taller, recepción
+					</p>
+					<p class="parrafo-registro">
+						{{ form_widget(form.accesoriosFormacionPizarras, { 'attr': {'class': 'check-tipo-servicio check-mejora-contenidos'}}) }}
+						Accesorios formación (Pizarras...)
+					</p>
+					<p class="parrafo-registro">
+						{{ form_widget(form.papeleriaNormalCorporativa, { 'attr': {'class': 'check-tipo-servicio check-mejora-contenidos'}}) }}
+						Papelería normal y corporativa
+					</p>
+					<p class="parrafo-registro">
+						{{ form_widget(form.internetCable, { 'attr': {'class': 'check-tipo-servicio check-mejora-contenidos'}}) }}
+						Internet cable
+					</p>
+					<p class="parrafo-registro">
+						{{ form_widget(form.internetWifiContenidos, { 'attr': {'class': 'check-tipo-servicio check-mejora-contenidos'}}) }}
+						Internet WIFI
+					</p>
+					<p class="parrafo-registro">
+						{{ form_widget(form.animacion, { 'attr': {'class': 'check-tipo-servicio check-mejora-contenidos'}}) }}
+						Animación
+					</p>
+					<p class="parrafo-registro">
+						{{ form_widget(form.interpretacionMusical, { 'attr': {'class': 'check-tipo-servicio check-mejora-contenidos'}}) }}
+						Interpretación musical
+					</p>
+					<p class="parrafo-registro">
+						{{ form_widget(form.interpretacionTeatral, { 'attr': {'class': 'check-tipo-servicio check-mejora-contenidos'}}) }}
+						Interpretación teatral
+					</p>
+
+					<p>
+						&nbsp;
+					</p>
+					<p>
+						&nbsp;
+					</p>
+
+					<div class="clearfix"></div>
+
+					<div class="clearfix"></div>
+
+					<div class="enviar">
+						<a href="javascript:void(0)" class="siguiente-formulario" referencia="cuarto" actual="tercero">Siguiente</a>
+					</div>
+					<div class="enviar">
+						<a href="javascript:void(0)" class="anterior-formulario" referencia="segundo" actual="tercero">Anterior</a>
+					</div>
+
+					<div id="error"></div>
+					<div class="clearfix"></div>
+				</div>
+
+				<div class="formnuevo ocultar">
+
+					<h2 > Registrar nuevo servicio (4/5)</h2>
+					<p >
+						&nbsp;
+					</p>
+
+					<p>
+						&nbsp;
+					</p>
+					<p>
+						<strong>Servicios para asistentes:</strong>
+					</p>
+					<p class="parrafo-registro">
+						{{ form_widget(form.todosServicioAsistentes, { 'attr': {'class': 'check-tipo-servicio check-mejora-servicio-asistentes'}}) }}
+						Todos
+					</p>
+					<p class="parrafo-registro">
+						{{ form_widget(form.catering, { 'attr': {'class': 'check-tipo-servicio check-mejora-servicio-asistentes'}}) }}
+						Catering
+					</p>
+					<p class="parrafo-registro">
+						{{ form_widget(form.azafatas, { 'attr': {'class': 'check-tipo-servicio check-mejora-servicio-asistentes'}}) }}
+						Azafatas
+					</p>
+					<p class="parrafo-registro">
+						{{ form_widget(form.recepcionista, { 'attr': {'class': 'check-tipo-servicio check-mejora-servicio-asistentes'}}) }}
+						Recepcionista
+					</p>
+					<p class="parrafo-registro">
+						{{ form_widget(form.traduccion, { 'attr': {'class': 'check-tipo-servicio check-mejora-servicio-asistentes'}}) }}
+						Traducción
+					</p>
+					<p class="parrafo-registro">
+						{{ form_widget(form.interpretes, { 'attr': {'class': 'check-tipo-servicio check-mejora-servicio-asistentes'}}) }}
+						Intérpretes
+					</p>
+					<p class="parrafo-registro">
+						{{ form_widget(form.receptoresAuricularEscucharInterprete, { 'attr': {'class': 'check-tipo-servicio check-mejora-servicio-asistentes'}}) }}
+						Receptores con auricular para escuchar intérprete
+					</p>
+					<p class="parrafo-registro">
+						{{ form_widget(form.alojamiento, { 'attr': {'class': 'check-tipo-servicio check-mejora-servicio-asistentes'}}) }}
+						Alojamiento
+					</p>
+					<p class="parrafo-registro">
+						{{ form_widget(form.internetWifiAsistentes, { 'attr': {'class': 'check-tipo-servicio check-mejora-servicio-asistentes'}}) }}
+						Internet WIFI
+					</p>
+					<p class="parrafo-registro">
+						{{ form_widget(form.viaje, { 'attr': {'class': 'check-tipo-servicio check-mejora-servicio-asistentes'}}) }}
+						Viaje
+					</p>
+					<p class="parrafo-registro">
+						{{ form_widget(form.transporteLocalAsistentes, { 'attr': {'class': 'check-tipo-servicio check-mejora-servicio-asistentes'}}) }}
+						Transporte local de asistentes
+					</p>
+					<p class="parrafo-registro">
+						{{ form_widget(form.guiaAcompanianteAsistentes, { 'attr': {'class': 'check-tipo-servicio check-mejora-servicio-asistentes'}}) }}
+						Guía o acompañante para asistentes
+					</p>
+
+					<p>
+						&nbsp;
+					</p>
+					<p>
+						&nbsp;
+					</p>
+					<p>
+						<strong>Servicios de Imagen Corporativa:</strong>
+					</p>
+					<p class="parrafo-registro">
+						{{ form_widget(form.todosImagenCorporativa, { 'attr': {'class': 'check-tipo-servicio check-imagen-corporativa'}}) }}
+						Todos
+					</p>
+					<p class="parrafo-registro">
+						{{ form_widget(form.logosDocsCorporativos, { 'attr': {'class': 'check-tipo-servicio check-imagen-corporativa'}}) }}
+						Logos y docs corporativos
+					</p>
+					<p class="parrafo-registro">
+						{{ form_widget(form.webEventoSede, { 'attr': {'class': 'check-tipo-servicio check-imagen-corporativa'}}) }}
+						Web del evento o de la Sede
+					</p>
+					<p class="parrafo-registro">
+						{{ form_widget(form.impresionGrabacion, { 'attr': {'class': 'check-tipo-servicio check-imagen-corporativa'}}) }}
+						Impresión y grabación
+					</p>
+					<p class="parrafo-registro">
+						{{ form_widget(form.repartoPublicitario, { 'attr': {'class': 'check-tipo-servicio check-imagen-corporativa'}}) }}
+						Reparto publicitario
+					</p>
+					<p class="parrafo-registro">
+						{{ form_widget(form.posicionamiento, { 'attr': {'class': 'check-tipo-servicio check-imagen-corporativa'}}) }}
+						Posicionamiento
+					</p>
+					<p class="parrafo-registro">
+						{{ form_widget(form.communityManagement, { 'attr': {'class': 'check-tipo-servicio check-imagen-corporativa'}}) }}
+						Community Management
+					</p>
+					<p class="parrafo-registro">
+						{{ form_widget(form.difusionInternet, { 'attr': {'class': 'check-tipo-servicio check-imagen-corporativa'}}) }}
+						Difusión en internet
+					</p>
+					<p class="parrafo-registro">
+						{{ form_widget(form.difusionOtrosMedios, { 'attr': {'class': 'check-tipo-servicio check-imagen-corporativa'}}) }}
+						Difusión otros medios
+					</p>
+					<p class="parrafo-registro">
+						{{ form_widget(form.emisionOnlinePaginaEvento, { 'attr': {'class': 'check-tipo-servicio check-imagen-corporativa'}}) }}
+						Emisión online en página del evento
+					</p>
+
+
+
+					<div class="clearfix"></div>
+					<p>
+						&nbsp;
+					</p>
+
+					<div class="enviar">
+						<a href="javascript:void(0)" class="siguiente-formulario" referencia="quinto" actual="cuarto">Siguiente</a>
+					</div>
+					<div class="enviar">
+						<a href="javascript:void(0)" class="anterior-formulario" referencia="tercero" actual="cuarto">Anterior</a>
+					</div>
+
+					<div id="error"></div>
+					<div class="clearfix"></div>
+				</div>
+
+				<div class="formnuevo ocultar">
+
+					<h2 > Registrar nuevo servicio (5/5)</h2>
+					<p >
+						&nbsp;
+					</p>
+
+					<p>
+						<strong>Detalles de la reserva:</strong>
+					</p>
+
+					<p>
+						{{ form_widget(form.aceptacionReservaAutomatica, { 'attr': {'class': 'check-aceptacion-reserva'}}) }}
+						Aceptación de la reserva automática
+					</p>
+
+					<p >
+						{{ form_widget(form.tiempoMaximoAceptacionReservaAutomatica24h, { 'attr': {'class': 'check-aceptacion-reserva'}}) }}
+						Tiempo máximo de aceptación de reserva 24h
+					</p>
+
+					<p >
+						{{ form_widget(form.tiempoMaximoAceptacionReservaAutomatica48, { 'attr': {'class': 'check-aceptacion-reserva'}}) }}
+						Tiempo máximo de aceptación de reserva 48h
+					</p>
+
+					<p >
+						&nbsp;
+					</p>
+
+					<p >
+						{{ form_widget(form.datosFacturacionPagoDelUsuario, { 'attr': {'class': 'check-facturacion-pago'}}) }}
+						Los datos de facturación y pago son los del usuario
+					</p>
+
+					<p >
+						{{ form_widget(form.anadirDatosFacturacionPago, { 'attr': {'class': 'check-facturacion-pago'}}) }}
+						<a href="#"> Añadir datos de facturación y pago</a>
+					</p>
+					<p >
+						&nbsp;
+					</p>
+
+				
+
+					<div class="clearfix"></div>
+
+					<p>
+						&nbsp;
+					</p>
+					<h3 > Precio</h3>
+
+					<p>
+
+						{{ form_widget(form.precioPorHora, { 'attr': {'class': 'formstyle','title':'Precio por Hora (Euros)','min':'0','step':'1','value':'0'} }) }}
+					</p>
+					<p>
+						&nbsp;
+					</p>
+					<div class="clearfix"></div>
+					<p>
+						{{ form_widget(form.aceptoCondicionesUsoPoliticaPrivacidad) }}
+						<a href="#"> Acepto las condiciones de uso y la política de privacidad</a>
+					</p>
+
+					<div class="clearfix"></div>
+
+					<div class="enviar">
+						<a href="javascript:void(0)" class="siguiente-formulario" referencia="envio" actual="quinto">Siguiente</a>
+					</div>
+					<div class="enviar">
+						<a href="javascript:void(0)" class="anterior-formulario" referencia="cuarto" actual="quinto">Anterior</a>
+					</div>
+
+					<div class="clearfix"></div>
+
+				</div>
+
+			</div>
+
+			<div id="oculto" style="display:block">
+
+				{{ form_rest(form) }}
+			</div>
+		</form>
+		<!-- Work Links Section End -->
+		<!-- Last Words Section End-->
+		<div id="sedes" ></div>
+	</div>
+
+</div>
+{%endblock%}

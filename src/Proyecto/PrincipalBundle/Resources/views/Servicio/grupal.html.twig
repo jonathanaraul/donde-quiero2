@@ -1,0 +1,15 @@
+{% extends "ProyectoPrincipalBundle:Default:base.html.twig" %}
+
+{%block contenedorbase%}
+<div class="wrapper">
+
+	{% include 'ProyectoPrincipalBundle:Helpers:top.html.twig'  with {'clase': 'azul'}  %}
+	{% include 'ProyectoPrincipalBundle:Default:sesion.html.twig'  with {'datos': datos} %}
+
+	{% render controller('ProyectoPrincipalBundle:Servicio:destacados', { 'numResults': 4 }) %}
+	{% render controller('ProyectoPrincipalBundle:Servicio:widget', {  'titulo':'Servicios','numResults': 16,'paginacion':true,'proveedor':false,'cliente':false,'idRelacionado':0 }) %}
+
+	<!--<div class="clearfix"></div>-->
+</div>
+
+{%endblock%} 

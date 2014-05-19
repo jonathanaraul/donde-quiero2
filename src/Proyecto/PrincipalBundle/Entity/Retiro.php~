@@ -1,0 +1,43 @@
+<?php
+
+namespace Proyecto\PrincipalBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Retiro
+ *
+ * @ORM\Table(name="retiro")
+ * @ORM\Entity
+ */
+class Retiro
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $id;
+
+     /**
+     * @ORM\Column(type="text", nullable=false)
+     */
+    public $razon;
+    /**
+     * @var \User
+     *
+     * @ORM\ManyToOne(targetEntity="User")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="user", referencedColumnName="id", nullable=false)
+     * })
+     */
+    private $user;
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="fechaRegistro", type="datetime", nullable=false)
+     */
+    private $fechaRegistro;
+}

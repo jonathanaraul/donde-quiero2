@@ -1,0 +1,236 @@
+proyecto_principal_homepage:
+    pattern:  /
+    defaults: { _controller: ProyectoPrincipalBundle:Default:index }
+
+proyecto_principal_gestion:
+    pattern:  /gestion/
+    defaults: { _controller: ProyectoPrincipalBundle:Gestion:index }
+
+proyecto_principal_pago_procesar_reserva:
+    pattern:  /reservar/procesar-reserva
+    defaults: { _controller: ProyectoPrincipalBundle:Pago:procesarReserva}
+    requirements:
+      _method: POST
+proyecto_principal_pago_borrar_reservas:
+    pattern:  /reservar/borrar-reservas
+    defaults: { _controller: ProyectoPrincipalBundle:Pago:borrarReservas}
+    requirements:
+      _method: POST
+proyecto_principal_pago_confirmacion_guardar:
+    pattern:  /reservar/confirmacion/guardar
+    defaults: { _controller: ProyectoPrincipalBundle:Pago:confirmacionGuardar}
+    requirements:
+      _method: POST
+proyecto_principal_pago_aprobado:
+    pattern:  /pago/aprobado/{id}
+    defaults: { _controller: ProyectoPrincipalBundle:Pago:aprobado,id: '1' }
+proyecto_principal_pago_cancelado:
+    pattern:  /pago/cancelado/{id}
+    defaults: { _controller: ProyectoPrincipalBundle:Pago:cancelado,id: '1' }
+
+proyecto_principal_espacio_individual:
+    pattern:  /espacio/{id}
+    defaults: { _controller: ProyectoPrincipalBundle:Espacio:individual,id: '1' }
+proyecto_principal_espacio_grupal:
+    pattern:  /espacios
+    defaults: { _controller: ProyectoPrincipalBundle:Espacio:grupal }
+proyecto_principal_espacio_registrar:
+    pattern:  /registrar/espacio
+    defaults: { _controller: ProyectoPrincipalBundle:Espacio:registrar }
+proyecto_principal_espacio_editar:
+    pattern:  /editar/espacio
+    defaults: { _controller: ProyectoPrincipalBundle:Espacio:editar }
+proyecto_principal_espacio_busqueda:
+    pattern:  /busqueda/espacio
+    defaults: { _controller: ProyectoPrincipalBundle:Espacio:busqueda}
+    requirements:
+      _method: POST
+proyecto_principal_espacio_reservar:
+    pattern:  /reservar/espacio/{id}
+    defaults: { _controller: ProyectoPrincipalBundle:Espacio:reserva,id: '1' }
+proyecto_principal_espacio_confirmacion:
+    pattern:  /reservar/confirmacion/espacio/{id}
+    defaults: { _controller: ProyectoPrincipalBundle:Espacio:confirmacion,id: '1' }
+
+proyecto_principal_evento_individual:
+    pattern:  /evento/{id}
+    defaults: { _controller: ProyectoPrincipalBundle:Evento:individual,id: '1' }
+proyecto_principal_evento_grupal:
+    pattern:  /eventos
+    defaults: { _controller: ProyectoPrincipalBundle:Evento:grupal }
+proyecto_principal_evento_registrar:
+    pattern:  /registrar/evento
+    defaults: { _controller: ProyectoPrincipalBundle:Evento:registrar }
+proyecto_principal_evento_editar:
+    pattern:  /editar/evento
+    defaults: { _controller: ProyectoPrincipalBundle:Evento:editar }
+proyecto_principal_evento_busqueda:
+    pattern:  /busqueda/evento
+    defaults: { _controller: ProyectoPrincipalBundle:Evento:busqueda}
+    requirements:
+      _method: POST
+proyecto_principal_evento_reservar:
+    pattern:  /reservar/evento/{id}
+    defaults: { _controller: ProyectoPrincipalBundle:Evento:reserva,id: '1' }
+proyecto_principal_evento_confirmacion:
+    pattern:  /reservar/confirmacion/evento/{id}
+    defaults: { _controller: ProyectoPrincipalBundle:Evento:confirmacion,id: '1' }
+
+proyecto_principal_servicio_individual:
+    pattern:  /servicio/{id}
+    defaults: { _controller: ProyectoPrincipalBundle:Servicio:individual,id: '1' }
+proyecto_principal_servicio_grupal:
+    pattern:  /servicios
+    defaults: { _controller: ProyectoPrincipalBundle:Servicio:grupal }
+proyecto_principal_servicio_registrar:
+    pattern:  /registrar/servicio
+    defaults: { _controller: ProyectoPrincipalBundle:Servicio:registrar }
+proyecto_principal_servicio_editar:
+    pattern:  /editar/servicio
+    defaults: { _controller: ProyectoPrincipalBundle:Servicio:editar }
+proyecto_principal_servicio_busqueda:
+    pattern:  /busqueda/servicio
+    defaults: { _controller: ProyectoPrincipalBundle:Servicio:busqueda}
+    requirements:
+      _method: POST
+proyecto_principal_servicio_reservar:
+    pattern:  /reservar/servicio/{id}
+    defaults: { _controller: ProyectoPrincipalBundle:Servicio:reserva,id: '1' }
+proyecto_principal_servicio_confirmacion:
+    pattern:  /reservar/confirmacion/servicio/{id}
+    defaults: { _controller: ProyectoPrincipalBundle:Servicio:confirmacion,id: '1' }
+
+proyecto_principal_sede_grupal:
+    pattern:  /sedes
+    defaults: { _controller: ProyectoPrincipalBundle:Sede:grupal }
+proyecto_principal_sede_individual:
+    pattern:  /sede/{id}
+    defaults: { _controller: ProyectoPrincipalBundle:Sede:individual,id: '1' }
+proyecto_principal_sede_registrar:
+    pattern:  /registrar/sede
+    defaults: { _controller: ProyectoPrincipalBundle:Sede:registrar }
+proyecto_principal_sede_editar:
+    pattern:  /editar/sede
+    defaults: { _controller: ProyectoPrincipalBundle:Sede:editar }
+proyecto_principal_sede_busqueda:
+    pattern:  /busqueda/sede
+    defaults: { _controller: ProyectoPrincipalBundle:Sede:busqueda}
+    requirements:
+      _method: POST
+proyecto_principal_sede_reservar:
+    pattern:  /reservar/sede/{id}
+    defaults: { _controller: ProyectoPrincipalBundle:Sede:reserva,id: '1' }
+proyecto_principal_sede_confirmacion:
+    pattern:  /reservar/confirmacion/sede/{id}
+    defaults: { _controller: ProyectoPrincipalBundle:Sede:confirmacion,id: '1' }
+
+
+proyecto_users_buscar_ciudad:
+    pattern:  /users/buscarCiudad
+    defaults: { _controller: ProyectoPrincipalBundle:Users:buscarCiudad }
+    requirements:
+      _method: POST
+
+proyecto_contacto_enviar_mensaje:
+    pattern:  /contacto/enviarMensaje
+    defaults: { _controller: ProyectoPrincipalBundle:Contacto:enviarMensaje}
+    requirements:
+      _method: POST
+
+proyecto_perfil_privado:
+    pattern:  /perfil/privado
+    defaults: { _controller: ProyectoPrincipalBundle:Perfil:privado }
+proyecto_perfil_publico:
+    pattern:  /perfil/publico
+    defaults: { _controller: ProyectoPrincipalBundle:Perfil:publico }
+proyecto_perfil_enrutador:
+    pattern:  /perfil/enrutador
+    defaults: { _controller: ProyectoPrincipalBundle:Perfil:enrutador }
+proyecto_perfil_editar:
+    pattern:  /perfil/editar
+    defaults: { _controller: ProyectoPrincipalBundle:Perfil:editar }
+proyecto_perfil_crearcuenta:
+    pattern:  /crearcuenta
+    defaults: { _controller: ProyectoPrincipalBundle:Perfil:crearCuenta }
+proyecto_perfil_facturacion:
+    pattern:  /perfil/facturacion
+    defaults: { _controller: ProyectoPrincipalBundle:Facturacion:index }
+proyecto_perfil_enviar_solicitud_baja:
+    pattern:  /perfil/enviarSolicitudBaja
+    defaults: { _controller: ProyectoPrincipalBundle:Perfil:enviarSolicitudBaja }
+    requirements:
+      _method: POST
+proyecto_perfil_cancelar_solicitud_baja:
+    pattern:  /perfil/cancelarSolicitudBaja
+    defaults: { _controller: ProyectoPrincipalBundle:Perfil:cancelarSolicitudBaja }
+    requirements:
+      _method: POST
+proyecto_perfil_reservas:
+    pattern:  /perfil/reservas
+    defaults: { _controller: ProyectoPrincipalBundle:Perfil:reservas }
+proyecto_perfil_notificaciones:
+    pattern:  /perfil/notificaciones
+    defaults: { _controller: ProyectoPrincipalBundle:Perfil:notificaciones }
+proyecto_perfil_notificacion_reserva:
+    pattern:  /perfil/notificacionReserva
+    defaults: { _controller: ProyectoPrincipalBundle:Perfil:notificacionReserva }
+    requirements:
+      _method: POST
+
+proyecto_principal_acceso:
+    pattern:  /acceso
+    defaults: { _controller: ProyectoPrincipalBundle:Users:acceso }
+proyecto_principal_registro:
+    pattern:  /registro
+    defaults: { _controller: ProyectoPrincipalBundle:Users:registro }
+proyecto_principal_cuenta_guardar:
+    pattern:  /cuenta/guardar
+    defaults: { _controller: ProyectoPrincipalBundle:Default:cuentaGuardar }
+    requirements:
+      _method: POST
+proyecto_principal_cerrarsesion:
+    pattern:  /logout
+    defaults: { _controller: ProyectoPrincipalBundle:Default:acceso }
+proyecto_principal_perfil:
+    pattern:  /perfil
+    defaults: { _controller: ProyectoPrincipalBundle:Default:perfil }
+
+
+
+
+proyecto_principal_listado:
+    pattern:  /listado
+    defaults: { _controller: ProyectoPrincipalBundle:Default:listado }
+proyecto_principal_acerca:
+    pattern:  /acerca
+    defaults: { _controller: ProyectoPrincipalBundle:Default:acerca }
+proyecto_principal_validacion:
+    pattern:  /validacion
+proyecto_principal_nuevo:
+    pattern:  /nuevo
+    defaults: { _controller: ProyectoPrincipalBundle:Default:nuevo }
+proyecto_principal_historia:
+    pattern:  /historia
+    defaults: { _controller: ProyectoPrincipalBundle:Default:historia }
+login:
+    pattern:   /login
+    defaults:  { _controller: AcmeSecurityBundle:Security:login }
+login_check:
+    pattern:   /login_check
+proyecto_principal_procesa_objeto:
+    pattern:  /procesa/objeto
+    defaults: { _controller: ProyectoPrincipalBundle:Default:procesaObjeto }
+    requirements:
+      _method: POST
+proyecto_principal_elimina_objeto:
+    pattern:  /elimina/
+    defaults: { _controller: ProyectoPrincipalBundle:Default:eliminar }
+    requirements:
+      _method: POST
+proyecto_principal_editar_objeto:
+    pattern:  /editar/{id}
+    defaults: { _controller: ProyectoPrincipalBundle:Default:editar,id: '1' }
+proyecto_principal_ver_objeto:
+    pattern:  /ver/{id}
+    defaults: { _controller: ProyectoPrincipalBundle:Default:ver,id: '1' }
+

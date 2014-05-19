@@ -1,0 +1,40 @@
+Proyecto\PrincipalBundle\Entity\User:
+    properties:
+        file:
+            - Image:
+                minWidth: 10
+                maxWidth: 5000
+                minHeight: 10
+                maxHeight: 5000
+Proyecto\PrincipalBundle\Entity\Sede:
+    properties:
+        file:
+            - Image:
+                minWidth: 10
+                maxWidth: 5000
+                minHeight: 10
+                maxHeight: 5000
+Proyecto\PrincipalBundle\Entity\Servicio:
+    properties:
+        file:
+            - Image:
+                minWidth: 10
+                maxWidth: 5000
+                minHeight: 10
+                maxHeight: 5000
+Proyecto\PrincipalBundle\Entity\Espacio:
+    properties:
+        file:
+            - Image:
+                minWidth: 10
+                maxWidth: 5000
+                minHeight: 10
+                maxHeight: 5000
+Proyecto\PrincipalBundle\Entity\Evento:
+    properties:
+        file:
+            - Image:
+                minWidth: 10
+                maxWidth: 5000
+                minHeight: 10
+                maxHeight: 5000

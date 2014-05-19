@@ -1,0 +1,42 @@
+
+<link href='{{ asset('sistema/fullcalendar-1.6.4/fullcalendar/fullcalendar.css')}}' rel='stylesheet' />
+<link href='{{ asset('sistema/fullcalendar-1.6.4/fullcalendar/fullcalendar.print.css')}}' rel='stylesheet' media='print' />
+
+<style>
+	body {
+		#margin-top: 40px;
+		text-align: center;
+		font-size: 14px;
+		font-family: "Lucida Grande", Helvetica, Arial, Verdana, sans-serif;
+	}
+	.fc-event {
+		#border: 1px solid #000000;
+		background-color: {{color}};
+	}
+	#calendar {
+		width: 700px;
+		margin: 0 auto;
+		background-color: white;
+		margin-top: 20px;
+		/* padding-top: 20px; */
+		/* margin-top: 20px; */
+		margin-bottom: 20px;
+		padding: 20px;
+		border-radius: 15px;
+		-moz-border-radius: 15px;
+		-webkit-box-shadow: 0 1px 3px #c3c3c3;
+		-moz-box-shadow: 0 1px 3px #c3c3c3;
+		box-shadow: 0 1px 3px #c3c3c3;
+		-webkit-transition: box-shadow 0.2s ease-in-out;
+		-moz-transition: box-shadow 0.2s ease-in-out;
+		-o-transition: box-shadow 0.2s ease-in-out;
+		-ms-transition: box-shadow 0.2s ease-in-out;
+		transition: box-shadow 0.2s ease-in-out;
+	}
+	.external-event {
+		background-color: {{color}};
+		color: rgb(241, 241, 240);
+		cursor: pointer;
+	}
+
+</style>

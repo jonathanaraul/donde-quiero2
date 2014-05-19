@@ -1,0 +1,56 @@
+{% extends "ProyectoPrincipalBundle:Default:base.html.twig" %}
+
+
+{%block contenedorbase%}
+<div class="wrapper">
+
+	{% include 'ProyectoPrincipalBundle:Helpers:top.html.twig'  with {'clase': 'gris'}  %}
+
+  <div id="registro">
+    <p>Bienvenido {{user.nombre|title}} {{user.apellido|title}} - <a href="{{path('proyecto_principal_cerrarsesion')}}">Cerrar Sesión</a></p>
+  </div>
+
+	<aside id="about" class=" left">
+		<!-- Text Section Start -->
+		<!-- Replace all text with what you want -->
+	 
+		<div class="perfilimg"> 
+			<p>
+          <img src="{{ asset(''~ user.getWebPath ~'') }}"  >
+
+       </p>
+			
+			<div class="clearfix"></div>
+				
+		</div>
+
+			<div class="clearfix"></div>
+ 
+				
+	</aside>
+	<aside class="right">
+		<div class="sede" style="margin-top:1%;" >
+			<h3>{{user.nombre|title}} {{user.apellido|title}}</h3>
+			<ul>
+				<li class="izquierda"><h4> Profesión</h4></li>
+				<li class="derecha">
+			 <h4>    {{user.localidad.nombre|title}}, {{user.pais|title}}</h4>
+					</li>
+				</ul>
+			<!--Category-->
+			<div class="clearfix"></div>
+			<p>{{user.descripcion}}</p>
+			<div class="clearfix"></div>
+			 <p>
+				 <input name="condiciones" type="checkbox" {%if user.eventos%}checked{%endif%} >    
+				 Disponible para organizar eventos</p>
+			 <div class="clearfix"></div>
+
+		
+
+			 
+
+	</aside>
+	<div class="clearfix" ></div> 
+</div>
+{%endblock%} 
