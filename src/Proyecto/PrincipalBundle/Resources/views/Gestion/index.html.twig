@@ -1,21 +1,13 @@
 {% extends "ProyectoPrincipalBundle:Default:base.html.twig" %}
 
 {%block scripts%}
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
-
-<script src="{{ asset('bundles/obhighcharts/js/highcharts/highcharts.js') }}"></script>
-<script src="{{ asset('bundles/obhighcharts/js/highcharts/modules/exporting.js') }}"></script>
-<script type="text/javascript">
-	{{
-			chart(chart)
-		}}
-</script>
+{% include 'ProyectoPrincipalBundle:Gestion:scriptsGestion.html.twig' %}
 {%endblock%}
 
 {%block contenedorbase%}
 <div class="wrapper">
 
-	{% include 'ProyectoPrincipalBundle:Helpers:top.html.twig'  with {'clase': 'azul'}  %}
+	{% include 'ProyectoPrincipalBundle:Helpers:top.html.twig'  with {'clase': color}  %}
 	{% include 'ProyectoPrincipalBundle:Default:sesion.html.twig'  with {'datos': datos} %}
 
 	<h3>Administracion</h3>
@@ -26,8 +18,31 @@
 	</p>
 	<div class="clearfix" ></div>
 	<!-- Text Section End -->
+	<div id="botonesGestion">
+		<div tipo="Ingresos" class="work verdeazul botonGestion" style="margin-left: 8px;" >
+			<h3 class="tituloBotonGestion" >Ingresos</h3>
+		</div>
+		<div tipo="Usuarios" class="work rojo botonGestion " >
+			<h3 class="tituloBotonGestionSeleccionado tituloBotonGestion" >Usuarios</h3>
+		</div>
+		<div tipo="Espacios" class="work verde botonGestion" >
+			<h3 class="tituloBotonGestion" >Espacios</h3>
+		</div>
+		<div tipo="Eventos" class="work rosa botonGestion" >
+			<h3 class="tituloBotonGestion" >Eventos</h3>
+		</div>
+		<div tipo="Servicios" class="work azul botonGestion" >
+			<h3 class="tituloBotonGestion" >Servicios</h3>
+		</div>
+		<div tipo="Sedes" class="work amarillo botonGestion" >
+			<h3 class="tituloBotonGestion" >Sedes</h3>
+		</div>
 
-	<div id="work" class="azul" style="width: 820px;height: 480px;">
+        <div class="clearfix"></div>
+	</div>
+
+	<div id="work" class="{{color}}" style="width: 820px;height: 480px;">
+		<div class="clearfix"></div>
 		<!-- Work Links Section Start -->
 		<div class="añadir" style="width: 251px;">
 			<a href="javascript:void(0)">Registros de usuarios</a><!--/item-->
@@ -42,43 +57,37 @@
 	<div class="clearfix"></div>
 </div><!--/html_carousel-->
 
-<div id="work" class="azul" style="width: 820px;">
+{{ form_start(form, { 'attr': {'id': 'formularioGestion'}}) }}
+<div id="work" class="{{color}}" style="width: 820px;">
 	<!-- Work Links Section Start -->
 	<div class="añadir" >
 		<a href="javascript:void(0)">Usuarios</a><!--/item-->
 	</div>
+
 	<div class="buscador">
-		<input type="text" placeholder="Usuario" class="input-gestion">
+		{{ form_widget(form.username, { 'attr': {'class': 'input-gestion','placeholder':'Usuario'} }) }}
 	</div>
 	<div class="buscador">
-		<input type="text" placeholder="Correo" class="input-gestion">
+		{{ form_widget(form.email, { 'attr': {'class': 'input-gestion','placeholder':'Correo'} }) }}
 	</div>
 	<div class="buscador">
-		<input type="text" placeholder="Localidad" class="input-gestion">
+		{{ form_widget(form.localidad, { 'attr': {'class': 'formstyle selectBusqueda'} }) }}
 	</div>
 	<div class="añadir">
 		<ul>
 			<li>
-				<a href="/donde-quiero2/web/app_dev.php/registrar/evento"><img class="icon" src="/donde-quiero2/web/sistema/images/icons/mas.png" width="27" height="27" title="Añadir Gratis"></a>
+				<a href="javascript:void(0)"><img class="icon" src="/donde-quiero2/web/sistema/images/icons/mas.png" width="27" height="27" title="Añadir Gratis"></a>
 			</li>
 			<li style="float:right;">
-				<a href="javascript:void(0)" id="buscarEvento" numresults="8"><img class="icon" src="/donde-quiero2/web/sistema/images/icons/buscar.png" width="27" height="27" alt="Buscar"></a>
+				<a href="javascript:void(0)" id="buscarGestion" numresults="8"><img class="icon" src="/donde-quiero2/web/sistema/images/icons/buscar.png" width="27" height="27" alt="Buscar"></a>
 			</li>
 		</ul>
 	</div>
 	<div class="buscador">
-		<select name="precio" class="formstyle">
-			<option value="0"> Estado </option>
-			<option value="0"> Activo </option>
-			<option value="1"> Inactivo </option>
-		</select>
+		{{ form_widget(form.estado, { 'attr': {'class': 'formstyle selectBusqueda'} }) }}
 	</div>
 	<div class="buscador">
-		<select name="precio" class="formstyle">
-			<option value="0"> Rol </option>
-			<option value="0"> Administrador </option>
-			<option value="1"> Usuario </option>
-		</select>
+        {{ form_widget(form.rol, { 'attr': {'class': 'formstyle selectBusqueda'} }) }}
 	</div>
 	<div class="buscador">
 		<select name="precio" class="formstyle">
@@ -110,18 +119,19 @@
 				<td>{{ element.email }}</td>
 				<td>{{ element.localidad.nombre }}</td>
 				<td>{{ element.fechaRegistro.format('d/m/Y') }}</td>
-				<td>{%if element.estado %}Activo{%else%}Inactivo{%endif%}</td>
-				<td>{%if element.rol %}Administrador{%else%}Usuario{%endif%}</td>
+				<td class="funcionGestion" tipo="usuario" tarea="estado" identificador="{{ element.id }}">{%if element.estado %}Activo{%else%}Inactivo{%endif%}</td>
+				<td class="funcionGestion" tipo="usuario" tarea="rol"  identificador="{{ element.id }}">{%if element.rol %}Administrador{%else%}Usuario{%endif%}</td>
 			</tr>
 			{%endfor%}
 		</table>
 	</div>
 	<div class="clearfix"></div>
-	<div id="contador" class="paginacion-rosa">
+	<div id="contador" class="paginacion-{{color}}">
 		<span style="color:" class=""> {{ knp_pagination_render(pagination) }}</span>
 		<span style="color: #000;" class="">  {{ pagination.getTotalItemCount }} Resultados</span>
 	</div>
 </div>
+{{ form_end(form) }}
 <div class="clearfix"></div>
 </div><!--/html_carousel-->
 {%endblock%} 

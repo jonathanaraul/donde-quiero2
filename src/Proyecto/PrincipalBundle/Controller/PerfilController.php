@@ -20,10 +20,7 @@ use Proyecto\PrincipalBundle\Entity\Retiro;
 
 class PerfilController extends Controller {
 	public static $parametro =0;
-    public function enrutadorAction(){
-        echo'llego al enrutador';
-        exit;
-    }
+
 	public function privadoAction() {
 		$firstArray = UtilitiesAPI::getDefaultContent($this);
 		$user = UtilitiesAPI::getActiveUser($this);
@@ -64,10 +61,13 @@ class PerfilController extends Controller {
         $query->setParameter('idUser', $idUser);
         $notificaciones = $query->getResult();
         $auxiliar = array();
-        for ($i=0; $i < 3 ; $i++) { 
-        	$auxiliar[$i] = $notificaciones[$i];
-        }
+        if($notificaciones!=null){
+          for ($i=0; $i < 3 ; $i++) { 
+            $auxiliar[$i] = $notificaciones[$i];
+                                    }
         $notificaciones = $auxiliar;
+        }
+
 
         //var_dump($notificaciones);exit;
 
@@ -294,6 +294,8 @@ class PerfilController extends Controller {
 				$object -> setNombre(strtolower($object -> getNombre()));
 				$object -> setApellido(strtolower($object -> getApellido()));
 				$object -> setEmail(strtolower($object -> getEmail()));
+                $object -> setEstado(1);
+                $object -> setRol(0);
 				if($id == null) {$object -> setFechaRegistro(new \DateTime());
     			$em->persist($object);}
     			$em->flush();

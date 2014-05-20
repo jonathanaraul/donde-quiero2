@@ -1,10 +1,28 @@
 proyecto_principal_homepage:
     pattern:  /
     defaults: { _controller: ProyectoPrincipalBundle:Default:index }
+proyecto_principal_direccionador:
+    pattern:  /direccionador
+    defaults: { _controller: ProyectoPrincipalBundle:Default:direccionador }
 
 proyecto_principal_gestion:
     pattern:  /gestion/
     defaults: { _controller: ProyectoPrincipalBundle:Gestion:index }
+proyecto_principal_gestion_usuarios:
+    pattern:  /gestion/usuarios
+    defaults: { _controller: ProyectoPrincipalBundle:Gestion:usuarios }
+proyecto_principal_gestion_espacios:
+    pattern:  /gestion/espacios
+    defaults: { _controller: ProyectoPrincipalBundle:Gestion:espacios }
+proyecto_principal_gestion_eventos:
+    pattern:  /gestion/eventos
+    defaults: { _controller: ProyectoPrincipalBundle:Gestion:eventos }
+proyecto_principal_gestion_servicios:
+    pattern:  /gestion/servicios
+    defaults: { _controller: ProyectoPrincipalBundle:Gestion:servicios }
+proyecto_principal_gestion_sedes:
+    pattern:  /gestion/sedes
+    defaults: { _controller: ProyectoPrincipalBundle:Gestion:sedes }
 
 proyecto_principal_pago_procesar_reserva:
     pattern:  /reservar/procesar-reserva

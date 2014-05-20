@@ -28,7 +28,7 @@ security:
             form_login:
                 check_path: /login_check
                 login_path: /acceso
-                default_target_path: /
+                default_target_path: /direccionador
             logout:
                 path:   /logout
                 target: /

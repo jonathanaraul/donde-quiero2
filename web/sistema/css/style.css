@@ -707,6 +707,27 @@ height:auto;
 	background-color: #C4C4C4;;
 
 }
+.rojo
+{
+	background-color: #EF4343;
+}
+.verdeazul{
+	background-color: #59948D;
+}
+.botonGestion{
+	width:13%;
+	float:left;
+	margin-left: 6px;
+	cursor: pointer;
+}
+
+.tituloBotonGestion{
+	text-align: center;
+	color: #F1F1F0;
+}
+.tituloBotonGestionSeleccionado{
+	color:#515151
+}
 #destacados{
 	width:100%;
 	margin:1% auto 1% auto;
@@ -994,6 +1015,10 @@ color:#666;
 .white{
 	color:#ffffff;
 }
+.funcionGestion:hover { 
+	background: #FCF;
+    cursor: pointer;
+ }
 
 
 

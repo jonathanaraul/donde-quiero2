@@ -41,8 +41,8 @@
 			</p>
 
 			<div class="datos">
-				{%if reservas is not null%}
-				{%for elemento in reservas%}
+				{%if reservas |length >0%}
+				   {%for elemento in reservas%}
  
                 {%set color = ''%}
                 {%set nombre = ''%}
@@ -80,7 +80,8 @@
 				    </a>
 
 				</p>
-				{%endfor%}
+				  {%endfor%}
+
 
 				<div class="clearfix"></div>
 				<div class="otras">
@@ -99,7 +100,7 @@
 				<a href="{{path('proyecto_perfil_notificaciones')}}">Notificaciones pendientes</a>
 			</p>
 			<div class="datos">
-				{%if notificaciones is not null%}
+				{%if notificaciones|length >0%}
 				<div class="datos">
 				
 				{%for elemento in notificaciones%}
@@ -160,6 +161,8 @@
 						<a href="{{path('proyecto_perfil_notificaciones')}}">Todas</a>
 					</p>
 				</div>
+				{%else%}
+				<p>Ud no tiene notificaciones pendientes...</p>
 				{%endif%}
 			</div>
 			<div class="clearfix"></div>

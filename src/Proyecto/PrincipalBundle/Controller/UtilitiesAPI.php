@@ -172,9 +172,9 @@ class UtilitiesAPI extends Controller {
 
 		$user = $class -> getUser();
 
-		if ($user != NULL && false === $class -> get('security.context') -> isGranted('ROLE_ADMIN')) {
-			$user = null;
-		}
+		//if ($user != NULL && false === $class -> get('security.context') -> isGranted('ROLE_ADMIN')) {
+		//	$user = null;
+		//}
 
 		return $user;
 	}

@@ -79,5 +79,5 @@ knp_paginator:
 avalanche_imagine:
     filters:
         gestion:
-            type:    resize
+            type:    thumbnail
             options: { size: [120, 120], mode: outbound }
