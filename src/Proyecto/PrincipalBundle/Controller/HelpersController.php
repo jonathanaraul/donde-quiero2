@@ -89,8 +89,11 @@ class HelpersController extends Controller
         $em = $class->getDoctrine()->getManager();
 
         $dql =  'SELECT o1.id,o1.nombre,o1.path, o1.latitud,o1.longitud
-                 FROM ProyectoPrincipalBundle:Sede o1
+                 FROM ProyectoPrincipalBundle:Sede o1 
                 ';
+
+
+
         $tieneWhere = false;
 
         if($proveedor){
@@ -102,7 +105,9 @@ class HelpersController extends Controller
             ProyectoPrincipalBundle:Sede r2, ProyectoPrincipalBundle:User r3 WHERE r1.sede = r2.id and r1.user = r3.id and r3.id = :idRelacionado ) ';
             $tieneWhere = true;
         }
-
+        
+       if(!$tieneWhere){$dql.= ' WHERE ';$tieneWhere= true; }else $dql.= ' AND ';
+        $dql .= ' o1.id != 105  ';
 
         $dql .=   ' ORDER BY o1.id ASC';
 

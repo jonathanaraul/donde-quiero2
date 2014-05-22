@@ -329,6 +329,14 @@ class Servicio
      */
     private $precioPorHora;
 
+    /**
+     * @ORM\Column(name="estado", type="boolean", nullable=false)
+     */
+    private $estado;
+    /**
+     * @ORM\Column(name="suspendido", type="boolean", nullable=false)
+     */
+    private $suspendido;
 
     /**
      * @ORM\Column(name="destacado", type="boolean", nullable=true)
@@ -2092,5 +2100,51 @@ class Servicio
     public function getDestacado()
     {
         return $this->destacado;
+    }
+
+    /**
+     * Set estado
+     *
+     * @param boolean $estado
+     * @return Servicio
+     */
+    public function setEstado($estado)
+    {
+        $this->estado = $estado;
+
+        return $this;
+    }
+
+    /**
+     * Get estado
+     *
+     * @return boolean 
+     */
+    public function getEstado()
+    {
+        return $this->estado;
+    }
+
+    /**
+     * Set suspendido
+     *
+     * @param boolean $suspendido
+     * @return Servicio
+     */
+    public function setSuspendido($suspendido)
+    {
+        $this->suspendido = $suspendido;
+
+        return $this;
+    }
+
+    /**
+     * Get suspendido
+     *
+     * @return boolean 
+     */
+    public function getSuspendido()
+    {
+        return $this->suspendido;
     }
 }

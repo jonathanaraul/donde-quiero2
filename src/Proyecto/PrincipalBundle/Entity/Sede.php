@@ -295,6 +295,17 @@ class Sede
      * @ORM\Column(name="destacado", type="boolean", nullable=true)
      */
     private $destacado;
+
+
+    /**
+     * @ORM\Column(name="estado", type="boolean", nullable=false)
+     */
+    private $estado;
+    /**
+     * @ORM\Column(name="suspendido", type="boolean", nullable=false)
+     */
+    private $suspendido;
+
      /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
@@ -1844,5 +1855,51 @@ class Sede
     public function getDestacado()
     {
         return $this->destacado;
+    }
+
+    /**
+     * Set estado
+     *
+     * @param boolean $estado
+     * @return Sede
+     */
+    public function setEstado($estado)
+    {
+        $this->estado = $estado;
+
+        return $this;
+    }
+
+    /**
+     * Get estado
+     *
+     * @return boolean 
+     */
+    public function getEstado()
+    {
+        return $this->estado;
+    }
+
+    /**
+     * Set suspendido
+     *
+     * @param boolean $suspendido
+     * @return Sede
+     */
+    public function setSuspendido($suspendido)
+    {
+        $this->suspendido = $suspendido;
+
+        return $this;
+    }
+
+    /**
+     * Get suspendido
+     *
+     * @return boolean 
+     */
+    public function getSuspendido()
+    {
+        return $this->suspendido;
     }
 }

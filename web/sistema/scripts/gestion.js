@@ -26,17 +26,42 @@ $(".funcionGestion").live("click", function() {
 			valor = 1;
 		}
 	}
+	if(tarea=='destacado'){
+		if(contenido=='Si'){
+			$(this).html('No');
+			valor = 0;
+		}
+		else if(contenido=='No'){
+			$(this).html('Si');
+			valor = 1;
+		}
+	}
+	if(tarea=='suspendido'){
+		if(contenido=='Si'){
+			$(this).html('No');
+			valor = 0;
+		}
+		else if(contenido=='No'){
+			$(this).html('Si');
+			valor = 1;
+		}
+	}
+	if(tarea=='cancelado'){
+		if(contenido=='Si'){
+			$(this).html('No');
+			valor = 0;
+		}
+		else if(contenido=='No'){
+			$(this).html('Si');
+			valor = 1;
+		}
+	}
+
 
 	var data = 'tipo=' + tipo + '&tarea=' + tarea + '&identificador=' + identificador + '&valor='+valor;
-
-/*
 	$.post(direccionFuncionGestion, data, function(respuesta) {
-		var respuesta = JSON.parse(respuesta);
-		var elementos = respuesta['arreglo']['elementos'];
-		markers = new Array(elementos.length);
-		colocaMarcador(elementos);
 	});
-*/
+
 });
 
 $('.botonGestion').live("click", function() {

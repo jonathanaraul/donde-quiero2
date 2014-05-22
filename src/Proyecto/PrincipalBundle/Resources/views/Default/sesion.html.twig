@@ -3,7 +3,12 @@
   		{%if datos.usuario is null %}
       <p><a href="{{path('proyecto_principal_acceso')}}">Iniciar Sesión</a></p>
       {%else%}
-	  <p>{{datos.usuario}} - <a href="{{path('proyecto_perfil_privado')}}">Perfil Privado</a> - <a href="{{path('proyecto_principal_cerrarsesion')}}">Cerrar Sesión</a></p>
+	  <p>{{datos.usuario}} - 
+	  	<a href="{{path('proyecto_perfil_privado')}}">Perfil Privado</a> - 
+        {%if datos.rol%}
+	  	<a href="{{path('proyecto_principal_gestion')}}">Administrador</a> - 
+        {%endif%}
+	  	<a href="{{path('proyecto_principal_cerrarsesion')}}">Cerrar Sesión</a></p>
       {%endif%}
 
 

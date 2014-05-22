@@ -94,6 +94,12 @@ class Confirmacion
      */
     private $evento;
 
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="fechaRegistro", type="datetime", nullable=false)
+     */
+    private $fechaRegistro;
 
     /**
      * Get id
@@ -333,5 +339,28 @@ class Confirmacion
     public function getEvento()
     {
         return $this->evento;
+    }
+
+    /**
+     * Set fechaRegistro
+     *
+     * @param \DateTime $fechaRegistro
+     * @return Confirmacion
+     */
+    public function setFechaRegistro($fechaRegistro)
+    {
+        $this->fechaRegistro = $fechaRegistro;
+
+        return $this;
+    }
+
+    /**
+     * Get fechaRegistro
+     *
+     * @return \DateTime 
+     */
+    public function getFechaRegistro()
+    {
+        return $this->fechaRegistro;
     }
 }

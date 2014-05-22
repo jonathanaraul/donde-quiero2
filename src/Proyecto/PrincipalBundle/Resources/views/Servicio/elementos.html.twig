@@ -1,7 +1,8 @@
 	{%for element in elementos%}
 	<!--/item-->
 	<div class="item">
-		<a href="{{ path('proyecto_principal_servicio_individual',{'id':element.id}) }}"><img src="{{ asset('uploads/servicios/'~ element.path  ) }}" alt="image 1" style="width:180px;height:135px;"></a><!-- Image must be 400px by 300px -->
+		<a href="{{ path('proyecto_principal_servicio_individual',{'id':element.id}) }}">
+			<img src="{%if element.path is not null%}{{('uploads/servicios/'~ element.path) | apply_filter('elementos') }}{%else%}{{asset('sistema/images/nodisponible.png')}}{%endif%}" alt="image 1" style="width:180px;height:135px;"></a><!-- Image must be 400px by 300px -->
 		<h3>{{element.nombre|title}}</h3><!--Title-->
 		<ul>
 			<li class="izquierda">

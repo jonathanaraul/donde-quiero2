@@ -196,12 +196,11 @@ class ServicioController extends Controller {
 
         $em = $this->getDoctrine()->getManager();
 
-        $dql =  'SELECT o1.id,o1.nombre,o1.path,o1.precioPorHora FROM ProyectoPrincipalBundle:Servicio o1
+        $dql =  'SELECT o1.id,o1.nombre,o1.path,o1.precioPorHora FROM ProyectoPrincipalBundle:Servicio o1  WHERE o1.destacado = 1 
                  ORDER BY o1.id ASC';
 
         $query = $em->createQuery( $dql )
-                ->setMaxResults($numResults)
-               ->setFirstResult(10);
+                ->setMaxResults($numResults);
 
         $arreglo['destacados'] = $query->getResult();
 
@@ -282,6 +281,9 @@ class ServicioController extends Controller {
         $dql.= ', ProyectoPrincipalBundle:User o3 ';
         $dqlTotales .=  ', ProyectoPrincipalBundle:User o3 ';
     }
+
+    $dql .= '   WHERE o1.id != 103  ';
+    $dqlTotales .= '   WHERE o1.id != 103  ';
 
     $modoA = "";
     $modoB = "";

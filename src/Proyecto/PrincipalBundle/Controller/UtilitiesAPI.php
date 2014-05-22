@@ -46,10 +46,14 @@ class UtilitiesAPI extends Controller {
 		//$parameters = UtilitiesAPI::getParameters($class);
 		//$menu = UtilitiesAPI::getMenu($item,$class);
 		$user = UtilitiesAPI::getActiveUser($class);
+		$rol = null;
 		$usuario = null;
-		if($user!=NULL)$usuario = ucfirst($user->getNombre()).' '.ucfirst($user->getApellido());
-		
-		$datos = array('usuario' => $usuario, 'fecha' => UtilitiesAPI::obtenerFechaSistema($class));
+		if($user!=NULL){
+			$usuario = ucfirst($user->getNombre()).' '.ucfirst($user->getApellido());
+			$rol = $user->getRol();
+		}
+
+		$datos = array('usuario' => $usuario, 'fecha' => UtilitiesAPI::obtenerFechaSistema($class),'rol'=>$rol);
 		$array = array('datos' => $datos );
 		return $array;
 	}

@@ -4,10 +4,13 @@ proyecto_principal_homepage:
 proyecto_principal_direccionador:
     pattern:  /direccionador
     defaults: { _controller: ProyectoPrincipalBundle:Default:direccionador }
+proyecto_principal_suspendida::
+    pattern:  /cuenta/suspendida
+    defaults: { _controller: ProyectoPrincipalBundle:Default:cuentaSuspendida }
 
 proyecto_principal_gestion:
     pattern:  /gestion/
-    defaults: { _controller: ProyectoPrincipalBundle:Gestion:index }
+    defaults: { _controller: ProyectoPrincipalBundle:Gestion:ingresos }
 proyecto_principal_gestion_usuarios:
     pattern:  /gestion/usuarios
     defaults: { _controller: ProyectoPrincipalBundle:Gestion:usuarios }
@@ -23,6 +26,11 @@ proyecto_principal_gestion_servicios:
 proyecto_principal_gestion_sedes:
     pattern:  /gestion/sedes
     defaults: { _controller: ProyectoPrincipalBundle:Gestion:sedes }
+proyecto_principal_gestion_funcion:
+    pattern:  /gestion/funcion
+    defaults: { _controller: ProyectoPrincipalBundle:Gestion:funcion}
+    requirements:
+      _method: POST
 
 proyecto_principal_pago_procesar_reserva:
     pattern:  /reservar/procesar-reserva
@@ -198,9 +206,6 @@ proyecto_perfil_notificacion_reserva:
 proyecto_principal_acceso:
     pattern:  /acceso
     defaults: { _controller: ProyectoPrincipalBundle:Users:acceso }
-proyecto_principal_registro:
-    pattern:  /registro
-    defaults: { _controller: ProyectoPrincipalBundle:Users:registro }
 proyecto_principal_cuenta_guardar:
     pattern:  /cuenta/guardar
     defaults: { _controller: ProyectoPrincipalBundle:Default:cuentaGuardar }
@@ -212,6 +217,8 @@ proyecto_principal_cerrarsesion:
 proyecto_principal_perfil:
     pattern:  /perfil
     defaults: { _controller: ProyectoPrincipalBundle:Default:perfil }
+
+
 
 
 

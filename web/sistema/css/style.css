@@ -218,7 +218,17 @@ header h2{
 .clearfix {
     clear: both;
 }
-
+.gestion-ingreso-especial{
+	width: 60px;
+}
+.gestion-ingreso-usuario{
+	width: 142px;
+	height: 142px;
+}
+.gestion-imagen{
+	width: 131px;
+	height: 124px;
+}
 /* - - - - - - - - - - - - - - -  Galeria  - - - - - - - - - - - - - - - */
 #gallery { display: none; }
 #jgal {padding:0;margin:0;list-style: none; width: 80px; }

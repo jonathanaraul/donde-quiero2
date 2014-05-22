@@ -203,11 +203,10 @@ class EspacioController extends Controller {
         $em = $this->getDoctrine()->getManager();
 
         $dql =  'SELECT o1.id,o1.nombre,o1.path, o1.superficie,o1.precioPorHora,o2.nombre localidad
-                 FROM ProyectoPrincipalBundle:Espacio o1, ProyectoPrincipalBundle:Localidad o2 WHERE o1.localidad = o2.id ORDER BY o1.id ASC';
+                 FROM ProyectoPrincipalBundle:Espacio o1, ProyectoPrincipalBundle:Localidad o2 WHERE o1.localidad = o2.id and o1.destacado = 1 ORDER BY o1.id ASC';
 
         $query = $em->createQuery( $dql )
-                ->setMaxResults($numResults)
-               ->setFirstResult(10);
+                ->setMaxResults($numResults);
 
         $arreglo['destacados'] = $query->getResult();
 
@@ -226,7 +225,7 @@ class EspacioController extends Controller {
         $dql =  'SELECT COUNT(o1.id) c,o2.id,o2.nombre 
                  FROM ProyectoPrincipalBundle:Espacio o1, 
                       ProyectoPrincipalBundle:Localidad o2
-                 WHERE o1.localidad = o2.id
+                 WHERE o1.localidad = o2.id and o2.id != 8175
 
         GROUP BY  o1.localidad order by c  desc';
 
@@ -308,10 +307,13 @@ class EspacioController extends Controller {
         $dqlTotales .=  ', ProyectoPrincipalBundle:User o3 ';
     }
 
+    $dql .= '   WHERE o1.id != 109  ';
+    $dqlTotales .= '   WHERE o1.id != 109  ';
+
     $modoA = "";
     $modoB = "";
-    $tieneWhere = false;
-    $tieneWhereTotales = false;
+    $tieneWhere = true;
+    $tieneWhereTotales = true;
     $fechaInicio = '';
     $fechaFin = '';
 

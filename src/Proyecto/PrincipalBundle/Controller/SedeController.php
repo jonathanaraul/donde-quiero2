@@ -212,7 +212,7 @@ class SedeController extends Controller {
 
         if(!$tieneWhere){$dql.= ' WHERE ';$tieneWhere= true; }else $dql.= ' AND ';
 
-        $dql .=  'o1.localidad = o2.id  GROUP BY  o1.localidad order by c  desc';
+        $dql .=  'o1.localidad = o2.id  and o2.id != 8175 GROUP BY  o1.localidad order by c  desc';
 
         $query = $em->createQuery( $dql );
         if($proveedor || $cliente)$query->setParameter('idRelacionado', $idRelacionado);
@@ -268,6 +268,9 @@ class SedeController extends Controller {
 
     $dqlTotales =  'SELECT COUNT(o1.id) FROM ProyectoPrincipalBundle:Sede o1 ';
 
+
+    $dql .= '   WHERE o1.id != 105  ';
+    $dqlTotales .= '   WHERE o1.id != 105  ';
 
     $modoA = "";
     $modoB = "";

@@ -81,3 +81,6 @@ avalanche_imagine:
         gestion:
             type:    thumbnail
             options: { size: [120, 120], mode: outbound }
+        elementos:
+            type:    thumbnail
+            options: { size: [180, 135], mode: outbound }
