@@ -25,8 +25,9 @@ class EspacioController extends Controller {
 
         $object = $this -> getDoctrine() -> getRepository('ProyectoPrincipalBundle:Espacio') -> find($id);
         $reservas = $this -> getDoctrine() -> getRepository('ProyectoPrincipalBundle:Reserva') -> findByEspacio($object);
-
-		$secondArray = array('object'=>$object,'reservas'=>$reservas);
+       
+        $user = UtilitiesAPI::getActiveUser($this);
+        $secondArray = array('object'=>$object,'reservas'=>$reservas,'userId'=>$user->getId());
 
 		$array = array_merge($firstArray, $secondArray);
 		return $this -> render('ProyectoPrincipalBundle:Espacio:individual.html.twig', $array);
@@ -45,11 +46,21 @@ class EspacioController extends Controller {
 
 		return EspacioController::registrarEditar($id ,$url, $request,$this);
 	}
-	public function editarAction(Request $request) {
+	public function editarAction(Request $request,$id) {
 
 		$user = UtilitiesAPI::getActiveUser($this);
-		$id = $user->getId();
-		$url = $this -> generateUrl('proyecto_principal_espacio_editar');
+        $idUser = $user->getId();
+        $object = $this -> getDoctrine() -> getRepository('ProyectoPrincipalBundle:Espacio') -> find($id);
+
+        if($object->getUser()->getId() != $idUser){
+            $titulo = '¡Error 404...!';
+            $mensaje = 'Estimado(a) '.ucfirst($user ->getNombre()) . ' '.ucfirst($user ->getApellido()) .' ud no tiene derechos para realizar esta edición.';
+            $tituloBoton = 'Ir al inicio';
+            $direccionBoton = $this->generateUrl('proyecto_principal_homepage');
+            $array = array('titulo' => $titulo, 'mensaje' => $mensaje, 'tituloBoton'=>$tituloBoton, 'direccionBoton'=>$direccionBoton );
+            return $this -> render('ProyectoPrincipalBundle:Default:mensaje.html.twig', $array);
+        }
+		$url = $this -> generateUrl('proyecto_principal_espacio_editar',array('id' => $id));
 
 		return EspacioController::registrarEditar($id ,$url,$request, $this);
 
@@ -65,8 +76,12 @@ class EspacioController extends Controller {
 		$provincias = HelpersController::getProvincias($class);
 		$idProvincia = $user->getProvincia()->getId();
 
+
+
+
 		$parametro = $user->getProvincia()->getId();
 		$object->setLocalidad($user->getLocalidad());
+
 
         $form = $class->createFormBuilder($object)
             ->add('jardineria', 'checkbox',array('required'  => false))
@@ -108,6 +123,7 @@ class EspacioController extends Controller {
             ->add('ventanasExterior', 'checkbox',array('required'  => false))
             ->add('ventanasPatioInterior', 'checkbox',array('required'  => false))
             ->add('posibilidadOscurecerSala', 'checkbox',array('required'  => false))
+            
             ->add('otrasCaracteristicas', 'text')
 
             ->add('proyectorPantallaSala', 'checkbox',array('required'  => false))
@@ -156,10 +172,12 @@ class EspacioController extends Controller {
 			            ->setParameter(1, $parametro); // Sustituye ?1 por 100
 			    },
 
-			))          
+			)
+
+            )          
 
             ->getForm();
-
+    
 	    if ($request->isMethod('POST')) {
 
         	$form->bind($request);
@@ -179,13 +197,16 @@ class EspacioController extends Controller {
 				if($object->getOtrasCaracteristicas()=='Otros...') $object->setOtrasCaracteristicas(null);
 				if($object->getOtrosServicios()=='Otros...') $object->setOtrosServicios(null);
 
-
 				$object -> setUser($user);	
+                
+                $object -> setDestacado(0);
+                $object -> setEstado(1);  
+                $object -> setSuspendido(0);  
     			
     			$em->persist($object);
 				$em->flush();
 
-				return $class->redirect($class->generateUrl('proyecto_principal_homepage'));
+				return $class->redirect($class->generateUrl('proyecto_principal_espacio_individual',array('id' => $object ->getId())));
 
     		}
 	
@@ -193,6 +214,7 @@ class EspacioController extends Controller {
 
         $secondArray = array('form' => $form->createView(),'url'=>$url,'idProvincia'=>$idProvincia,'provincias'=>$provincias);
 		$array = array_merge($firstArray, $secondArray);
+
 		return $class -> render('ProyectoPrincipalBundle:Espacio:registrarEditar.html.twig', $array);
 	}
     public function destacadosAction($numResults)

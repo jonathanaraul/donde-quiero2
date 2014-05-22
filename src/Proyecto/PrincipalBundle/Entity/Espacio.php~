@@ -44,7 +44,7 @@ class Espacio
      */
     private $destacado;
     /**
-     * @ORM\Column(name="estadp", type="boolean", nullable=false)
+     * @ORM\Column(name="estado", type="boolean", nullable=false)
      */
     private $estado;
     /**
@@ -182,27 +182,27 @@ class Espacio
 
 
     /**
-     * @ORM\Column(name="pilaresSueltos",type="integer", nullable=true)
+     * @ORM\Column(name="pilaresSueltos",type="boolean", nullable=true)
      */
     private $pilaresSueltos;
 
     /**
-     * @ORM\Column(name="entradaAseosMovilidadReducida",type="integer", nullable=true)
+     * @ORM\Column(name="entradaAseosMovilidadReducida",type="boolean", nullable=true)
      */
     private $entradaAseosMovilidadReducida;
 
     /**
-     * @ORM\Column(name="ventanasExterior",type="integer", nullable=true)
+     * @ORM\Column(name="ventanasExterior",type="boolean", nullable=true)
      */
     private $ventanasExterior;
 
     /**
-     * @ORM\Column(name="ventanasPatioInterior",type="integer", nullable=true)
+     * @ORM\Column(name="ventanasPatioInterior",type="boolean", nullable=true)
      */
     private $ventanasPatioInterior;
 
     /**
-     * @ORM\Column(name="posibilidadOscurecerSala",type="integer", nullable=true)
+     * @ORM\Column(name="posibilidadOscurecerSala",type="boolean", nullable=true)
      */
     private $posibilidadOscurecerSala;
 
@@ -850,121 +850,7 @@ class Espacio
 
 
 
-    /**
-     * Set pilaresSueltos
-     *
-     * @param integer $pilaresSueltos
-     * @return Espacio
-     */
-    public function setPilaresSueltos($pilaresSueltos)
-    {
-        $this->pilaresSueltos = $pilaresSueltos;
-    
-        return $this;
-    }
-
-    /**
-     * Get pilaresSueltos
-     *
-     * @return integer 
-     */
-    public function getPilaresSueltos()
-    {
-        return $this->pilaresSueltos;
-    }
-
-    /**
-     * Set entradaAseosMovilidadReducida
-     *
-     * @param integer $entradaAseosMovilidadReducida
-     * @return Espacio
-     */
-    public function setEntradaAseosMovilidadReducida($entradaAseosMovilidadReducida)
-    {
-        $this->entradaAseosMovilidadReducida = $entradaAseosMovilidadReducida;
-    
-        return $this;
-    }
-
-    /**
-     * Get entradaAseosMovilidadReducida
-     *
-     * @return integer 
-     */
-    public function getEntradaAseosMovilidadReducida()
-    {
-        return $this->entradaAseosMovilidadReducida;
-    }
-
-    /**
-     * Set ventanasExterior
-     *
-     * @param integer $ventanasExterior
-     * @return Espacio
-     */
-    public function setVentanasExterior($ventanasExterior)
-    {
-        $this->ventanasExterior = $ventanasExterior;
-    
-        return $this;
-    }
-
-    /**
-     * Get ventanasExterior
-     *
-     * @return integer 
-     */
-    public function getVentanasExterior()
-    {
-        return $this->ventanasExterior;
-    }
-
-    /**
-     * Set ventanasPatioInterior
-     *
-     * @param integer $ventanasPatioInterior
-     * @return Espacio
-     */
-    public function setVentanasPatioInterior($ventanasPatioInterior)
-    {
-        $this->ventanasPatioInterior = $ventanasPatioInterior;
-    
-        return $this;
-    }
-
-    /**
-     * Get ventanasPatioInterior
-     *
-     * @return integer 
-     */
-    public function getVentanasPatioInterior()
-    {
-        return $this->ventanasPatioInterior;
-    }
-
-    /**
-     * Set posibilidadOscurecerSala
-     *
-     * @param integer $posibilidadOscurecerSala
-     * @return Espacio
-     */
-    public function setPosibilidadOscurecerSala($posibilidadOscurecerSala)
-    {
-        $this->posibilidadOscurecerSala = $posibilidadOscurecerSala;
-    
-        return $this;
-    }
-
-    /**
-     * Get posibilidadOscurecerSala
-     *
-     * @return integer 
-     */
-    public function getPosibilidadOscurecerSala()
-    {
-        return $this->posibilidadOscurecerSala;
-    }
-
+   
     /**
      * Set otrasCaracteristicas
      *
@@ -1922,5 +1808,51 @@ class Espacio
     public function getDestacado()
     {
         return $this->destacado;
+    }
+
+    /**
+     * Set estado
+     *
+     * @param boolean $estado
+     * @return Espacio
+     */
+    public function setEstado($estado)
+    {
+        $this->estado = $estado;
+
+        return $this;
+    }
+
+    /**
+     * Get estado
+     *
+     * @return boolean 
+     */
+    public function getEstado()
+    {
+        return $this->estado;
+    }
+
+    /**
+     * Set suspendido
+     *
+     * @param boolean $suspendido
+     * @return Espacio
+     */
+    public function setSuspendido($suspendido)
+    {
+        $this->suspendido = $suspendido;
+
+        return $this;
+    }
+
+    /**
+     * Get suspendido
+     *
+     * @return boolean 
+     */
+    public function getSuspendido()
+    {
+        return $this->suspendido;
     }
 }

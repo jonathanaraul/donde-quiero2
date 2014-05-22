@@ -176,8 +176,13 @@ class SedeController extends Controller {
 
 				$object -> setUser($user);	
     			
-    			$em->persist($object);
-				$em->flush();
+                $object -> setDestacado(0);
+                $object -> setEstado(1);  
+                $object -> setSuspendido(0);  
+                
+                $em->persist($object);
+                $em->flush();
+
 
 				return $class->redirect($class->generateUrl('proyecto_principal_homepage'));
 

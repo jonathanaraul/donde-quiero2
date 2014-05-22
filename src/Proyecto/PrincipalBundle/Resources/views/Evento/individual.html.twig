@@ -6,6 +6,10 @@
 
 {%block scripts%}
 	{% include 'ProyectoPrincipalBundle:Helpers:scriptsIndividual.html.twig'  with {'clase': 'rosa'}  %}
+    <script type="text/javascript">
+        var direccionEditar = "{{path('proyecto_principal_evento_editar',{'id':object.id})}}";
+        var direccionFuncion = "{{path('proyecto_principal_helpers_funcion')}}";
+    </script>
 {%endblock%}
 
 {%block contenedorbase%}
@@ -124,8 +128,15 @@
 
 		</ul><!--Category-->
 	</div>
-	<div class="clearfix"></div>
-
+    {%if userId == object.user.id%}
+	<div class="clearfix"></div>		
+	<div  class="work rosa" id="editarElemento" style="width: 61px;float: left;cursor:pointer;" >
+		<h3 class="" >Editar </h3>
+	</div>
+	<div  class="work rosa" id="publicarElemento" tipo="evento" tarea="estado"  identificador="{{ object.id }}" style="width: 100px;float: left;margin-left:10px;cursor:pointer;" >
+		<h3 class="elementoEstado" >{%if object.estado%}Despublicar{%else%}Publicar{%endif%}</h3>
+	</div>
+	{%endif%}
 </aside>
 <div class="clearfix"></div>
 <!-- Text Section End -->

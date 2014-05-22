@@ -8,6 +8,12 @@ proyecto_principal_suspendida::
     pattern:  /cuenta/suspendida
     defaults: { _controller: ProyectoPrincipalBundle:Default:cuentaSuspendida }
 
+proyecto_principal_helpers_funcion:
+    pattern:  /helpers/funcion
+    defaults: { _controller: ProyectoPrincipalBundle:Helpers:funcion}
+    requirements:
+      _method: POST
+
 proyecto_principal_gestion:
     pattern:  /gestion/
     defaults: { _controller: ProyectoPrincipalBundle:Gestion:ingresos }
@@ -64,8 +70,8 @@ proyecto_principal_espacio_registrar:
     pattern:  /registrar/espacio
     defaults: { _controller: ProyectoPrincipalBundle:Espacio:registrar }
 proyecto_principal_espacio_editar:
-    pattern:  /editar/espacio
-    defaults: { _controller: ProyectoPrincipalBundle:Espacio:editar }
+    pattern:  /editar/espacio/{id}
+    defaults: { _controller: ProyectoPrincipalBundle:Espacio:editar,id: '1' }
 proyecto_principal_espacio_busqueda:
     pattern:  /busqueda/espacio
     defaults: { _controller: ProyectoPrincipalBundle:Espacio:busqueda}
@@ -88,8 +94,8 @@ proyecto_principal_evento_registrar:
     pattern:  /registrar/evento
     defaults: { _controller: ProyectoPrincipalBundle:Evento:registrar }
 proyecto_principal_evento_editar:
-    pattern:  /editar/evento
-    defaults: { _controller: ProyectoPrincipalBundle:Evento:editar }
+    pattern:  /editar/evento/{id}
+    defaults: { _controller: ProyectoPrincipalBundle:Evento:editar,id: '1' }
 proyecto_principal_evento_busqueda:
     pattern:  /busqueda/evento
     defaults: { _controller: ProyectoPrincipalBundle:Evento:busqueda}
@@ -112,8 +118,8 @@ proyecto_principal_servicio_registrar:
     pattern:  /registrar/servicio
     defaults: { _controller: ProyectoPrincipalBundle:Servicio:registrar }
 proyecto_principal_servicio_editar:
-    pattern:  /editar/servicio
-    defaults: { _controller: ProyectoPrincipalBundle:Servicio:editar }
+    pattern:  /editar/servicio/{id}
+    defaults: { _controller: ProyectoPrincipalBundle:Servicio:editar,id: '1' }
 proyecto_principal_servicio_busqueda:
     pattern:  /busqueda/servicio
     defaults: { _controller: ProyectoPrincipalBundle:Servicio:busqueda}
@@ -136,8 +142,8 @@ proyecto_principal_sede_registrar:
     pattern:  /registrar/sede
     defaults: { _controller: ProyectoPrincipalBundle:Sede:registrar }
 proyecto_principal_sede_editar:
-    pattern:  /editar/sede
-    defaults: { _controller: ProyectoPrincipalBundle:Sede:editar }
+    pattern:  /editar/sede/{id}
+    defaults: { _controller: ProyectoPrincipalBundle:Sede:editar,id: '1' }
 proyecto_principal_sede_busqueda:
     pattern:  /busqueda/sede
     defaults: { _controller: ProyectoPrincipalBundle:Sede:busqueda}

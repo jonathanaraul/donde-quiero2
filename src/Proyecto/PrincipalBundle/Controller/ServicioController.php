@@ -26,7 +26,8 @@ class ServicioController extends Controller {
         $object = $this -> getDoctrine() -> getRepository('ProyectoPrincipalBundle:Servicio') -> find($id);
         $reservas = $this -> getDoctrine() -> getRepository('ProyectoPrincipalBundle:Reserva') -> findByServicio($object);
 
-        $secondArray = array('object'=>$object,'reservas'=>$reservas);
+        $user = UtilitiesAPI::getActiveUser($this);
+        $secondArray = array('object'=>$object,'reservas'=>$reservas,'userId'=>$user->getId());
 
 		$array = array_merge($firstArray, $secondArray);
 		return $this -> render('ProyectoPrincipalBundle:Servicio:individual.html.twig', $array);
@@ -45,11 +46,21 @@ class ServicioController extends Controller {
 
 		return ServicioController::registrarEditar($id ,$url, $request,$this);
 	}
-	public function editarAction(Request $request) {
+	public function editarAction(Request $request,$id) {
 
 		$user = UtilitiesAPI::getActiveUser($this);
-		$id = $user->getId();
-		$url = $this -> generateUrl('proyecto_principal_servicio_editar');
+        $idUser = $user->getId();
+        $object = $this -> getDoctrine() -> getRepository('ProyectoPrincipalBundle:Servicio') -> find($id);
+
+        if($object->getUser()->getId() != $idUser){
+            $titulo = '¡Error 404...!';
+            $mensaje = 'Estimado(a) '.ucfirst($user ->getNombre()) . ' '.ucfirst($user ->getApellido()) .' ud no tiene derechos para realizar esta edición.';
+            $tituloBoton = 'Ir al inicio';
+            $direccionBoton = $this->generateUrl('proyecto_principal_homepage');
+            $array = array('titulo' => $titulo, 'mensaje' => $mensaje, 'tituloBoton'=>$tituloBoton, 'direccionBoton'=>$direccionBoton );
+            return $this -> render('ProyectoPrincipalBundle:Default:mensaje.html.twig', $array);
+        }
+		$url = $this -> generateUrl('proyecto_principal_servicio_editar',array('id' => $id));
 
 		return ServicioController::registrarEditar($id ,$url,$request, $this);
 
@@ -150,10 +161,7 @@ class ServicioController extends Controller {
             ->add('aceptoCondicionesUsoPoliticaPrivacidad', 'checkbox',array('required'  => false))
         	->add('precioPorHora','number',array('required'  => true))
 
-
             ->getForm();
-
-
 
 
 	    if ($request->isMethod('POST')) {
@@ -176,10 +184,14 @@ class ServicioController extends Controller {
 
 				$object -> setUser($user);	
     			
-    			$em->persist($object);
-				$em->flush();
+                $object -> setDestacado(0);
+                $object -> setEstado(1);  
+                $object -> setSuspendido(0);  
+                
+                $em->persist($object);
+                $em->flush();
 
-				return $class->redirect($class->generateUrl('proyecto_principal_homepage'));
+                return $class->redirect($class->generateUrl('proyecto_principal_servicio_individual',array('id' => $object ->getId())));
 
     		}
 	

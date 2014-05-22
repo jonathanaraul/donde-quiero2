@@ -182,27 +182,27 @@ class Espacio
 
 
     /**
-     * @ORM\Column(name="pilaresSueltos",type="integer", nullable=true)
+     * @ORM\Column(name="pilaresSueltos",type="boolean", nullable=true)
      */
     private $pilaresSueltos;
 
     /**
-     * @ORM\Column(name="entradaAseosMovilidadReducida",type="integer", nullable=true)
+     * @ORM\Column(name="entradaAseosMovilidadReducida",type="boolean", nullable=true)
      */
     private $entradaAseosMovilidadReducida;
 
     /**
-     * @ORM\Column(name="ventanasExterior",type="integer", nullable=true)
+     * @ORM\Column(name="ventanasExterior",type="boolean", nullable=true)
      */
     private $ventanasExterior;
 
     /**
-     * @ORM\Column(name="ventanasPatioInterior",type="integer", nullable=true)
+     * @ORM\Column(name="ventanasPatioInterior",type="boolean", nullable=true)
      */
     private $ventanasPatioInterior;
 
     /**
-     * @ORM\Column(name="posibilidadOscurecerSala",type="integer", nullable=true)
+     * @ORM\Column(name="posibilidadOscurecerSala",type="boolean", nullable=true)
      */
     private $posibilidadOscurecerSala;
 
@@ -850,121 +850,7 @@ class Espacio
 
 
 
-    /**
-     * Set pilaresSueltos
-     *
-     * @param integer $pilaresSueltos
-     * @return Espacio
-     */
-    public function setPilaresSueltos($pilaresSueltos)
-    {
-        $this->pilaresSueltos = $pilaresSueltos;
-    
-        return $this;
-    }
-
-    /**
-     * Get pilaresSueltos
-     *
-     * @return integer 
-     */
-    public function getPilaresSueltos()
-    {
-        return $this->pilaresSueltos;
-    }
-
-    /**
-     * Set entradaAseosMovilidadReducida
-     *
-     * @param integer $entradaAseosMovilidadReducida
-     * @return Espacio
-     */
-    public function setEntradaAseosMovilidadReducida($entradaAseosMovilidadReducida)
-    {
-        $this->entradaAseosMovilidadReducida = $entradaAseosMovilidadReducida;
-    
-        return $this;
-    }
-
-    /**
-     * Get entradaAseosMovilidadReducida
-     *
-     * @return integer 
-     */
-    public function getEntradaAseosMovilidadReducida()
-    {
-        return $this->entradaAseosMovilidadReducida;
-    }
-
-    /**
-     * Set ventanasExterior
-     *
-     * @param integer $ventanasExterior
-     * @return Espacio
-     */
-    public function setVentanasExterior($ventanasExterior)
-    {
-        $this->ventanasExterior = $ventanasExterior;
-    
-        return $this;
-    }
-
-    /**
-     * Get ventanasExterior
-     *
-     * @return integer 
-     */
-    public function getVentanasExterior()
-    {
-        return $this->ventanasExterior;
-    }
-
-    /**
-     * Set ventanasPatioInterior
-     *
-     * @param integer $ventanasPatioInterior
-     * @return Espacio
-     */
-    public function setVentanasPatioInterior($ventanasPatioInterior)
-    {
-        $this->ventanasPatioInterior = $ventanasPatioInterior;
-    
-        return $this;
-    }
-
-    /**
-     * Get ventanasPatioInterior
-     *
-     * @return integer 
-     */
-    public function getVentanasPatioInterior()
-    {
-        return $this->ventanasPatioInterior;
-    }
-
-    /**
-     * Set posibilidadOscurecerSala
-     *
-     * @param integer $posibilidadOscurecerSala
-     * @return Espacio
-     */
-    public function setPosibilidadOscurecerSala($posibilidadOscurecerSala)
-    {
-        $this->posibilidadOscurecerSala = $posibilidadOscurecerSala;
-    
-        return $this;
-    }
-
-    /**
-     * Get posibilidadOscurecerSala
-     *
-     * @return integer 
-     */
-    public function getPosibilidadOscurecerSala()
-    {
-        return $this->posibilidadOscurecerSala;
-    }
-
+   
     /**
      * Set otrasCaracteristicas
      *
@@ -1968,5 +1854,120 @@ class Espacio
     public function getSuspendido()
     {
         return $this->suspendido;
+    }
+
+    /**
+     * Set pilaresSueltos
+     *
+     * @param boolean $pilaresSueltos
+     * @return Espacio
+     */
+    public function setPilaresSueltos($pilaresSueltos)
+    {
+        $this->pilaresSueltos = $pilaresSueltos;
+
+        return $this;
+    }
+
+    /**
+     * Get pilaresSueltos
+     *
+     * @return boolean 
+     */
+    public function getPilaresSueltos()
+    {
+        return $this->pilaresSueltos;
+    }
+
+    /**
+     * Set entradaAseosMovilidadReducida
+     *
+     * @param boolean $entradaAseosMovilidadReducida
+     * @return Espacio
+     */
+    public function setEntradaAseosMovilidadReducida($entradaAseosMovilidadReducida)
+    {
+        $this->entradaAseosMovilidadReducida = $entradaAseosMovilidadReducida;
+
+        return $this;
+    }
+
+    /**
+     * Get entradaAseosMovilidadReducida
+     *
+     * @return boolean 
+     */
+    public function getEntradaAseosMovilidadReducida()
+    {
+        return $this->entradaAseosMovilidadReducida;
+    }
+
+    /**
+     * Set ventanasExterior
+     *
+     * @param boolean $ventanasExterior
+     * @return Espacio
+     */
+    public function setVentanasExterior($ventanasExterior)
+    {
+        $this->ventanasExterior = $ventanasExterior;
+
+        return $this;
+    }
+
+    /**
+     * Get ventanasExterior
+     *
+     * @return boolean 
+     */
+    public function getVentanasExterior()
+    {
+        return $this->ventanasExterior;
+    }
+
+    /**
+     * Set ventanasPatioInterior
+     *
+     * @param boolean $ventanasPatioInterior
+     * @return Espacio
+     */
+    public function setVentanasPatioInterior($ventanasPatioInterior)
+    {
+        $this->ventanasPatioInterior = $ventanasPatioInterior;
+
+        return $this;
+    }
+
+    /**
+     * Get ventanasPatioInterior
+     *
+     * @return boolean 
+     */
+    public function getVentanasPatioInterior()
+    {
+        return $this->ventanasPatioInterior;
+    }
+
+    /**
+     * Set posibilidadOscurecerSala
+     *
+     * @param boolean $posibilidadOscurecerSala
+     * @return Espacio
+     */
+    public function setPosibilidadOscurecerSala($posibilidadOscurecerSala)
+    {
+        $this->posibilidadOscurecerSala = $posibilidadOscurecerSala;
+
+        return $this;
+    }
+
+    /**
+     * Get posibilidadOscurecerSala
+     *
+     * @return boolean 
+     */
+    public function getPosibilidadOscurecerSala()
+    {
+        return $this->posibilidadOscurecerSala;
     }
 }

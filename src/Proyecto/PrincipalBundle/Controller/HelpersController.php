@@ -21,7 +21,45 @@ use Proyecto\PrincipalBundle\Entity\Espacio5;
 
 class HelpersController extends Controller
 {
+    public function funcionAction() {
+        $peticion = $this -> getRequest();
+        $doctrine = $this -> getDoctrine();
+        $post = $peticion -> request;
+        $em = $this->getDoctrine()->getManager();
 
+        $tipo = trim($post -> get("tipo"));
+        $tarea = trim($post -> get("tarea"));
+        $identificador = intval($post -> get("identificador"));
+        $valor = intval($post -> get("valor"));
+        $user = UtilitiesAPI::getActiveUser($this);
+
+        //if($tipo=='usuario')
+        //$object = $this -> getDoctrine() -> getRepository('ProyectoPrincipalBundle:User') -> find($identificador);
+        if($tipo=='espacio')
+        $object = $this -> getDoctrine() -> getRepository('ProyectoPrincipalBundle:Espacio') -> find($identificador);
+        else if($tipo=='sede')
+        $object = $this -> getDoctrine() -> getRepository('ProyectoPrincipalBundle:Sede') -> find($identificador);
+        else if($tipo=='evento')
+        $object = $this -> getDoctrine() -> getRepository('ProyectoPrincipalBundle:Evento') -> find($identificador);
+        else if($tipo=='servicio')
+        $object = $this -> getDoctrine() -> getRepository('ProyectoPrincipalBundle:Servicio') -> find($identificador);
+        //else if($tipo=='ingreso')
+        //$object = $this -> getDoctrine() -> getRepository('ProyectoPrincipalBundle:Reserva') -> find($identificador);
+
+        if($tarea=='estado')$object->setEstado($valor);
+        //else if($tarea=='rol')$object->setRol($valor);
+        //else if($tarea=='destacado')$object->setDestacado($valor);
+        //else if($tarea=='suspendido')$object->setSuspendido($valor);
+        //else if($tarea=='cancelado')$object->setCancelado($valor);
+
+
+        $em->persist($object);
+        $em->flush();
+
+        $respuesta = new response(json_encode(array('estado' => true)));
+        $respuesta -> headers -> set('content_type', 'aplication/json');
+        return $respuesta;
+    }
     public function listaNavegacionAction($menu,$user)
     {
         return $this->render('ProyectoPrincipalBundle:Helpers:listaNavegacion.html.twig', array('menu' => $menu,'user'=>$user));

@@ -25,8 +25,9 @@ class EventoController extends Controller {
 
         $object = $this -> getDoctrine() -> getRepository('ProyectoPrincipalBundle:Evento') -> find($id);
         $reservas = $this -> getDoctrine() -> getRepository('ProyectoPrincipalBundle:Reserva') -> findByEvento($object);
-
-        $secondArray = array('object'=>$object,'reservas'=>$reservas);
+        
+        $user = UtilitiesAPI::getActiveUser($this);
+        $secondArray = array('object'=>$object,'reservas'=>$reservas,'userId'=>$user->getId());
 
 		$array = array_merge($firstArray, $secondArray);
 		return $this -> render('ProyectoPrincipalBundle:Evento:individual.html.twig', $array);
@@ -45,11 +46,22 @@ class EventoController extends Controller {
 
 		return EventoController::registrarEditar($id ,$url, $request,$this);
 	}
-	public function editarAction(Request $request) {
+	public function editarAction(Request $request,$id) {
 
 		$user = UtilitiesAPI::getActiveUser($this);
-		$id = $user->getId();
-		$url = $this -> generateUrl('proyecto_principal_evento_editar');
+		$idUser = $user->getId();
+        $object = $this -> getDoctrine() -> getRepository('ProyectoPrincipalBundle:Evento') -> find($id);
+
+        if($object->getUser()->getId() != $idUser){
+            $titulo = '¡Error 404...!';
+            $mensaje = 'Estimado(a) '.ucfirst($user ->getNombre()) . ' '.ucfirst($user ->getApellido()) .' ud no tiene derechos para realizar esta edición.';
+            $tituloBoton = 'Ir al inicio';
+            $direccionBoton = $this->generateUrl('proyecto_principal_homepage');
+            $array = array('titulo' => $titulo, 'mensaje' => $mensaje, 'tituloBoton'=>$tituloBoton, 'direccionBoton'=>$direccionBoton );
+            return $this -> render('ProyectoPrincipalBundle:Default:mensaje.html.twig', $array);
+        }
+
+		$url = $this -> generateUrl('proyecto_principal_evento_editar',array('id' => $id));
 
 		return EventoController::registrarEditar($id ,$url,$request, $this);
 
@@ -168,10 +180,14 @@ class EventoController extends Controller {
 
 				$object -> setUser($user);	
     			
-    			$em->persist($object);
-				$em->flush();
+                $object -> setDestacado(0);
+                $object -> setEstado(1);  
+                $object -> setSuspendido(0);  
+                
+                $em->persist($object);
+                $em->flush();
 
-				return $class->redirect($class->generateUrl('proyecto_principal_homepage'));
+                return $class->redirect($class->generateUrl('proyecto_principal_evento_individual',array('id' => $object ->getId())));
 
     		}
 	
@@ -179,6 +195,7 @@ class EventoController extends Controller {
 
         $secondArray = array('form' => $form->createView(),'url'=>$url,'idProvincia'=>$idProvincia,'provincias'=>$provincias);
 		$array = array_merge($firstArray, $secondArray);
+
 		return $class -> render('ProyectoPrincipalBundle:Evento:registrarEditar.html.twig', $array);
 	}
     public function destacadosAction($numResults)
