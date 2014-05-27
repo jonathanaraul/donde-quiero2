@@ -16,17 +16,17 @@
 			<div class="clearfix"></div>
 			<p>
 				- No pagas nada.  </br>
-				- Te alquilarán y pagarán online. </br>
-				- Gestionarás tu calendario de reservas y cancelaciones gratis. </br>
+				- Te reservarán y pagarán online. </br>
+				- Gestionarás tus reservas y cancelaciones. </br>
 				- Tendrás difusión y posicionamiento gratuito en internet.
 			</p>
 
 			<h2 class="izquierda">a cambio.... </h2>
 			<div class="clearfix"></div>
 			<p>
-				- Esfuérzate definiendo bien con datos, fotos,.. ¡Tendrás más éxito!.   </br>
-				- Lee las <a href="condiciones.html">Condiciones detalladas</a> que aceptas al registrar el evento. </br>
-				- Nuestro premio es un  % ¡Sólo de las contrataciones reales que te consigamos! .
+				- Añade información detallada  sobre el evento. ¡Tendrás más éxito!.   </br>
+				- Lee las <a href="#">Condiciones detalladas</a> que aceptas al registrar el evento. </br>
+				- Nuestro premio es un % ¡Sólo de las contrataciones reales que te consigamos! .
 			</p>
 		</div>
 	</div>
@@ -90,17 +90,13 @@
 						&nbsp;
 					</p>
 
-					{{ form_widget(form.nombre, { 'attr': {'class': 'formstyle','title': 'Nombre del Evento (Max 20 carácteres)'} }) }}
+					{{ form_widget(form.nombre, { 'attr': {'class': 'formstyle','title': 'Nombre del Evento'} }) }}
 
 					<div class="clearfix"></div>
 
-					{{ form_widget(form.descripcionGeneral, { 'attr': {'title': 'Descripción general'} }) }}
+					{{ form_widget(form.descripcionGeneral, { 'attr': {'title': 'Descripción'} }) }}
 
-					<p>
-						Se impartirá en la sede:
-					</p>
 
-					{{ form_widget(form.sede1, { 'attr': {'class': 'formstyle'} }) }}
 
 					<p>
 						Provincia
@@ -123,7 +119,7 @@
 
 
 					<p style="float:left">
-						Añadir Imágenes
+						Imagen de evento
 					</p>
 					{{ form_widget(form.file, { 'attr': {'class': 'formstyle','accept':'image/*'} }) }}
 
@@ -145,6 +141,11 @@
 					<div class="clearfix"></div>
 					{{ form_widget(form.enlaceVideo, { 'attr': {'class': 'formstyle','title': 'Añadir enlace a Video'} }) }}
 
+
+
+					<p>
+						{{ form_widget(form.esPrivado) }}Evento Privado
+					</p>
 					<!--
 					<div class="clearfix"></div>
 					<div class="enviar">
@@ -178,7 +179,26 @@
 					</p>
 
 
+					<p>
+						Espacio:
+					</p>
 
+					{{ form_widget(form.espacio, { 'attr': {'class': 'formstyle'} }) }}
+
+					<p>
+						Fecha:
+						{{ form_widget(form.fecha, { 'attr': {'class': 'formstyle','style':'width: 160px;'} }) }}
+					</p>
+					<p>
+						Hora inicio:
+						{{ form_widget(form.horaInicio, { 'attr': {'class': 'formstyle','style':'width: 160px;'} }) }}
+					</p>
+					<p>
+						Hora finalizacion:
+						{{ form_widget(form.horaFinalizacion, { 'attr': {'class': 'formstyle','style':'width: 160px;'} }) }}
+					</p>
+					
+				
 
 					<p>Tipo de Evento
 						<strong>:</strong>
@@ -242,75 +262,57 @@
 					<p>
 						&nbsp;
 					</p>
+                    <p>
+						<strong>Permite las siguientes configuraciones:</strong>
+					</p>
+						
+					<p class="left">
+						{{ form_widget(form.modoAula, { 'attr': {'class': 'check-configuracion'}}) }}
+						<strong> Modo Aula (Sillas)</strong>
+					<p class="right">
+						hasta
+						{{ form_widget(form.modoAulaCapacidad, { 'attr': {'class': 'formstyle3','title':'...','min':'0','step':'1','value':'0'} }) }}
+						personas
+					</p>
+
+					<p class="left">
+						{{ form_widget(form.modoBanquete, { 'attr': {'class': 'check-configuracion'}}) }}
+						<strong> Modo Banquete</strong>
+					<p class="right">
+						hasta
+						{{ form_widget(form.modoBanqueteCapacidad, { 'attr': {'class': 'formstyle3','title':'...','min':'0','step':'1','value':'0'} }) }}
+						personas
+					</p>
+
+					<p class="left">
+						{{ form_widget(form.modoCocktail, { 'attr': {'class': 'check-configuracion'}}) }}
+						<strong> Modo Cocktail</strong>
+					<p class="right">
+						hasta
+						{{ form_widget(form.modoCocktailCapacidad, { 'attr': {'class': 'formstyle3','title':'...','min':'0','step':'1','value':'0'} }) }}
+						personas
+					</p>
+
+					<p class="left">
+						{{ form_widget(form.modoEscenario, { 'attr': {'class': 'check-configuracion'}}) }}
+						<strong> Modo Escenario</strong>
+					<p class="right">
+						hasta
+						{{ form_widget(form.modoEscenarioCapacidad, { 'attr': {'class': 'formstyle3','title':'...','min':'0','step':'1','value':'0'} }) }}
+						personas
+					</p>
+
+					<p class="left">
+						{{ form_widget(form.modoExposicion, { 'attr': {'class': 'check-configuracion'}}) }}
+						<strong> Modo Exposición</strong>
+					<p class="right">
+						hasta
+						{{ form_widget(form.modoExposicionCapacidad, { 'attr': {'class': 'formstyle3','title':'...','min':'0','step':'1','value':'0'} }) }}
+						personas
+					</p>
+
+
 				    </br>
-
-					<p>
-						<strong>Equipamiento incluido:</strong> (si no es gratuito, <a href="#">regístralo</a> </br>con su precio como servicio adjunto al de la sede).
-					</p>
-
-					<p>
-						{{ form_widget(form.proyectorPantallaSala) }} Proyector y pantalla de sala
-					</p>
-
-					<p >
-						{{ form_widget(form.microfonoAltavoces) }}  Micrófono y altavoces
-					</p>
-
-					<p>
-						{{ form_widget(form.videocamara) }} Videocámara
-					</p>
-
-					<p>
-						&nbsp;
-					</p>
-
-					<p>
-						{{ form_widget(form.wifi) }} WiFi
-					</p>
-
-					<p style="width:200px;">
-						{{ form_widget(form.internetCable) }}Internet por Cable
-					</p>
-
-					<p>
-						&nbsp;
-					</p>
-
-					<p style="width:200px;">
-						{{ form_widget(form.maquinaBebidas) }}
-						Máquina de bebidas
-					</p>
-
-					<p style="width:200px;">
-						{{ form_widget(form.pizarra) }}  Pizarra
-					</p>
-
-					<p style="width:200px;">
-						{{ form_widget(form.conserjeria) }}
-						Conserjería
-					</p>
-
-					<p>
-						&nbsp;
-					</p>
-
-					<p style="width:200px;">
-						{{ form_widget(form.aireAcondicionado) }}  Aire acondicionado
-					</p>
-
-					<p style="width:200px;">
-						{{ form_widget(form.calefaccion) }}
-						Calefacción
-					</p>
-
-					<p>
-						&nbsp;
-					</p>
-
-					{{ form_widget(form.otrosServicios, { 'attr': {'class': 'formstyle','title':'Otros...'} }) }}
-					
-
-					</br>
 
 					<div class="clearfix"></div>
 
@@ -380,12 +382,11 @@
 
 						{{ form_widget(form.precio, { 'attr': {'class': 'formstyle','title':'Precio por Hora (Euros)','min':'0','step':'1','value':'0'} }) }}
 					</p>
-					<h3 > Precio por hora</h3>
-
 					<p>
-
-						{{ form_widget(form.precioPorHora, { 'attr': {'class': 'formstyle','title':'Precio por Hora (Euros)','min':'0','step':'1','value':'0'} }) }}
+						{{ form_widget(form.esGratuito) }} Evento Gratuito
 					</p>
+
+
 					<p>
 						&nbsp;
 					</p>

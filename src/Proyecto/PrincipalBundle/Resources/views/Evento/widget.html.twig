@@ -82,7 +82,7 @@
      #}
 		</select>
 	</div><!--/item-->
-
+<!--
 	<div class="buscador">
 		<select name="precioHora" class="formstyle">
 			<option value="0"> Coste por hora (€/h) </option>
@@ -93,21 +93,11 @@
 			<option value="1000"> hasta 1000</option>
 			<option value="1001"> más de 1000</option>
 		</select>
-	</div><!--/item-->
-
-	<div class="añadir">
-		<ul>
-			<li>
-				<a href="{{path('proyecto_principal_evento_registrar')}}"><img class="icon" src="{{ asset('sistema/images/icons/mas.png')}}" width="27" height="27" title="Añadir Gratis"></a>
-			</li>
-			<li style="float:right;">
-				<a href="javascript:void(0)" id="buscarEvento" numResults="{{dataPaginacion.numResults}}"><img class="icon" src="{{ asset('sistema/images/icons/buscar.png')}}" width="27" height="27" alt="Buscar"></a>
-			</li>
-		</ul>
 	</div>
+-->
 	<div class="buscador">
 		<select  name="precio" class="formstyle">
-			<option value="0"> Precio Total (€) </option>
+			<option value="0"> Precio (€) </option>
 			<option value="0"> Todos </option>
 			<option value="1"> Gratis </option>
 			<option value="20">hasta 20</option>
@@ -119,6 +109,17 @@
 			<option value="10001"> más de 10000</option>
 		</select>
 	</div><!--/item-->
+	<div class="añadir">
+		<ul>
+			<li>
+				<a href="{{path('proyecto_principal_evento_registrar')}}"><img class="icon" src="{{ asset('sistema/images/icons/mas.png')}}" width="27" height="27" title="Añadir Gratis"></a>
+			</li>
+			<li style="float:right;">
+				<a href="javascript:void(0)" id="buscarEvento" numResults="{{dataPaginacion.numResults}}"><img class="icon" src="{{ asset('sistema/images/icons/buscar.png')}}" width="27" height="27" alt="Buscar"></a>
+			</li>
+		</ul>
+	</div>
+
 
 	<div class="buscador">
 		<select name="duracionTotal" class="formstyle">
@@ -150,6 +151,7 @@
 			<option value="jardineria"> Jardín</option>
 		</select>
 	</div><!--/item-->
+	<div class="clearfix"></div>
 
     <div id="elementos-evento-rosa">
 	{% include 'ProyectoPrincipalBundle:Evento:elementos.html.twig'  with {'elementos': elementos} %}

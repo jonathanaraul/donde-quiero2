@@ -74,8 +74,8 @@ function ejecutaValidaciones(nivel) {
 			jError('Debe definir su tipo de evento'); 
 			return false;
         }
-		if(!$('#form_proyectorPantallaSala').is(":checked") && !$('#form_microfonoAltavoces').is(":checked") && !$('#form_videocamara').is(":checked") && !$('#form_wifi').is(":checked") && !$('#form_internetCable').is(":checked") && !$('#form_maquinaBebidas').is(":checked") && !$('#form_pizarra').is(":checked") && !$('#form_conserjeria').is(":checked") && !$('#form_aireAcondicionado').is(":checked") && !$('#form_calefaccion').is(":checked")){
-			jError('Debe definir por lo menos un tipo de equipamiento para su evento'); 
+        if(checksApagados('check-configuracion')){
+			jError('Debe definir el tipo de disposición y la capacidad del aforo'); 
 			return false;
 		}
 	}
@@ -88,8 +88,8 @@ function ejecutaValidaciones(nivel) {
 			jError('Debe indicar el tipo de procesamiento de pagos'); 
 			return false;
 		}
-		if(!parseFloat($('#form_precioPorHora').val())>0){
-			jError('Debe especificar un precio de alquiler para su evento, ejemplo 500'); 
+		if(!parseFloat($('#form_precio').val())>0){
+			jError('Debe especificar un precio para su evento, ejemplo 500'); 
 			return false;
 		}
 		if(!$('#form_aceptoCondicionesUsoPoliticaPrivacidad').is(":checked")){

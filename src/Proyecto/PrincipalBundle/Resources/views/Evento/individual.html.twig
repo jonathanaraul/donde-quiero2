@@ -61,7 +61,7 @@
 
 	<div class="fichader">
 		<div id="precio" class="rosa">
-			<h3> {{object.precioPorHora}} </h3>
+			<h3> {{object.precio}} </h3>
 			<h4> € </h4>
 		</div>
 			<a href="{{path('proyecto_principal_evento_reservar',{'id':object.id})}}">Reservar</a>
@@ -93,12 +93,6 @@
 			<li>
 				Asientos¿?: <span> Si </span>
 			</li>
-				<li>
-					Aire Acondicionado: <span> {%if object.aireAcondicionado%}Si{%else%}No{%endif%}</span>
-				</li>
-				<li>
-					Calefacción: <span> {%if object.calefaccion%}Si{%else%}No{%endif%}</span>
-				</li>
 			<li>
 				Exterior¿?: <span> Si </span>
 			</li>
@@ -117,14 +111,6 @@
 			<li>
 				Accesible minusválidos: <span> Si </span>
 			</li>
-
-				<li>
-					Wifi: <span> {%if object.wifi%}Si{%else%}No{%endif%}</span>
-				</li>
-				<li>
-					Internet Lan: <span> {%if object.internetCable%}Si{%else%}No{%endif%}</span>
-				</li>
-
 
 		</ul><!--Category-->
 	</div>

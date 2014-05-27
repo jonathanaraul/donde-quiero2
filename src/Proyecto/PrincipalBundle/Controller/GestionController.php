@@ -120,7 +120,7 @@ class GestionController extends Controller {
         $meses = array('Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre');
 
         $connection = $em->getConnection();
-        $sql ="SELECT MONTH( o1.fechaRegistro ) AS mes, SUM( o1.precioTotal ) AS cantidad FROM  Confirmacion o1  GROUP BY MONTH( o1.fechaRegistro )";
+        $sql ="SELECT MONTH( o1.fechaRegistro ) AS mes, SUM( o1.precioTotal ) AS cantidad FROM  confirmacion o1  GROUP BY MONTH( o1.fechaRegistro )";
         $statement = $connection->prepare($sql);
         $statement->execute();
         $results = $statement->fetchAll();
@@ -292,7 +292,7 @@ class GestionController extends Controller {
 
         
         $connection = $em->getConnection();
-        $sql ="SELECT MONTH( o1.fechaRegistro ) AS mes, COUNT( o1.id ) AS cantidad FROM  User o1  where o1.id != 39  GROUP BY MONTH( o1.fechaRegistro )";
+        $sql ="SELECT MONTH( o1.fechaRegistro ) AS mes, COUNT( o1.id ) AS cantidad FROM  user o1  where o1.id != 39  GROUP BY MONTH( o1.fechaRegistro )";
         $statement = $connection->prepare($sql);
         $statement->execute();
         $results = $statement->fetchAll();
@@ -436,7 +436,7 @@ class GestionController extends Controller {
 
         
         $connection = $em->getConnection();
-        $sql ="SELECT MONTH( o1.fechaRegistro ) AS mes, COUNT( o1.id ) AS cantidad FROM  Espacio o1  WHERE o1.id != 109   GROUP BY MONTH( o1.fechaRegistro )";
+        $sql ="SELECT MONTH( o1.fechaRegistro ) AS mes, COUNT( o1.id ) AS cantidad FROM  espacio o1  WHERE o1.id != 109   GROUP BY MONTH( o1.fechaRegistro )";
         $statement = $connection->prepare($sql);
         $statement->execute();
         $results = $statement->fetchAll();
@@ -601,7 +601,7 @@ class GestionController extends Controller {
 
         
         $connection = $em->getConnection();
-        $sql ="SELECT MONTH( o1.fechaRegistro ) AS mes, COUNT( o1.id ) AS cantidad FROM  Evento o1  WHERE o1.id != 103   GROUP BY MONTH( o1.fechaRegistro )";
+        $sql ="SELECT MONTH( o1.fechaRegistro ) AS mes, COUNT( o1.id ) AS cantidad FROM  evento o1  WHERE o1.id != 103   GROUP BY MONTH( o1.fechaRegistro )";
         $statement = $connection->prepare($sql);
         $statement->execute();
         $results = $statement->fetchAll();
@@ -768,7 +768,7 @@ class GestionController extends Controller {
 
         
         $connection = $em->getConnection();
-        $sql ="SELECT MONTH( o1.fechaRegistro ) AS mes, COUNT( o1.id ) AS cantidad FROM  Servicio o1  WHERE o1.id != 103   GROUP BY MONTH( o1.fechaRegistro )";
+        $sql ="SELECT MONTH( o1.fechaRegistro ) AS mes, COUNT( o1.id ) AS cantidad FROM  servicio o1  WHERE o1.id != 103   GROUP BY MONTH( o1.fechaRegistro )";
         $statement = $connection->prepare($sql);
         $statement->execute();
         $results = $statement->fetchAll();
@@ -922,7 +922,7 @@ class GestionController extends Controller {
         $meses = array('Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre');
 
         $connection = $em->getConnection();
-        $sql ="SELECT MONTH( o1.fechaRegistro ) AS mes, COUNT( o1.id ) AS cantidad FROM  Sede o1  WHERE o1.id != 105   GROUP BY MONTH( o1.fechaRegistro )";
+        $sql ="SELECT MONTH( o1.fechaRegistro ) AS mes, COUNT( o1.id ) AS cantidad FROM  sede o1  WHERE o1.id != 105   GROUP BY MONTH( o1.fechaRegistro )";
         $statement = $connection->prepare($sql);
         $statement->execute();
         $results = $statement->fetchAll();

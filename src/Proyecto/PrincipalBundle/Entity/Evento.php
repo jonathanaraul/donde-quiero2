@@ -69,6 +69,27 @@ class Evento
     private $fechaRegistro;
 
     /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="fecha", type="date", nullable=false)
+     */
+    private $fecha;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="horaInicio", type="time", nullable=false)
+     */
+    private $horaInicio;
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="horaFinalizacion", type="time", nullable=false)
+     */
+    private $horaFinalizacion;
+
+
+    /**
      * @ORM\Column(type="string", length=60, nullable=false)
      */
     private $nombre;
@@ -89,61 +110,76 @@ class Evento
     private $enlaceVideo;
 
     /**
-     * @var \Sede1
+     * @var \Espacio
      *
-     * @ORM\ManyToOne(targetEntity="Sede1")
+     * @ORM\ManyToOne(targetEntity="Espacio")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="sede1", referencedColumnName="id", nullable=true)
+     *   @ORM\JoinColumn(name="espacio", referencedColumnName="id", nullable=true)
      * })
      */
-    private $sede1;
-
+    private $espacio;
 
    /**
-     * @ORM\Column(name="proyectorPantallaSala", type="boolean", nullable=true)
+     * @ORM\Column(name="esPrivado", type="boolean", nullable=true)
      */
-    private $proyectorPantallaSala;
-    /**
-     * @ORM\Column(name="microfonoAltavoces", type="boolean", nullable=true)
+    private $esPrivado;
+
+   /**
+     * @ORM\Column(name="esGratuito", type="boolean", nullable=true)
      */
-    private $microfonoAltavoces;
-    /**
-     * @ORM\Column(name="videocamara", type="boolean", nullable=true)
-     */
-    private $videocamara;
-    /**
-     * @ORM\Column(name="wifi", type="boolean", nullable=true)
-     */
-    private $wifi;
-    /**
-     * @ORM\Column(name="internetCable", type="boolean", nullable=true)
-     */
-    private $internetCable;
-    /**
-     * @ORM\Column(name="maquinaBebidas", type="boolean", nullable=true)
-     */
-    private $maquinaBebidas;
-    /**
-     * @ORM\Column(name="pizarra", type="boolean", nullable=true)
-     */
-    private $pizarra;
-    /**
-     * @ORM\Column(name="conserjeria", type="boolean", nullable=true)
-     */
-    private $conserjeria;
-    /**
-     * @ORM\Column(name="aireAcondicionado", type="boolean", nullable=true)
-     */
-    private $aireAcondicionado;
-    /**
-     * @ORM\Column(name="calefaccion", type="boolean", nullable=true)
-     */
-    private $calefaccion;
+    private $esGratuito;
 
     /**
-     * @ORM\Column(type="string", length=100, nullable=true)
+     * @ORM\Column(name="modoAula", type="boolean", nullable=true)
      */
-    private $otrosServicios;
+    private $modoAula;
+
+    /**
+     * @ORM\Column(name="modoAulaCapacidad",type="integer", nullable=true)
+     */
+    private $modoAulaCapacidad;
+
+    /**
+     * @ORM\Column(name="modoBanquete", type="boolean", nullable=true)
+     */
+    private $modoBanquete;
+
+    /**
+     * @ORM\Column(name="modoBanqueteCapacidad",type="integer", nullable=true)
+     */
+    private $modoBanqueteCapacidad;
+
+    /**
+     * @ORM\Column(name="modoCocktail", type="boolean", nullable=true)
+     */
+    private $modoCocktail;
+
+    /**
+     * @ORM\Column(name="modoCocktailCapacidad",type="integer", nullable=true)
+     */
+    private $modoCocktailCapacidad;
+
+    /**
+     * @ORM\Column(name="modoEscenario",type="boolean", nullable=true)
+     */
+    private $modoEscenario;
+
+    /**
+     * @ORM\Column(name="modoEscenarioCapacidad", type="integer", nullable=true)
+     */
+    private $modoEscenarioCapacidad;
+
+    /**
+     * @ORM\Column(name="modoExposicion",type="boolean", nullable=true)
+     */
+    private $modoExposicion;
+
+    /**
+     * @ORM\Column(name="modoExposicionCapacidad",type="integer", nullable=true)
+     */
+    private $modoExposicionCapacidad;
+
+
 
    /**
      * @ORM\Column(name="aceptacionReservaAutomatica", type="boolean", nullable=true)
@@ -218,11 +254,6 @@ class Evento
      * @ORM\Column(name="aceptoCondicionesUsoPoliticaPrivacidad", type="boolean", nullable=false)
      */
     private $aceptoCondicionesUsoPoliticaPrivacidad;
-
-    /**
-     * @ORM\Column(name="precioPorHora",type="float", nullable=false)
-     */
-    private $precioPorHora;
 
     /**
      * @ORM\Column(name="precio",type="float", nullable=false)
@@ -448,259 +479,6 @@ class Evento
     public function getEnlaceVideo()
     {
         return $this->enlaceVideo;
-    }
-
-    /**
-     * Set proyectorPantallaSala
-     *
-     * @param boolean $proyectorPantallaSala
-     * @return Evento
-     */
-    public function setProyectorPantallaSala($proyectorPantallaSala)
-    {
-        $this->proyectorPantallaSala = $proyectorPantallaSala;
-    
-        return $this;
-    }
-
-    /**
-     * Get proyectorPantallaSala
-     *
-     * @return boolean 
-     */
-    public function getProyectorPantallaSala()
-    {
-        return $this->proyectorPantallaSala;
-    }
-
-    /**
-     * Set microfonoAltavoces
-     *
-     * @param boolean $microfonoAltavoces
-     * @return Evento
-     */
-    public function setMicrofonoAltavoces($microfonoAltavoces)
-    {
-        $this->microfonoAltavoces = $microfonoAltavoces;
-    
-        return $this;
-    }
-
-    /**
-     * Get microfonoAltavoces
-     *
-     * @return boolean 
-     */
-    public function getMicrofonoAltavoces()
-    {
-        return $this->microfonoAltavoces;
-    }
-
-    /**
-     * Set videocamara
-     *
-     * @param boolean $videocamara
-     * @return Evento
-     */
-    public function setVideocamara($videocamara)
-    {
-        $this->videocamara = $videocamara;
-    
-        return $this;
-    }
-
-    /**
-     * Get videocamara
-     *
-     * @return boolean 
-     */
-    public function getVideocamara()
-    {
-        return $this->videocamara;
-    }
-
-    /**
-     * Set wifi
-     *
-     * @param boolean $wifi
-     * @return Evento
-     */
-    public function setWifi($wifi)
-    {
-        $this->wifi = $wifi;
-    
-        return $this;
-    }
-
-    /**
-     * Get wifi
-     *
-     * @return boolean 
-     */
-    public function getWifi()
-    {
-        return $this->wifi;
-    }
-
-    /**
-     * Set internetCable
-     *
-     * @param boolean $internetCable
-     * @return Evento
-     */
-    public function setInternetCable($internetCable)
-    {
-        $this->internetCable = $internetCable;
-    
-        return $this;
-    }
-
-    /**
-     * Get internetCable
-     *
-     * @return boolean 
-     */
-    public function getInternetCable()
-    {
-        return $this->internetCable;
-    }
-
-    /**
-     * Set maquinaBebidas
-     *
-     * @param boolean $maquinaBebidas
-     * @return Evento
-     */
-    public function setMaquinaBebidas($maquinaBebidas)
-    {
-        $this->maquinaBebidas = $maquinaBebidas;
-    
-        return $this;
-    }
-
-    /**
-     * Get maquinaBebidas
-     *
-     * @return boolean 
-     */
-    public function getMaquinaBebidas()
-    {
-        return $this->maquinaBebidas;
-    }
-
-    /**
-     * Set pizarra
-     *
-     * @param boolean $pizarra
-     * @return Evento
-     */
-    public function setPizarra($pizarra)
-    {
-        $this->pizarra = $pizarra;
-    
-        return $this;
-    }
-
-    /**
-     * Get pizarra
-     *
-     * @return boolean 
-     */
-    public function getPizarra()
-    {
-        return $this->pizarra;
-    }
-
-    /**
-     * Set conserjeria
-     *
-     * @param boolean $conserjeria
-     * @return Evento
-     */
-    public function setConserjeria($conserjeria)
-    {
-        $this->conserjeria = $conserjeria;
-    
-        return $this;
-    }
-
-    /**
-     * Get conserjeria
-     *
-     * @return boolean 
-     */
-    public function getConserjeria()
-    {
-        return $this->conserjeria;
-    }
-
-    /**
-     * Set aireAcondicionado
-     *
-     * @param boolean $aireAcondicionado
-     * @return Evento
-     */
-    public function setAireAcondicionado($aireAcondicionado)
-    {
-        $this->aireAcondicionado = $aireAcondicionado;
-    
-        return $this;
-    }
-
-    /**
-     * Get aireAcondicionado
-     *
-     * @return boolean 
-     */
-    public function getAireAcondicionado()
-    {
-        return $this->aireAcondicionado;
-    }
-
-    /**
-     * Set calefaccion
-     *
-     * @param boolean $calefaccion
-     * @return Evento
-     */
-    public function setCalefaccion($calefaccion)
-    {
-        $this->calefaccion = $calefaccion;
-    
-        return $this;
-    }
-
-    /**
-     * Get calefaccion
-     *
-     * @return boolean 
-     */
-    public function getCalefaccion()
-    {
-        return $this->calefaccion;
-    }
-
-    /**
-     * Set otrosServicios
-     *
-     * @param string $otrosServicios
-     * @return Evento
-     */
-    public function setOtrosServicios($otrosServicios)
-    {
-        $this->otrosServicios = $otrosServicios;
-    
-        return $this;
-    }
-
-    /**
-     * Get otrosServicios
-     *
-     * @return string 
-     */
-    public function getOtrosServicios()
-    {
-        return $this->otrosServicios;
     }
 
     /**
@@ -1118,29 +896,6 @@ class Evento
     }
 
     /**
-     * Set precioPorHora
-     *
-     * @param float $precioPorHora
-     * @return Evento
-     */
-    public function setPrecioPorHora($precioPorHora)
-    {
-        $this->precioPorHora = $precioPorHora;
-    
-        return $this;
-    }
-
-    /**
-     * Get precioPorHora
-     *
-     * @return float 
-     */
-    public function getPrecioPorHora()
-    {
-        return $this->precioPorHora;
-    }
-
-    /**
      * Set precio
      *
      * @param float $precio
@@ -1232,28 +987,6 @@ class Evento
         return $this->localidad;
     }
 
-    /**
-     * Set sede1
-     *
-     * @param \Proyecto\PrincipalBundle\Entity\Sede1 $sede1
-     * @return Evento
-     */
-    public function setSede1(\Proyecto\PrincipalBundle\Entity\Sede1 $sede1 = null)
-    {
-        $this->sede1 = $sede1;
-    
-        return $this;
-    }
-
-    /**
-     * Get sede1
-     *
-     * @return \Proyecto\PrincipalBundle\Entity\Sede1 
-     */
-    public function getSede1()
-    {
-        return $this->sede1;
-    }
 
   /**
      * Sets file.
@@ -1426,5 +1159,377 @@ class Evento
     public function getSuspendido()
     {
         return $this->suspendido;
+    }
+
+    /**
+     * Set fecha
+     *
+     * @param \DateTime $fecha
+     * @return Evento
+     */
+    public function setFecha($fecha)
+    {
+        $this->fecha = $fecha;
+
+        return $this;
+    }
+
+    /**
+     * Get fecha
+     *
+     * @return \DateTime 
+     */
+    public function getFecha()
+    {
+        return $this->fecha;
+    }
+
+    /**
+     * Set horaInicio
+     *
+     * @param \DateTime $horaInicio
+     * @return Evento
+     */
+    public function setHoraInicio($horaInicio)
+    {
+        $this->horaInicio = $horaInicio;
+
+        return $this;
+    }
+
+    /**
+     * Get horaInicio
+     *
+     * @return \DateTime 
+     */
+    public function getHoraInicio()
+    {
+        return $this->horaInicio;
+    }
+
+    /**
+     * Set horaFinalizacion
+     *
+     * @param \DateTime $horaFinalizacion
+     * @return Evento
+     */
+    public function setHoraFinalizacion($horaFinalizacion)
+    {
+        $this->horaFinalizacion = $horaFinalizacion;
+
+        return $this;
+    }
+
+    /**
+     * Get horaFinalizacion
+     *
+     * @return \DateTime 
+     */
+    public function getHoraFinalizacion()
+    {
+        return $this->horaFinalizacion;
+    }
+
+    /**
+     * Set esGratuito
+     *
+     * @param boolean $esGratuito
+     * @return Evento
+     */
+    public function setEsGratuito($esGratuito)
+    {
+        $this->esGratuito = $esGratuito;
+
+        return $this;
+    }
+
+    /**
+     * Get esGratuito
+     *
+     * @return boolean 
+     */
+    public function getEsGratuito()
+    {
+        return $this->esGratuito;
+    }
+
+    /**
+     * Set modoAula
+     *
+     * @param boolean $modoAula
+     * @return Evento
+     */
+    public function setModoAula($modoAula)
+    {
+        $this->modoAula = $modoAula;
+
+        return $this;
+    }
+
+    /**
+     * Get modoAula
+     *
+     * @return boolean 
+     */
+    public function getModoAula()
+    {
+        return $this->modoAula;
+    }
+
+    /**
+     * Set modoAulaCapacidad
+     *
+     * @param integer $modoAulaCapacidad
+     * @return Evento
+     */
+    public function setModoAulaCapacidad($modoAulaCapacidad)
+    {
+        $this->modoAulaCapacidad = $modoAulaCapacidad;
+
+        return $this;
+    }
+
+    /**
+     * Get modoAulaCapacidad
+     *
+     * @return integer 
+     */
+    public function getModoAulaCapacidad()
+    {
+        return $this->modoAulaCapacidad;
+    }
+
+    /**
+     * Set modoBanquete
+     *
+     * @param boolean $modoBanquete
+     * @return Evento
+     */
+    public function setModoBanquete($modoBanquete)
+    {
+        $this->modoBanquete = $modoBanquete;
+
+        return $this;
+    }
+
+    /**
+     * Get modoBanquete
+     *
+     * @return boolean 
+     */
+    public function getModoBanquete()
+    {
+        return $this->modoBanquete;
+    }
+
+    /**
+     * Set modoBanqueteCapacidad
+     *
+     * @param integer $modoBanqueteCapacidad
+     * @return Evento
+     */
+    public function setModoBanqueteCapacidad($modoBanqueteCapacidad)
+    {
+        $this->modoBanqueteCapacidad = $modoBanqueteCapacidad;
+
+        return $this;
+    }
+
+    /**
+     * Get modoBanqueteCapacidad
+     *
+     * @return integer 
+     */
+    public function getModoBanqueteCapacidad()
+    {
+        return $this->modoBanqueteCapacidad;
+    }
+
+    /**
+     * Set modoCocktail
+     *
+     * @param boolean $modoCocktail
+     * @return Evento
+     */
+    public function setModoCocktail($modoCocktail)
+    {
+        $this->modoCocktail = $modoCocktail;
+
+        return $this;
+    }
+
+    /**
+     * Get modoCocktail
+     *
+     * @return boolean 
+     */
+    public function getModoCocktail()
+    {
+        return $this->modoCocktail;
+    }
+
+    /**
+     * Set modoCocktailCapacidad
+     *
+     * @param integer $modoCocktailCapacidad
+     * @return Evento
+     */
+    public function setModoCocktailCapacidad($modoCocktailCapacidad)
+    {
+        $this->modoCocktailCapacidad = $modoCocktailCapacidad;
+
+        return $this;
+    }
+
+    /**
+     * Get modoCocktailCapacidad
+     *
+     * @return integer 
+     */
+    public function getModoCocktailCapacidad()
+    {
+        return $this->modoCocktailCapacidad;
+    }
+
+    /**
+     * Set modoEscenario
+     *
+     * @param boolean $modoEscenario
+     * @return Evento
+     */
+    public function setModoEscenario($modoEscenario)
+    {
+        $this->modoEscenario = $modoEscenario;
+
+        return $this;
+    }
+
+    /**
+     * Get modoEscenario
+     *
+     * @return boolean 
+     */
+    public function getModoEscenario()
+    {
+        return $this->modoEscenario;
+    }
+
+    /**
+     * Set modoEscenarioCapacidad
+     *
+     * @param integer $modoEscenarioCapacidad
+     * @return Evento
+     */
+    public function setModoEscenarioCapacidad($modoEscenarioCapacidad)
+    {
+        $this->modoEscenarioCapacidad = $modoEscenarioCapacidad;
+
+        return $this;
+    }
+
+    /**
+     * Get modoEscenarioCapacidad
+     *
+     * @return integer 
+     */
+    public function getModoEscenarioCapacidad()
+    {
+        return $this->modoEscenarioCapacidad;
+    }
+
+    /**
+     * Set modoExposicion
+     *
+     * @param boolean $modoExposicion
+     * @return Evento
+     */
+    public function setModoExposicion($modoExposicion)
+    {
+        $this->modoExposicion = $modoExposicion;
+
+        return $this;
+    }
+
+    /**
+     * Get modoExposicion
+     *
+     * @return boolean 
+     */
+    public function getModoExposicion()
+    {
+        return $this->modoExposicion;
+    }
+
+    /**
+     * Set modoExposicionCapacidad
+     *
+     * @param integer $modoExposicionCapacidad
+     * @return Evento
+     */
+    public function setModoExposicionCapacidad($modoExposicionCapacidad)
+    {
+        $this->modoExposicionCapacidad = $modoExposicionCapacidad;
+
+        return $this;
+    }
+
+    /**
+     * Get modoExposicionCapacidad
+     *
+     * @return integer 
+     */
+    public function getModoExposicionCapacidad()
+    {
+        return $this->modoExposicionCapacidad;
+    }
+
+
+
+    /**
+     * Set esPrivado
+     *
+     * @param boolean $esPrivado
+     * @return Evento
+     */
+    public function setEsPrivado($esPrivado)
+    {
+        $this->esPrivado = $esPrivado;
+
+        return $this;
+    }
+
+    /**
+     * Get esPrivado
+     *
+     * @return boolean 
+     */
+    public function getEsPrivado()
+    {
+        return $this->esPrivado;
+    }
+
+
+
+    /**
+     * Set espacio
+     *
+     * @param \Proyecto\PrincipalBundle\Entity\Espacio $espacio
+     * @return Evento
+     */
+    public function setEspacio(\Proyecto\PrincipalBundle\Entity\Espacio $espacio = null)
+    {
+        $this->espacio = $espacio;
+
+        return $this;
+    }
+
+    /**
+     * Get espacio
+     *
+     * @return \Proyecto\PrincipalBundle\Entity\Espacio 
+     */
+    public function getEspacio()
+    {
+        return $this->espacio;
     }
 }

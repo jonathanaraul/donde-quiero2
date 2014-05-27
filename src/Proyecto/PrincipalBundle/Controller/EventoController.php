@@ -88,8 +88,8 @@ class EventoController extends Controller {
 
             ->add('nombre', 'text')
             ->add('descripcionGeneral', 'textarea')
-            ->add('sede1', 'entity', array(
-			    'class' => 'ProyectoPrincipalBundle:Sede1',
+            ->add('espacio', 'entity', array(
+			    'class' => 'ProyectoPrincipalBundle:Espacio',
 			    'property' => 'nombre',
 			    'required'  => false,
 			    'query_builder' => function(EntityRepository $er) {
@@ -114,18 +114,20 @@ class EventoController extends Controller {
 			->add('file','file') 
             ->add('enlaceVideo', 'text')
 
+            ->add('esPrivado', 'checkbox',array('required'  => false))
+            ->add('esGratuito', 'checkbox',array('required'  => false))
 
-            ->add('proyectorPantallaSala', 'checkbox',array('required'  => false))
-            ->add('microfonoAltavoces', 'checkbox',array('required'  => false))
-            ->add('videocamara', 'checkbox',array('required'  => false))
-            ->add('wifi', 'checkbox',array('required'  => false))
-            ->add('internetCable', 'checkbox',array('required'  => false))
-            ->add('maquinaBebidas', 'checkbox',array('required'  => false))
-            ->add('pizarra', 'checkbox',array('required'  => false))
-            ->add('conserjeria', 'checkbox',array('required'  => false))
-            ->add('aireAcondicionado', 'checkbox',array('required'  => false))
-            ->add('calefaccion', 'checkbox',array('required'  => false))
-            ->add('otrosServicios', 'text')
+
+            ->add('modoAula', 'checkbox',array('required'  => false))
+            ->add('modoAulaCapacidad')
+            ->add('modoBanquete', 'checkbox',array('required'  => false))
+            ->add('modoBanqueteCapacidad')
+            ->add('modoCocktail', 'checkbox',array('required'  => false))
+            ->add('modoCocktailCapacidad')
+            ->add('modoEscenario', 'checkbox',array('required'  => false))
+            ->add('modoEscenarioCapacidad')
+            ->add('modoExposicion', 'checkbox',array('required'  => false))
+            ->add('modoExposicionCapacidad')
 
 
             ->add('aceptacionReservaAutomatica', 'checkbox',array('required'  => false))
@@ -148,11 +150,20 @@ class EventoController extends Controller {
 
 
             ->add('aceptoCondicionesUsoPoliticaPrivacidad', 'checkbox',array('required'  => false))
-        	->add('precioPorHora','number',array('required'  => true))
             ->add('precio','number',array('required'  => true))
 
+            ->add('fecha', 'date', array(
+                'empty_value' => array('year' => 'Año', 'month' => 'Mes', 'day' => 'Dia')
+                ))
 
-            
+            ->add('horaInicio', 'time', array(
+                'input'  => 'datetime',
+                'widget' => 'choice',
+                ))
+             ->add('horaFinalizacion', 'time', array(
+                'input'  => 'datetime',
+                'widget' => 'choice',
+                ))           
 
             ->getForm();
 
@@ -175,7 +186,7 @@ class EventoController extends Controller {
 				
 				//Casos especiales
 				if($object->getEnlaceVideo()=='Añadir enlace a Video') $object->setEnlaceVideo(null);
-				if($object->getOtrosServicios()=='Otros...') $object->setOtrosServicios(null);
+				
 
 
 				$object -> setUser($user);	
@@ -183,8 +194,33 @@ class EventoController extends Controller {
                 $object -> setDestacado(0);
                 $object -> setEstado(1);  
                 $object -> setSuspendido(0);  
-                
+
+
                 $em->persist($object);
+                $em->flush();
+
+                $fechaInicio = new \DateTime();
+                $fechaInicio->setDate($object->getFecha()->format('Y'),$object->getFecha()->format('m'),$object->getFecha()->format('d'));
+                $fechaInicio->setTime($object->getHoraInicio()->format('h'),$object->getHoraInicio()->format('i'),$object->getHoraInicio()->format('s'));
+
+                $fechaFin = new \DateTime();
+                $fechaFin->setDate($object->getFecha()->format('Y'),$object->getFecha()->format('m'),$object->getFecha()->format('d'));
+                $fechaFin->setTime($object->getHoraFinalizacion()->format('h'),$object->getHoraFinalizacion()->format('i'),$object->getHoraFinalizacion()->format('s'));
+
+                $reserva = new Reserva();
+                $reserva->setFechaInicio($fechaInicio);
+                $reserva->setFechaFin($fechaFin);
+                $reserva->setUser($user);
+                $reserva->setEvento($object);
+                $reserva->setNumeroReservacion(1);
+                $reserva->setTitulo('Mi evento');
+                $reserva->setTodoDia(true);
+                $reserva->setPagado(false);
+                $reserva->setCancelado(false);
+                $reserva->setAprobado(true);
+                $reserva->setOculto(false);
+
+                $em->persist($reserva);
                 $em->flush();
 
                 return $class->redirect($class->generateUrl('proyecto_principal_evento_individual',array('id' => $object ->getId())));
@@ -205,7 +241,7 @@ class EventoController extends Controller {
 
         $em = $this->getDoctrine()->getManager();
 
-        $dql =  'SELECT o1.id,o1.nombre,o1.path,o1.duracionTotal,o1.precioPorHora,o2.nombre localidad
+        $dql =  'SELECT o1.id,o1.nombre,o1.path,o1.duracionTotal,o1.precio as precioPorHora,o2.nombre localidad
                  FROM ProyectoPrincipalBundle:Evento o1, ProyectoPrincipalBundle:Localidad o2 
                  WHERE o1.localidad = o2.id  and o1.destacado = 1 ORDER BY o1.id ASC';
 
@@ -289,7 +325,7 @@ class EventoController extends Controller {
     $em = $this->getDoctrine()->getManager();
     $array = array();
 
-    $dql =  'SELECT o1.id,o1.nombre,o1.path,o1.duracionTotal,o1.precioPorHora,o2.nombre localidad
+    $dql =  'SELECT o1.id,o1.nombre,o1.path,o1.duracionTotal,o1.precio,o2.nombre localidad
                  FROM ProyectoPrincipalBundle:Evento o1, ProyectoPrincipalBundle:Localidad o2 ';
 
     $dqlTotales =  'SELECT COUNT(o1.id) FROM ProyectoPrincipalBundle:Evento o1 ';
@@ -317,7 +353,7 @@ class EventoController extends Controller {
                 $dql.= ' o1.localidad = :localidad';
                 $dqlTotales.=' o1.localidad = :localidad';
         }
-        if($parametros['precioHora']!= null && $parametros['precioHora']!=0){
+        /*if($parametros['precioHora']!= null && $parametros['precioHora']!=0){
 
             if(!$tieneWhere){$dql.= ' WHERE ';$tieneWhere= true; }else $dql.= ' AND ';
             if(!$tieneWhereTotales){$dqlTotales.= ' WHERE ';$tieneWhereTotales= true; }else $dqlTotales.= ' AND ';
@@ -334,7 +370,7 @@ class EventoController extends Controller {
                 $dql.= ' o1.precioPorHora = :precioHora';
                 $dqlTotales.=' o1.precioPorHora = :precioHora';
             }
-        }
+        }*/
         if($parametros['precio']!= null && $parametros['precio']!=0){
 
             if(!$tieneWhere){$dql.= ' WHERE ';$tieneWhere= true; }else $dql.= ' AND ';
