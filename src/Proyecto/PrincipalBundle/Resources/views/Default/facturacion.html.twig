@@ -5,103 +5,88 @@
 </script>
 {%endblock%}
 {%block contenedorbase%}
+<div class="wrapper">
 
- 
-    <!-- Text Section End 
-  <div id="registro">
-     Bienvenido  <a href="fichaprivada.html">Juan Díaz</a>
-  </div>-->
+	{% include 'ProyectoPrincipalBundle:Helpers:top.html.twig'  with {'clase': 'gris'}  %}
+	<!-- Text Section End -->
 
-   <div class="inicio">                    
-    <div id="forminicio">
-      <form action="{{ url }}" method="post" {{ form_enctype(form) }}>                
-        <h3 > Información de Facturación</h3>
-        <h4>{{ form_errors(form) }}</h4>
-        <p>  Rellena los siguientes datos añadir tus datos de facturación               </p>
+	<header>
+		<!-- Header Title Start -->
+		<h1>&nbsp;</h1>
 
-        {{ form_widget(form.empresa, { 'attr': {'class': 'formstyle','placeholder': 'Nombre de la Empresa/Particular'} }) }}
-        {{ form_widget(form.identificador, { 'attr': {'class': 'formstyle','placeholder': 'C.I.F. / N.I.F. / D.N.I.'} }) }}
-        {{ form_widget(form.direccion, { 'attr': {'placeholder': 'Dirección'} }) }}
-        
-        <p>Provincia</p>
+	</header>
+	<!-- Header Title End -->
+	<div class="inicio">
+		<div id="forminicio">
+			<form action="{{ url }}" method="post" {{ form_enctype(form) }}>
+				<h3 > Información de Facturación</h3>
+				<h4>{{ form_errors(form) }}</h4>
+				<p>
+					Rellena los siguientes datos añadir tus datos de facturación
+				</p>
 
-        <select id="form_provincia" name="provincia" required="required" class="formstyle">
-          {%for provincia in provincias%}
-          <option value="{{provincia.id}}" {%if idProvinciaDefecto == provincia.id%}selected{%endif%} >{{provincia.nombre|title}}</option>
-          {%endfor%}
+				{{ form_widget(form.empresa, { 'attr': {'class': 'formstyle','placeholder': 'Nombre de la Empresa/Particular'} }) }}
+				{{ form_widget(form.identificador, { 'attr': {'class': 'formstyle','placeholder': 'C.I.F. / N.I.F. / D.N.I.'} }) }}
+				{{ form_widget(form.direccion, { 'attr': {'placeholder': 'Dirección'} }) }}
 
-        </select>
+				<p>
+					Provincia
+				</p>
 
-        <p>Localidad</p>
+				<select id="form_provincia" name="provincia" required="required" class="formstyle">
+					{%for provincia in provincias%}
+					<option value="{{provincia.id}}" {%if idProvinciaDefecto == provincia.id%}selected{%endif%} >{{provincia.nombre|title}}</option>
+					{%endfor%}
 
+				</select>
 
-        {{ form_widget(form.localidad, { 'attr': {'class': 'formstyle'} }) }}
-        {{ form_widget(form.numeroCuenta, { 'attr': {'class': 'formstyle','placeholder': 'Número de Cuenta'} }) }}
+				<p>
+					Localidad
+				</p>
 
-        <h3 > Datos de tarjeta de crédito</h3>     
-        <p>  Introduzca los datos de su tarjeta de crédito </p>
-        {{ form_widget(form.numeroTarjeta, { 'attr': {'class': 'formstyle','placeholder': 'Número de Tarjeta'} }) }}
-
-        <p>  Fecha de caducidad </p>
-        {{ form_widget(form.fechaCaducidad, { 'attr': {'class': 'formstyle','placeholder': 'Fecha de Caducidad'} }) }}
-        {{ form_widget(form.codigo, { 'attr': {'class': 'formstyle','placeholder': 'Código'} }) }}
-
-<!--
-        <input type="text" class="formstyle" title="Nombre de la Empresa/Particular" name="name" />
-        <input type="text" class="formstyle" title="C.I.F. / N.I.F. / D.N.I." name="name" />
-        <input type="text" class="formstyle" title="Dirección" name="name" />
-        <input type="text" class="formstyle" title="Ciudad" name="name" />
-        <input type="text" class="formstyle" title="Provincia" name="name" />
-        <input type="text" class="formstyle" title="Código Postal" name="name" />
-        <input type="text" class="formstyle" title="Número de Cuenta " name="name" />
-
-        <h3 > Datos de tarjeta de crédito</h3>     
-        <p>  Introduzca los datos de su tarjeta de crédito </p>
-
-        <input type="text" class="formstyle" title="Número de Tarjeta " name="name" />
-        <input type="text" class="formstyle" title="Fecha de Caducidad " name="name" />
-        <input type="text" class="formstyle" title="Código" name="name" />
+				{{ form_widget(form.localidad, { 'attr': {'class': 'formstyle'} }) }}
 
 
--->
-        <div class="clearfix"></div>        
-        <p> {{ form_widget(form.aceptoTerminos) }} Acepto las condiciones de uso y la política de privacidad</p>
+				<!--
+				<input type="text" class="formstyle" title="Nombre de la Empresa/Particular" name="name" />
+				<input type="text" class="formstyle" title="C.I.F. / N.I.F. / D.N.I." name="name" />
+				<input type="text" class="formstyle" title="Dirección" name="name" />
+				<input type="text" class="formstyle" title="Ciudad" name="name" />
+				<input type="text" class="formstyle" title="Provincia" name="name" />
+				<input type="text" class="formstyle" title="Código Postal" name="name" />
+				<input type="text" class="formstyle" title="Número de Cuenta " name="name" />
 
+				<h3 > Datos de tarjeta de crédito</h3>
+				<p>  Introduzca los datos de su tarjeta de crédito </p>
 
-        <input type="submit" class="botonSubmitFormulario formstyle ">
+				<input type="text" class="formstyle" title="Número de Tarjeta " name="name" />
+				<input type="text" class="formstyle" title="Fecha de Caducidad " name="name" />
+				<input type="text" class="formstyle" title="Código" name="name" />
 
+				-->
+				<div class="clearfix"></div>
+				<p>
+					{{ form_widget(form.aceptoTerminos) }} Acepto las condiciones de uso y la política de privacidad
+				</p>
 
-        {{ form_rest(form) }}
+				<input type="submit" class="botonSubmitFormulario formstyle ">
 
-      </form>
+				{{ form_rest(form) }}
 
-    <!--  <div class="enviar"><a href="fichaprivada.html" title="Perfil">Enviar</a></div>-->
+			</form>
 
-      <div id="error"></div>
-      <div class="clearfix"></div>
-      </div>
-    </div> 
+			<!--  <div class="enviar"><a href="fichaprivada.html" title="Perfil">Enviar</a></div>-->
 
+			<div id="error"></div>
+			<div class="clearfix"></div>
+		</div>
+	</div>
 
-    <div class="clearfix"></div>
-    
+	<div class="clearfix"></div>
 
+	<div class="clearfix"></div>
+</div>
 
-
-    
-    
-    
-    <div id="espacios" ></div>
-    <div id="eventos" ></div>
-    <div id="servicios" ></div>
-    <div class="clearfix"></div>
-  </div> <!-- Work Links Section End -->
-  <!-- Last Words Section End-->
-  <div id="sedes" ></div>
-
-  <!-- TO MAKE THE PHP FORM WORK, ALL YOU NEED TO DO IS OPEN UP THE FILE CALLED 'submitemail.php' AND CHANGE WHERE IT SAYS 'your email goes here' -->
-
-  <!-- DON'T TOUCH THIS SECTION -->
-
-
+<!-- TO MAKE THE PHP FORM WORK, ALL YOU NEED TO DO IS OPEN UP THE FILE CALLED 'submitemail.php' AND CHANGE WHERE IT SAYS 'your email goes here' -->
+<!-- DON'T TOUCH THIS SECTION -->
 {%endblock%} 

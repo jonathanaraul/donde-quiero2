@@ -65,6 +65,11 @@ class User implements UserInterface, \Serializable
     /**
      * @ORM\Column(type="string", length=100, nullable=false)
      */
+    private $profesion;
+
+    /**
+     * @ORM\Column(type="string", length=100, nullable=false)
+     */
     private $pais;
 
 
@@ -726,5 +731,28 @@ class User implements UserInterface, \Serializable
     public function getRol()
     {
         return $this->rol;
+    }
+
+    /**
+     * Set profesion
+     *
+     * @param string $profesion
+     * @return User
+     */
+    public function setProfesion($profesion)
+    {
+        $this->profesion = $profesion;
+
+        return $this;
+    }
+
+    /**
+     * Get profesion
+     *
+     * @return string 
+     */
+    public function getProfesion()
+    {
+        return $this->profesion;
     }
 }

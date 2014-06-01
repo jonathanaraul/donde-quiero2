@@ -50,32 +50,6 @@ class Facturacion
      */
     private $localidad;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="numeroCuenta", type="string", length=300, nullable=false)
-     */
-    private $numeroCuenta;
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="numeroTarjeta", type="string", length=300, nullable=false)
-     */
-    private $numeroTarjeta;
-
-    /**
-     * * @var \DateTime
-     *
-     * @ORM\Column(name="fechaCaducidad", type="datetime", nullable=false)
-     */
-    private $fechaCaducidad;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="codigo", type="string", length=300, nullable=false)
-     */
-    private $codigo;
 
     /**
      * @var \User
@@ -157,98 +131,7 @@ class Facturacion
         return $this->direccion;
     }
 
-    /**
-     * Set numeroCuenta
-     *
-     * @param string $numeroCuenta
-     * @return Facturacion
-     */
-    public function setNumeroCuenta($numeroCuenta)
-    {
-        $this->numeroCuenta = $numeroCuenta;
-    
-        return $this;
-    }
-
-    /**
-     * Get numeroCuenta
-     *
-     * @return string 
-     */
-    public function getNumeroCuenta()
-    {
-        return $this->numeroCuenta;
-    }
-
-    /**
-     * Set numeroTarjeta
-     *
-     * @param string $numeroTarjeta
-     * @return Facturacion
-     */
-    public function setNumeroTarjeta($numeroTarjeta)
-    {
-        $this->numeroTarjeta = $numeroTarjeta;
-    
-        return $this;
-    }
-
-    /**
-     * Get numeroTarjeta
-     *
-     * @return string 
-     */
-    public function getNumeroTarjeta()
-    {
-        return $this->numeroTarjeta;
-    }
-
-    /**
-     * Set fechaCaducidad
-     *
-     * @param \DateTime $fechaCaducidad
-     * @return Facturacion
-     */
-    public function setFechaCaducidad($fechaCaducidad)
-    {
-        $this->fechaCaducidad = $fechaCaducidad;
-    
-        return $this;
-    }
-
-    /**
-     * Get fechaCaducidad
-     *
-     * @return \DateTime 
-     */
-    public function getFechaCaducidad()
-    {
-        return $this->fechaCaducidad;
-    }
-
-    /**
-     * Set codigo
-     *
-     * @param string $codigo
-     * @return Facturacion
-     */
-    public function setCodigo($codigo)
-    {
-        $this->codigo = $codigo;
-    
-        return $this;
-    }
-
-    /**
-     * Get codigo
-     *
-     * @return string 
-     */
-    public function getCodigo()
-    {
-        return $this->codigo;
-    }
-
+ 
     /**
      * Set fechaRegistro
      *

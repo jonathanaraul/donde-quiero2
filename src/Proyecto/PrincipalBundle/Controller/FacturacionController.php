@@ -57,13 +57,6 @@ class FacturacionController extends Controller {
             ->add('empresa', 'text')
             ->add('identificador', 'text')
             ->add('direccion', 'textarea')
-            ->add('numeroCuenta', 'text')
-            ->add('numeroTarjeta', 'text')
-            ->add('fechaCaducidad', 'date', array(
-			    'input'  => 'datetime',
-			    'widget' => 'single_text',
-			))
-            ->add('codigo', 'text')
             ->add('localidad', 'entity', array(
 			    'class' => 'ProyectoPrincipalBundle:Localidad',
 			    'property' => 'nombre',

@@ -221,8 +221,16 @@ class PerfilController extends Controller {
 	}
 
 	public static function procesar($id ,$url,Request $request,$class) {
-		if($id == null )$object = new User();
-		else $object = $class -> getDoctrine() -> getRepository('ProyectoPrincipalBundle:User') -> find($id);
+		$accion = ''; 
+        if($id == null ){
+           $accion = 'nuevo'; 
+           $object = new User();
+                        }
+		else{
+           $object = $class -> getDoctrine() -> getRepository('ProyectoPrincipalBundle:User') -> find($id);
+           $accion = 'editar'; 
+
+        } 
 		
 		$firstArray = UtilitiesAPI::getDefaultContent($class);
 		$secondArray = array();
@@ -249,6 +257,7 @@ class PerfilController extends Controller {
             ->add('apellido', 'text')
             ->add('telefono', 'text')
             ->add('username', 'text')
+            ->add('profesion', 'text')
             ->add('password', 'password')
             ->add('descripcion', 'textarea')
             ->add('pais', 'text')
@@ -320,7 +329,7 @@ class PerfilController extends Controller {
 	        }
 	    }
 
-        $secondArray = array('form' => $form->createView(),'url'=>$url);
+        $secondArray = array('form' => $form->createView(),'url'=>$url,'accion'=> $accion);
 		$array = array_merge($firstArray, $secondArray);
 		return $class -> render('ProyectoPrincipalBundle:Default:registro.html.twig', $array);
 	}
