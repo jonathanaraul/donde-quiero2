@@ -14,12 +14,12 @@ $("#publicarElemento").live("click", function() {
     var contenido = titulo.html();
 
 	if(tarea=='estado'){
-		if(contenido=='Despublicar'){
+		if(contenido=='Eliminar'){
 			titulo.html('Publicar');
 			valor = 0;
 		}
 		else if(contenido=='Publicar'){
-			titulo.html('Despublicar');
+			titulo.html('Eliminar');
 			valor = 1;
 		}
 	}

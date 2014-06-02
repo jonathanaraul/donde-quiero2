@@ -116,11 +116,11 @@
 	</div>
     {%if userId == object.user.id%}
 	<div class="clearfix"></div>		
-	<div  class="work rosa" id="editarElemento" style="width: 61px;float: left;cursor:pointer;" >
+	<div  class="work rosa" id="editarElemento" style="width: 61px;float: left;cursor:pointer;margin-left:10px;margin-top: 30px;" >
 		<h3 class="" >Editar </h3>
 	</div>
-	<div  class="work rosa" id="publicarElemento" tipo="evento" tarea="estado"  identificador="{{ object.id }}" style="width: 100px;float: left;margin-left:10px;cursor:pointer;" >
-		<h3 class="elementoEstado" >{%if object.estado%}Despublicar{%else%}Publicar{%endif%}</h3>
+	<div  class="work rosa" id="publicarElemento" tipo="evento" tarea="estado"  identificador="{{ object.id }}" style="width: 75px;float: left;margin-left:10px;cursor:pointer;margin-top: 30px;" >
+		<h3 class="elementoEstado" >{%if object.estado%}Eliminar{%else%}Publicar{%endif%}</h3>
 	</div>
 	{%endif%}
 </aside>

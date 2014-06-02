@@ -76,7 +76,7 @@ class EspacioController extends Controller {
 		$provincias = HelpersController::getProvincias($class);
 		$idProvincia = $user->getProvincia()->getId();
 
-
+        $arregloSedes = GestionController::dqlArregloDoble('Sede',105,106, $class);
 
 
 		$parametro = $user->getProvincia()->getId();
@@ -91,15 +91,11 @@ class EspacioController extends Controller {
 
             ->add('nombre', 'text')
             ->add('descripcionGeneral', 'textarea')
-            ->add('sede1', 'entity', array(
-			    'class' => 'ProyectoPrincipalBundle:Sede1',
-			    'property' => 'nombre',
-			    'required'  => false,
-			    'query_builder' => function(EntityRepository $er) {
-			        return $er->createQueryBuilder('u')
-			            ->orderBy('u.nombre', 'ASC');
-			    },
-			))
+            -> add('sede', 'entity', array(
+            'class' => 'ProyectoPrincipalBundle:Sede',
+            'choices' => $arregloSedes,
+            'property' => 'nombre',
+            ))
 			->add('file','file') 
             ->add('enlaceVideo', 'text')
 
@@ -196,6 +192,7 @@ class EspacioController extends Controller {
 				if($object->getEnlaceVideo()=='Añadir enlace a Video') $object->setEnlaceVideo(null);
 				if($object->getOtrasCaracteristicas()=='Otros...') $object->setOtrasCaracteristicas(null);
 				if($object->getOtrosServicios()=='Otros...') $object->setOtrosServicios(null);
+                if($object->getSede()->getId()==106) $object->setSede(null);
 
 				$object -> setUser($user);	
                 

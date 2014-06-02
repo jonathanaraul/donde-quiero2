@@ -46,16 +46,14 @@
 		<div class="fichaizq">
 			<h3>{{object.nombre|title}}</h3>
 
-{#
+            {%if object.sede is not null%}
 			<ul>
 				<li class="izquierda">
-					<h4><a href="sede.html">La Sede del Coam.</a></h4>
-				</li>
-				<li class="derecha">
-					<h4><a href="sede.html" style="margin-left:5px">Cómo llegar.</a></h4>
+					<h4><a href="#">{{object.sede.nombre}}</a></h4>
 				</li>
 			</ul><!--Category-->
-#}
+			{%endif%}
+
 			<div class="clearfix"></div>
 			<p>
 				{{object.descripcionGeneral}}
@@ -88,21 +86,31 @@
 				<li>
 					Altura  Mín Libre:<span>{{object.alturaMinimaLibre}} m </span>
 				</li>
+				{%if object.modoBanquete and object.modoBanqueteCapacidad>0%}
 				<li>
 					Aforo Modo Banquete: <span> {{object.modoBanqueteCapacidad}} </span>
 				</li>
+				{%endif%}
+				{%if object.modoCocktail and object.modoCocktailCapacidad>0%}
 				<li>
 					Aforo Modo Cocktail: <span> {{object.modoCocktailCapacidad}} </span>
 				</li>
+				{%endif%}
+				{%if object.modoAula and object.modoAulaCapacidad>0%}
 				<li>
 					Aforo Modo Aula: <span> {{object.modoAulaCapacidad}} </span>
 				</li>
+				{%endif%}
+				{%if object.modoEscenario and object.modoEscenarioCapacidad>0%}
 				<li>
 					Aforo Modo Escenario: <span> {{object.modoEscenarioCapacidad}} </span>
 				</li>
+				{%endif%}
+				{%if object.modoExposicion and object.modoExposicionCapacidad>0%}
 				<li>
 					Aforo Modo Expo: <span> {{object.modoExposicionCapacidad}} </span>
 				</li>
+				{%endif%}
 				<li>
 					Asientos: <span> {%if object.pilaresSueltos%}Si{%else%}No{%endif%}</span>
 				</li>
@@ -123,24 +131,8 @@
 				</li>
 
 
-				<li>
-					Exterior¿?: <span> Si </span>
-				</li>
-				<li>
-					Permite oscurecer¿? : <span> No </span>
-				</li>
-				<li>
-					Decoración¿?: <span> Moderna </span>
-				</li>
-				<li>
-					Proyector¿?: <span> Opcional </span>
-				</li>
-				<li>
-					Espacio Espera¿?: <span> No </span>
-				</li>
-				<li>
-					Accesible minusválidos¿?: <span> Si </span>
-				</li>
+
+
 
 
 			</ul><!--Category-->
@@ -165,7 +157,7 @@
 
 		<div class="derecha" style="margin-right:20px;">
 			<div class="servicios">
-				<h4 style="margin-top:3%;">Servicios del Centro¿?</h4>
+				<h4 style="margin-top:3%;">Servicios adicionale</h4>
 				<ul>
                      {#
 					<a href="servicios.html"><img class="icon" src="{{ asset('sistema/images/icons/s.multimedia.png')}}" width="32" height="32" title="Servicios Multimedia"></a></li>
@@ -180,11 +172,11 @@
 		</div>
         {%if userId == object.user.id%}
 		<div class="clearfix"></div>		
-		<div  class="work verde" id="editarElemento" style="width: 61px;float: left;cursor:pointer;" >
+		<div  class="work verde" id="editarElemento" style="width: 61px;float: right;cursor:pointer;margin-left:10px;margin-top: 30px;" >
 		     <h3 class="" >Editar </h3>
 		</div>
-		<div  class="work verde" id="publicarElemento" tipo="espacio" tarea="estado"  identificador="{{ object.id }}" style="width: 100px;float: left;margin-left:10px;cursor:pointer;" >
-		     <h3 class="elementoEstado" >{%if object.estado%}Despublicar{%else%}Publicar{%endif%}</h3>
+		<div  class="work verde" id="publicarElemento" tipo="espacio" tarea="estado"  identificador="{{ object.id }}" style="width: 75px;float: right;margin-left:10px;cursor:pointer;margin-top: 30px;" >
+		     <h3 class="elementoEstado" >{%if object.estado%}Eliminar{%else%}Publicar{%endif%}</h3>
 		</div>
 		{%endif%}
 	</aside>

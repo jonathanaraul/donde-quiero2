@@ -50,11 +50,11 @@
 				{{ form_widget(form.password, { 'attr': {'class': 'formstyle','placeholder': 'Contraseña'} }) }}
 
 				<p style="float:left">
-					Foto de perfil
+					Foto de perfil (JEPG/ GIF máx. 2MG) 
 				</p><!-- <div class="enviar">Buscar imagen .. Examinar</div>-->
 
 				{{ form_widget(form.file, { 'attr': {'class': 'formstyle','accept':'image/*'} }) }}
-				{{ form_widget(form.descripcion, { 'attr': {'placeholder': 'Descripcion'} }) }}
+				{{ form_widget(form.descripcion, { 'attr': {'placeholder': 'Escribe Algo sobre ti'} }) }}
 				{{ form_widget(form.pais, { 'attr': {'class': 'formstyle','placeholder': 'Pais','value': 'España','readonly': ''} }) }}
 				<p>
 					Provincia

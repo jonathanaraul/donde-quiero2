@@ -100,12 +100,12 @@ class Espacio
     /**
      * @var \Sede1
      *
-     * @ORM\ManyToOne(targetEntity="Sede1")
+     * @ORM\ManyToOne(targetEntity="Sede")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="sede1", referencedColumnName="id", nullable=true)
+     *   @ORM\JoinColumn(name="sede", referencedColumnName="id", nullable=true)
      * })
      */
-    private $sede1;
+    private $sede;
 
 
     /**
@@ -1854,5 +1854,120 @@ class Espacio
     public function getSuspendido()
     {
         return $this->suspendido;
+    }
+
+    /**
+     * Set pilaresSueltos
+     *
+     * @param boolean $pilaresSueltos
+     * @return Espacio
+     */
+    public function setPilaresSueltos($pilaresSueltos)
+    {
+        $this->pilaresSueltos = $pilaresSueltos;
+
+        return $this;
+    }
+
+    /**
+     * Get pilaresSueltos
+     *
+     * @return boolean 
+     */
+    public function getPilaresSueltos()
+    {
+        return $this->pilaresSueltos;
+    }
+
+    /**
+     * Set entradaAseosMovilidadReducida
+     *
+     * @param boolean $entradaAseosMovilidadReducida
+     * @return Espacio
+     */
+    public function setEntradaAseosMovilidadReducida($entradaAseosMovilidadReducida)
+    {
+        $this->entradaAseosMovilidadReducida = $entradaAseosMovilidadReducida;
+
+        return $this;
+    }
+
+    /**
+     * Get entradaAseosMovilidadReducida
+     *
+     * @return boolean 
+     */
+    public function getEntradaAseosMovilidadReducida()
+    {
+        return $this->entradaAseosMovilidadReducida;
+    }
+
+    /**
+     * Set ventanasExterior
+     *
+     * @param boolean $ventanasExterior
+     * @return Espacio
+     */
+    public function setVentanasExterior($ventanasExterior)
+    {
+        $this->ventanasExterior = $ventanasExterior;
+
+        return $this;
+    }
+
+    /**
+     * Get ventanasExterior
+     *
+     * @return boolean 
+     */
+    public function getVentanasExterior()
+    {
+        return $this->ventanasExterior;
+    }
+
+    /**
+     * Set ventanasPatioInterior
+     *
+     * @param boolean $ventanasPatioInterior
+     * @return Espacio
+     */
+    public function setVentanasPatioInterior($ventanasPatioInterior)
+    {
+        $this->ventanasPatioInterior = $ventanasPatioInterior;
+
+        return $this;
+    }
+
+    /**
+     * Get ventanasPatioInterior
+     *
+     * @return boolean 
+     */
+    public function getVentanasPatioInterior()
+    {
+        return $this->ventanasPatioInterior;
+    }
+
+    /**
+     * Set posibilidadOscurecerSala
+     *
+     * @param boolean $posibilidadOscurecerSala
+     * @return Espacio
+     */
+    public function setPosibilidadOscurecerSala($posibilidadOscurecerSala)
+    {
+        $this->posibilidadOscurecerSala = $posibilidadOscurecerSala;
+
+        return $this;
+    }
+
+    /**
+     * Get posibilidadOscurecerSala
+     *
+     * @return boolean 
+     */
+    public function getPosibilidadOscurecerSala()
+    {
+        return $this->posibilidadOscurecerSala;
     }
 }

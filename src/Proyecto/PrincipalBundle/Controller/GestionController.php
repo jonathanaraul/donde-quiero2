@@ -110,6 +110,31 @@ class GestionController extends Controller {
         return $arreglo;
 
     } 
+    public static function dqlArregloDoble($EntidadExtraer,$idProhibido1,$idProhibido2, $class){
+        $em = $class->getDoctrine()->getManager();
+
+        /////////////////////USUARIOS///////////////////////////////////////////////////////
+        $dql =  'SELECT distinct o1
+                 FROM ProyectoPrincipalBundle:'.$EntidadExtraer.' o1
+                 WHERE o1.id != :idProhibido1 AND o1.id != :idProhibido2
+                 ORDER BY o1.nombre ASC';
+
+        $query = $em->createQuery( $dql );
+        $query -> setParameter('idProhibido1',$idProhibido1);
+        $query -> setParameter('idProhibido2',$idProhibido2);
+
+        $arreglo = $query->getResult();
+
+        $auxiliar = $class -> getDoctrine() -> getRepository('ProyectoPrincipalBundle:'.$EntidadExtraer) -> find($idProhibido2);
+        $auxiliar = array( $auxiliar );
+        for ($i=0; $i <count($arreglo) ; $i++) { 
+            $auxiliar[$i+1] =$arreglo[$i];
+        }
+        $arreglo =  $auxiliar;
+
+        return $arreglo;
+
+    } 
 	public function ingresosAction(Request $request) {
 
 		$firstArray = UtilitiesAPI::getDefaultContent($this);

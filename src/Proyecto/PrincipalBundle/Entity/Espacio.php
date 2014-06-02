@@ -100,12 +100,12 @@ class Espacio
     /**
      * @var \Sede1
      *
-     * @ORM\ManyToOne(targetEntity="Sede1")
+     * @ORM\ManyToOne(targetEntity="Sede")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="sede1", referencedColumnName="id", nullable=true)
+     *   @ORM\JoinColumn(name="sede", referencedColumnName="id", nullable=true)
      * })
      */
-    private $sede1;
+    private $sede;
 
 
     /**
@@ -1634,29 +1634,6 @@ class Espacio
     }
 
     /**
-     * Set sede1
-     *
-     * @param \Proyecto\PrincipalBundle\Entity\Sede1 $sede1
-     * @return Espacio
-     */
-    public function setSede1(\Proyecto\PrincipalBundle\Entity\Sede1 $sede1 = null)
-    {
-        $this->sede1 = $sede1;
-    
-        return $this;
-    }
-
-    /**
-     * Get sede1
-     *
-     * @return \Proyecto\PrincipalBundle\Entity\Sede1 
-     */
-    public function getSede1()
-    {
-        return $this->sede1;
-    }
-
-    /**
      * Set localidad
      *
      * @param \Proyecto\PrincipalBundle\Entity\Localidad $localidad
@@ -1969,5 +1946,28 @@ class Espacio
     public function getPosibilidadOscurecerSala()
     {
         return $this->posibilidadOscurecerSala;
+    }
+
+    /**
+     * Set sede
+     *
+     * @param \Proyecto\PrincipalBundle\Entity\Sede $sede
+     * @return Espacio
+     */
+    public function setSede(\Proyecto\PrincipalBundle\Entity\Sede $sede = null)
+    {
+        $this->sede = $sede;
+
+        return $this;
+    }
+
+    /**
+     * Get sede
+     *
+     * @return \Proyecto\PrincipalBundle\Entity\Sede 
+     */
+    public function getSede()
+    {
+        return $this->sede;
     }
 }
