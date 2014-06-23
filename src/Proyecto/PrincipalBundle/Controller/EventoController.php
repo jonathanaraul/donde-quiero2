@@ -27,7 +27,9 @@ class EventoController extends Controller {
         $reservas = $this -> getDoctrine() -> getRepository('ProyectoPrincipalBundle:Reserva') -> findByEvento($object);
         
         $user = UtilitiesAPI::getActiveUser($this);
-        $secondArray = array('object'=>$object,'reservas'=>$reservas,'userId'=>$user->getId());
+        if($user==null)$userId= 0;
+        else $userId = $user->getId(); 
+        $secondArray = array('object'=>$object,'reservas'=>$reservas,'userId'=>$userId);
 
 		$array = array_merge($firstArray, $secondArray);
 		return $this -> render('ProyectoPrincipalBundle:Evento:individual.html.twig', $array);
@@ -101,14 +103,11 @@ class EventoController extends Controller {
 			    'class' => 'ProyectoPrincipalBundle:Localidad',
 			    'property' => 'nombre',
 			    'query_builder' => function(EntityRepository $er)use ( $parametro ) {
-
-
 			        return $er->createQueryBuilder('u')
 			            ->add('where', 'u.provincia = ?1')
 			            ->orderBy('u.nombre', 'ASC')
 			            ->setParameter(1, $parametro); // Sustituye ?1 por 100
 			    },
-
 			))
 			->add('duracionTotal', 'text')
 			->add('file','file') 

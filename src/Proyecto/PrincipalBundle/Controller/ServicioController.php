@@ -27,7 +27,9 @@ class ServicioController extends Controller {
         $reservas = $this -> getDoctrine() -> getRepository('ProyectoPrincipalBundle:Reserva') -> findByServicio($object);
 
         $user = UtilitiesAPI::getActiveUser($this);
-        $secondArray = array('object'=>$object,'reservas'=>$reservas,'userId'=>$user->getId());
+        if($user==null)$userId= 0;
+        else $userId = $user->getId(); 
+        $secondArray = array('object'=>$object,'reservas'=>$reservas,'userId'=>$userId);
 
 		$array = array_merge($firstArray, $secondArray);
 		return $this -> render('ProyectoPrincipalBundle:Servicio:individual.html.twig', $array);
