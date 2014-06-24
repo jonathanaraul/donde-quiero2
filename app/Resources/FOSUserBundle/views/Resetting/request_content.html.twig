@@ -1,0 +1,59 @@
+{% trans_default_domain 'FOSUserBundle' %}
+{% include '::header.html.twig'  with {'clase': 'gris'}  %}
+{% include '::mensaje.html.twig'  with {'titulo': 'Restaurar contraseña','subtitulo':'Solitice una contraseña nueva','accion':''}  %}
+
+
+
+<!-- Content starts -->
+<div class="content">
+    <div class="container">
+
+        <div class="register">
+            <div class="row">
+                <div class="span6">
+                    <h2>¡No pierda su acceso!</h2>
+                    <p class="big grey">
+                        Restaure su contraseña y siga disfrutando de los servicios que oferece tufuturo.com.ve
+                    </p>
+
+                </div>
+
+                <div class="span6">
+                    <div class="formy bred">
+                        <h3>Restauración de contraseña</h3>
+                        <div class="form">
+                            <!-- Login form (not working)-->
+                            <form class="form-horizontal fos_user_resetting_request"  action="{{ path('fos_user_resetting_send_email') }}" method="POST"/>
+                            {% if invalid_username is defined %}
+                            <p>{{ 'resetting.request.invalid_username'|trans({'%username%': invalid_username}) }}</p>
+                            {% endif %}
+                            <!-- Username -->
+                                <div class="control-group">
+                                    <label class="control-label" for="username">{{ 'resetting.request.username'|trans }}</label>
+                                    <div class="controls">
+                                        <input type="text" id="username" name="username" required="required" />
+                                    </div>
+                                </div>
+                                <!-- Buttons -->
+                                <div class="form-actions">
+                                    <!-- Buttons -->
+                                    <button type="submit" class="btn">
+                                       {{ 'resetting.request.submit'|trans }}
+                                    </button>
+                                </div>
+                            </form>
+                          
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<!-- Content ends -->
+
+
+
+{% render controller('ProjectFrontBundle:Helpers:frase') %}

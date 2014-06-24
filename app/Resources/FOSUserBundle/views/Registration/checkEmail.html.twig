@@ -1,0 +1,25 @@
+{% extends "FOSUserBundle::layout.html.twig" %}
+
+{% trans_default_domain 'FOSUserBundle' %}
+
+{% block fos_user_content %}
+<div class="wrapper">
+
+	{% include '::top.html.twig'  with {'clase': 'gris'}  %}
+	<!-- Text Section End -->
+
+	<header>
+		<!-- Header Title Start -->
+		<h1>Confirmación de correo electrónico</h1>
+
+		<p>{{'registration.check_email'|trans({'%email%': user.email})}}</p>
+
+		<p>Si no lo encuentra por favor revise su carpeta de correo no deseado o spam</p>
+
+	</header>
+
+</div>
+{% endblock fos_user_content %}
+
+
+

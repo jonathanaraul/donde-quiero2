@@ -244,10 +244,6 @@ class PerfilController extends Controller {
 						   );
 		
 
-
-        
-
-
 		$parametro =1;
 		if($id != null)$parametro=$object->getProvincia()->getId();
 

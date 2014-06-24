@@ -1,0 +1,5 @@
+Project\UserBundle\Entity\User:
+    properties:
+        file:
+            - File:
+                maxSize: 600000000

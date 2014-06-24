@@ -1,0 +1,161 @@
+{% trans_default_domain 'FOSUserBundle' %}
+<div class="wrapper">
+
+	{% include '::top.html.twig'  with {'clase': 'gris'}  %}
+	<!-- Text Section End -->
+
+	<header>
+		<!-- Header Title Start -->
+		<h1>&nbsp;</h1>
+
+	</header>
+	<!-- Header Title End -->
+
+	<div class="inicio">
+		<div id="forminicio">
+			<form action="{{ path('fos_user_registration_register') }}" {{ form_enctype(form) }} method="POST"  id="usuarioRegistroFormulario">
+				{{ form_start(form) }}
+
+				<h3 >Inscríbete gratis</h3>
+
+				<h4>{{ form_errors(form) }}</h4>
+
+				<p>
+					Rellena los siguientes datos para crear un perfil de usuario
+				</p>
+				{{ form_widget(form.email, { 'attr': {'class': 'formstyle','placeholder': 'E-Mail'} }) }}
+				{{ form_widget(form.nombre, { 'attr': {'class': 'formstyle','placeholder': 'Nombre'} }) }}
+				{{ form_widget(form.apellido, { 'attr': {'class': 'formstyle','placeholder': 'Apellidos'} }) }}
+				{{ form_widget(form.telefono, { 'attr': {'class': 'formstyle','placeholder': 'Telefono'} }) }}
+				{{ form_widget(form.profesion, { 'attr': {'class': 'formstyle','placeholder': 'Profesion'} }) }}
+				<p>
+					Datos de acceso
+				</p>
+				{{ form_widget(form.username, { 'attr': {'class': 'formstyle','placeholder': 'Usuario'} }) }}
+				{{ form_widget(form.plainPassword.first, { 'attr': {'class': 'formstyle','placeholder': 'Contraseña'} }) }}
+				{{ form_widget(form.plainPassword.second, { 'attr': {'class': 'formstyle','placeholder': 'Repita la contraseña'} }) }}
+
+				<p style="float:left">
+					Foto de perfil (JEPG/ GIF máx. 2MG)
+				</p><!-- <div class="enviar">Buscar imagen .. Examinar</div>-->
+
+				{{ form_widget(form.file, { 'attr': {'class': 'formstyle','accept':'image/*'} }) }}
+				{{ form_widget(form.descripcion, { 'attr': {'placeholder': 'Escribe Algo sobre ti'} }) }}
+				<p>
+					País
+				</p>				
+				{{ form_widget(form.pais, { 'attr': {'class': 'formstyle','placeholder': 'Pais','value': 'España','readonly': ''} }) }}
+				<p>
+					Provincia
+				</p>
+				<select id="formProvincia" class="formstyle">
+					<option value="1">Álava</option>
+					<option value="5">Albacete</option>
+					<option value="9">Alicante</option>
+					<option value="13">Almería</option>
+					<option value="17">Asturias</option>
+                    <option value="21">Ávila</option>
+                    <option value="25">Badajoz</option>
+                    <option value="29">Baleares</option>
+                    <option value="33">Barcelona</option>
+                    <option value="37">Burgos</option>
+                    <option value="41">Cáceres</option>
+                    <option value="45">Cádiz</option>
+                    <option value="49">Cantabria</option>
+                    <option value="2">Castellón</option>
+                    <option value="6">Ceuta</option>
+                    <option value="10">Ciudad Real</option>
+                    <option value="14">Córdoba</option>
+                    <option value="22">Cuenca</option>
+                    <option value="26">Girona</option>
+                    <option value="30">Granada</option>
+                    <option value="34">Guadalajara</option>
+                    <option value="38">Guipúzcoa</option>
+                    <option value="42">Huelva</option>
+                    <option value="46">Huesca</option>
+                    <option value="50">Jaén</option>
+                    <option value="18">La Coruña</option>
+                    <option value="51">La Rioja</option>
+                    <option value="43">Las Palmas</option>
+                    <option value="3">León</option>
+                    <option value="7">Lleida</option>
+                    <option value="11">Lugo</option>
+                    <option value="15">Madrid</option>
+                    <option value="19">Málaga</option>
+                    <option value="23">Melilla</option>
+                    <option value="27">Murcia</option>
+                    <option value="31">Navarra</option>
+                    <option value="35">Ourense</option>
+                    <option value="39">Palencia</option>
+                    <option value="47">Pontevedra</option>
+                    <option value="24">S.C. Tenerife</option>
+					<option value="4">Salamanca</option>
+					<option value="8">Segovia</option>
+					<option value="12">Sevilla</option>
+					<option value="16">Soria</option>
+					<option value="20">Tarragona</option>
+					<option value="28">Teruel</option>
+					<option value="32">Toledo</option>
+					<option value="36">Valencia</option>
+					<option value="40">Valladolid</option>
+					<option value="44">Vizcaya</option>
+					<option value="48">Zamora</option>
+					<option value="52">Zaragoza</option>
+				</select>
+				<p>
+					Localidad
+				</p>
+				{{ form_widget(form.idLocalidad, { 'attr': {'class': 'formstyle'} }) }}
+				<p>
+					¿Cómo nos ha conocido?
+				</p>
+				{{ form_widget(form.marketing, { 'attr': {'class': 'formstyle'} }) }}
+
+				<p>
+					{{ form_widget(form.eventos) }}Disponible para organizar eventos
+				</p>
+				<p>
+					{{ form_widget(form.aceptoCondiciones) }}Acepto condiciones
+				</p>
+
+				<div style="display:none;">
+
+					
+
+				</div>
+
+				<input type="submit" class="botonSubmitFormulario formstyle " value="Registrarme">
+				</br>
+				</br>
+				¿Ud tiene una cuenta? <a href="{{ path('fos_user_security_login') }}"><b>Acceda</b></a>
+				</br>
+
+				{{ form_end(form) }}
+				<p>
+					&nbsp;
+				</p>
+				<div class="clearfix"></div>
+
+			</form>
+		</div>
+
+		<div id="loader" style="display:none">
+			<p style="text-align:center">
+				<img src="{{asset('sistema/images/loader.gif')}}" style="width: 100px;">
+			</p>
+		</div>
+		<div id="error"></div>
+		<div class="clearfix"></div>
+		<!--  <p> <input name="condiciones" type="checkbox" >
+		<a href="ayuda.html"> Acepto las condiciones de uso y la política de privacidad</a></p></div>-->
+	</div>
+	<div class="clearfix"></div>
+	<div id="espacios" ></div>
+	<div id="eventos" ></div>
+	<div id="servicios" ></div>
+	<div class="clearfix"></div>
+
+	<!-- TO MAKE THE PHP FORM WORK, ALL YOU NEED TO DO IS OPEN UP THE FILE CALLED 'submitemail.php' AND CHANGE WHERE IT SAYS 'your email goes here' -->
+
+	<!-- DON'T TOUCH THIS SECTION -->
+</div>

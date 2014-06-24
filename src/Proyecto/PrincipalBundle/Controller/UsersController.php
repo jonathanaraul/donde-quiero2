@@ -25,8 +25,7 @@ class UsersController extends Controller {
 		$post = $peticion -> request;
 
 		$provincia = $post -> get("provincia");
-
-
+		
 		$em = $this->getDoctrine()->getManager();
 		$query = $em->createQuery(
 		    'SELECT p.id,p.nombre
@@ -36,6 +35,7 @@ class UsersController extends Controller {
 		)->setParameter('provincia', $provincia);
 
 		$localidades = $query->getResult();
+
 		$respuesta = new response(json_encode(array('localidades' => $localidades)));
 		$respuesta -> headers -> set('content_type', 'aplication/json');
 		return $respuesta;

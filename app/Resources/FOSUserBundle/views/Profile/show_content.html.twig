@@ -1,0 +1,110 @@
+{% trans_default_domain 'FOSUserBundle' %}
+{% include '::header.html.twig'  with {'clase': 'gris'}  %}
+{% include '::mensaje.html.twig'  with {'titulo': 'Perfil','subtitulo':'Bienvenido a tu perfil de usuario','accion':''}  %}
+
+
+  <!-- Content starts -->
+  <div class="content">
+    <div class="container">
+
+      <div class="service-home">
+        <div class="row">
+
+          
+          <!-- Image -->
+          <div class="span3 service-social bblack">
+            <a href="javascript:void(0);" class="service-image"><img src="{%if app.user.getPath is not null%}{{ app.user.getWebPath | apply_filter('profile') }}{%endif%}" alt="{{app.user.username|title}} foto" width="212" height="212"/></a>
+            {#
+            <div class="service-box bblue" style="cursor:pointer;" onclick="document.location.href = '{{ path('fos_user_profile_edit') }}'">
+                  <!-- name and followers -->
+                  <a href="javascript:void(0);">Editar perfil</a>
+                </div>#}
+          </div>
+
+          <!-- Service -->
+
+          <div class="span9 service-list">
+
+            <!--  Service #1 -->
+            <!-- Service icon -->
+            <div class="service-icon">
+              <i class="icon-group bred"></i>
+            </div>
+
+            <div class="service-content">
+              <!-- Title -->
+              <div class="service-home-meta">{{ 'profile.show.username'|trans }}</div>
+              <h4>{{app.user.username|title}}</h4>
+            </div>
+
+            <hr />
+
+            <!-- Service #2 -->
+
+            <div class="service-icon">
+              <i class="icon-envelope blightblue"></i>
+            </div>
+
+            <div class="service-content">
+              <div class="service-home-meta">{{ 'profile.show.email'|trans }}</div>
+              <h4>{{ user.email }}</h4>
+            </div>
+
+            <hr />   
+
+            <!-- Service #3 -->
+
+            <div class="service-icon">
+              <i class="icon-calendar borange"></i>
+            </div>
+
+            <div class="service-content">
+              <div class="service-home-meta">Fecha de registro</div>
+              <h4>{{ user.fechaRegistro.format('d/m/Y H:i:s')}}</h4>
+            </div>
+            
+            <hr />
+
+            <!-- Service #3 -->
+
+            <div class="service-icon">
+              <i class="icon-calendar bblue"></i>
+            </div>
+
+            <div class="service-content">
+              <div class="service-home-meta">&Uacute;ltima sesi&oacute;n</div>
+              <h4>{{ user.lastLogin.format('d/m/Y H:i:s')}}</h4>
+            </div>
+            
+            <hr />
+            <!-- Service #4 -->
+
+            <div class="service-icon">
+              <i class="icon-book bviolet"></i>
+            </div>
+
+            <div class="service-content">
+              <div class="service-home-meta">Sobre mi</div>
+              <p>{{ user.descripcion }}</p>
+            </div>
+            
+            <br />
+
+
+            <div class="clearfix"></div>
+
+          </div>
+
+
+        </div>
+
+        <hr />
+        
+      </div>
+
+    </div>
+  </div>
+  <!-- Content ends -->
+
+<!--PAGE CONTENT ENDS-->
+{% render controller('ProjectFrontBundle:Helpers:frase') %}

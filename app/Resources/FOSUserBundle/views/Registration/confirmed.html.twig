@@ -1,0 +1,31 @@
+{% extends "FOSUserBundle::layout.html.twig" %}
+
+{% trans_default_domain 'FOSUserBundle' %}
+
+{% block fos_user_content %}
+<div class="wrapper">
+
+	{% include '::top.html.twig'  with {'clase': 'gris'}  %}
+	<!-- Text Section End -->
+
+	<header>
+		<!-- Header Title Start -->
+		<h1>¡Registro exitoso!</h1>
+
+		<p>{{'registration.confirmed'|trans({'%username%': user.username})}}</p>
+
+		<p>Ahora haz clic en perfil personal</p>
+
+	</header>
+
+     {% if app.session is not empty %}
+        {% set targetUrl = app.session.get('_security.' ~ app.security.token.providerKey ~ '.target_path') %}
+        {% if targetUrl is not empty %}
+
+        <p><a href="{{ targetUrl }}">{{ 'registration.back'|trans }}</a></p>
+
+        {% endif %}
+    {% endif %}
+</div>
+
+{% endblock fos_user_content %}

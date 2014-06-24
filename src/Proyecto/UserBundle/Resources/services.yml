@@ -1,0 +1,26 @@
+parameters:
+#    project_user.example.class: Project\UserBundle\Example
+
+services:
+#    project_user.example:
+#        class: %project_user.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]
+    project.registration.form.type:
+        class: Project\UserBundle\Form\Type\RegistrationFormType
+        arguments: [%fos_user.model.user.class%,@doctrine.orm.entity_manager]
+        tags: [{ name: "form.type", alias: "project_user_registration" }]
+
+    project.invitation.form.type:
+        class: Project\UserBundle\Form\Type\InvitationFormType
+        arguments: [@project.invitation.form.data_transformer]
+        tags: [{ name: "form.type", alias: "project_invitation_type" }]
+
+    project.invitation.form.data_transformer:
+        class: Project\UserBundle\Form\DataTransformer\InvitationToCodeTransformer
+        arguments: [@doctrine.orm.entity_manager]
+
+    project.profile.form.type:
+        class: Project\UserBundle\Form\Type\ProfileFormType
+        arguments: [%fos_user.model.user.class%]
+        tags:
+            - { name: form.type, alias: project_user_profile }
