@@ -1,4 +1,4 @@
-{% extends "ProyectoPrincipalBundle:Default:base.html.twig" %}
+{% extends "::base.html.twig" %}
 {%block scripts%}
 <script type="text/javascript">
 	var direccionEnviarSolicitudBaja = "{{path('proyecto_perfil_enviar_solicitud_baja')}}";
@@ -9,11 +9,11 @@
 {%block contenedorbase%}
 <div class="wrapper">
 
-	{% include 'ProyectoPrincipalBundle:Helpers:top.html.twig'  with {'clase': 'gris'}  %}
+	{% include '::top.html.twig'  with {'clase': 'gris'}  %}
 
 	<div id="registro">
 		<p>
-			Bienvenido {{user.nombre|title}} {{user.apellido|title}} - <a href="{{path('proyecto_principal_cerrarsesion')}}">Cerrar Sesión</a>
+			Bienvenido {{user.nombre|title}} {{user.apellido|title}} - <a href="{{ path('fos_user_security_logout') }}">Cerrar Sesión</a>
 		</p>
 	</div>
 
@@ -23,7 +23,7 @@
 
 		<div class="perfilimg">
 			<p>
-				<img src="{{ asset(''~ user.getWebPath ~'') }}"  >
+				<img src="{{ user.getWebPath | apply_filter('perfil') }}"  >
 
 			</p>
 			<p>
@@ -179,10 +179,10 @@
 			<h3>{{user.nombre|title}} {{user.apellido|title}}</h3>
 			<ul>
 				<li class="izquierda">
-					<h4> Profesión</h4>
+					<h4> {{user.profesion|title}}</h4>
 				</li>
 				<li class="derecha">
-					<h4> {{user.localidad.nombre|title}}, {{user.pais|title}}</h4>
+					<h4> {{localidad.nombre|title}}, {{user.pais|title}}</h4>
 				</li>
 			</ul>
 			<!--Category-->
@@ -206,7 +206,7 @@
 				</p>
 				<div class="clearfix"></div>
 				<div class="otras">
-					<h4><a href="{{path('proyecto_perfil_editar')}}">Editar datos personales</a></h4>
+					<h4><a href="#{#{{path('proyecto_perfil_editar')}}#}">Editar datos personales</a></h4>
 				</div>
 			</div>
 			<div class="clearfix"></div>

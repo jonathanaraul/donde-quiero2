@@ -56,7 +56,7 @@ class Espacio
     /**
      * @var \User
      *
-     * @ORM\ManyToOne(targetEntity="User")
+     * @ORM\ManyToOne(targetEntity="\Proyecto\UserBundle\Entity\User")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="user", referencedColumnName="id", nullable=false)
      * })
@@ -98,7 +98,7 @@ class Espacio
     private $enlaceVideo;
 
     /**
-     * @var \Sede1
+     * @var \Sede
      *
      * @ORM\ManyToOne(targetEntity="Sede")
      * @ORM\JoinColumns({
@@ -1611,29 +1611,6 @@ class Espacio
     }
 
     /**
-     * Set user
-     *
-     * @param \Proyecto\PrincipalBundle\Entity\User $user
-     * @return Espacio
-     */
-    public function setUser(\Proyecto\PrincipalBundle\Entity\User $user)
-    {
-        $this->user = $user;
-    
-        return $this;
-    }
-
-    /**
-     * Get user
-     *
-     * @return \Proyecto\PrincipalBundle\Entity\User 
-     */
-    public function getUser()
-    {
-        return $this->user;
-    }
-
-    /**
      * Set localidad
      *
      * @param \Proyecto\PrincipalBundle\Entity\Localidad $localidad
@@ -1969,5 +1946,28 @@ class Espacio
     public function getSede()
     {
         return $this->sede;
+    }
+
+    /**
+     * Set user
+     *
+     * @param \Proyecto\UserBundle\Entity\User $user
+     * @return Espacio
+     */
+    public function setUser(\Proyecto\UserBundle\Entity\User $user)
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * Get user
+     *
+     * @return \Proyecto\UserBundle\Entity\User 
+     */
+    public function getUser()
+    {
+        return $this->user;
     }
 }

@@ -42,7 +42,7 @@ class Evento
     /**
      * @var \User
      *
-     * @ORM\ManyToOne(targetEntity="User")
+     * @ORM\ManyToOne(targetEntity="\Proyecto\UserBundle\Entity\User")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="user", referencedColumnName="id", nullable=false)
      * })
@@ -482,259 +482,6 @@ class Evento
     }
 
     /**
-     * Set proyectorPantallaSala
-     *
-     * @param boolean $proyectorPantallaSala
-     * @return Evento
-     */
-    public function setProyectorPantallaSala($proyectorPantallaSala)
-    {
-        $this->proyectorPantallaSala = $proyectorPantallaSala;
-    
-        return $this;
-    }
-
-    /**
-     * Get proyectorPantallaSala
-     *
-     * @return boolean 
-     */
-    public function getProyectorPantallaSala()
-    {
-        return $this->proyectorPantallaSala;
-    }
-
-    /**
-     * Set microfonoAltavoces
-     *
-     * @param boolean $microfonoAltavoces
-     * @return Evento
-     */
-    public function setMicrofonoAltavoces($microfonoAltavoces)
-    {
-        $this->microfonoAltavoces = $microfonoAltavoces;
-    
-        return $this;
-    }
-
-    /**
-     * Get microfonoAltavoces
-     *
-     * @return boolean 
-     */
-    public function getMicrofonoAltavoces()
-    {
-        return $this->microfonoAltavoces;
-    }
-
-    /**
-     * Set videocamara
-     *
-     * @param boolean $videocamara
-     * @return Evento
-     */
-    public function setVideocamara($videocamara)
-    {
-        $this->videocamara = $videocamara;
-    
-        return $this;
-    }
-
-    /**
-     * Get videocamara
-     *
-     * @return boolean 
-     */
-    public function getVideocamara()
-    {
-        return $this->videocamara;
-    }
-
-    /**
-     * Set wifi
-     *
-     * @param boolean $wifi
-     * @return Evento
-     */
-    public function setWifi($wifi)
-    {
-        $this->wifi = $wifi;
-    
-        return $this;
-    }
-
-    /**
-     * Get wifi
-     *
-     * @return boolean 
-     */
-    public function getWifi()
-    {
-        return $this->wifi;
-    }
-
-    /**
-     * Set internetCable
-     *
-     * @param boolean $internetCable
-     * @return Evento
-     */
-    public function setInternetCable($internetCable)
-    {
-        $this->internetCable = $internetCable;
-    
-        return $this;
-    }
-
-    /**
-     * Get internetCable
-     *
-     * @return boolean 
-     */
-    public function getInternetCable()
-    {
-        return $this->internetCable;
-    }
-
-    /**
-     * Set maquinaBebidas
-     *
-     * @param boolean $maquinaBebidas
-     * @return Evento
-     */
-    public function setMaquinaBebidas($maquinaBebidas)
-    {
-        $this->maquinaBebidas = $maquinaBebidas;
-    
-        return $this;
-    }
-
-    /**
-     * Get maquinaBebidas
-     *
-     * @return boolean 
-     */
-    public function getMaquinaBebidas()
-    {
-        return $this->maquinaBebidas;
-    }
-
-    /**
-     * Set pizarra
-     *
-     * @param boolean $pizarra
-     * @return Evento
-     */
-    public function setPizarra($pizarra)
-    {
-        $this->pizarra = $pizarra;
-    
-        return $this;
-    }
-
-    /**
-     * Get pizarra
-     *
-     * @return boolean 
-     */
-    public function getPizarra()
-    {
-        return $this->pizarra;
-    }
-
-    /**
-     * Set conserjeria
-     *
-     * @param boolean $conserjeria
-     * @return Evento
-     */
-    public function setConserjeria($conserjeria)
-    {
-        $this->conserjeria = $conserjeria;
-    
-        return $this;
-    }
-
-    /**
-     * Get conserjeria
-     *
-     * @return boolean 
-     */
-    public function getConserjeria()
-    {
-        return $this->conserjeria;
-    }
-
-    /**
-     * Set aireAcondicionado
-     *
-     * @param boolean $aireAcondicionado
-     * @return Evento
-     */
-    public function setAireAcondicionado($aireAcondicionado)
-    {
-        $this->aireAcondicionado = $aireAcondicionado;
-    
-        return $this;
-    }
-
-    /**
-     * Get aireAcondicionado
-     *
-     * @return boolean 
-     */
-    public function getAireAcondicionado()
-    {
-        return $this->aireAcondicionado;
-    }
-
-    /**
-     * Set calefaccion
-     *
-     * @param boolean $calefaccion
-     * @return Evento
-     */
-    public function setCalefaccion($calefaccion)
-    {
-        $this->calefaccion = $calefaccion;
-    
-        return $this;
-    }
-
-    /**
-     * Get calefaccion
-     *
-     * @return boolean 
-     */
-    public function getCalefaccion()
-    {
-        return $this->calefaccion;
-    }
-
-    /**
-     * Set otrosServicios
-     *
-     * @param string $otrosServicios
-     * @return Evento
-     */
-    public function setOtrosServicios($otrosServicios)
-    {
-        $this->otrosServicios = $otrosServicios;
-    
-        return $this;
-    }
-
-    /**
-     * Get otrosServicios
-     *
-     * @return string 
-     */
-    public function getOtrosServicios()
-    {
-        return $this->otrosServicios;
-    }
-
-    /**
      * Set aceptacionReservaAutomatica
      *
      * @param boolean $aceptacionReservaAutomatica
@@ -1149,29 +896,6 @@ class Evento
     }
 
     /**
-     * Set precioPorHora
-     *
-     * @param float $precioPorHora
-     * @return Evento
-     */
-    public function setPrecioPorHora($precioPorHora)
-    {
-        $this->precioPorHora = $precioPorHora;
-    
-        return $this;
-    }
-
-    /**
-     * Get precioPorHora
-     *
-     * @return float 
-     */
-    public function getPrecioPorHora()
-    {
-        return $this->precioPorHora;
-    }
-
-    /**
      * Set precio
      *
      * @param float $precio
@@ -1217,28 +941,6 @@ class Evento
         return $this->path;
     }
 
-    /**
-     * Set user
-     *
-     * @param \Proyecto\PrincipalBundle\Entity\User $user
-     * @return Evento
-     */
-    public function setUser(\Proyecto\PrincipalBundle\Entity\User $user)
-    {
-        $this->user = $user;
-    
-        return $this;
-    }
-
-    /**
-     * Get user
-     *
-     * @return \Proyecto\PrincipalBundle\Entity\User 
-     */
-    public function getUser()
-    {
-        return $this->user;
-    }
 
     /**
      * Set localidad
@@ -1263,28 +965,6 @@ class Evento
         return $this->localidad;
     }
 
-    /**
-     * Set sede1
-     *
-     * @param \Proyecto\PrincipalBundle\Entity\Sede1 $sede1
-     * @return Evento
-     */
-    public function setSede1(\Proyecto\PrincipalBundle\Entity\Sede1 $sede1 = null)
-    {
-        $this->sede1 = $sede1;
-    
-        return $this;
-    }
-
-    /**
-     * Get sede1
-     *
-     * @return \Proyecto\PrincipalBundle\Entity\Sede1 
-     */
-    public function getSede1()
-    {
-        return $this->sede1;
-    }
 
   /**
      * Sets file.
@@ -1807,4 +1487,27 @@ class Evento
     }
 
 
+
+    /**
+     * Set espacio
+     *
+     * @param \Proyecto\PrincipalBundle\Entity\Espacio $espacio
+     * @return Evento
+     */
+    public function setEspacio(\Proyecto\PrincipalBundle\Entity\Espacio $espacio = null)
+    {
+        $this->espacio = $espacio;
+
+        return $this;
+    }
+
+    /**
+     * Get espacio
+     *
+     * @return \Proyecto\PrincipalBundle\Entity\Espacio 
+     */
+    public function getEspacio()
+    {
+        return $this->espacio;
+    }
 }

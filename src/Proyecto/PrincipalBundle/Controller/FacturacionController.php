@@ -37,11 +37,12 @@ class FacturacionController extends Controller {
 		else $id=$object->getId();
 
 		if($id == null )$object = new Facturacion();
+        $localidad =  $class -> getDoctrine() -> getRepository('ProyectoPrincipalBundle:Localidad') -> find($user->getIdLocalidad());
 
-		$object->setLocalidad($user->getLocalidad());
+		$object->setLocalidad($localidad);
 		
-		$idProvinciaDefecto = $user->getLocalidad()->getProvincia()->getId();
-		$idLocalidadDefecto= $user->getLocalidad()->getId();
+		$idProvinciaDefecto = $localidad->getProvincia()->getId();
+		$idLocalidadDefecto= $localidad->getId();
 		$firstArray = UtilitiesAPI::getDefaultContent($class);
 		$secondArray = array();
 

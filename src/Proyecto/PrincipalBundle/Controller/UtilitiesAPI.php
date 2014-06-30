@@ -45,115 +45,23 @@ class UtilitiesAPI extends Controller {
 		
 		//$parameters = UtilitiesAPI::getParameters($class);
 		//$menu = UtilitiesAPI::getMenu($item,$class);
-		$user = UtilitiesAPI::getActiveUser($class);
+        $userManager = $class->container->get('fos_user.user_manager');
+        $user = $class->getUser();
+
 		$rol = null;
 		$usuario = null;
 		if($user!=NULL){
 			$usuario = ucfirst($user->getNombre()).' '.ucfirst($user->getApellido());
-			$rol = $user->getRol();
+			if (false === $class->get('security.context')->isGranted('ROLE_ADMIN')) $rol = 0;
+		    else $rol = 1;
 		}
+
+
+
 
 		$datos = array('usuario' => $usuario, 'fecha' => UtilitiesAPI::obtenerFechaSistema($class),'rol'=>$rol);
 		$array = array('datos' => $datos );
 		return $array;
-	}
-	public static function removeProject($id,$class){
-			
-		$object = $class -> getDoctrine() -> getRepository('ProyectoPrincipalBundle:Proyecto') -> find($id);
-		$em = $class -> getDoctrine() -> getManager();
-		$em->remove($object);
-		$em->flush();
-	}
-
-	public static function saveProject( $tipo, $id, $nombre, $langelier, $rysnar, $puckoris, $informacion, $autoguardado, $ph, $tds, $t, $ca2, $tds, $alcalinidad, $class) {
-
-		$object = null;
-		
-		if ($id == 0) {
-			$object = new Proyecto();
-			$object -> setFecha(new \DateTime());
-		} else {
-			$object = $class -> getDoctrine() -> getRepository('ProyectoPrincipalBundle:Proyecto') -> find($id );
-			if (!$object) {
-				throw $class -> createNotFoundException('No se encontro el proyecto ');
-			}
-		}
-
-		
-		$object -> setNombre($nombre);
-		$object -> setLangelier($langelier);
-		$object -> setRysnar($rysnar);
-		$object -> setPuckorius($puckoris);
-		$object -> setInformacion($informacion);
-		$object -> setAutoguardado($autoguardado);
-		$object -> setUser(UtilitiesAPI::getActiveUser($class));
-		$object -> setPh($ph);
-		$object -> setTds($tds);
-		$object -> setT($t);
-		$object -> setCa2($ca2);
-		$object -> setAlcalinidad($alcalinidad);
-
-		$em = $class -> getDoctrine() -> getManager();
-		$em -> persist($object);
-		$em -> flush();
-		
-		return $object->getId();
-		
-	}
-
-	/*
-	public static function getDefaultContent($item,$info,$class){
-		
-		$parameters = UtilitiesAPI::getParameters($class);
-		$menu = UtilitiesAPI::getMenu($item,$class);
-		$user = UtilitiesAPI::getActiveUser($class);
-		$notifications = UtilitiesAPI::getNotifications($user);
-		$usuario = $user;// UtilidadesAPI::usuarioActual($this);
-		if($usuario!=NULL)$usuario = ucfirst($usuario->getNombre()).' '.ucfirst($usuario->getApellido());
-		else $usuario = '';
-		$datos = array('usuario' => $usuario, 'fecha' => UtilitiesAPI::obtenerFechaSistema($class));
-		
-		$array = array('parameters' => $parameters,'menu' => $menu,'user' => $user, 
-		               'info' => $info, 'notifications' => $notifications,
-		               'datos' => $datos
-					   );
-		
-		return $array;
-	}*/
-
-	public static function getAutors($class) {
-		$autors = $class -> getDoctrine() -> getRepository('ProyectoPrincipalBundle:Autores') -> findAll();
-		$users = array();
-		for ($i = 0; $i < count($autors); $i++) {
-			$users[$i] = $autors[$i] -> getUser();
-			
-		}
-
-		/*
-		 * Añadir exception de no encontrar parameters
-		 if (!$product) {
-		 throw $this->createNotFoundException(
-		 'No product found for id '.$id
-		 );
-		 }
-		 *
-		 */
-		return $users;
-	}
-
-	public static function getParameters($class) {
-		$parameters = $class -> getDoctrine() -> getRepository('ProyectoPrincipalBundle:Sistema') -> find(1);
-
-		/*
-		 * Añadir exception de no encontrar parameters
-		 if (!$product) {
-		 throw $this->createNotFoundException(
-		 'No product found for id '.$id
-		 );
-		 }
-		 *
-		 */
-		return $parameters;
 	}
 
 	public static function getMenu($seccion, $this) {
@@ -174,7 +82,9 @@ class UtilitiesAPI extends Controller {
 
 	public static function getActiveUser($class) {
 
-		$user = $class -> getUser();
+        $userManager = $class->container->get('fos_user.user_manager');
+        $user = $class->getUser();
+
 
 		//if ($user != NULL && false === $class -> get('security.context') -> isGranted('ROLE_ADMIN')) {
 		//	$user = null;

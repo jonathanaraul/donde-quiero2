@@ -3,8 +3,24 @@
 {% trans_default_domain 'FOSUserBundle' %}
 
 {% block fos_user_content %}
-{% include '::header.html.twig'  with {'clase': 'gris'}  %}
-{% include '::mensaje.html.twig'  with {'titulo': 'Correo enviado','subtitulo': 'resetting.check_email'|trans({'%email%': email}),'accion':''}  %}
-{% render controller('ProjectFrontBundle:Helpers:frase') %}
+
+<div class="wrapper">
+
+    {% include '::top.html.twig'  with {'clase': 'gris'}  %}
+    <!-- Text Section End -->
+
+    <header>
+        <!-- Header Title Start -->
+    </br>
+        <h1>¡Correo enviado!</h1>
+        <p style="text-align:center;">{{'resetting.check_email'|trans({'%email%': email})}}</p>
+
+    </header>
+    <!-- Header Title End -->
+    <!-- TO MAKE THE PHP FORM WORK, ALL YOU NEED TO DO IS OPEN UP THE FILE CALLED 'submitemail.php' AND CHANGE WHERE IT SAYS 'your email goes here' -->
+
+    <!-- DON'T TOUCH THIS SECTION -->
+</div>
+
 {% endblock %}
 

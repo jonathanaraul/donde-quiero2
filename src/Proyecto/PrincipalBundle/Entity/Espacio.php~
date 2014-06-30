@@ -56,7 +56,7 @@ class Espacio
     /**
      * @var \User
      *
-     * @ORM\ManyToOne(targetEntity="User")
+     * @ORM\ManyToOne(targetEntity="\Proyecto\UserBundle\Entity\User")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="user", referencedColumnName="id", nullable=false)
      * })
@@ -98,7 +98,7 @@ class Espacio
     private $enlaceVideo;
 
     /**
-     * @var \Sede1
+     * @var \Sede
      *
      * @ORM\ManyToOne(targetEntity="Sede")
      * @ORM\JoinColumns({
@@ -1611,52 +1611,6 @@ class Espacio
     }
 
     /**
-     * Set user
-     *
-     * @param \Proyecto\PrincipalBundle\Entity\User $user
-     * @return Espacio
-     */
-    public function setUser(\Proyecto\PrincipalBundle\Entity\User $user)
-    {
-        $this->user = $user;
-    
-        return $this;
-    }
-
-    /**
-     * Get user
-     *
-     * @return \Proyecto\PrincipalBundle\Entity\User 
-     */
-    public function getUser()
-    {
-        return $this->user;
-    }
-
-    /**
-     * Set sede1
-     *
-     * @param \Proyecto\PrincipalBundle\Entity\Sede1 $sede1
-     * @return Espacio
-     */
-    public function setSede1(\Proyecto\PrincipalBundle\Entity\Sede1 $sede1 = null)
-    {
-        $this->sede1 = $sede1;
-    
-        return $this;
-    }
-
-    /**
-     * Get sede1
-     *
-     * @return \Proyecto\PrincipalBundle\Entity\Sede1 
-     */
-    public function getSede1()
-    {
-        return $this->sede1;
-    }
-
-    /**
      * Set localidad
      *
      * @param \Proyecto\PrincipalBundle\Entity\Localidad $localidad
@@ -1969,5 +1923,28 @@ class Espacio
     public function getPosibilidadOscurecerSala()
     {
         return $this->posibilidadOscurecerSala;
+    }
+
+    /**
+     * Set sede
+     *
+     * @param \Proyecto\PrincipalBundle\Entity\Sede $sede
+     * @return Espacio
+     */
+    public function setSede(\Proyecto\PrincipalBundle\Entity\Sede $sede = null)
+    {
+        $this->sede = $sede;
+
+        return $this;
+    }
+
+    /**
+     * Get sede
+     *
+     * @return \Proyecto\PrincipalBundle\Entity\Sede 
+     */
+    public function getSede()
+    {
+        return $this->sede;
     }
 }

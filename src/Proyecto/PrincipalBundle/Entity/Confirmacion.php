@@ -22,7 +22,7 @@ class Confirmacion
     /**
      * @var \User
      *
-     * @ORM\ManyToOne(targetEntity="User")
+     * @ORM\ManyToOne(targetEntity="\Proyecto\UserBundle\Entity\User")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="user", referencedColumnName="id", nullable=false)
      * })
@@ -227,29 +227,6 @@ class Confirmacion
     }
 
     /**
-     * Set user
-     *
-     * @param \Proyecto\PrincipalBundle\Entity\User $user
-     * @return Confirmacion
-     */
-    public function setUser(\Proyecto\PrincipalBundle\Entity\User $user)
-    {
-        $this->user = $user;
-    
-        return $this;
-    }
-
-    /**
-     * Get user
-     *
-     * @return \Proyecto\PrincipalBundle\Entity\User 
-     */
-    public function getUser()
-    {
-        return $this->user;
-    }
-
-    /**
      * Set espacio
      *
      * @param \Proyecto\PrincipalBundle\Entity\Espacio $espacio
@@ -362,5 +339,28 @@ class Confirmacion
     public function getFechaRegistro()
     {
         return $this->fechaRegistro;
+    }
+
+    /**
+     * Set user
+     *
+     * @param \Proyecto\UserBundle\Entity\User $user
+     * @return Confirmacion
+     */
+    public function setUser(\Proyecto\UserBundle\Entity\User $user)
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * Get user
+     *
+     * @return \Proyecto\UserBundle\Entity\User 
+     */
+    public function getUser()
+    {
+        return $this->user;
     }
 }

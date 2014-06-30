@@ -1,13 +1,13 @@
-{% extends "ProyectoPrincipalBundle:Default:base.html.twig" %}
+{% extends "::base.html.twig" %}
 
 
 {%block contenedorbase%}
 <div class="wrapper">
 
-	{% include 'ProyectoPrincipalBundle:Helpers:top.html.twig'  with {'clase': 'gris'}  %}
+	{% include '::top.html.twig'  with {'clase': 'gris'}  %}
 
   <div id="registro">
-    <p>Bienvenido {{user.nombre|title}} {{user.apellido|title}} - <a href="{{path('proyecto_principal_cerrarsesion')}}">Cerrar Sesión</a></p>
+    <p>Bienvenido {{user.nombre|title}} {{user.apellido|title}} - <a href="{{path('fos_user_security_logout')}}">Cerrar Sesión</a></p>
   </div>
 
 	<aside id="about" class=" left">
@@ -34,7 +34,7 @@
 			<ul>
 				<li class="izquierda"><h4> Profesión</h4></li>
 				<li class="derecha">
-			 <h4>    {{user.localidad.nombre|title}}, {{user.pais|title}}</h4>
+			 <h4>    {{localidad.nombre|title}}, {{user.pais|title}}</h4>
 					</li>
 				</ul>
 			<!--Category-->

@@ -1,59 +1,42 @@
 {% trans_default_domain 'FOSUserBundle' %}
-{% include '::header.html.twig'  with {'clase': 'gris'}  %}
-{% include '::mensaje.html.twig'  with {'titulo': 'Restaurar contraseña','subtitulo':'Solitice una contraseña nueva','accion':''}  %}
 
 
+<div class="wrapper">
 
-<!-- Content starts -->
-<div class="content">
-    <div class="container">
+    {% include '::top.html.twig'  with {'clase': 'gris'}  %}
+    <!-- Text Section End -->
 
-        <div class="register">
-            <div class="row">
-                <div class="span6">
-                    <h2>¡No pierda su acceso!</h2>
-                    <p class="big grey">
-                        Restaure su contraseña y siga disfrutando de los servicios que oferece tufuturo.com.ve
-                    </p>
+    <header>
+        <!-- Header Title Start -->
+    </br>
+        <h1>¡No pierda su acceso!</h1>
+        <p style="text-align:center;">Restaure su contraseña y siga disfrutando de los servicios que oferece dondequiero.es</p>
 
-                </div>
+    </header>
+    <!-- Header Title End -->
 
-                <div class="span6">
-                    <div class="formy bred">
-                        <h3>Restauración de contraseña</h3>
-                        <div class="form">
-                            <!-- Login form (not working)-->
-                            <form class="form-horizontal fos_user_resetting_request"  action="{{ path('fos_user_resetting_send_email') }}" method="POST"/>
-                            {% if invalid_username is defined %}
-                            <p>{{ 'resetting.request.invalid_username'|trans({'%username%': invalid_username}) }}</p>
-                            {% endif %}
-                            <!-- Username -->
-                                <div class="control-group">
-                                    <label class="control-label" for="username">{{ 'resetting.request.username'|trans }}</label>
-                                    <div class="controls">
-                                        <input type="text" id="username" name="username" required="required" />
-                                    </div>
-                                </div>
-                                <!-- Buttons -->
-                                <div class="form-actions">
-                                    <!-- Buttons -->
-                                    <button type="submit" class="btn">
-                                       {{ 'resetting.request.submit'|trans }}
-                                    </button>
-                                </div>
-                            </form>
-                          
-                        </div>
-                    </div>
+    <div class="inicio">
+        <div id="forminicio">
+            <form class="form-horizontal fos_user_resetting_request"  action="{{ path('fos_user_resetting_send_email') }}" method="POST">
 
-                </div>
-            </div>
+                {% if invalid_username is defined %}
+                  <h1>{{ 'resetting.request.invalid_username'|trans({'%username%': invalid_username}) }}</h1>
+                {% endif %}
+               
+                <p>{{ 'resetting.request.username'|trans }} <input type="text" id="username" name="username" required="required" class="formstyle" style="width: 56%;"/>
+                        </p>
+                </br>
+
+                <input type="submit" class="botonSubmitFormulario formstyle " value=" {{ 'resetting.request.submit'|trans }}">
+
+
+            </form>
         </div>
 
+        
     </div>
+
+    <!-- TO MAKE THE PHP FORM WORK, ALL YOU NEED TO DO IS OPEN UP THE FILE CALLED 'submitemail.php' AND CHANGE WHERE IT SAYS 'your email goes here' -->
+
+    <!-- DON'T TOUCH THIS SECTION -->
 </div>
-<!-- Content ends -->
-
-
-
-{% render controller('ProjectFrontBundle:Helpers:frase') %}

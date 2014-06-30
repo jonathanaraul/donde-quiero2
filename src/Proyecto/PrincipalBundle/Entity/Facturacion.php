@@ -54,7 +54,7 @@ class Facturacion
     /**
      * @var \User
      *
-     * @ORM\ManyToOne(targetEntity="User")
+     * @ORM\ManyToOne(targetEntity="\Proyecto\UserBundle\Entity\User")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="user", referencedColumnName="id", nullable=false)
      * })
@@ -179,29 +179,6 @@ class Facturacion
     }
 
     /**
-     * Set user
-     *
-     * @param \Proyecto\PrincipalBundle\Entity\User $user
-     * @return Facturacion
-     */
-    public function setUser(\Proyecto\PrincipalBundle\Entity\User $user)
-    {
-        $this->user = $user;
-    
-        return $this;
-    }
-
-    /**
-     * Get user
-     *
-     * @return \Proyecto\PrincipalBundle\Entity\User 
-     */
-    public function getUser()
-    {
-        return $this->user;
-    }
-
-    /**
      * Set empresa
      *
      * @param string $empresa
@@ -245,5 +222,28 @@ class Facturacion
     public function getAceptoTerminos()
     {
         return $this->aceptoTerminos;
+    }
+
+    /**
+     * Set user
+     *
+     * @param \Proyecto\UserBundle\Entity\User $user
+     * @return Facturacion
+     */
+    public function setUser(\Proyecto\UserBundle\Entity\User $user)
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * Get user
+     *
+     * @return \Proyecto\UserBundle\Entity\User 
+     */
+    public function getUser()
+    {
+        return $this->user;
     }
 }

@@ -24,7 +24,8 @@ class UsersController extends Controller {
 		$doctrine = $this -> getDoctrine();
 		$post = $peticion -> request;
 
-		$provincia = $post -> get("provincia");
+		$provincia = intval($post -> get("valor"));
+		//echo'la provincia es'.$provincia;exit;
 		
 		$em = $this->getDoctrine()->getManager();
 		$query = $em->createQuery(
@@ -34,11 +35,22 @@ class UsersController extends Controller {
 		    ORDER BY p.nombre ASC'
 		)->setParameter('provincia', $provincia);
 
-		$localidades = $query->getResult();
+		$elementos = $query->getResult();
 
-		$respuesta = new response(json_encode(array('localidades' => $localidades)));
-		$respuesta -> headers -> set('content_type', 'aplication/json');
-		return $respuesta;
+        $arreglo = array();
+
+        for ($i=0; $i < count($elementos) ; $i++) { 
+
+             $arreglo[$elementos[$i]['id']] = $elementos[$i]['nombre'];
+            # code...
+        }
+
+
+        //$htmlElementos = $this -> renderView('ProjectUserBundle:Default:elementos.html.twig', array('elementos'=>$elementos ));
+        
+        $respuesta = new response(json_encode(array('elementos' => $arreglo)));
+        $respuesta -> headers -> set('content_type', 'aplication/json');
+        return $respuesta;
 	}
 	public function registroAction(Request $request) {
 		$firstArray = UtilitiesAPI::getDefaultContent($this);

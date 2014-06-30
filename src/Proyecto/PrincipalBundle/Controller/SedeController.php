@@ -61,11 +61,13 @@ class SedeController extends Controller {
 		$idProvincia = $user->getProvincia()->getId();
 
 		$parametro = $user->getProvincia()->getId();
-		$object->setLocalidad($user->getLocalidad());
-		$object->setLatitud($user->getLocalidad()->getLatitud());
-		$object->setLongitud($user->getLocalidad()->getLongitud());
-		$latitud=$user->getLocalidad()->getLatitud();
-		$longitud=$user->getLocalidad()->getLongitud();
+        $localidad =  $class -> getDoctrine() -> getRepository('ProyectoPrincipalBundle:Localidad') -> find($user->getIdLocalidad());
+
+		$object->setLocalidad($localidad);
+		$object->setLatitud($localidad->getLatitud());
+		$object->setLongitud($localidad->getLongitud());
+		$latitud=$localidad->getLatitud();
+		$longitud=$localidad->getLongitud();
 
         $form = $class->createFormBuilder($object)
             //
@@ -206,12 +208,12 @@ class SedeController extends Controller {
                       ProyectoPrincipalBundle:Localidad o2 ';
 
         if($proveedor){
-            $dql .=  ', ProyectoPrincipalBundle:User o3  WHERE o1.user = o3.id and o3.id = :idRelacionado';
+            $dql .=  ', ProyectoUserBundle:User o3  WHERE o1.user = o3.id and o3.id = :idRelacionado';
             $tieneWhere = true;
         }
         if($cliente){
             $dql.= ' WHERE o1.id IN ( SELECT DISTINCT r2.id FROM ProyectoPrincipalBundle:Reserva r1, 
-            ProyectoPrincipalBundle:Sede r2, ProyectoPrincipalBundle:User r3 WHERE r1.sede = r2.id and r1.user = r3.id and r3.id = :idRelacionado ) ';
+            ProyectoPrincipalBundle:Sede r2, ProyectoUserBundle:User r3 WHERE r1.sede = r2.id and r1.user = r3.id and r3.id = :idRelacionado ) ';
             $tieneWhere = true;
         }
 

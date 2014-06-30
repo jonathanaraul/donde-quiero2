@@ -80,7 +80,9 @@ class EventoController extends Controller {
 		$idProvincia = $user->getProvincia()->getId();
 
 		$parametro = $user->getProvincia()->getId();
-		$object->setLocalidad($user->getLocalidad());
+        $localidad =  $class -> getDoctrine() -> getRepository('ProyectoPrincipalBundle:Localidad') -> find($user->getIdLocalidad());
+
+		$object->setLocalidad($localidad);
 
         $form = $class->createFormBuilder($object)
 
@@ -330,8 +332,8 @@ class EventoController extends Controller {
     $dqlTotales =  'SELECT COUNT(o1.id) FROM ProyectoPrincipalBundle:Evento o1 ';
 
     if($proveedor){
-        $dql.= ', ProyectoPrincipalBundle:User o3 ';
-        $dqlTotales .=  ', ProyectoPrincipalBundle:User o3 ';
+        $dql.= ', ProyectoUserBundle:User o3 ';
+        $dqlTotales .=  ', ProyectoUserBundle:User o3 ';
     }
 
     $dql .= '   WHERE o1.id != 103  ';
@@ -431,11 +433,11 @@ class EventoController extends Controller {
     if($cliente){
         if(!$tieneWhere){$dql.= ' WHERE ';$tieneWhere= true; }else $dql.= ' AND ';
         $dql.= ' o1.id IN ( SELECT DISTINCT r2.id FROM ProyectoPrincipalBundle:Reserva r1, 
-            ProyectoPrincipalBundle:Evento r2, ProyectoPrincipalBundle:User r3 WHERE r1.evento = r2.id and r1.user = r3.id and r3.id = :idRelacionado ) ';
+            ProyectoPrincipalBundle:Evento r2, ProyectoUserBundle:User r3 WHERE r1.evento = r2.id and r1.user = r3.id and r3.id = :idRelacionado ) ';
         
         if(!$tieneWhereTotales){$dqlTotales.= ' WHERE ';$tieneWhereTotales= true; }else $dqlTotales.= ' AND ';
         $dqlTotales .=  ' o1.id IN ( SELECT DISTINCT r2.id FROM ProyectoPrincipalBundle:Reserva r1, 
-            ProyectoPrincipalBundle:Evento r2, ProyectoPrincipalBundle:User r3 WHERE r1.evento = r2.id and r1.user = r3.id and r3.id = :idRelacionado ) ';
+            ProyectoPrincipalBundle:Evento r2, ProyectoUserBundle:User r3 WHERE r1.evento = r2.id and r1.user = r3.id and r3.id = :idRelacionado ) ';
 
     }
 

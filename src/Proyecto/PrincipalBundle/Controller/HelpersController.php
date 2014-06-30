@@ -34,7 +34,7 @@ class HelpersController extends Controller
         $user = UtilitiesAPI::getActiveUser($this);
 
         //if($tipo=='usuario')
-        //$object = $this -> getDoctrine() -> getRepository('ProyectoPrincipalBundle:User') -> find($identificador);
+        //$object = $this -> getDoctrine() -> getRepository('ProyectoUserBundle:User') -> find($identificador);
         if($tipo=='espacio')
         $object = $this -> getDoctrine() -> getRepository('ProyectoPrincipalBundle:Espacio') -> find($identificador);
         else if($tipo=='sede')
@@ -71,7 +71,7 @@ class HelpersController extends Controller
 		$secondArray['estudios'] = $this -> getDoctrine() -> getRepository('ProyectoPrincipalBundle:Proyecto') -> findAll(  );
 		$secondArray['estudios'] = count($secondArray['estudios']);
 		
-		$secondArray['usuarios'] = $this -> getDoctrine() -> getRepository('ProyectoPrincipalBundle:User') -> findAll(  );
+		$secondArray['usuarios'] = $this -> getDoctrine() -> getRepository('ProyectoUserBundle:User') -> findAll(  );
 		$secondArray['usuarios'] = count($secondArray['usuarios']);
 
         return $this->render('ProyectoPrincipalBundle:Helpers:estadisticas.html.twig', $secondArray);
@@ -135,12 +135,12 @@ class HelpersController extends Controller
         $tieneWhere = false;
 
         if($proveedor){
-            $dql .=  ', ProyectoPrincipalBundle:User o3  WHERE o1.user = o3.id and o3.id = :idRelacionado';
+            $dql .=  ', ProyectoUserBundle:User o3  WHERE o1.user = o3.id and o3.id = :idRelacionado';
             $tieneWhere = true;
         }
         if($cliente){
             $dql.= ' WHERE o1.id IN ( SELECT DISTINCT r2.id FROM ProyectoPrincipalBundle:Reserva r1, 
-            ProyectoPrincipalBundle:Sede r2, ProyectoPrincipalBundle:User r3 WHERE r1.sede = r2.id and r1.user = r3.id and r3.id = :idRelacionado ) ';
+            ProyectoPrincipalBundle:Sede r2, ProyectoUserBundle:User r3 WHERE r1.sede = r2.id and r1.user = r3.id and r3.id = :idRelacionado ) ';
             $tieneWhere = true;
         }
         

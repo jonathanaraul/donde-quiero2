@@ -1,12 +1,21 @@
 {% extends '::base.html.twig' %}
 
 {%block scripts%}
-<script type="text/javascript"> var direccionBuscarCiudad = "{{path('proyecto_users_buscar_ciudad')}}";</script>
 <script type="text/javascript" src="{{ asset('sistema/scripts/registro.js')}}"> </script>
+<script type="text/javascript"> var direccionBuscarCiudad = "{{path('proyecto_users_buscar_ciudad')}}";</script>
 {%endblock%}
 
 
 {% block contenedorbase  %}
+{#
+        {% for type, messages in app.session.flashBag.all %}
+            {% for message in messages %}
+                <div class="{{ type }}">
+                    {{ message|trans({}, 'FOSUserBundle') }}
+                </div>
+            {% endfor %}
+        {% endfor %}
+#}
 
 {% block fos_user_content %}
 {% endblock fos_user_content %}

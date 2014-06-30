@@ -37,7 +37,7 @@ class Servicio
     /**
      * @var \User
      *
-     * @ORM\ManyToOne(targetEntity="User")
+     * @ORM\ManyToOne(targetEntity="\Proyecto\UserBundle\Entity\User")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="user", referencedColumnName="id", nullable=false)
      * })
@@ -1607,29 +1607,6 @@ class Servicio
         return $this->path;
     }
 
-    /**
-     * Set user
-     *
-     * @param \Proyecto\PrincipalBundle\Entity\User $user
-     * @return Servicio
-     */
-    public function setUser(\Proyecto\PrincipalBundle\Entity\User $user)
-    {
-        $this->user = $user;
-    
-        return $this;
-    }
-
-    /**
-     * Get user
-     *
-     * @return \Proyecto\PrincipalBundle\Entity\User 
-     */
-    public function getUser()
-    {
-        return $this->user;
-    }
-
       /**
      * Sets file.
      *
@@ -2146,5 +2123,28 @@ class Servicio
     public function getSuspendido()
     {
         return $this->suspendido;
+    }
+
+    /**
+     * Set user
+     *
+     * @param \Proyecto\UserBundle\Entity\User $user
+     * @return Servicio
+     */
+    public function setUser(\Proyecto\UserBundle\Entity\User $user)
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * Get user
+     *
+     * @return \Proyecto\UserBundle\Entity\User 
+     */
+    public function getUser()
+    {
+        return $this->user;
     }
 }

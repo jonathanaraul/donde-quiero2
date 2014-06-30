@@ -1,14 +1,14 @@
 
   	<div id="registro">
   		{%if datos.usuario is null %}
-      <p><a href="{{path('proyecto_principal_acceso')}}">Iniciar Sesión</a> / <a href="{{path('fos_user_registration_register')}}">Registrarse</a> </p>
+      <p><a href="{{ path('fos_user_security_login') }}">Iniciar Sesión</a> / <a href="{{path('fos_user_registration_register')}}">Registrarse</a> </p>
       {%else%}
 	  <p>
 	  	<a href="{{path('proyecto_perfil_privado')}}">{{datos.usuario}}</a> - 
         {%if datos.rol%}
 	  	<a href="{{path('proyecto_principal_gestion')}}">Administrador</a> - 
         {%endif%}
-	  	<a href="{{path('proyecto_principal_cerrarsesion')}}">Cerrar Sesión</a>
+	  	<a href="{{ path('fos_user_security_logout') }}">Cerrar Sesión</a>
     </p>
       {%endif%}
 

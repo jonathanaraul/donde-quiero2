@@ -1,4 +1,4 @@
-{% extends "ProyectoPrincipalBundle:Default:base.html.twig" %}
+{% extends "::base.html.twig" %}
 {%block scripts%}
 <script type="text/javascript">
   var direccionBuscarCiudad = "{{path('proyecto_users_buscar_ciudad')}}";
@@ -7,7 +7,7 @@
 {%block contenedorbase%}
 <div class="wrapper">
 
-	{% include 'ProyectoPrincipalBundle:Helpers:top.html.twig'  with {'clase': 'gris'}  %}
+	{% include '::top.html.twig'  with {'clase': 'gris'}  %}
 	<!-- Text Section End -->
 
 	<header>

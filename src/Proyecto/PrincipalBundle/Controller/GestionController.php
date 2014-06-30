@@ -34,7 +34,7 @@ class GestionController extends Controller {
         $user = UtilitiesAPI::getActiveUser($this);
 
         if($tipo=='usuario')
-        $object = $this -> getDoctrine() -> getRepository('ProyectoPrincipalBundle:User') -> find($identificador);
+        $object = $this -> getDoctrine() -> getRepository('ProyectoUserBundle:User') -> find($identificador);
         else if($tipo=='espacio')
         $object = $this -> getDoctrine() -> getRepository('ProyectoPrincipalBundle:Espacio') -> find($identificador);
         else if($tipo=='sede')
@@ -192,7 +192,7 @@ class GestionController extends Controller {
         -> setAction($this->generateUrl('proyecto_principal_gestion'))
         -> setMethod('POST')
         -> add('user', 'entity', array(
-            'class' => 'ProyectoPrincipalBundle:User',
+            'class' => 'ProyectoUserBundle:User',
             'choices' => $arregloUsuarios,
             'property' => 'nombre',
             ))
@@ -376,7 +376,7 @@ class GestionController extends Controller {
 
         if ($form->isValid()) {
 
-            $dql = "SELECT o FROM ProyectoPrincipalBundle:User o WHERE o.id != 39 ";
+            $dql = "SELECT o FROM ProyectoUserBundle:User o WHERE o.id != 39 ";
             $tieneWhere = true;
             
             if($data -> getLocalidad()->getId()!=8175){
@@ -427,7 +427,7 @@ class GestionController extends Controller {
             }
         }
         else {
-            $dql = "SELECT o FROM ProyectoPrincipalBundle:User o  WHERE o.id != 39 ORDER BY o.id  ASC ";
+            $dql = "SELECT o FROM ProyectoUserBundle:User o  WHERE o.id != 39 ORDER BY o.id  ASC ";
             $query = $em -> createQuery($dql);
         }
 
@@ -511,7 +511,7 @@ class GestionController extends Controller {
             'property' => 'nombre',
             ))
         -> add('user', 'entity', array(
-            'class' => 'ProyectoPrincipalBundle:User',
+            'class' => 'ProyectoUserBundle:User',
             'choices' => $arregloUsuarios,
             'property' => 'nombre',
             ))
@@ -678,7 +678,7 @@ class GestionController extends Controller {
             'property' => 'nombre',
             ))
         -> add('user', 'entity', array(
-            'class' => 'ProyectoPrincipalBundle:User',
+            'class' => 'ProyectoUserBundle:User',
             'choices' => $arregloUsuarios,
             'property' => 'nombre',
             ))
@@ -841,7 +841,7 @@ class GestionController extends Controller {
         //-> add('email', 'text', array('required' => false)) 
 
         -> add('user', 'entity', array(
-            'class' => 'ProyectoPrincipalBundle:User',
+            'class' => 'ProyectoUserBundle:User',
             'choices' => $arregloUsuarios,
             'property' => 'nombre',
             ))
@@ -999,7 +999,7 @@ class GestionController extends Controller {
             'property' => 'nombre',
             ))
         -> add('user', 'entity', array(
-            'class' => 'ProyectoPrincipalBundle:User',
+            'class' => 'ProyectoUserBundle:User',
             'choices' => $arregloUsuarios,
             'property' => 'nombre',
             ))

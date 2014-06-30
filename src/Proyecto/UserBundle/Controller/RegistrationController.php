@@ -42,19 +42,22 @@ class RegistrationController extends BaseController
 
         $form = $formFactory->createForm();
         $form->setData($user);
-
+       
         if ('POST' === $request->getMethod()) {
             $form->bind($request);
             //$user->setAceptoCondiciones(true);
+
+            //echo'mi localidad es'.$user->getIdLocalidad();exit;
+            
             $prueba = false;
-            /*if($user->getMarketingValor()== null && $user->getFile()!= null){
+            if($user->getIdLocalidad()== null){
                 $data = $request->request->all();
-                $marketingValor = intval($data['fos_user_registration_form']['marketingValor']);
-                $user->setMarketingValor($marketingValor);
+                $idLocalidad = intval($data['fos_user_registration_form']['idLocalidad']);
+                $user->setIdLocalidad($idLocalidad);
                 $prueba = true;
             
                 //$objeto = $this -> getDoctrine() -> getRepository('ProjectUserBundle:MarketingValor') -> find($marketingValor);
-            }*/
+            }
             if ($form->isValid() || $prueba==true) {
                 $event = new FormEvent($form, $request);
                 $dispatcher->dispatch(FOSUserEvents::REGISTRATION_SUCCESS, $event);

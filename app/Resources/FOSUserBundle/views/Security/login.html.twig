@@ -4,78 +4,64 @@
 
 {% block fos_user_content %}
 
-{% include '::header.html.twig'  with {'clase': 'gris'}  %}
-{% include '::mensaje.html.twig'  with {'titulo': 'Acceso','subtitulo':'Inicia sesión','accion':'Chequea las últimas informaciones'}  %}
+<div class="wrapper">
 
-<!-- Content starts -->
-<div class="content">
-	<div class="container">
+ {% include '::top.html.twig'  with {'clase': 'gris'}  %}
+    <!-- Text Section End -->
+    
+  <header>	<!-- Header Title Start -->
+    	<h1>&nbsp;</h1>
+       
+  </header>	<!-- Header Title End -->
+  
+  <div class="inicio">   
+    <div id="forminicio">
+      <h3 >Inicio de Sesión</h3>    
+      	{% if error %}
+		<p>{{ error|trans }}</p>
+	    {%endif%}
 
-		<div class="register">
-			<div class="row">
-				<div class="span6">
-					<h2>Acceda a su cuenta</h2>
+	  <form class="form-horizontal" action="{{ path("fos_user_security_check") }}" method="post"/>
+		<input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
 
-					<p class="big grey">
-						Y descubra las ultimas novedades e informaciones de tufuturo.com.ve
-					</p>
 
-				</div>
+        <p>   Si ya está registrado, por favor, introduzca su nombre de usuario y contraseña para Iniciar su sesión                   
+          </p>
+        <p>{{ 'security.login.username'|trans }} </p>
+          <input type="text" id="username" name="_username" value="{{ last_username }}" placeholder="{{ last_username }}" required="required" class="formstyle"/>
 
-				<div class="span6">
-					<div class="formy bred">
-						<h3>Acceda a su cuenta</h3>
-						<div class="form">
-							{% if error %}
-					            <p>{{ error|trans }}</p>
-					        {%endif%}
-							<!-- Login form (not working)-->
-							<form class="form-horizontal" action="{{ path("fos_user_security_check") }}" method="post"/>
-							    <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
-								<!-- Username -->
-								<div class="control-group">
-									<label class="control-label" for="username">{{ 'security.login.username'|trans }}</label>
-									<div class="controls">
-										<input type="text" id="username" name="_username" value="{{ last_username }}" placeholder="{{ last_username }}" required="required" class="input-large"/>
-									</div>
-								</div>
-								<!-- Password -->
-								<div class="control-group">
-									<label class="control-label" for="email">{{ 'security.login.password'|trans }}</label>
-									<div class="controls">
-										<input type="password" id="password" name="_password" required="required" class="input-large"/>
-									</div>
-								</div>
-								<div class="control-group">
-									<div class="controls">
-										<label class="checkbox">
-											<input type="checkbox" id="remember_me" name="_remember_me" value="on" />
-											{{ 'security.login.remember_me'|trans }} </label>
-									</div>
-								</div>
-								<!-- Buttons -->
-								<div class="form-actions">
-									<!-- Buttons -->
-									<button type="submit" class="btn">
+        <p>{{ 'security.login.password'|trans }} </p>
+		  <input type="password" id="password" name="_password" required="required" class="formstyle"/>
+
+
+        <p>{{ 'security.login.remember_me'|trans }} </p>
+
+        <input type="checkbox" id="remember_me" name="_remember_me" value="on" />
+
+        <div class="clearfix"></div>        
+
+									<button type="submit" class="enviar">
 										{{ 'security.login.submit'|trans }}
 									</button>
-								</div>
-								 <input type="hidden" name="_target_path" value="/conferencias" />
-							</form>
-							¿No tiene cuenta? <a href="{{ path('fos_user_registration_register') }}">Registrese aquí</a></br>
-							¿Olvido su contraseña? <a href="{{ path('fos_user_resetting_request') }}">Solicite una nueva</a></br>
-						</div>
-					</div>
+									 <input type="hidden" name="_target_path" value="/direccionador" />
+      </form>
 
-				</div>
-			</div>
-		</div>
+      <div id="error"></div>
+      <div class="clearfix"></div>
+      <p>¿No tiene cuenta? <a href="{{ path('fos_user_registration_register') }}">Registrese aquí</a></p>
+	  <p>¿Olvido su contraseña? <a href="{{ path('fos_user_resetting_request') }}">Solicite una nueva</a></p>
 
-	</div>
-</div>
-<!-- Content ends -->
+    </div>
+  </div> 
+  <div class="clearfix"></div>
+  <div id="espacios" ></div>
+  <div id="eventos" ></div>
+  <div id="servicios" ></div>
+  <div class="clearfix"></div>
+</div> 
 
-<!-- Footer -->
-{% render controller('ProjectFrontBundle:Helpers:frase') %}
+
+
+
 
 {% endblock fos_user_content %}

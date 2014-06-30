@@ -11,7 +11,7 @@ security:
 
     providers:
         administrators:
-            entity: { class: ProyectoPrincipalBundle:User, property: username }
+            entity: { class: ProyectoUserBundle:User, property: username }
 
     firewalls:
         dev:

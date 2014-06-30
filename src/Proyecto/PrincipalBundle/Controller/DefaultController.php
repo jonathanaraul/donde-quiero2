@@ -17,24 +17,27 @@ use Symfony\Component\HttpFoundation\Session\Session;
 class DefaultController extends Controller {
 
 	public function direccionadorAction() {
-		$user = UtilitiesAPI::getActiveUser($this);
-        
-        $url = '';
-		if($user->getRol()==1) $url = 'proyecto_principal_gestion';
-		else if($user->getRol()==0)$url = 'proyecto_perfil_privado';
 
-		if($user->getEstado()==0)$url = 'proyecto_principal_suspendida';
+        $userManager = $this->container->get('fos_user.user_manager');
+        $user = $this->getUser();
+        $em = $this->getDoctrine()->getManager();
+        $url = '';
+
+        if (false === $this->get('security.context')->isGranted('ROLE_ADMIN')) $url = 'proyecto_perfil_privado';
+		else $url = 'proyecto_principal_gestion';
+
+		if($user->isEnabled()===false)$url = 'proyecto_principal_suspendida';
 
         return $this->redirect($this->generateUrl($url));
 	}
     public function cuentaSuspendidaAction(){
 
-
-
         $session = new Session();
-    	$object = UtilitiesAPI::getActiveUser($this);
+        $userManager = $this->container->get('fos_user.user_manager');
+        $user = $this->getUser();
+        $em = $this->getDoctrine()->getManager();
     	$titulo = '¡Su cuenta fue suspendida...!';
-    	$mensaje = 'Estimado(a) '.ucfirst($object ->getNombre()) . ' '.ucfirst($object ->getApellido()) .' su cuenta fue suspendida en DONDE-QUIERO, lamentamos la situación.';
+    	$mensaje = 'Estimado(a) '.ucfirst($user ->getNombre()) . ' '.ucfirst($user ->getApellido()) .' su cuenta fue suspendida en DONDE-QUIERO, lamentamos la situación.';
     	$tituloBoton = 'Ir al inicio';
     	$direccionBoton = $this->generateUrl('proyecto_principal_homepage');
     	$array = array('titulo' => $titulo, 'mensaje' => $mensaje, 'tituloBoton'=>$tituloBoton, 'direccionBoton'=>$direccionBoton );

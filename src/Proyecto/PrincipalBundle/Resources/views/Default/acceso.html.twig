@@ -1,9 +1,9 @@
-{% extends "ProyectoPrincipalBundle:Default:base.html.twig" %}
+{% extends "::base.html.twig" %}
 
 {%block contenedorbase%}
 <div class="wrapper">
 
- {% include 'ProyectoPrincipalBundle:Helpers:top.html.twig'  with {'clase': 'gris'}  %}
+ {% include '::top.html.twig'  with {'clase': 'gris'}  %}
     <!-- Text Section End -->
     
   <header>	<!-- Header Title Start -->
@@ -33,13 +33,7 @@
   <div id="eventos" ></div>
   <div id="servicios" ></div>
   <div class="clearfix"></div>
-</div> <!-- Work Links Section End -->
-    <!-- Last Words Section End-->
-<div id="sedes" ></div>
-
-<!-- TO MAKE THE PHP FORM WORK, ALL YOU NEED TO DO IS OPEN UP THE FILE CALLED 'submitemail.php' AND CHANGE WHERE IT SAYS 'your email goes here' -->
-
-<!-- DON'T TOUCH THIS SECTION -->
+</div> 
 
 
 {%endblock%} 

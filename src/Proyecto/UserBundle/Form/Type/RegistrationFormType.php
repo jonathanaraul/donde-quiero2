@@ -7,6 +7,7 @@ use FOS\UserBundle\Form\Type\RegistrationFormType as BaseType;
 use Doctrine\ORM\EntityRepository;
 
 
+
 class RegistrationFormType extends BaseType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
@@ -80,16 +81,30 @@ $filtros['marketing'] = array(
 $builder->add('email', 'email');
 $builder->add('nombre');
 $builder->add('apellido');
-$builder->add('file');
-//$builder->add('path');
-$builder->add('descripcion');
-$builder->add('idLocalidad', 'choice', array('choices' => $filtros['idLocalidad'], 'required' => true));
-$builder->add('aceptoCondiciones');
 $builder->add('telefono');
 $builder->add('profesion');
+$builder->add('file');
+
+$builder->add('descripcion');
 $builder->add('pais');
+/*$builder->add('provincia', 'entity', array(
+            'class' => 'ProyectoPrincipalBundle:Provincia',
+            'property' => 'nombre',
+            ));
+*/
+$builder->add('provincia', 'entity', array(
+    'class' => 'ProyectoPrincipalBundle:Provincia',
+    'property' => 'nombre',
+    'query_builder' => function(EntityRepository $er) {
+        return $er->createQueryBuilder('u')
+            ->orderBy('u.nombre', 'ASC');
+    },
+));
+
+$builder->add('idLocalidad', 'choice', array('choices' => $filtros['idLocalidad'], 'required' => true));
 $builder->add('marketing', 'choice', array('choices' => $filtros['marketing'], 'required' => true));
 $builder->add('eventos', 'checkbox',array('required'  => false));
+$builder->add('aceptoCondiciones');
 
     }
 

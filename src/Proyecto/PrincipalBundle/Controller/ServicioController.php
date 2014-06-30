@@ -292,8 +292,8 @@ class ServicioController extends Controller {
     $dqlTotales =  'SELECT COUNT(o1.id) FROM ProyectoPrincipalBundle:Servicio o1 ';
 
     if($proveedor){
-        $dql.= ', ProyectoPrincipalBundle:User o3 ';
-        $dqlTotales .=  ', ProyectoPrincipalBundle:User o3 ';
+        $dql.= ', ProyectoUserBundle:User o3 ';
+        $dqlTotales .=  ', ProyectoUserBundle:User o3 ';
     }
 
     $dql .= '   WHERE o1.id != 103  ';
@@ -356,11 +356,11 @@ class ServicioController extends Controller {
     if($cliente){
         if(!$tieneWhere){$dql.= ' WHERE ';$tieneWhere= true; }else $dql.= ' AND ';
         $dql.= ' o1.id IN ( SELECT DISTINCT r2.id FROM ProyectoPrincipalBundle:Reserva r1, 
-            ProyectoPrincipalBundle:Servicio r2, ProyectoPrincipalBundle:User r3 WHERE r1.servicio = r2.id and r1.user = r3.id and r3.id = :idRelacionado ) ';
+            ProyectoPrincipalBundle:Servicio r2, ProyectoUserBundle:User r3 WHERE r1.servicio = r2.id and r1.user = r3.id and r3.id = :idRelacionado ) ';
         
         if(!$tieneWhereTotales){$dqlTotales.= ' WHERE ';$tieneWhereTotales= true; }else $dqlTotales.= ' AND ';
         $dqlTotales .=  ' o1.id IN ( SELECT DISTINCT r2.id FROM ProyectoPrincipalBundle:Reserva r1, 
-            ProyectoPrincipalBundle:Servicio r2, ProyectoPrincipalBundle:User r3 WHERE r1.servicio = r2.id and r1.user = r3.id and r3.id = :idRelacionado ) ';
+            ProyectoPrincipalBundle:Servicio r2, ProyectoUserBundle:User r3 WHERE r1.servicio = r2.id and r1.user = r3.id and r3.id = :idRelacionado ) ';
 
     }
 

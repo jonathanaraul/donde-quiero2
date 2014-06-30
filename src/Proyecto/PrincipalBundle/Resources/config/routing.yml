@@ -209,17 +209,8 @@ proyecto_perfil_notificacion_reserva:
     requirements:
       _method: POST
 
-proyecto_principal_acceso:
-    pattern:  /acceso
-    defaults: { _controller: ProyectoPrincipalBundle:Users:acceso }
-proyecto_principal_cuenta_guardar:
-    pattern:  /cuenta/guardar
-    defaults: { _controller: ProyectoPrincipalBundle:Default:cuentaGuardar }
-    requirements:
-      _method: POST
-proyecto_principal_cerrarsesion:
-    pattern:  /logout
-    defaults: { _controller: ProyectoPrincipalBundle:Default:acceso }
+
+
 proyecto_principal_perfil:
     pattern:  /perfil
     defaults: { _controller: ProyectoPrincipalBundle:Default:perfil }
@@ -243,11 +234,6 @@ proyecto_principal_nuevo:
 proyecto_principal_historia:
     pattern:  /historia
     defaults: { _controller: ProyectoPrincipalBundle:Default:historia }
-login:
-    pattern:   /login
-    defaults:  { _controller: AcmeSecurityBundle:Security:login }
-login_check:
-    pattern:   /login_check
 proyecto_principal_procesa_objeto:
     pattern:  /procesa/objeto
     defaults: { _controller: ProyectoPrincipalBundle:Default:procesaObjeto }

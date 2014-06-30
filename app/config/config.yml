@@ -82,6 +82,9 @@ avalanche_imagine:
         elementos:
             type:    thumbnail
             options: { size: [180, 135], mode: outbound }
+        perfil:
+            type:    thumbnail
+            options: { size: [310, 310], mode: outbound }
 
 fos_user:
     db_driver: orm # other valid values are 'mongodb', 'couchdb' and 'propel'
@@ -89,7 +92,7 @@ fos_user:
     user_class: Proyecto\UserBundle\Entity\User
     registration:
         confirmation:
-            enabled:    true
+            enabled:    false
         form:
             type: proyecto_user_registration
     profile:

@@ -1,4 +1,4 @@
-{% extends "ProyectoPrincipalBundle:Default:base.html.twig" %}
+{% extends "::base.html.twig" %}
 
 {%block estilos%}
 	{% include 'ProyectoPrincipalBundle:Helpers:estilosReserva.html.twig'  with {'color': 'rgb(160, 172, 24)'}  %}
@@ -11,8 +11,8 @@
 {%block contenedorbase%}
 <div class="wrapper">
 
-	{% include 'ProyectoPrincipalBundle:Helpers:top.html.twig'  with {'clase': 'amarillo'}  %}
-	{% include 'ProyectoPrincipalBundle:Default:sesion.html.twig'  with {'datos': datos} %}
+	{% include '::top.html.twig'  with {'clase': 'amarillo'}  %}
+	{% include '::sesion.html.twig'  with {'datos': datos} %}
 
 	<aside id="about" class=" left">
 		<!-- Text Section Start -->

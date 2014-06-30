@@ -1,4 +1,4 @@
-{% extends "ProyectoPrincipalBundle:Default:base.html.twig" %}
+{% extends "::base.html.twig" %}
 
 {%block scripts%}
 <script type="text/javascript" src="{{ asset('sistema/scripts/jquery.form.js')}}"></script>
@@ -49,8 +49,8 @@ google.maps.event.addDomListener(window, 'load', initialize);
 {%block contenedorbase%}
 <div class="wrapper">
 
-	{% include 'ProyectoPrincipalBundle:Helpers:top.html.twig'  with {'clase': 'gris'}  %}
-	{% include 'ProyectoPrincipalBundle:Default:sesion.html.twig'  with {'datos': datos} %}
+	{% include '::top.html.twig'  with {'clase': 'gris'}  %}
+	{% include '::sesion.html.twig'  with {'datos': datos} %}
 
 	<aside id="about" class=" left">
 		<!-- Text Section Start -->

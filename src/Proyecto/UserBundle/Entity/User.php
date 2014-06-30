@@ -83,6 +83,16 @@ class User extends BaseUser
      * )
      */
     public $descripcion;
+    /**
+     * @var \Provincia
+     * @Assert\NotBlank(message="Por favor espacifique su provincia.", groups={"Registration"})
+     * @ORM\ManyToOne(targetEntity="\Proyecto\PrincipalBundle\Entity\Provincia")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="provincia", referencedColumnName="id", nullable=false)
+     * })
+     */
+    private $provincia;
+
 
     /**
      * @ORM\Column(type="integer", nullable=true)
@@ -556,4 +566,26 @@ class User extends BaseUser
 
 
  
+    /**
+     * Set provincia
+     *
+     * @param \Proyecto\PrincipalBundle\Entity\Provincia $provincia
+     * @return User
+     */
+    public function setProvincia(\Proyecto\PrincipalBundle\Entity\Provincia $provincia)
+    {
+        $this->provincia = $provincia;
+
+        return $this;
+    }
+
+    /**
+     * Get provincia
+     *
+     * @return \Proyecto\PrincipalBundle\Entity\Provincia 
+     */
+    public function getProvincia()
+    {
+        return $this->provincia;
+    }
 }

@@ -44,7 +44,7 @@ class Contacto
     /**
      * @var \User
      *
-     * @ORM\ManyToOne(targetEntity="User")
+     * @ORM\ManyToOne(targetEntity="\Proyecto\UserBundle\Entity\User")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="user", referencedColumnName="id", nullable=true)
      * })
@@ -162,23 +162,24 @@ class Contacto
         return $this->fechaRegistro;
     }
 
+
     /**
      * Set user
      *
-     * @param \Proyecto\PrincipalBundle\Entity\User $user
+     * @param \Proyecto\UserBundle\Entity\User $user
      * @return Contacto
      */
-    public function setUser(\Proyecto\PrincipalBundle\Entity\User $user = null)
+    public function setUser(\Proyecto\UserBundle\Entity\User $user = null)
     {
         $this->user = $user;
-    
+
         return $this;
     }
 
     /**
      * Get user
      *
-     * @return \Proyecto\PrincipalBundle\Entity\User 
+     * @return \Proyecto\UserBundle\Entity\User 
      */
     public function getUser()
     {

@@ -26,13 +26,14 @@ class PerfilController extends Controller {
 		$user = UtilitiesAPI::getActiveUser($this);
 		$facturacion =  $this -> getDoctrine() -> getRepository('ProyectoPrincipalBundle:Facturacion') -> findOneByUser($user);
 		$retiro =  $this -> getDoctrine() -> getRepository('ProyectoPrincipalBundle:Retiro') -> findOneByUser($user);
+        $localidad =  $this -> getDoctrine() -> getRepository('ProyectoPrincipalBundle:Localidad') -> find($user->getIdLocalidad());
 
         $idUser = $user->getId();
         $em = $this->getDoctrine()->getManager();
 
         $dql =  'SELECT o1
                  FROM ProyectoPrincipalBundle:Reserva o1, 
-                      ProyectoPrincipalBundle:User o2
+                      ProyectoUserBundle:User o2
                  WHERE 
                        o1.user = o2.id AND
                        o2.id = :idUser 
@@ -48,11 +49,11 @@ class PerfilController extends Controller {
 
         $dql =  'SELECT o1
                  FROM ProyectoPrincipalBundle:Reserva o1, 
-                      ProyectoPrincipalBundle:User o2
+                      ProyectoUserBundle:User o2
                  WHERE 
-                       o1.espacio  IN (SELECT s1.id FROM ProyectoPrincipalBundle:Espacio  s1,  ProyectoPrincipalBundle:User s2  WHERE s1.user = s2.id and s2.id = :idUser)
-                    or o1.evento   IN (SELECT e1.id FROM ProyectoPrincipalBundle:Evento   e1,  ProyectoPrincipalBundle:User e2  WHERE e1.user = e2.id and e2.id = :idUser)
-                    or o1.servicio IN (SELECT d1.id FROM ProyectoPrincipalBundle:Servicio d1,  ProyectoPrincipalBundle:User d2  WHERE d1.user = d2.id and d2.id = :idUser)
+                       o1.espacio  IN (SELECT s1.id FROM ProyectoPrincipalBundle:Espacio  s1,  ProyectoUserBundle:User s2  WHERE s1.user = s2.id and s2.id = :idUser)
+                    or o1.evento   IN (SELECT e1.id FROM ProyectoPrincipalBundle:Evento   e1,  ProyectoUserBundle:User e2  WHERE e1.user = e2.id and e2.id = :idUser)
+                    or o1.servicio IN (SELECT d1.id FROM ProyectoPrincipalBundle:Servicio d1,  ProyectoUserBundle:User d2  WHERE d1.user = d2.id and d2.id = :idUser)
                     
                  ORDER BY o1.id desc
                        ';
@@ -71,7 +72,7 @@ class PerfilController extends Controller {
 
         //var_dump($notificaciones);exit;
 
-		$secondArray = array('user'=>$user,'facturacion'=>$facturacion,'retiro'=>$retiro,'reservas'=>$reservas,'notificaciones'=>$notificaciones);
+		$secondArray = array('user'=>$user,'facturacion'=>$facturacion,'retiro'=>$retiro,'reservas'=>$reservas,'notificaciones'=>$notificaciones,'localidad'=>$localidad );
 
 		$array = array_merge($firstArray, $secondArray);
 		return $this -> render('ProyectoPrincipalBundle:Perfil:privado.html.twig', $array);
@@ -86,10 +87,10 @@ class PerfilController extends Controller {
         $dql =  'SELECT o1
                  FROM ProyectoPrincipalBundle:Reserva o1
                  WHERE 
-                       o1.espacio  IN (SELECT s1.id FROM ProyectoPrincipalBundle:Espacio  s1,  ProyectoPrincipalBundle:User s2  WHERE s1.user = s2.id and s2.id = :idUser)
-                    or o1.evento   IN (SELECT e1.id FROM ProyectoPrincipalBundle:Evento   e1,  ProyectoPrincipalBundle:User e2  WHERE e1.user = e2.id and e2.id = :idUser)
-                    or o1.servicio IN (SELECT d1.id FROM ProyectoPrincipalBundle:Servicio d1,  ProyectoPrincipalBundle:User d2  WHERE d1.user = d2.id and d2.id = :idUser)
-                    or o1.sede     IN (SELECT x1.id FROM ProyectoPrincipalBundle:Sede x1,  ProyectoPrincipalBundle:User x2  WHERE x1.user = x2.id and x2.id = :idUser)
+                       o1.espacio  IN (SELECT s1.id FROM ProyectoPrincipalBundle:Espacio  s1,  ProyectoUserBundle:User s2  WHERE s1.user = s2.id and s2.id = :idUser)
+                    or o1.evento   IN (SELECT e1.id FROM ProyectoPrincipalBundle:Evento   e1,  ProyectoUserBundle:User e2  WHERE e1.user = e2.id and e2.id = :idUser)
+                    or o1.servicio IN (SELECT d1.id FROM ProyectoPrincipalBundle:Servicio d1,  ProyectoUserBundle:User d2  WHERE d1.user = d2.id and d2.id = :idUser)
+                    or o1.sede     IN (SELECT x1.id FROM ProyectoPrincipalBundle:Sede x1,  ProyectoUserBundle:User x2  WHERE x1.user = x2.id and x2.id = :idUser)
                     and o1.fechaFin >= :fechaFin
                     
                  ORDER BY o1.fechaFin desc
@@ -104,10 +105,10 @@ class PerfilController extends Controller {
         $dql =  'SELECT o1
                  FROM ProyectoPrincipalBundle:Reserva o1
                  WHERE 
-                       o1.espacio  IN (SELECT s1.id FROM ProyectoPrincipalBundle:Espacio  s1,  ProyectoPrincipalBundle:User s2  WHERE s1.user = s2.id and s2.id = :idUser)
-                    or o1.evento   IN (SELECT e1.id FROM ProyectoPrincipalBundle:Evento   e1,  ProyectoPrincipalBundle:User e2  WHERE e1.user = e2.id and e2.id = :idUser)
-                    or o1.servicio IN (SELECT d1.id FROM ProyectoPrincipalBundle:Servicio d1,  ProyectoPrincipalBundle:User d2  WHERE d1.user = d2.id and d2.id = :idUser)
-                    or o1.sede     IN (SELECT x1.id FROM ProyectoPrincipalBundle:Sede x1,  ProyectoPrincipalBundle:User x2  WHERE x1.user = x2.id and x2.id = :idUser)
+                       o1.espacio  IN (SELECT s1.id FROM ProyectoPrincipalBundle:Espacio  s1,  ProyectoUserBundle:User s2  WHERE s1.user = s2.id and s2.id = :idUser)
+                    or o1.evento   IN (SELECT e1.id FROM ProyectoPrincipalBundle:Evento   e1,  ProyectoUserBundle:User e2  WHERE e1.user = e2.id and e2.id = :idUser)
+                    or o1.servicio IN (SELECT d1.id FROM ProyectoPrincipalBundle:Servicio d1,  ProyectoUserBundle:User d2  WHERE d1.user = d2.id and d2.id = :idUser)
+                    or o1.sede     IN (SELECT x1.id FROM ProyectoPrincipalBundle:Sede x1,  ProyectoUserBundle:User x2  WHERE x1.user = x2.id and x2.id = :idUser)
                     and o1.fechaFin < :fechaFin
                     
                  ORDER BY o1.fechaFin desc
@@ -132,7 +133,7 @@ class PerfilController extends Controller {
 
         $dql =  'SELECT o1
                  FROM ProyectoPrincipalBundle:Reserva o1, 
-                      ProyectoPrincipalBundle:User o2
+                      ProyectoUserBundle:User o2
                  WHERE 
                        o1.user = o2.id AND
                        o2.id = :idUser AND
@@ -148,7 +149,7 @@ class PerfilController extends Controller {
 
         $dql =  'SELECT o1
                  FROM ProyectoPrincipalBundle:Reserva o1, 
-                      ProyectoPrincipalBundle:User o2
+                      ProyectoUserBundle:User o2
                  WHERE 
                        o1.user = o2.id AND
                        o2.id = :idUser AND
@@ -199,7 +200,8 @@ class PerfilController extends Controller {
 	public function publicoAction() {
 		$firstArray = UtilitiesAPI::getDefaultContent($this);
 		$user = UtilitiesAPI::getActiveUser($this);
-		$secondArray = array('user'=>$user);
+        $localidad =  $this -> getDoctrine() -> getRepository('ProyectoPrincipalBundle:Localidad') -> find($user->getIdLocalidad());
+		$secondArray = array('user'=>$user,'localidad'=>$localidad);
 
 		$array = array_merge($firstArray, $secondArray);
 		return $this -> render('ProyectoPrincipalBundle:Perfil:publico.html.twig', $array);
@@ -227,7 +229,7 @@ class PerfilController extends Controller {
            $object = new User();
                         }
 		else{
-           $object = $class -> getDoctrine() -> getRepository('ProyectoPrincipalBundle:User') -> find($id);
+           $object = $class -> getDoctrine() -> getRepository('ProyectoUserBundle:User') -> find($id);
            $accion = 'editar'; 
 
         } 
