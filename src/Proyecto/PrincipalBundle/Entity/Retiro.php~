@@ -8,6 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Retiro
  *
  * @ORM\Table(name="retiro")
+ * @ORM\Entity(repositoryClass="Proyecto\PrincipalBundle\Entity\RetiroRepository")
  * @ORM\Entity
  */
 class Retiro

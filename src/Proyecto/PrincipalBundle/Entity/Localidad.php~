@@ -1,0 +1,217 @@
+<?php
+
+namespace Proyecto\PrincipalBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Localidad
+ *
+ * @ORM\Table(name="localidad")
+ * @ORM\Entity(repositoryClass="Proyecto\PrincipalBundle\Entity\LocalidadRepository")
+ * @ORM\Entity
+ */
+class Localidad
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $id;
+
+    /**
+     * @var \Provincia
+     *
+     * @ORM\ManyToOne(targetEntity="Provincia")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="provincia", referencedColumnName="id")
+     * })
+     */
+    private $provincia;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="nombre", type="string", length=50, nullable=false)
+     */
+    private $nombre;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="seo", type="string", length=50, nullable=false)
+     */
+    private $seo;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="postal", type="integer", columnDefinition="INT(5) UNSIGNED ZEROFILL", nullable=false)
+     */
+    private $postal;
+
+    /**
+     * @var float
+     *
+     * @ORM\Column(name="latitud", type="float", nullable=false)
+     */
+    private $latitud;
+
+    /**
+     * @var float
+     *
+     * @ORM\Column(name="longitud", type="float", nullable=false)
+     */
+    private $longitud;
+
+
+    /**
+     * Get id
+     *
+     * @return integer 
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set nombre
+     *
+     * @param string $nombre
+     * @return Localidad
+     */
+    public function setNombre($nombre)
+    {
+        $this->nombre = $nombre;
+    
+        return $this;
+    }
+
+    /**
+     * Get nombre
+     *
+     * @return string 
+     */
+    public function getNombre()
+    {
+        return $this->nombre;
+    }
+
+    /**
+     * Set seo
+     *
+     * @param string $seo
+     * @return Localidad
+     */
+    public function setSeo($seo)
+    {
+        $this->seo = $seo;
+    
+        return $this;
+    }
+
+    /**
+     * Get seo
+     *
+     * @return string 
+     */
+    public function getSeo()
+    {
+        return $this->seo;
+    }
+
+    /**
+     * Set latitud
+     *
+     * @param float $latitud
+     * @return Localidad
+     */
+    public function setLatitud($latitud)
+    {
+        $this->latitud = $latitud;
+    
+        return $this;
+    }
+
+    /**
+     * Get latitud
+     *
+     * @return float 
+     */
+    public function getLatitud()
+    {
+        return $this->latitud;
+    }
+
+    /**
+     * Set longitud
+     *
+     * @param float $longitud
+     * @return Localidad
+     */
+    public function setLongitud($longitud)
+    {
+        $this->longitud = $longitud;
+    
+        return $this;
+    }
+
+    /**
+     * Get longitud
+     *
+     * @return float 
+     */
+    public function getLongitud()
+    {
+        return $this->longitud;
+    }
+
+    /**
+     * Set postal
+     *
+     * @param float $postal
+     * @return Localidad
+     */
+    public function setPostal($postal)
+    {
+        $this->postal = $postal;
+    
+        return $this;
+    }
+
+    /**
+     * Get postal
+     *
+     * @return float 
+     */
+    public function getPostal()
+    {
+        return $this->postal;
+    }
+    /**
+     * Set provincia
+     *
+     * @param \Proyecto\PrincipalBundle\Entity\Provincia $provincia
+     * @return Localidad
+     */
+    public function setProvincia(\Proyecto\PrincipalBundle\Entity\Provincia $provincia = null)
+    {
+        $this->provincia = $provincia;
+    
+        return $this;
+    }
+
+    /**
+     * Get provincia
+     *
+     * @return \Proyecto\PrincipalBundle\Entity\Provincia 
+     */
+    public function getProvincia()
+    {
+        return $this->provincia;
+    }
+}

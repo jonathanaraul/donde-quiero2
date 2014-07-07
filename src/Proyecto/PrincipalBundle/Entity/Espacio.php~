@@ -11,6 +11,7 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
  * Espacio
  *
  * @ORM\Table(name="espacio")
+ * @ORM\Entity(repositoryClass="Proyecto\PrincipalBundle\Entity\EspacioRepository")
  * @ORM\HasLifecycleCallbacks
  * @ORM\Entity
  */
@@ -100,7 +101,7 @@ class Espacio
     /**
      * @var \Sede
      *
-     * @ORM\ManyToOne(targetEntity="Sede")
+     * @ORM\ManyToOne(targetEntity="Sede", inversedBy="espacios")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="sede", referencedColumnName="id", nullable=true)
      * })
@@ -1946,5 +1947,28 @@ class Espacio
     public function getSede()
     {
         return $this->sede;
+    }
+
+    /**
+     * Set user
+     *
+     * @param \Proyecto\UserBundle\Entity\User $user
+     * @return Espacio
+     */
+    public function setUser(\Proyecto\UserBundle\Entity\User $user)
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * Get user
+     *
+     * @return \Proyecto\UserBundle\Entity\User 
+     */
+    public function getUser()
+    {
+        return $this->user;
     }
 }

@@ -126,7 +126,7 @@ class HelpersController extends Controller
 
         $em = $class->getDoctrine()->getManager();
 
-        $dql =  'SELECT o1.id,o1.nombre,o1.path, o1.latitud,o1.longitud
+        $dql =  'SELECT o1.id,o1.nombre,o1.path,o1.descripcionGeneral, o1.latitud,o1.longitud
                  FROM ProyectoPrincipalBundle:Sede o1 
                 ';
 

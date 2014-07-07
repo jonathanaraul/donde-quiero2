@@ -11,6 +11,7 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
  * Servicio
  *
  * @ORM\Table(name="servicio")
+ * @ORM\Entity(repositoryClass="Proyecto\PrincipalBundle\Entity\ServicioRepository")
  * @ORM\HasLifecycleCallbacks
  * @ORM\Entity
  */
@@ -2123,5 +2124,28 @@ class Servicio
     public function getSuspendido()
     {
         return $this->suspendido;
+    }
+
+    /**
+     * Set user
+     *
+     * @param \Proyecto\UserBundle\Entity\User $user
+     * @return Servicio
+     */
+    public function setUser(\Proyecto\UserBundle\Entity\User $user)
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * Get user
+     *
+     * @return \Proyecto\UserBundle\Entity\User 
+     */
+    public function getUser()
+    {
+        return $this->user;
     }
 }

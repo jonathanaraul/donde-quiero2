@@ -5,6 +5,7 @@
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCUY1Omfl_gVZyliOZWXKUYaLG3O0JIleI&sensor=false"></script>
 <script>
 var markers = new Array({{sedes | length}});
+var infowindows = new Array({{sedes | length}});
 var map;
 var mapOptions = {
 	center : new google.maps.LatLng(39.656456, -3.493652),
@@ -19,7 +20,34 @@ map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
 	markers[{{loop.index0}}] = new google.maps.Marker({
 		position: new google.maps.LatLng({{element.latitud}}, {{element.longitud}}), map: map,
 		title: '{{element.nombre}}'});
+
+
+var contentString = '<div id="contenedor-mapa" style="width:100%">'+
+        '<div class="imagen-mapa" style="width:182px;float:left;">'+
+            '<p><img src="{%if element.path is not null%}{{("uploads/sedes/"~ element.path) | apply_filter("elementos") }}{%else%}{{asset("sistema/images/nodisponible.png")}}{%endif%}" style="width:180px;height:135px;">'+
+            '</p>'+
+        '</div>'+
+        '<div class="texto-mapa" style="width: 182px;">'+
+            '<h2 id="firstHeading" class="firstHeading">{{element.nombre|title}}</h2>'+
+            '<p>{{element.descripcionGeneral[:120] ~ "..."}}</p>'+
+            '<p><a href="{{ path("proyecto_principal_sede_individual",{"id":element.id}) }}"> Leer más</a>.'+
+            '</p>'+
+        '</div>'+
+    '</div>';
+
+infowindows[{{loop.index0}}] = new google.maps.InfoWindow({
+    content: contentString,
+    maxWidth: 400
+});
+
+google.maps.event.addListener(markers[{{loop.index0}}], 'click', function() {
+  infowindows[{{loop.index0}}].open(map,markers[{{loop.index0}}]);
+});
 	{%endfor%}
+
+
+
+
 
 }
 

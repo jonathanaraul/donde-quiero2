@@ -8,6 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Facturacion
  *
  * @ORM\Table(name="facturacion")
+ * @ORM\Entity(repositoryClass="Proyecto\PrincipalBundle\Entity\FacturacionRepository")
  * @ORM\Entity
  */
 class Facturacion
@@ -222,5 +223,28 @@ class Facturacion
     public function getAceptoTerminos()
     {
         return $this->aceptoTerminos;
+    }
+
+    /**
+     * Set user
+     *
+     * @param \Proyecto\UserBundle\Entity\User $user
+     * @return Facturacion
+     */
+    public function setUser(\Proyecto\UserBundle\Entity\User $user)
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * Get user
+     *
+     * @return \Proyecto\UserBundle\Entity\User 
+     */
+    public function getUser()
+    {
+        return $this->user;
     }
 }

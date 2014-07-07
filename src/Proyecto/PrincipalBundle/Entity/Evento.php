@@ -11,6 +11,7 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
  * Evento
  *
  * @ORM\Table(name="evento")
+ * @ORM\Entity(repositoryClass="Proyecto\PrincipalBundle\Entity\EventoRepository")
  * @ORM\HasLifecycleCallbacks
  * @ORM\Entity
  */

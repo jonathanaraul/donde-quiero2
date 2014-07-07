@@ -9,6 +9,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * Confirmacion
  *
  * @ORM\Table(name="confirmacion")
+ * @ORM\Entity(repositoryClass="Proyecto\PrincipalBundle\Entity\ConfirmacionRepository")
  * @ORM\Entity
  */
 class Confirmacion
@@ -111,51 +112,7 @@ class Confirmacion
         return $this->id;
     }
 
-    /**
-     * Set informacionAdicional
-     *
-     * @param string $informacionAdicional
-     * @return Confirmacion
-     */
-    public function setInformacionAdicional($informacionAdicional)
-    {
-        $this->informacionAdicional = $informacionAdicional;
-    
-        return $this;
-    }
 
-    /**
-     * Get informacionAdicional
-     *
-     * @return string 
-     */
-    public function getInformacionAdicional()
-    {
-        return $this->informacionAdicional;
-    }
-
-    /**
-     * Set horas
-     *
-     * @param integer $horas
-     * @return Confirmacion
-     */
-    public function setHoras($horas)
-    {
-        $this->horas = $horas;
-    
-        return $this;
-    }
-
-    /**
-     * Get horas
-     *
-     * @return integer 
-     */
-    public function getHoras()
-    {
-        return $this->horas;
-    }
 
     /**
      * Set precioTotal
@@ -339,5 +296,74 @@ class Confirmacion
     public function getFechaRegistro()
     {
         return $this->fechaRegistro;
+    }
+
+    /**
+     * Set user
+     *
+     * @param \Proyecto\UserBundle\Entity\User $user
+     * @return Confirmacion
+     */
+    public function setUser(\Proyecto\UserBundle\Entity\User $user)
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * Get user
+     *
+     * @return \Proyecto\UserBundle\Entity\User 
+     */
+    public function getUser()
+    {
+        return $this->user;
+    }
+
+    /**
+     * Set informacionAdicional
+     *
+     * @param string $informacionAdicional
+     * @return Confirmacion
+     */
+    public function setInformacionAdicional($informacionAdicional)
+    {
+        $this->informacionAdicional = $informacionAdicional;
+
+        return $this;
+    }
+
+    /**
+     * Get informacionAdicional
+     *
+     * @return string 
+     */
+    public function getInformacionAdicional()
+    {
+        return $this->informacionAdicional;
+    }
+
+    /**
+     * Set horas
+     *
+     * @param integer $horas
+     * @return Confirmacion
+     */
+    public function setHoras($horas)
+    {
+        $this->horas = $horas;
+
+        return $this;
+    }
+
+    /**
+     * Get horas
+     *
+     * @return integer 
+     */
+    public function getHoras()
+    {
+        return $this->horas;
     }
 }

@@ -25,7 +25,7 @@ class UsersController extends Controller {
 		$post = $peticion -> request;
 
 		$provincia = intval($post -> get("valor"));
-		//echo'la provincia es'.$provincia;exit;
+		echo'la provincia es'.$provincia;exit;
 		
 		$em = $this->getDoctrine()->getManager();
 		$query = $em->createQuery(

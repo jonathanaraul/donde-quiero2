@@ -6,11 +6,13 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * Sede
  *
  * @ORM\Table(name="sede")
+ * @ORM\Entity(repositoryClass="Proyecto\PrincipalBundle\Entity\SedeRepository")
  * @ORM\HasLifecycleCallbacks
  * @ORM\Entity
  */
@@ -35,6 +37,10 @@ class Sede
      */
     private $administradorWeb;
 
+    /**
+     * @ORM\OneToMany(targetEntity="Espacio", mappedBy="sede")
+     */
+    protected $espacios;
     /**
      * @var \User
      *
@@ -316,6 +322,12 @@ class Sede
      */
     private $file;
     private $temp;
+
+
+    public function __construct()
+    {
+        $this->espacios = new ArrayCollection();
+    }
 
     /**
      * Get id
@@ -1901,5 +1913,38 @@ class Sede
     public function getUser()
     {
         return $this->user;
+    }
+
+    /**
+     * Add espacios
+     *
+     * @param \Proyecto\PrincipalBundle\Entity\Espacio $espacios
+     * @return Sede
+     */
+    public function addEspacio(\Proyecto\PrincipalBundle\Entity\Espacio $espacios)
+    {
+        $this->espacios[] = $espacios;
+
+        return $this;
+    }
+
+    /**
+     * Remove espacios
+     *
+     * @param \Proyecto\PrincipalBundle\Entity\Espacio $espacios
+     */
+    public function removeEspacio(\Proyecto\PrincipalBundle\Entity\Espacio $espacios)
+    {
+        $this->espacios->removeElement($espacios);
+    }
+
+    /**
+     * Get espacios
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getEspacios()
+    {
+        return $this->espacios;
     }
 }

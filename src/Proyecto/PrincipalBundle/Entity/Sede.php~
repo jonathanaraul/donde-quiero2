@@ -6,11 +6,13 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * Sede
  *
  * @ORM\Table(name="sede")
+ * @ORM\Entity(repositoryClass="Proyecto\PrincipalBundle\Entity\SedeRepository")
  * @ORM\HasLifecycleCallbacks
  * @ORM\Entity
  */
@@ -35,6 +37,10 @@ class Sede
      */
     private $administradorWeb;
 
+    /**
+     * @ORM\OneToMany(targetEntity="Espacio", mappedBy="sede")
+     */
+    protected $espacios;
     /**
      * @var \User
      *
@@ -316,6 +322,12 @@ class Sede
      */
     private $file;
     private $temp;
+
+
+    public function __construct()
+    {
+        $this->espacios = new ArrayCollection();
+    }
 
     /**
      * Get id
@@ -1878,5 +1890,28 @@ class Sede
     public function getSuspendido()
     {
         return $this->suspendido;
+    }
+
+    /**
+     * Set user
+     *
+     * @param \Proyecto\UserBundle\Entity\User $user
+     * @return Sede
+     */
+    public function setUser(\Proyecto\UserBundle\Entity\User $user)
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * Get user
+     *
+     * @return \Proyecto\UserBundle\Entity\User 
+     */
+    public function getUser()
+    {
+        return $this->user;
     }
 }

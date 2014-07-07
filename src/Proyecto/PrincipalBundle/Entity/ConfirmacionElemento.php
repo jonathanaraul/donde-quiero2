@@ -9,6 +9,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * ConfirmacionElemento
  *
  * @ORM\Table(name="confirmacion_elemento")
+ * @ORM\Entity(repositoryClass="Proyecto\PrincipalBundle\Entity\ConfirmacionElementoRepository")
  * @ORM\Entity
  */
 class ConfirmacionElemento

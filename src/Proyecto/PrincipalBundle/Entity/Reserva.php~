@@ -9,6 +9,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * Reserva
  *
  * @ORM\Table(name="reserva")
+ * @ORM\Entity(repositoryClass="Proyecto\PrincipalBundle\Entity\ReservaRepository")
  * @ORM\Entity
  */
 class Reserva
@@ -426,5 +427,28 @@ class Reserva
     public function getOculto()
     {
         return $this->oculto;
+    }
+
+    /**
+     * Set user
+     *
+     * @param \Proyecto\UserBundle\Entity\User $user
+     * @return Reserva
+     */
+    public function setUser(\Proyecto\UserBundle\Entity\User $user)
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * Get user
+     *
+     * @return \Proyecto\UserBundle\Entity\User 
+     */
+    public function getUser()
+    {
+        return $this->user;
     }
 }

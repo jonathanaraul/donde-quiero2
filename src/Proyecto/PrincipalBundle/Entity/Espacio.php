@@ -11,6 +11,7 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
  * Espacio
  *
  * @ORM\Table(name="espacio")
+ * @ORM\Entity(repositoryClass="Proyecto\PrincipalBundle\Entity\EspacioRepository")
  * @ORM\HasLifecycleCallbacks
  * @ORM\Entity
  */
@@ -100,7 +101,7 @@ class Espacio
     /**
      * @var \Sede
      *
-     * @ORM\ManyToOne(targetEntity="Sede")
+     * @ORM\ManyToOne(targetEntity="Sede", inversedBy="espacios")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="sede", referencedColumnName="id", nullable=true)
      * })

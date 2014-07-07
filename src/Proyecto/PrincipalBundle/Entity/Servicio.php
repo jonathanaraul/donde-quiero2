@@ -11,6 +11,7 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
  * Servicio
  *
  * @ORM\Table(name="servicio")
+ * @ORM\Entity(repositoryClass="Proyecto\PrincipalBundle\Entity\ServicioRepository")
  * @ORM\HasLifecycleCallbacks
  * @ORM\Entity
  */

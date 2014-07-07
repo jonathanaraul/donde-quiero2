@@ -11,6 +11,7 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
  * Evento
  *
  * @ORM\Table(name="evento")
+ * @ORM\Entity(repositoryClass="Proyecto\PrincipalBundle\Entity\EventoRepository")
  * @ORM\HasLifecycleCallbacks
  * @ORM\Entity
  */
@@ -1509,5 +1510,28 @@ class Evento
     public function getEspacio()
     {
         return $this->espacio;
+    }
+
+    /**
+     * Set user
+     *
+     * @param \Proyecto\UserBundle\Entity\User $user
+     * @return Evento
+     */
+    public function setUser(\Proyecto\UserBundle\Entity\User $user)
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * Get user
+     *
+     * @return \Proyecto\UserBundle\Entity\User 
+     */
+    public function getUser()
+    {
+        return $this->user;
     }
 }

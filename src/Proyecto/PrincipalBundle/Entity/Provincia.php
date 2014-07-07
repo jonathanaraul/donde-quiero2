@@ -8,6 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Provincia
  *
  * @ORM\Table(name="provincia")
+ * @ORM\Entity(repositoryClass="Proyecto\PrincipalBundle\Entity\ProvinciaRepository")
  * @ORM\Entity
  */
 class Provincia

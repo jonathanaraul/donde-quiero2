@@ -21,9 +21,14 @@ class SedeController extends Controller {
         $firstArray = UtilitiesAPI::getDefaultContent($this);
 
         $object = $this -> getDoctrine() -> getRepository('ProyectoPrincipalBundle:Sede') -> find($id);
-        $secondArray = array('object'=>$object);
+        $reservas = $this -> getDoctrine() -> getRepository('ProyectoPrincipalBundle:Reserva') -> findBySede($object);
+        $sedes = array($object);
+        $user = UtilitiesAPI::getActiveUser($this);
+        if($user==null)$userId= 0;
+        else $userId = $user->getId(); 
+        $secondArray = array('object'=>$object,'reservas'=>$reservas,'userId'=>$userId,'sedes'=>$sedes);
 
-		$array = array_merge($firstArray, $secondArray);
+        $array = array_merge($firstArray, $secondArray);
 		return $this -> render('ProyectoPrincipalBundle:Sede:individual.html.twig', $array);
 	}
 	public function grupalAction() {

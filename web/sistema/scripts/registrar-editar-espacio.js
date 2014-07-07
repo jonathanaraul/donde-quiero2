@@ -105,6 +105,8 @@ $("#form_provincia").live("change", function() {
 
 	var data = 'provincia='+$("#form_provincia").val();	 
 	$('#form_localidad').find('option').remove().end();
+	console.log(data);
+	return false;
 	$.post(direccionBuscarCiudad, data, function(respuesta) {
 		var respuesta = JSON.parse(respuesta);
 
