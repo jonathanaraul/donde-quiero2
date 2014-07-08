@@ -23,7 +23,18 @@
         "avalanche123/imagine-bundle": "v2.1",
         "knplabs/knp-paginator-bundle": "~2.4",
         "stof/doctrine-extensions-bundle": "~1.1@dev",
-        "friendsofsymfony/user-bundle": "~2.0@dev"
+        "friendsofsymfony/user-bundle": "~2.0@dev",
+        "doctrine/migrations": "dev-master",
+        "doctrine/doctrine-migrations-bundle": "dev-master",
+        "genemu/form-bundle": "2.2.*",
+        "avocode/form-extensions-bundle": "dev-master",
+        "lexik/form-filter-bundle": "v2.0.0",
+        "knplabs/knp-snappy-bundle": "dev-master",
+        "jms/translation-bundle": "dev-master",
+        "jms/di-extra-bundle": "dev-master",
+        "craue/formflow-bundle": "~2.0"
+
+
     },
     "scripts": {
         "post-install-cmd": [

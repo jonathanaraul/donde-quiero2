@@ -1,0 +1,19 @@
+	{%for element in elementos%}
+	<!--/item-->
+	<div class="item">
+		<a href="{{ path('project_front_espacio_individual',{'id':element.id}) }}">
+			<img src="{%if element.path is not null%}{{('uploads/espacios/'~ element.path) | apply_filter('elementos') }}{%else%}{{asset('sistema/images/nodisponible.png')}}{%endif%}" alt="image 1" style="width:180px;height:135px;"></a><!-- Image must be 400px by 300px -->
+		<h3>{{element.nombre|title}}</h3><!--Title-->
+		<ul>
+			<li class="izquierda">
+				{{element.localidad|title}}
+			</li>
+			<li class="izquierda">
+				{{element.superficie}} m2
+			</li>
+			<li class="derecha">
+				{{element.precioPorHora}} &euro;
+			</li>
+		</ul><!--Category-->
+	</div><!--/item-->
+	{%endfor%}

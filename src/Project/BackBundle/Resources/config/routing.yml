@@ -1,0 +1,27 @@
+project_back_homepage:
+    path:     /hello/{name}
+    defaults: { _controller: ProjectBackBundle:Default:index }
+
+project_back_dashboard:
+    pattern:  /dashboard/
+    defaults: { _controller: ProjectBackBundle:Dashboard:ingresos }
+project_back_dashboard_usuarios:
+    pattern:  /dashboard/usuarios
+    defaults: { _controller: ProjectBackBundle:Dashboard:usuarios }
+project_back_dashboard_espacios:
+    pattern:  /dashboard/espacios
+    defaults: { _controller: ProjectBackBundle:Dashboard:espacios }
+project_back_dashboard_eventos:
+    pattern:  /dashboard/eventos
+    defaults: { _controller: ProjectBackBundle:Dashboard:eventos }
+project_back_dashboard_servicios:
+    pattern:  /dashboard/servicios
+    defaults: { _controller: ProjectBackBundle:Dashboard:servicios }
+project_back_dashboard_sedes:
+    pattern:  /dashboard/sedes
+    defaults: { _controller: ProjectBackBundle:Dashboard:sedes }
+project_back_dashboard_funcion:
+    pattern:  /dashboard/funcion
+    defaults: { _controller: ProjectBackBundle:Dashboard:funcion}
+    requirements:
+      _method: POST

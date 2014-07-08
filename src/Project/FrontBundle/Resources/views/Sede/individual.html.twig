@@ -1,0 +1,252 @@
+{% extends "::base.html.twig" %}
+
+{%block estilos%}
+{% include 'ProjectFrontBundle:Helpers:estilosIndividual.html.twig' %}
+<style>
+	html, body, #map-canvas {
+		height: 100%;
+		margin: 0px;
+		padding: 0px
+	}
+</style>
+{%endblock%}
+
+{%block scripts%}
+{% include 'ProjectFrontBundle:Helpers:scriptsIndividual.html.twig'  with {'clase': 'rosa'}  %}
+<script type="text/javascript">
+	var direccionEditar = "{{path('project_front_espacio_editar',{'id':object.id})}}";
+	var direccionFuncion = "{{path('project_front_helpers_funcion')}}"; 
+</script>
+
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCUY1Omfl_gVZyliOZWXKUYaLG3O0JIleI&sensor=false"></script>
+<script>
+	var markers = new Array({{sedes | length}});
+	var infowindows = new Array({{sedes | length}});
+	var map;
+	var mapOptions = {
+		center : new google.maps.LatLng(39.656456, -3.493652),
+		zoom : 6
+	};
+
+	function initialize() {
+
+		map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+
+		{%for element in sedes%}
+		markers[{{loop.index0}}] = new google.maps.Marker({
+
+	position: new google.maps.LatLng({{element.latitud}}, {{element.longitud}}), map: map,
+	title: '{{element.nombre}}'});
+
+	var contentString = '<div id="contenedor-mapa" style="width:100%">' + '<div class="imagen-mapa" style="width:182px;float:left;">' + '<p><img src="{%if element.path is not null%}{{("uploads/sedes/"~ element.path) | apply_filter("elementos") }}{%else%}{{asset("sistema/images/nodisponible.png")}}{%endif%}" style="width:180px;height:135px;">' + '</p>' + '</div>' + '<div class="texto-mapa" style="width: 182px;">' + '<h2 id="firstHeading" class="firstHeading">{{element.nombre|title}}</h2>' + '<p>{{element.descripcionGeneral[:120] ~ "..."}}</p>' + '<p><a href="{{ path("project_front_sede_individual",{"id":element.id}) }}"> Leer más</a>.' + '</p>' + '</div>' + '</div>';
+
+	infowindows[{{loop.index0}}] =
+	new google.maps.InfoWindow({
+		content : contentString,
+		maxWidth : 400
+	});
+
+	google.maps.event.addListener(markers[{{loop.index0}}], 'click', function() {
+	infowindows[{{loop.index0}}].open(map,markers[{{loop.index0}}]);
+	});
+	{%endfor%}
+
+	}
+
+	google.maps.event.addDomListener(window, 'load', initialize);
+
+</script>
+
+{%endblock%}
+{%block contenedorbase%}
+<div class="wrapper">
+
+	{% include '::top.html.twig'  with {'clase': 'amarillo'}  %}
+	{% include '::sesion.html.twig'  with {'datos': datos} %}
+
+	<aside id="about" class=" left">
+		<!-- Text Section Start -->
+		<!-- Replace all text with what you want -->
+		<div style="position:relative;">
+			<ul id="gallery">
+				<li>
+					<img src="{{ asset(''~ object.getWebpath  ) }}" alt="" style="width:270px;height:230px;">
+
+				</li>
+				<li>
+					{#<img src="{{ asset('sistema/images/work/thumbs/triangulo2.png')}}" alt="" />#}
+				</li>
+				<li>
+					{#<img src="{{ asset('sistema/images/work/thumbs/triangulo3.png')}}"  alt="" />#}
+				</li>
+
+			</ul>
+		</div>
+		<div class="clearfix"></div>
+		<div style="text-align:left; margin-top:50px;" >
+			<a href="{{path('project_front_espacio_reservar',{'id':object.id})}}" title="Reservar"> <div id='calendar'></div> </a>
+		</div>
+	</aside>
+	<aside class="right">
+
+		<div class="fichaizq">
+			<h3>{{object.nombre|title}}</h3>
+
+			{#{%if object.sede is not null%}
+			<ul>
+				<li class="izquierda">
+					<h4><a href="#">{{object.sede.nombre}}</a></h4>
+				</li>
+			</ul><!--Category-->
+			{%endif%}#}
+
+			<div class="clearfix"></div>
+			<p>
+				{{object.descripcionGeneral}}
+			</p>
+
+		</div>
+
+		<div class="fichader">
+			<div id="precio" class="amarillo">
+				<h3> {{object.precioPorHora}} </h3>
+				<h4> €/h </h4>
+			</div>
+			<a href="{{path('project_front_sede_reservar',{'id':object.id})}}">Reservar</a>
+		</div>
+		<div class="clearfix"></div>
+		<h4>Detalles</h4>
+		<div class="clearfix"></div>
+		<div class="atributos">
+
+			<ul>
+				<li>
+					En centro cuidad: <span>{%if object.enCentroCiudad%}Si{%else%}No{%endif%}</span>
+				</li>
+				<li>
+					Cerca de autobus: <span>{%if object.cercaAutobus%}Si{%else%}No{%endif%}</span>
+				</li>
+				<li>
+					Cerca de aereopuerto: <span>{%if object.cercaAeropuerto%}Si{%else%}No{%endif%}</span>
+				</li>
+				<li>
+					Accesible movilidad reducida: <span>{%if object.accesibleMovilidadReducida%}Si{%else%}No{%endif%}</span>
+				</li>
+				{%if object.modoBanquete and object.modoBanqueteCapacidad>0%}
+				<li>
+					Aforo Modo Banquete: <span> {{object.modoBanqueteCapacidad}} </span>
+				</li>
+				{%endif%}
+				{%if object.modoCocktail and object.modoCocktailCapacidad>0%}
+				<li>
+					Aforo Modo Cocktail: <span> {{object.modoCocktailCapacidad}} </span>
+				</li>
+				{%endif%}
+				{%if object.modoAula and object.modoAulaCapacidad>0%}
+				<li>
+					Aforo Modo Aula: <span> {{object.modoAulaCapacidad}} </span>
+				</li>
+				{%endif%}
+				{%if object.modoEscenario and object.modoEscenarioCapacidad>0%}
+				<li>
+					Aforo Modo Escenario: <span> {{object.modoEscenarioCapacidad}} </span>
+				</li>
+				{%endif%}
+				{%if object.modoExposicion and object.modoExposicionCapacidad>0%}
+				<li>
+					Aforo Modo Expo: <span> {{object.modoExposicionCapacidad}} </span>
+				</li>
+				{%endif%}
+
+			</ul><!--Category-->
+		</div>
+		<div class="clearfix"></div>
+		<div class="izquierda">
+			<div class="servicios">
+				<h4 style="margin-top:3%">Servicios de sede</h4>
+				<ul>
+					{#
+					<a href="servicios.html"><img class="icon" src="{{ asset('sistema/images/icons/s.multimediasede.png')}}" width="32" height="32" title="Servicios Multimedia"></a></li>
+					<a href="servicios.html"><img class="icon" src="{{ asset('sistema/images/icons/s.corporativosede.png')}}" width="32" height="32" title="Diseño Corporativo"></a></li>
+					<a href="servicios.html"><img class="icon" src="{{ asset('sistema/images/icons/s.espaciosede.png')}}" width="32" height="32" title="Servicios para el Espacio"></a>
+					</li>
+					<a href="servicios.html"><img class="icon" src="{{ asset('sistema/images/icons/s.asistentesede.png')}}" width="32" height="32" title="Servicios para Asistentes"></a></li>
+					<a href="servicios.html"><img class="icon" src="{{ asset('sistema/images/icons/s.contenidosede.png')}}" width="32" height="32" title="Servicios para el Contenido"></a></li>
+					#}
+				</ul><!--Category-->
+			</div>
+		</div>
+		<!-- Text Section End -->
+
+		<div class="derecha" style="margin-right:20px;">
+			<div class="servicios">
+				<h4 style="margin-top:3%;">Servicios adicionale</h4>
+				<ul>
+					{#
+					<a href="servicios.html"><img class="icon" src="{{ asset('sistema/images/icons/s.multimedia.png')}}" width="32" height="32" title="Servicios Multimedia"></a></li>
+					<a href="servicios.html"><img class="icon" src="{{ asset('sistema/images/icons/s.corporativo.png')}}" width="32" height="32" title="Diseño Corporativo"></a></li>
+					<a href="servicios.html"><img class="icon" src="{{ asset('sistema/images/icons/s.espacio.png')}}" width="32" height="32" title="Servicios para el Espacio"></a>
+					</li>
+					<a href="servicios.html"><img class="icon" src="{{ asset('sistema/images/icons/s.asistente.png')}}" width="32" height="32" title="Servicios para Asistentes"></a></li>
+					<a href="servicios.html"><img class="icon" src="{{ asset('sistema/images/icons/s.contenido.png')}}" width="32" height="32" title="Servicios para el Contenido"></a></li>
+					#}
+				</ul><!--Category-->
+			</div>
+		</div>
+		{%if userId == object.user.id%}
+		<div class="clearfix"></div>
+		<div  class="work amarillo" id="editarElemento" style="width: 61px;float: right;cursor:pointer;margin-left:10px;margin-top: 30px;" >
+			<h3 class="" >Editar </h3>
+		</div>
+		<div  class="work amarillo" id="publicarElemento" tipo="sede" tarea="estado"  identificador="{{ object.id }}" style="width: 75px;float: right;margin-left:10px;cursor:pointer;margin-top: 30px;" >
+			<h3 class="elementoEstado" >{%if object.estado%}Eliminar{%else%}Publicar{%endif%}</h3>
+		</div>
+		{%endif%}
+	</aside>
+	<div class="clearfix" ></div>
+	<!-- Text Section End -->
+	<div class="amarillo" id="work">
+		<!-- Work Links Section Start -->
+		<div class="izquierda">
+			<div id="titulosede">
+				Espacios de la Sede del {{object.nombre|title}}
+			</div>
+		</div>
+
+		<div class="derecha" style="margin-right:12px;">
+			<a href="{{path('project_front_espacio_registrar')}}"><img class="icon" src="{{ asset('sistema/images/icons/mas.png')}}" width="27" height="27" title="Añadir Gratis"></a>
+		</div>
+		<div class="clearfix"></div>
+		{%for element in object.getEspacios%}
+		<div class="item">
+			<a href="{{ path('project_front_espacio_individual',{'id':element.id}) }}"><img src="{{ asset(''~ element.getWebpath  ) }}" alt="image 1"></a>
+			<!-- Image must be 400px by 300px -->
+			<h3>{{element.nombre|title}}</h3>
+			<!--Title-->
+			<ul>
+				<li class="izquierda">
+					{{element.getLocalidad.getNombre|title}}
+				</li>
+				<li class="izquierda">
+					{{element.superficie}} m2
+				</li>
+				<li class="derecha">
+					{{element.precioPorHora}} €
+				</li>
+			</ul>
+			<!--Category-->
+		</div>
+		<!--/item-->
+		{%endfor%}
+
+		<div class="clearfix"></div>
+	</div>
+	<!-- Work Links Section End -->
+
+
+	{% render controller('ProjectFrontBundle:Sede:widget', {  'titulo':'Sedes','numResults': 8,'proveedor':false,'cliente':false,'idRelacionado':0 }) %}
+
+	<div class="clearfix"></div>
+</div><!--/html_carousel-->
+
+{%endblock%} 

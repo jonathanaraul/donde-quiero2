@@ -1,0 +1,92 @@
+{% extends "ProjectLayoutBundle:Structure:base.html.twig" %}
+{%block scripts%}
+<script type="text/javascript">
+  var direccionBuscarCiudad = "{{path('proyecto_users_buscar_ciudad')}}";
+</script>
+{%endblock%}
+{%block contenedorbase%}
+<div class="wrapper">
+
+	{% include 'ProjectLayoutBundle:Structure:top.html.twig'  with {'clase': 'gris'}  %}
+	<!-- Text Section End -->
+
+	<header>
+		<!-- Header Title Start -->
+		<h1>&nbsp;</h1>
+
+	</header>
+	<!-- Header Title End -->
+	<div class="inicio">
+		<div id="forminicio">
+			<form action="{{ url }}" method="post" {{ form_enctype(form) }}>
+				<h3 > Información de Facturación</h3>
+				<h4>{{ form_errors(form) }}</h4>
+				<p>
+					Rellena los siguientes datos añadir tus datos de facturación
+				</p>
+
+				{{ form_widget(form.empresa, { 'attr': {'class': 'formstyle','placeholder': 'Nombre de la Empresa/Particular'} }) }}
+				{{ form_widget(form.identificador, { 'attr': {'class': 'formstyle','placeholder': 'C.I.F. / N.I.F. / D.N.I.'} }) }}
+				{{ form_widget(form.direccion, { 'attr': {'placeholder': 'Dirección'} }) }}
+
+				<p>
+					Provincia
+				</p>
+
+				<select id="form_provincia" name="provincia" required="required" class="formstyle">
+					{%for provincia in provincias%}
+					<option value="{{provincia.id}}" {%if idProvinciaDefecto == provincia.id%}selected{%endif%} >{{provincia.nombre|title}}</option>
+					{%endfor%}
+
+				</select>
+
+				<p>
+					Localidad
+				</p>
+
+				{{ form_widget(form.localidad, { 'attr': {'class': 'formstyle'} }) }}
+
+
+				<!--
+				<input type="text" class="formstyle" title="Nombre de la Empresa/Particular" name="name" />
+				<input type="text" class="formstyle" title="C.I.F. / N.I.F. / D.N.I." name="name" />
+				<input type="text" class="formstyle" title="Dirección" name="name" />
+				<input type="text" class="formstyle" title="Ciudad" name="name" />
+				<input type="text" class="formstyle" title="Provincia" name="name" />
+				<input type="text" class="formstyle" title="Código Postal" name="name" />
+				<input type="text" class="formstyle" title="Número de Cuenta " name="name" />
+
+				<h3 > Datos de tarjeta de crédito</h3>
+				<p>  Introduzca los datos de su tarjeta de crédito </p>
+
+				<input type="text" class="formstyle" title="Número de Tarjeta " name="name" />
+				<input type="text" class="formstyle" title="Fecha de Caducidad " name="name" />
+				<input type="text" class="formstyle" title="Código" name="name" />
+
+				-->
+				<div class="clearfix"></div>
+				<p>
+					{{ form_widget(form.aceptoTerminos) }} Acepto las condiciones de uso y la política de privacidad
+				</p>
+
+				<input type="submit" class="botonSubmitFormulario formstyle ">
+
+				{{ form_rest(form) }}
+
+			</form>
+
+			<!--  <div class="enviar"><a href="fichaprivada.html" title="Perfil">Enviar</a></div>-->
+
+			<div id="error"></div>
+			<div class="clearfix"></div>
+		</div>
+	</div>
+
+	<div class="clearfix"></div>
+
+	<div class="clearfix"></div>
+</div>
+
+<!-- TO MAKE THE PHP FORM WORK, ALL YOU NEED TO DO IS OPEN UP THE FILE CALLED 'submitemail.php' AND CHANGE WHERE IT SAYS 'your email goes here' -->
+<!-- DON'T TOUCH THIS SECTION -->
+{%endblock%} 

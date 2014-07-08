@@ -1,0 +1,40 @@
+Project\BackBundle\Entity\User:
+    properties:
+        file:
+            - Image:
+                minWidth: 10
+                maxWidth: 5000
+                minHeight: 10
+                maxHeight: 5000
+Project\BackBundle\Entity\Sede:
+    properties:
+        file:
+            - Image:
+                minWidth: 10
+                maxWidth: 5000
+                minHeight: 10
+                maxHeight: 5000
+Project\BackBundle\Entity\Servicio:
+    properties:
+        file:
+            - Image:
+                minWidth: 10
+                maxWidth: 5000
+                minHeight: 10
+                maxHeight: 5000
+Project\BackBundle\Entity\Espacio:
+    properties:
+        file:
+            - Image:
+                minWidth: 10
+                maxWidth: 5000
+                minHeight: 10
+                maxHeight: 5000
+Project\BackBundle\Entity\Evento:
+    properties:
+        file:
+            - Image:
+                minWidth: 10
+                maxWidth: 5000
+                minHeight: 10
+                maxHeight: 5000

@@ -1,0 +1,191 @@
+{% extends "ProjectLayoutBundle:Structure:base.html.twig" %}
+
+{%block estilos%}
+	{% include 'ProjectFrontBundle:Helpers:estilosIndividual.html.twig' %}
+{%endblock%}
+
+{%block scripts%}
+    {% include 'ProjectFrontBundle:Helpers:scriptsIndividual.html.twig'  with {'clase': 'rosa'}  %}
+    <script type="text/javascript">
+        var direccionEditar = "{{path('project_front_espacio_editar',{'id':object.id})}}";
+        var direccionFuncion = "{{path('project_front_helpers_funcion')}}";
+    </script>
+{%endblock%}
+
+{%block contenedorbase%}
+<div class="wrapper">
+
+	{% include 'ProjectLayoutBundle:Structure:top.html.twig'  with {'clase': 'verde'}  %}
+	{% include 'ProjectLayoutBundle:Structure:sesion.html.twig'  with {'datos': datos} %}
+
+	<aside id="about" class=" left">
+		<!-- Text Section Start -->
+		<!-- Replace all text with what you want -->
+		<div style="position:relative;">
+			<ul id="gallery">
+				<li>
+                    <img src="{{ asset('uploads/espacios/'~ object.path  ) }}" alt="" style="width:270px;height:230px;">
+					
+				</li>
+				<li>{#<img src="{{ asset('sistema/images/work/thumbs/triangulo2.png')}}" alt="" />#}
+				</li>
+				<li>{#<img src="{{ asset('sistema/images/work/thumbs/triangulo3.png')}}"  alt="" />#}
+				</li>
+
+			</ul>
+		</div>
+		<div class="clearfix"></div>
+		<div style="text-align:left; margin-top:50px;" >
+			<a href="{{path('project_front_espacio_reservar',{'id':object.id})}}" title="Reservar">
+				<div id='calendar'></div>
+			</a>
+		</div>
+	</aside>
+	<aside class="right">
+
+		<div class="fichaizq">
+			<h3>{{object.nombre|title}}</h3>
+
+            {%if object.sede is not null%}
+			<ul>
+				<li class="izquierda">
+					<h4><a href="#">{{object.sede.nombre}}</a></h4>
+				</li>
+			</ul><!--Category-->
+			{%endif%}
+
+			<div class="clearfix"></div>
+			<p>
+				{{object.descripcionGeneral}}
+			</p>
+
+		</div>
+
+		<div class="fichader">
+			<div id="precio" class="verde">
+				<h3> {{object.precioPorHora}} </h3>
+				<h4> €/h </h4>
+			</div>
+			<a href="{{path('project_front_espacio_reservar',{'id':object.id})}}">Reservar</a>
+		</div>
+		<div class="clearfix"></div>
+		<h4>Detalles</h4>
+		<div class="clearfix"></div>
+		<div class="atributos">
+
+			<ul>
+				<li>
+					Superficie: <span>{{object.superficie}} m2 </span>
+				</li>
+				<li>
+					Ancho Mín Libre:<span>{{object.anchoMinimoLibre}} m</span>
+				</li>
+				<li>
+					Largo Mín Libre: <span>{{object.largoMinimoLibre}} m </span>
+				</li>
+				<li>
+					Altura  Mín Libre:<span>{{object.alturaMinimaLibre}} m </span>
+				</li>
+				{%if object.modoBanquete and object.modoBanqueteCapacidad>0%}
+				<li>
+					Aforo Modo Banquete: <span> {{object.modoBanqueteCapacidad}} </span>
+				</li>
+				{%endif%}
+				{%if object.modoCocktail and object.modoCocktailCapacidad>0%}
+				<li>
+					Aforo Modo Cocktail: <span> {{object.modoCocktailCapacidad}} </span>
+				</li>
+				{%endif%}
+				{%if object.modoAula and object.modoAulaCapacidad>0%}
+				<li>
+					Aforo Modo Aula: <span> {{object.modoAulaCapacidad}} </span>
+				</li>
+				{%endif%}
+				{%if object.modoEscenario and object.modoEscenarioCapacidad>0%}
+				<li>
+					Aforo Modo Escenario: <span> {{object.modoEscenarioCapacidad}} </span>
+				</li>
+				{%endif%}
+				{%if object.modoExposicion and object.modoExposicionCapacidad>0%}
+				<li>
+					Aforo Modo Expo: <span> {{object.modoExposicionCapacidad}} </span>
+				</li>
+				{%endif%}
+				<li>
+					Asientos: <span> {%if object.pilaresSueltos%}Si{%else%}No{%endif%}</span>
+				</li>
+				<li>
+					Pilares Sueltos: <span> {%if object.pilaresSueltos%}Si{%else%}No{%endif%}</span>
+				</li>
+				<li>
+					Aire Acondicionado: <span> {%if object.aireAcondicionado%}Si{%else%}No{%endif%}</span>
+				</li>
+				<li>
+					Calefacción: <span> {%if object.calefaccion%}Si{%else%}No{%endif%}</span>
+				</li>
+				<li>
+					Wifi: <span> {%if object.wifi%}Si{%else%}No{%endif%}</span>
+				</li>
+				<li>
+					Internet Lan: <span> {%if object.internetCable%}Si{%else%}No{%endif%}</span>
+				</li>
+
+
+
+
+
+
+			</ul><!--Category-->
+		</div>
+		<div class="clearfix"></div>
+		<div class="izquierda">
+			<div class="servicios">
+				<h4 style="margin-top:3%">Servicios de sede</h4>
+				<ul>
+{#
+					<a href="servicios.html"><img class="icon" src="{{ asset('sistema/images/icons/s.multimediasede.png')}}" width="32" height="32" title="Servicios Multimedia"></a></li>
+					<a href="servicios.html"><img class="icon" src="{{ asset('sistema/images/icons/s.corporativosede.png')}}" width="32" height="32" title="Diseño Corporativo"></a></li>
+					<a href="servicios.html"><img class="icon" src="{{ asset('sistema/images/icons/s.espaciosede.png')}}" width="32" height="32" title="Servicios para el Espacio"></a>
+					</li>
+					<a href="servicios.html"><img class="icon" src="{{ asset('sistema/images/icons/s.asistentesede.png')}}" width="32" height="32" title="Servicios para Asistentes"></a></li>
+					<a href="servicios.html"><img class="icon" src="{{ asset('sistema/images/icons/s.contenidosede.png')}}" width="32" height="32" title="Servicios para el Contenido"></a></li>
+                    #}
+				</ul><!--Category-->
+			</div>
+		</div>
+		<!-- Text Section End -->
+
+		<div class="derecha" style="margin-right:20px;">
+			<div class="servicios">
+				<h4 style="margin-top:3%;">Servicios adicionale</h4>
+				<ul>
+                     {#
+					<a href="servicios.html"><img class="icon" src="{{ asset('sistema/images/icons/s.multimedia.png')}}" width="32" height="32" title="Servicios Multimedia"></a></li>
+					<a href="servicios.html"><img class="icon" src="{{ asset('sistema/images/icons/s.corporativo.png')}}" width="32" height="32" title="Diseño Corporativo"></a></li>
+					<a href="servicios.html"><img class="icon" src="{{ asset('sistema/images/icons/s.espacio.png')}}" width="32" height="32" title="Servicios para el Espacio"></a>
+					</li>
+					<a href="servicios.html"><img class="icon" src="{{ asset('sistema/images/icons/s.asistente.png')}}" width="32" height="32" title="Servicios para Asistentes"></a></li>
+					<a href="servicios.html"><img class="icon" src="{{ asset('sistema/images/icons/s.contenido.png')}}" width="32" height="32" title="Servicios para el Contenido"></a></li>
+					#}
+				</ul><!--Category-->
+			</div>
+		</div>
+        {%if userId == object.user.id%}
+		<div class="clearfix"></div>		
+		<div  class="work verde" id="editarElemento" style="width: 61px;float: right;cursor:pointer;margin-left:10px;margin-top: 30px;" >
+		     <h3 class="" >Editar </h3>
+		</div>
+		<div  class="work verde" id="publicarElemento" tipo="espacio" tarea="estado"  identificador="{{ object.id }}" style="width: 75px;float: right;margin-left:10px;cursor:pointer;margin-top: 30px;" >
+		     <h3 class="elementoEstado" >{%if object.estado%}Eliminar{%else%}Publicar{%endif%}</h3>
+		</div>
+		{%endif%}
+	</aside>
+	<div class="clearfix" ></div>
+	<!-- Text Section End -->
+	{% render controller('ProjectFrontBundle:Espacio:widget', { 'titulo':'Espacios','numResults': 8,'paginacion':false,'proveedor':false,'cliente':false,'idRelacionado':0 }) %}
+	<!-- Work Links Section End -->
+
+	<div class="clearfix"></div>
+</div><!--/html_carousel-->
+
+{%endblock%} 

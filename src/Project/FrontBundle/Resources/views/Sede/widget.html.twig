@@ -1,0 +1,141 @@
+<div id="sedes" ></div>
+<div id="work"  class="amarillo rejilla-sedes" proveedor="{{proveedor}}" cliente="{{cliente}}" idRelacionado="{{idRelacionado}}">
+	<!-- Work Links Section Start -->
+	<div class="añadir">
+		<a href="{{path('project_front_sede_registrar')}}">{{titulo}}</a><!--/item-->
+	</div>
+	<div class="buscador">
+		<select name="localidad" class="formstyle">
+			<option value="0"> Ciudad </option>
+			<option value="0"> Todas </option>
+            {%for element in localidades%}
+            <option value="{{element.id}}"> {{element.nombre|title}}({{element.c}}) </option>
+            {%endfor%}
+		</select>
+	</div><!--/item-->
+
+
+	<div class="buscador">
+		<select name="accesibilidad" class="formstyle">
+			<option value="0">Accesibilidad </option>
+			<option value="0"> Todas </option>
+			<option value="enCentroCiudad">En centro ciudad </option>
+			<option value="cercaAutobus">Cerca de Autobús </option>
+			<option value="cercaAeropuerto">Cerca de aeropuerto </option>
+			<option value="accesibleMovilidadReducida">Accesible para Movilidad Reducida </option>
+		</select>
+	</div><!--/item-->
+
+	<div class="buscador">
+		<select  name="precio" class="formstyle">
+			<option value="0"> Calidad y Precio €/h </option>
+			<option value="0"> Todas </option>
+
+			<option value="20"> Low Cost... hasta 20 </option>
+			<option value="300">Normal... hasta 300</option>
+			<option value="3000"> Alto...  hasta 3000</option>
+			<option value="10000"> Especial...  hasta 10000</option>
+			<option value="10001"> Singular...  más de 10000</option>
+		</select>
+	</div><!--/item-->
+
+
+	<div class="añadir">
+		<ul>
+			<li>
+				<a href="{{path('project_front_sede_registrar')}}"><img class="icon" src="{{ asset('sistema/images/icons/mas.png')}}" width="27" height="27" title="Añadir Gratis"></a>
+			</li>
+			<li style="float:right;">
+				<a href="javascript:void(0)" id="buscarSede" ><img class="icon" src="{{ asset('sistema/images/icons/buscar.png')}}" width="27" height="27" alt="Buscar"></a>
+			</li>
+		</ul>
+	</div>
+	<div class="buscador">
+		<select   name="modo" class="formstyle">
+			<option value="0-0"> Personas y disposición </option>
+			<option value="0-0"> Todas </option>
+
+			<option value="modoAula-0"> Modo Aula</option>
+			<option value="modoAula-30">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; _hasta 30 </option>
+			<option value="modoAula-100">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; _hasta 100 </option>
+			<option value="modoAula-101">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; _más de 100 </option>
+
+			<option value="modoBanquete-0"> Banquete (con mesas) </option>
+			<option value="modoBanquete-30">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; _hasta 30 </option>
+			<option value="modoBanquete-100">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; _hasta 100 </option>
+			<option value="modoBanquete-101">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; _más de 100 </option>
+
+			<option value="modoCocktail-0"> Modo Cocktail (de pie) </option>
+			<option value="modoCocktail-30">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; _hasta 30 </option>
+			<option value="modoCocktail-100">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; _hasta 100 </option>
+			<option value="modoCocktail-101">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; _más de 100 </option>
+
+			<option value="modoEscenario-0"> Modo Escenario</option>
+			<option value="modoEscenario-30">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; _hasta 30 </option>
+			<option value="modoEscenario-100">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; _hasta 100 </option>
+			<option value="modoEscenario-101">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; _más de 100 </option>
+
+			<option value="modoExposicion-0"> Modo Exposición </option>
+			<option value="modoExposicion-30">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; _hasta 30 </option>
+			<option value="modoExposicion-100">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; _hasta 100 </option>
+			<option value="modoExposicion-101">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; _más de 100 </option>
+		</select>
+	</div><!--/item-->
+
+	<div class="buscador">
+		<select name="tiposede"  class="formstyle">
+			<option value="0"> Tipo </option>
+			<option value="0"> Todos </option>
+			<option value="colegioInstituto">Colegio/Instituto </option>
+			<option value="universidad">Universidad </option>
+			<option value="otrosCentrosFormacion">Otros Centros de Formación </option>
+			<option value="coWorking">Coworking </option>
+			<option value="centroNegocios">Centro de Negocios</option>
+			<option value="oficinaProfesional">Oficina Profesional</option>
+			<option value="hotel">Hotel</option>
+			<option value="restauranteBarDiscoteca">Restaurante, bar, discoteca</option>
+			<option value="finca">Finca</option>
+			<option value="colegioProfesional">Colegio Profesional</option>
+			<option value="fundacionCentroCultural">Fundación, Centro Cultural</option>
+			<option value="clubPrivadoAsociacion">Club privado o asociación</option>
+			<option value="cineTeatro">Cine o teatro</option>
+			<option value="centroDeportivo">Centro Deportivo</option>
+			<option value="centroFerial">Centro Ferial</option>
+			<option value="centroRecreativo">Centro Recreativo</option>
+			<option value="centroComercial">Centro Comercial</option>
+
+		</select>
+	</div><!--/item-->
+
+	<div class="buscador">
+		<select   name="actividades" class="formstyle">
+			<option value="0"> Actividades Posibles </option>
+			<option value="0"> Todas </option>
+			<option value="formacionTeorica"> Formación Teórica</option>
+			<option value="formacionInformatica"> Formación Informática </option>
+			<option value="formacionTaller"> Formación Taller</option>
+		    <option value="exposicion"> Exposicion</option>	
+            <option value="ventaFeria"> Venta, Feria</option>
+			<option value="deporte"> Deporte</option>
+			<option value="espectaculo"> Espectáculo</option>
+			<option value="reunionAsamblea"> Reunión o asamblea</option>
+			<option value="boda"> Boda</option>
+			<option value="fiesta"> Fiesta</option>
+			<option value="jardineria"> Jardín</option>
+		</select>
+	</div><!--/item-->
+
+	<div class="itemmap">
+		<!--
+		<iframe width="770" height="350" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.es/maps?f=q&amp;source=s_q&amp;hl=es&amp;geocode=&amp;q=espa%C3%B1a&amp;aq=&amp;sll=37.333351,-4.576501&amp;sspn=8.66189,18.314209&amp;ie=UTF8&amp;hq=&amp;hnear=Espa%C3%B1a&amp;t=m&amp;ll=39.656456,-3.493652&amp;spn=5.919918,17.138672&amp;z=6&amp;output=embed"></iframe>
+		<br />
+		<small><a href="https://maps.google.es/maps?f=q&amp;source=embed&amp;hl=es&amp;geocode=&amp;q=espa%C3%B1a&amp;aq=&amp;sll=37.333351,-4.576501&amp;sspn=8.66189,18.314209&amp;ie=UTF8&amp;hq=&amp;hnear=Espa%C3%B1a&amp;t=m&amp;ll=39.656456,-3.493652&amp;spn=5.919918,17.138672&amp;z=6" style="color:#0000FF;text-align:left">Ver mapa más grande</a></small>
+
+		-->
+		<div id="map-canvas"></div>
+	</div><!--/item-->
+
+	<div id="contador">
+		<a href="#" style="color:#999">Ver Mapa de Islas Canarias</a>
+	</div>
+</div>

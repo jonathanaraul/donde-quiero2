@@ -1,0 +1,7 @@
+parameters:
+#    project_layout.example.class: Project\LayoutBundle\Example
+
+services:
+#    project_layout.example:
+#        class: %project_layout.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]

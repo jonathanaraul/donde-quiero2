@@ -1,0 +1,111 @@
+{% extends "ProjectLayoutBundle:Structure:base.html.twig" %}
+
+{%block scripts%}
+{% include 'ProjectBackBundle:Dashboard:scriptsDashboard.html.twig' %}
+{%endblock%}
+
+{%block contenedorbase%}
+<div class="wrapper">
+
+	{% include 'ProjectLayoutBundle:Structure:top.html.twig'  with {'clase': color}  %}
+	{% include 'ProjectLayoutBundle:Structure:sesion.html.twig'  with {'datos': datos} %}
+
+	{% include 'ProjectBackBundle:Dashboard:cabecera.html.twig'  with {'dashboard': dashboard} %}
+
+	<div id="work" class="{{color}}" style="width: 820px;height: 480px;">
+		<div class="clearfix"></div>
+		<!-- Work Links Section Start -->
+		<div class="añadir" style="width: 350px;text-align: left;">
+			<a href="javascript:void(0)">{{dashboard.grafica}}</a><!--/item-->
+		</div>
+		</br>
+		<div style="margin-top: 20px;padding-top: 20px;">
+			<!--/item-->
+			<div id="linechart" style="min-width: 400px; height: 400px; margin: 0 auto"></div>
+		</div>
+		<div class="clearfix"></div>
+	</div>
+
+	<div class="clearfix"></div>
+</div><!--/html_carousel-->
+
+{{ form_start(form, { 'attr': {'id': 'formularioGestion'}}) }}
+<div id="work" class="{{color}}" style="width: 820px;">
+	<!-- Work Links Section Start -->
+	<div class="añadir" >
+		<a href="javascript:void(0)">{{dashboard.widget}}</a><!--/item-->
+	</div>
+	<div class="buscador">
+		{{ form_widget(form.user, { 'attr': {'class': 'formstyle selectBusqueda'} }) }}
+	</div>
+	<div class="buscador">
+		{{ form_widget(form.espacio, { 'attr': {'class': 'formstyle selectBusqueda'} }) }}
+	</div>
+	<div class="buscador">
+		{{ form_widget(form.servicio, { 'attr': {'class': 'formstyle selectBusqueda'} }) }}
+	</div>
+
+	<div class="añadir">
+		<ul>
+			<li>
+				<a href="{{dashboard.urlCrear}}"><img class="icon" src="{{ asset('sistema/images/icons/mas.png')}}" width="27" height="27" title="Añadir Gratis"></a>
+			</li>
+			<li style="float:right;">
+				<a href="javascript:void(0)" id="buscarGestion" numresults="8"><img class="icon" src="{{ asset('sistema/images/icons/buscar.png')}}" width="27" height="27" alt="Buscar"></a>
+			</li>
+		</ul>
+	</div>
+
+	<div class="buscador">
+		{{ form_widget(form.evento, { 'attr': {'class': 'formstyle selectBusqueda'} }) }}
+	</div>
+	<div class="buscador">
+		{{ form_widget(form.sede, { 'attr': {'class': 'formstyle selectBusqueda'} }) }}
+	</div>
+	<div class="buscador">
+		{{ form_widget(form.pagado, { 'attr': {'class': 'formstyle selectBusqueda'} }) }}
+	</div>
+
+	<div class="clearfix"></div>
+	<div style="margin-top: 9px;">
+
+		<!--/item-->
+		<table class="t-gestion">
+			<tr>
+				<td class="t-titulo t-azul">{{ knp_pagination_sortable(pagination, 'Id', 'o.id') }}</td>
+				<td class="t-titulo t-azul">{{ knp_pagination_sortable(pagination, 'Usuario', 'o.user') }}</td>
+				<td class="t-titulo t-azul">{{ knp_pagination_sortable(pagination, 'Espacio', 'o.espacio') }}</td>
+				<td class="t-titulo t-azul">{{ knp_pagination_sortable(pagination, 'Servicio', 'o.servicio') }}</td>
+				<td class="t-titulo t-azul">{{ knp_pagination_sortable(pagination, 'Evento', 'o.evento') }}</td>
+				<td class="t-titulo t-azul">{{ knp_pagination_sortable(pagination, 'Sede', 'o.sede') }}</td>
+				<td class="t-titulo t-azul">{{ knp_pagination_sortable(pagination, 'Fecha Inicio', 'o.fechaInicio') }}</td>
+				<td class="t-titulo t-azul">{{ knp_pagination_sortable(pagination, 'Pagado', 'o.pagado') }}</td>
+				<td class="t-titulo t-azul">{{ knp_pagination_sortable(pagination, 'Aprobado', 'o.aprobado') }}</td>
+				<td class="t-titulo t-azul">{{ knp_pagination_sortable(pagination, 'Cancelado', 'o.cancelado') }}</td>
+			</tr>
+			{% for element in pagination %}
+			<tr {% if loop.index is odd %}style="background-color: #F1F1F0;"{% endif %}>
+				<td>{{ element.id }}</td>
+				<td class="gestion-ingreso-usuario">{%if element.user.path is not null%}<img src="{{ element.user.getWebPath | apply_filter('gestion') }}"></br>{%endif%}{{element.user.username|title}}</td>
+				<td class="gestion-ingreso-especial">{%if element.espacio %}{{element.espacio.nombre|title}}{%else%}-{%endif%}</td>
+				<td class="gestion-ingreso-especial">{%if element.servicio %}{{element.servicio.nombre|title}}{%else%}-{%endif%}</td>
+				<td class="gestion-ingreso-especial">{%if element.evento %}{{element.evento.nombre|title}}{%else%}-{%endif%}</td>
+				<td class="gestion-ingreso-especial">{%if element.sede %}{{element.sede.nombre|title}}{%else%}-{%endif%}</td>
+				<td >{{ element.fechaInicio.format('d/m/Y') }}</td>
+				<td >{%if element.pagado %}Si{%else%}No{%endif%}</td>
+				<td >{%if element.aprobado %}Si{%else%}No{%endif%}</td>
+				<td class="funcionGestion" tipo="ingreso" tarea="cancelado" identificador="{{ element.id }}">{%if element.cancelado %}Si{%else%}No{%endif%}</td>
+			</tr>
+			{%endfor%}
+		</table>
+	</div>
+	<div class="clearfix"></div>
+	<div id="contador" class="paginacion-{{color}}">
+		<span style="color:" class=""> {{ knp_pagination_render(pagination) }}</span>
+		<span style="color: #000;" class="">  {{ pagination.getTotalItemCount }} Resultados</span>
+	</div>
+</div>
+{{ form_end(form) }}
+<div class="clearfix"></div>
+</div><!--/html_carousel-->
+{%endblock%} 

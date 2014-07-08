@@ -1,0 +1,231 @@
+project_front_homepage:
+    pattern:  /
+    defaults: { _controller: ProjectFrontBundle:Default:index }
+project_front_direccionador:
+    pattern:  /direccionador
+    defaults: { _controller: ProjectFrontBundle:Default:direccionador }
+project_front_suspendida::
+    pattern:  /cuenta/suspendida
+    defaults: { _controller: ProjectFrontBundle:Default:cuentaSuspendida }
+
+project_front_helpers_funcion:
+    pattern:  /helpers/funcion
+    defaults: { _controller: ProjectFrontBundle:Helpers:funcion}
+    requirements:
+      _method: POST
+
+
+project_front_pago_procesar_reserva:
+    pattern:  /reservar/procesar-reserva
+    defaults: { _controller: ProjectFrontBundle:Pago:procesarReserva}
+    requirements:
+      _method: POST
+project_front_pago_borrar_reservas:
+    pattern:  /reservar/borrar-reservas
+    defaults: { _controller: ProjectFrontBundle:Pago:borrarReservas}
+    requirements:
+      _method: POST
+project_front_pago_confirmacion_guardar:
+    pattern:  /reservar/confirmacion/guardar
+    defaults: { _controller: ProjectFrontBundle:Pago:confirmacionGuardar}
+    requirements:
+      _method: POST
+project_front_pago_aprobado:
+    pattern:  /pago/aprobado/{id}
+    defaults: { _controller: ProjectFrontBundle:Pago:aprobado,id: '1' }
+project_front_pago_cancelado:
+    pattern:  /pago/cancelado/{id}
+    defaults: { _controller: ProjectFrontBundle:Pago:cancelado,id: '1' }
+
+project_front_espacio_individual:
+    pattern:  /espacio/{id}
+    defaults: { _controller: ProjectFrontBundle:Espacio:individual,id: '1' }
+project_front_espacio_grupal:
+    pattern:  /espacios
+    defaults: { _controller: ProjectFrontBundle:Espacio:grupal }
+project_front_espacio_registrar:
+    pattern:  /registrar/espacio
+    defaults: { _controller: ProjectFrontBundle:Espacio:registrar }
+project_front_espacio_editar:
+    pattern:  /editar/espacio/{id}
+    defaults: { _controller: ProjectFrontBundle:Espacio:editar,id: '1' }
+project_front_espacio_busqueda:
+    pattern:  /busqueda/espacio
+    defaults: { _controller: ProjectFrontBundle:Espacio:busqueda}
+    requirements:
+      _method: POST
+project_front_espacio_reservar:
+    pattern:  /reservar/espacio/{id}
+    defaults: { _controller: ProjectFrontBundle:Espacio:reserva,id: '1' }
+project_front_espacio_confirmacion:
+    pattern:  /reservar/confirmacion/espacio/{id}
+    defaults: { _controller: ProjectFrontBundle:Espacio:confirmacion,id: '1' }
+
+project_front_evento_individual:
+    pattern:  /evento/{id}
+    defaults: { _controller: ProjectFrontBundle:Evento:individual,id: '1' }
+project_front_evento_grupal:
+    pattern:  /eventos
+    defaults: { _controller: ProjectFrontBundle:Evento:grupal }
+project_front_evento_registrar:
+    pattern:  /registrar/evento
+    defaults: { _controller: ProjectFrontBundle:Evento:registrar }
+project_front_evento_editar:
+    pattern:  /editar/evento/{id}
+    defaults: { _controller: ProjectFrontBundle:Evento:editar,id: '1' }
+project_front_evento_busqueda:
+    pattern:  /busqueda/evento
+    defaults: { _controller: ProjectFrontBundle:Evento:busqueda}
+    requirements:
+      _method: POST
+project_front_evento_reservar:
+    pattern:  /reservar/evento/{id}
+    defaults: { _controller: ProjectFrontBundle:Evento:reserva,id: '1' }
+project_front_evento_confirmacion:
+    pattern:  /reservar/confirmacion/evento/{id}
+    defaults: { _controller: ProjectFrontBundle:Evento:confirmacion,id: '1' }
+
+project_front_servicio_individual:
+    pattern:  /servicio/{id}
+    defaults: { _controller: ProjectFrontBundle:Servicio:individual,id: '1' }
+project_front_servicio_grupal:
+    pattern:  /servicios
+    defaults: { _controller: ProjectFrontBundle:Servicio:grupal }
+project_front_servicio_registrar:
+    pattern:  /registrar/servicio
+    defaults: { _controller: ProjectFrontBundle:Servicio:registrar }
+project_front_servicio_editar:
+    pattern:  /editar/servicio/{id}
+    defaults: { _controller: ProjectFrontBundle:Servicio:editar,id: '1' }
+project_front_servicio_busqueda:
+    pattern:  /busqueda/servicio
+    defaults: { _controller: ProjectFrontBundle:Servicio:busqueda}
+    requirements:
+      _method: POST
+project_front_servicio_reservar:
+    pattern:  /reservar/servicio/{id}
+    defaults: { _controller: ProjectFrontBundle:Servicio:reserva,id: '1' }
+project_front_servicio_confirmacion:
+    pattern:  /reservar/confirmacion/servicio/{id}
+    defaults: { _controller: ProjectFrontBundle:Servicio:confirmacion,id: '1' }
+
+project_front_sede_grupal:
+    pattern:  /sedes
+    defaults: { _controller: ProjectFrontBundle:Sede:grupal }
+project_front_sede_individual:
+    pattern:  /sede/{id}
+    defaults: { _controller: ProjectFrontBundle:Sede:individual,id: '1' }
+project_front_sede_registrar:
+    pattern:  /registrar/sede
+    defaults: { _controller: ProjectFrontBundle:Sede:registrar }
+project_front_sede_editar:
+    pattern:  /editar/sede/{id}
+    defaults: { _controller: ProjectFrontBundle:Sede:editar,id: '1' }
+project_front_sede_busqueda:
+    pattern:  /busqueda/sede
+    defaults: { _controller: ProjectFrontBundle:Sede:busqueda}
+    requirements:
+      _method: POST
+project_front_sede_reservar:
+    pattern:  /reservar/sede/{id}
+    defaults: { _controller: ProjectFrontBundle:Sede:reserva,id: '1' }
+project_front_sede_confirmacion:
+    pattern:  /reservar/confirmacion/sede/{id}
+    defaults: { _controller: ProjectFrontBundle:Sede:confirmacion,id: '1' }
+
+
+project_front_users_buscar_ciudad:
+    pattern:  /users/buscarCiudad
+    defaults: { _controller: ProjectFrontBundle:Users:buscarCiudad }
+    requirements:
+      _method: POST
+
+project_front_contacto_enviar_mensaje:
+    pattern:  /contacto/enviarMensaje
+    defaults: { _controller: ProjectFrontBundle:Contacto:enviarMensaje}
+    requirements:
+      _method: POST
+
+project_front_perfil_privado:
+    pattern:  /perfil/privado
+    defaults: { _controller: ProjectFrontBundle:Perfil:privado }
+project_front_perfil_publico:
+    pattern:  /perfil/publico
+    defaults: { _controller: ProjectFrontBundle:Perfil:publico }
+project_front_perfil_enrutador:
+    pattern:  /perfil/enrutador
+    defaults: { _controller: ProjectFrontBundle:Perfil:enrutador }
+project_front_perfil_editar:
+    pattern:  /perfil/editar
+    defaults: { _controller: ProjectFrontBundle:Perfil:editar }
+project_front_perfil_crearcuenta:
+    pattern:  /crearcuenta
+    defaults: { _controller: ProjectFrontBundle:Perfil:crearCuenta }
+project_front_perfil_facturacion:
+    pattern:  /perfil/facturacion
+    defaults: { _controller: ProjectFrontBundle:Facturacion:index }
+project_front_perfil_enviar_solicitud_baja:
+    pattern:  /perfil/enviarSolicitudBaja
+    defaults: { _controller: ProjectFrontBundle:Perfil:enviarSolicitudBaja }
+    requirements:
+      _method: POST
+project_front_perfil_cancelar_solicitud_baja:
+    pattern:  /perfil/cancelarSolicitudBaja
+    defaults: { _controller: ProjectFrontBundle:Perfil:cancelarSolicitudBaja }
+    requirements:
+      _method: POST
+project_front_perfil_reservas:
+    pattern:  /perfil/reservas
+    defaults: { _controller: ProjectFrontBundle:Perfil:reservas }
+project_front_perfil_notificaciones:
+    pattern:  /perfil/notificaciones
+    defaults: { _controller: ProjectFrontBundle:Perfil:notificaciones }
+project_front_perfil_notificacion_reserva:
+    pattern:  /perfil/notificacionReserva
+    defaults: { _controller: ProjectFrontBundle:Perfil:notificacionReserva }
+    requirements:
+      _method: POST
+
+
+
+project_front_front_perfil:
+    pattern:  /perfil
+    defaults: { _controller: ProjectFrontBundle:Default:perfil }
+
+
+
+
+
+
+project_front_listado:
+    pattern:  /listado
+    defaults: { _controller: ProjectFrontBundle:Default:listado }
+project_front_acerca:
+    pattern:  /acerca
+    defaults: { _controller: ProjectFrontBundle:Default:acerca }
+project_front_validacion:
+    pattern:  /validacion
+project_front_nuevo:
+    pattern:  /nuevo
+    defaults: { _controller: ProjectFrontBundle:Default:nuevo }
+project_front_historia:
+    pattern:  /historia
+    defaults: { _controller: ProjectFrontBundle:Default:historia }
+project_front_procesa_objeto:
+    pattern:  /procesa/objeto
+    defaults: { _controller: ProjectFrontBundle:Default:procesaObjeto }
+    requirements:
+      _method: POST
+project_front_elimina_objeto:
+    pattern:  /elimina/
+    defaults: { _controller: ProjectFrontBundle:Default:eliminar }
+    requirements:
+      _method: POST
+project_front_editar_objeto:
+    pattern:  /editar/{id}
+    defaults: { _controller: ProjectFrontBundle:Default:editar,id: '1' }
+project_front_ver_objeto:
+    pattern:  /ver/{id}
+    defaults: { _controller: ProjectFrontBundle:Default:ver,id: '1' }
+
+

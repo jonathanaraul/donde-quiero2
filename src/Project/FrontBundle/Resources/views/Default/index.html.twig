@@ -1,0 +1,140 @@
+{% extends "ProjectLayoutBundle:Structure:base.html.twig" %}
+{%block scripts%}
+<script type="text/javascript" src="{{ asset('sistema/scripts/jquery.form.js')}}"></script>
+
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCUY1Omfl_gVZyliOZWXKUYaLG3O0JIleI&sensor=false"></script>
+<script>
+var markers = new Array({{sedes | length}});
+var infowindows = new Array({{sedes | length}});
+var map;
+var mapOptions = {
+	center : new google.maps.LatLng(39.656456, -3.493652),
+	zoom : 6
+};
+
+function initialize() {
+
+map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+
+	{%for element in sedes%}
+	markers[{{loop.index0}}] = new google.maps.Marker({
+		position: new google.maps.LatLng({{element.latitud}}, {{element.longitud}}), map: map,
+		title: '{{element.nombre}}'});
+
+
+var contentString = '<div id="contenedor-mapa" style="width:100%">'+
+        '<div class="imagen-mapa" style="width:182px;float:left;">'+
+            '<p><img src="{%if element.path is not null%}{{("uploads/sedes/"~ element.path) | apply_filter("elementos") }}{%else%}{{asset("sistema/images/nodisponible.png")}}{%endif%}" style="width:180px;height:135px;">'+
+            '</p>'+
+        '</div>'+
+        '<div class="texto-mapa" style="width: 182px;">'+
+            '<h2 id="firstHeading" class="firstHeading">{{element.nombre|title}}</h2>'+
+            '<p>{{element.descripcionGeneral[:120] ~ "..."}}</p>'+
+            '<p><a href="{{ path("project_front_sede_individual",{"id":element.id}) }}"> Leer más</a>.'+
+            '</p>'+
+        '</div>'+
+    '</div>';
+
+infowindows[{{loop.index0}}] = new google.maps.InfoWindow({
+    content: contentString,
+    maxWidth: 400
+});
+
+google.maps.event.addListener(markers[{{loop.index0}}], 'click', function() {
+  infowindows[{{loop.index0}}].open(map,markers[{{loop.index0}}]);
+});
+	{%endfor%}
+
+
+
+
+
+}
+
+google.maps.event.addDomListener(window, 'load', initialize);
+
+</script>
+
+{%endblock%}
+{%block estilos%}
+<style>
+	html, body, #map-canvas {
+		height: 100%;
+		margin: 0px;
+		padding: 0px
+	}
+</style>
+
+{%endblock%}
+{%block contenedorbase%}
+<div class="wrapper">
+
+	{% include 'ProjectLayoutBundle:Structure:top.html.twig' with {'clase': 'gris'} %}
+	{% include 'ProjectLayoutBundle:Structure:sesion.html.twig'  with {'datos': datos} %}
+
+	<header>
+		<!-- Header Title Start -->
+		<h1>encuentra, ofrece, gestiona tus ...</h1>
+
+	</header>
+	<!-- Header Title End -->
+
+	<nav id="destacados">
+
+		<ul>
+			<li>
+				<div class="item2">
+					<a href="#espacios"><img src="{{ asset('sistema/images/icons/espaciosg.png')}}" title="Espacios"></a>
+					<!-- Image must be 400px by 300px -->
+					<h4 style="color:#9BC321">Espacios</h4><!--Title-->
+
+				</div><!--/item-->
+			</li>
+
+			<li>
+				<div class="item1">
+					<a href="#eventos"><img src="{{ asset('sistema/images/icons/eventog.png')}}" title="Eventos"></a>
+					<!-- Image must be 400px by 300px -->
+					<h4 style="color:#ED4CB7">Eventos</h4><!--Title-->
+
+				</div><!--/item-->
+			</li>
+
+			<li>
+
+				<div class="item1">
+					<a href="#servicios"><img src="{{ asset('sistema/images/icons/serviciog.png')}}" title="Servicios"></a>
+					<!-- Image must be 400px by 300px -->
+					<h4 style="color:#43C0EF">Servicios</h4><!--Title-->
+
+				</div><!--/item-->
+			</li>
+
+			<li>
+
+				<div class="item1">
+					<a href="#sedes"><img src="{{ asset('sistema/images/icons/centro.png')}}" title="Sedes"></a>
+					<!-- Image must be 400px by 300px -->
+					<h4 style="color:#F2D900">Sedes</h4><!--Title-->
+
+				</div><!--/item-->
+			</li>
+		</ul>
+		<div class="clearfix"></div>
+	</nav>
+
+	{% render controller('ProjectFrontBundle:Espacio:widget', { 'titulo':'Espacios','numResults': 8,'paginacion':false,'proveedor':false,'cliente':false,'idRelacionado':0 }) %}
+
+	{% render controller('ProjectFrontBundle:Evento:widget', {  'titulo':'Eventos','numResults': 8,'paginacion':false,'proveedor':false,'cliente':false,'idRelacionado':0 }) %}
+
+	{% render controller('ProjectFrontBundle:Servicio:widget', {  'titulo':'Servicios','numResults': 8,'paginacion':false,'proveedor':false,'cliente':false,'idRelacionado':0 }) %}
+
+	{% render controller('ProjectFrontBundle:Sede:widget', {  'titulo':'Sedes','numResults': 8,'proveedor':false,'cliente':false,'idRelacionado':0 }) %}
+
+	<div class="clearfix"></div>
+</div>
+<!-- Work Links Section End -->
+<!-- Last Words Section End-->
+
+<!-- TO MAKE THE PHP FORM WORK, ALL YOU NEED TO DO IS OPEN UP THE FILE CALLED 'submitemail.php' AND CHANGE WHERE IT SAYS 'your email goes here' -->
+{%endblock%} 

@@ -1,0 +1,18 @@
+{% extends "ProjectLayoutBundle:Structure:base.html.twig" %}
+
+{%block contenedorbase%}
+<div class="wrapper">
+
+	{% include 'ProjectLayoutBundle:Structure:top.html.twig'  with {'clase': 'verde'}  %}
+	{% include 'ProjectLayoutBundle:Structure:sesion.html.twig'  with {'datos': datos} %}
+
+    {% render controller('ProjectFrontBundle:Espacio:destacados', { 'numResults': 4 }) %}
+	{% render controller('ProjectFrontBundle:Espacio:widget', { 'titulo':'Espacios','numResults': 16,'paginacion':true,'proveedor':false,'cliente':false,'idRelacionado':0 }) %}
+
+</div>
+
+
+<!-- TO MAKE THE PHP FORM WORK, ALL YOU NEED TO DO IS OPEN UP THE FILE CALLED 'submitemail.php' AND CHANGE WHERE IT SAYS 'your email goes here' -->
+
+<!-- DON'T TOUCH THIS SECTION -->
+{%endblock%} 

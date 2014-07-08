@@ -1,0 +1,3 @@
+project_layout_homepage:
+    path:     /hello/{name}
+    defaults: { _controller: ProjectLayoutBundle:Default:index }

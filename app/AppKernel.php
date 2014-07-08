@@ -21,8 +21,14 @@ class AppKernel extends Kernel
             new Avalanche\Bundle\ImagineBundle\AvalancheImagineBundle(),
             new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
             new FOS\UserBundle\FOSUserBundle(),
-            new Proyecto\PrincipalBundle\ProyectoPrincipalBundle(),
-            new Proyecto\UserBundle\ProyectoUserBundle(),
+            new Doctrine\Bundle\MigrationsBundle\DoctrineMigrationsBundle(),
+            new Craue\FormFlowBundle\CraueFormFlowBundle(),
+            //new Proyecto\PrincipalBundle\ProyectoPrincipalBundle(),
+            //new Proyecto\UserBundle\ProyectoUserBundle(),
+            new Project\FrontBundle\ProjectFrontBundle(),
+            new Project\BackBundle\ProjectBackBundle(),
+            new Project\UserBundle\ProjectUserBundle(),
+            new Project\LayoutBundle\ProjectLayoutBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

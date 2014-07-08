@@ -1,0 +1,190 @@
+<div id="espacios" ></div>
+<div class="verde rejilla-espacios" id="work" paginacion="{{dataPaginacion.paginacion}}" proveedor="{{proveedor}}" cliente="{{cliente}}" idRelacionado="{{idRelacionado}}">
+	<!-- Work Links Section Start -->
+	<div class="añadir">
+		<a href="{{ path('project_front_espacio_grupal') }}">{{titulo}}</a><!--/item-->
+	</div>
+	<div class="buscador">
+		<select name="localidad" class="formstyle">
+			<option value="0"> Ciudad </option>
+			<option value="0"> Todas </option>
+            {%for element in localidades%}
+            <option value="{{element.id}}"> {{element.nombre|title}}({{element.c}}) </option>
+            {%endfor%}
+		</select>
+	</div><!--/item-->
+
+	<div class="buscador">
+		<select   name="disponibilidad" class="formstyle">
+			<option value="0"> Disponibilidad </option>
+			<option value="0"> Todo </option>
+             {%for element in disponibilidad%}
+
+            <option value="{{element.valor}}"> {{element.dia|title}}</option>
+            <option value="{{element.valor}} 08/12">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{element.dia|title}} 8:00am-12:00pm </option>
+            <option value="{{element.valor}} 12/20">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{element.dia|title}} 12:00pm-8:00pm </option>
+            <option value="{{element.valor}} 20/08">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{element.dia|title}} 8:00pm-8:00am </option>
+            {%endfor%}
+
+{#
+			<option value="Madrid"> Enero </option>
+			<option value="Barcelona" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 8:00-14:00 </option>
+			<option value="Barcelona" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 14:00-22:00 </option>
+			<option value="Barcelona" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;fin de semana </option>
+
+			<option value="Madrid"> Febrero </option>
+			<option value="Barcelona" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 8:00-14:00 </option>
+			<option value="Barcelona" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 14:00-22:00 </option>
+			<option value="Barcelona" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; fin de semana </option>
+
+			<option value="Madrid"> Marzo </option>
+			<option value="Barcelona" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 8:00-14:00 </option>
+			<option value="Barcelona" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 14:00-22:00 </option>
+			<option value="Barcelona" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; fin de semana </option>
+
+			<option value="Madrid"> Abril </option>
+			<option value="Barcelona" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 8:00-14:00 </option>
+			<option value="Barcelona" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 14:00-22:00 </option>
+			<option value="Barcelona" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; fin de semana </option>
+
+			<option value="Madrid"> Mayo </option>
+			<option value="Barcelona" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 8:00-14:00 </option>
+			<option value="Barcelona" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 14:00-22:00 </option>
+			<option value="Barcelona" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; fin de semana </option>
+
+			<option value="Madrid"> Junio </option>
+			<option value="Barcelona" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 8:00-14:00 </option>
+			<option value="Barcelona" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 14:00-22:00 </option>
+			<option value="Barcelona" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; fin de semana </option>
+
+			<option value="Madrid"> Julio </option>
+			<option value="Barcelona" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 8:00-14:00 </option>
+			<option value="Barcelona" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 14:00-22:00 </option>
+			<option value="Barcelona" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; fin de semana </option>
+
+			<option value="Madrid"> Agosto </option>
+			<option value="Barcelona" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 8:00-14:00 </option>
+			<option value="Barcelona" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 14:00-22:00 </option>
+			<option value="Barcelona" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;  fin de semana </option>
+
+			<option value="Madrid"> Septiembre </option>
+			<option value="Barcelona" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 8:00-14:00 </option>
+			<option value="Barcelona" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 14:00-22:00 </option>
+			<option value="Barcelona" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;  fin de semana </option>
+
+			<option value="Madrid"> Octubre </option>
+			<option value="Barcelona" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 8:00-14:00 </option>
+			<option value="Barcelona" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 14:00-22:00 </option>
+			<option value="Barcelona" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;  fin de semana </option>
+
+			<option value="Madrid"> Noviembre </option>
+			<option value="Barcelona" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 8:00-14:00 </option>
+			<option value="Barcelona" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 14:00-22:00 </option>
+			<option value="Barcelona" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;  fin de semana </option>
+
+			<option value="Madrid"> Diciembre </option>
+			<option value="Barcelona" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 8:00-14:00 </option>
+			<option value="Barcelona" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 14:00-22:00 </option>
+			<option value="Barcelona" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;  fin de semana </option>
+     #}
+		</select>
+	</div><!--/item-->
+
+	<div class="buscador">
+		<select  name="precio" class="formstyle">
+			<option value="0"> Calidad y Precio €/h </option>
+			<option value="0"> Todas </option>
+			<option value="20"> Low Cost... hasta 20 </option>
+			<option value="300">Normal... hasta 300</option>
+			<option value="3000"> Alto...  hasta 3000</option>
+			<option value="10000"> Especial...  hasta 10000</option>
+			<option value="10001"> Singular...  más de 10000</option>
+		</select>
+	</div><!--/item-->
+
+	<div class="añadir">
+		<ul>
+			<li>
+				<a href="{{path('project_front_espacio_registrar')}}"><img class="icon" src="{{ asset('sistema/images/icons/mas.png')}}" width="27" height="27" title="Añadir Gratis"></a>
+			</li>
+			<li style="float:right;">
+				<a href="javascript:void(0)" id="buscarEspacio" numResults="{{dataPaginacion.numResults}}"><img class="icon" src="{{ asset('sistema/images/icons/buscar.png')}}" width="27" height="27" alt="Buscar"></a>
+			</li>
+		</ul>
+	</div><!--/item--><!--/item--><!--/item-->
+
+	<div class="buscador">
+		<select   name="modo" class="formstyle">
+			<option value="0-0"> Personas y disposición </option>
+			<option value="0-0"> Todas </option>
+
+			<option value="modoAula-0"> Modo Aula</option>
+			<option value="modoAula-30">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; _hasta 30 </option>
+			<option value="modoAula-100">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; _hasta 100 </option>
+			<option value="modoAula-101">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; _más de 100 </option>
+
+			<option value="modoBanquete-0"> Banquete (con mesas) </option>
+			<option value="modoBanquete-30">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; _hasta 30 </option>
+			<option value="modoBanquete-100">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; _hasta 100 </option>
+			<option value="modoBanquete-101">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; _más de 100 </option>
+
+			<option value="modoCocktail-0"> Modo Cocktail (de pie) </option>
+			<option value="modoCocktail-30">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; _hasta 30 </option>
+			<option value="modoCocktail-100">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; _hasta 100 </option>
+			<option value="modoCocktail-101">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; _más de 100 </option>
+
+			<option value="modoEscenario-0"> Modo Escenario</option>
+			<option value="modoEscenario-30">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; _hasta 30 </option>
+			<option value="modoEscenario-100">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; _hasta 100 </option>
+			<option value="modoEscenario-101">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; _más de 100 </option>
+
+			<option value="modoExposicion-0"> Modo Exposición </option>
+			<option value="modoExposicion-30">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; _hasta 30 </option>
+			<option value="modoExposicion-100">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; _hasta 100 </option>
+			<option value="modoExposicion-101">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; _más de 100 </option>
+		</select>
+	</div><!--/item-->
+
+	<div class="buscador">
+		<select   name="superficie" class="formstyle">
+			<option value="0"> M2 </option>
+			<option value="0"> Todas </option>
+			<option value="15"> hasta 15 </option>
+			<option value="30"> hasta 30 </option>
+			<option value="100"> hasta 100 </option>
+			<option value="500"> hasta 500 </option>
+			<option value="2000"> hasta 2000 </option>
+			<option value="2001"> más de 2000 </option>
+		</select>
+	</div><!--/item-->
+
+	<div class="buscador">
+		<select   name="actividades" class="formstyle">
+			<option value="0"> Actividades Posibles </option>
+			<option value="0"> Todas </option>
+			<option value="formacionTeorica"> Formación Teórica</option>
+			<option value="formacionInformatica"> Formación Informática </option>
+			<option value="formacionTaller"> Formación Taller</option>
+		    <option value="exposicion"> Exposicion</option>	
+            <option value="ventaFeria"> Venta, Feria</option>
+			<option value="deporte"> Deporte</option>
+			<option value="espectaculo"> Espectáculo</option>
+			<option value="reunionAsamblea"> Reunión o asamblea</option>
+			<option value="boda"> Boda</option>
+			<option value="fiesta"> Fiesta</option>
+			<option value="jardineria"> Jardín</option>
+		</select>
+	</div><!--/item-->
+
+    <div id="elementos-espacio-verde">
+	{% include 'ProjectFrontBundle:Espacio:elementos.html.twig'  with {'elementos': elementos} %}
+    </div>
+	<div class="clearfix"></div>
+	<div id="contador" class="paginacion-verde">
+		{% include 'ProjectFrontBundle:Espacio:paginacion.html.twig' with {'dataPaginacion': dataPaginacion} %}
+	</div>
+	<div class="clearfix"></div>
+	<div id="loader-widget-verde" style="display:none;height:{%if numResults== 4%}150{%else%}260{%endif%}px;">
+       <p style="text-align:center;width: 100%;margin-top: {%if numResults== 4%}73{%else%}168{%endif%}px;"><img src="{{ asset('sistema/images/loader-verde.gif')}}" title="Cargando espacios" style="width:80px;"></p>
+	</div>
+</div>

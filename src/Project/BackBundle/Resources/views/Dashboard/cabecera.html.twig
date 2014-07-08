@@ -1,0 +1,31 @@
+
+	<div class="clearfix" ></div>
+	<!-- Text Section End -->
+	<div id="botonesGestion">
+		<div tipo="Ingresos" class="work verdeazul botonGestion" style="margin-left: 8px;" >
+			<h3 class="{%if dashboard.widget == "Reservas"%}tituloBotonGestionSeleccionado{%endif%} tituloBotonGestion" >Ingresos</h3>
+		</div>
+		<div tipo="Usuarios" class="work rojo botonGestion " >
+			<h3 class="{%if dashboard.widget == "Usuarios"%}tituloBotonGestionSeleccionado{%endif%} tituloBotonGestion" >Usuarios</h3>
+		</div>
+		<div tipo="Espacios" class="work verde botonGestion" >
+			<h3 class="{%if dashboard.widget == "Espacios"%}tituloBotonGestionSeleccionado{%endif%} tituloBotonGestion" >Espacios</h3>
+		</div>
+		<div tipo="Eventos" class="work rosa botonGestion" >
+			<h3 class="{%if dashboard.widget == "Eventos"%}tituloBotonGestionSeleccionado{%endif%} tituloBotonGestion" >Eventos</h3>
+		</div>
+		<div tipo="Servicios" class="work azul botonGestion" >
+			<h3 class="{%if dashboard.widget == "Servicios"%}tituloBotonGestionSeleccionado{%endif%} tituloBotonGestion" >Servicios</h3>
+		</div>
+		<div tipo="Sedes" class="work amarillo botonGestion" >
+			<h3 class="{%if dashboard.widget == "Sedes"%}tituloBotonGestionSeleccionado{%endif%} tituloBotonGestion" >Sedes</h3>
+		</div>
+
+        <div class="clearfix"></div>
+	</div>
+	<div class="clearfix" style="margin-top: 20px;"></div>
+	<h3>{{dashboard.titulo|title}}</h3>
+	<div class="clearfix"></div>
+	<p>
+		{{dashboard.mensaje}}
+	</p>

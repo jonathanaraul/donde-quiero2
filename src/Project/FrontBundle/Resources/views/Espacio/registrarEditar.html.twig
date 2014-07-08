@@ -1,0 +1,563 @@
+{% extends "ProjectLayoutBundle:Structure:base.html.twig" %}
+{%block scripts%}
+<script type="text/javascript" src="{{ asset('sistema/scripts/registrar-editar-espacio.js')}}"></script>
+<script type="text/javascript">var direccionBuscarCiudad = "{{path('proyecto_users_buscar_ciudad')}}";</script>
+
+{%endblock%}
+
+{%block contenedorbase%}
+<div class="wrapper">
+
+	{% include 'ProjectLayoutBundle:Structure:top.html.twig'  with {'clase': 'verde'}  %}
+
+	<div class="verde work mostrar" id="work-primero"  >
+		<div class="aviso"   >
+			<h2 class="izquierda">registrando tu espacio.... </h2><h2 class="derecha">(1/5) </h2>
+			<div class="clearfix"></div>
+			<p>
+				- No pagas nada.  </br>
+				- Te alquilarán y pagarán online. </br>
+				- Gestionarás tu calendario de reservas y cancelaciones gratis. </br>
+				- Tendrás difusión y posicionamiento gratuito en internet.
+			</p>
+
+			<h2 class="izquierda">a cambio.... </h2>
+			<div class="clearfix"></div>
+			<p>
+				- Esfuérzate definiendo bien con datos, fotos,.. ¡Tendrás más éxito!.   </br>
+				- Lee las <a href="condiciones.html">Condiciones detalladas</a> que aceptas al registrar el espacio. </br>
+				- Nuestro premio es un  % ¡Sólo de las contrataciones reales que te consigamos! .
+			</p>
+		</div>
+	</div>
+	<!-- Text Section End -->
+
+	<div class="verde work" id=""  >
+		<form action="{{ url }}" method="post" {{ form_enctype(form) }} id="formulario-registro">
+			<div class="nuevo">
+
+				<p>
+					{{ form_errors(form) }}
+				</p>
+
+				<div class="formnuevo mostrar">
+
+					<div class="clearfix"></div>
+
+					<p>
+						<strong>Registrar un nuevo espacio como:</strong>
+					</p></br>
+
+					<p></p>
+
+					<p>
+						{{ form_widget(form.propietarioEmpleado) }}Propietario/a ó Empleado
+					</p>
+
+					<p>
+						{{ form_widget(form.agenteComercial) }}Agente Comercial
+					</p>
+
+					<p>
+						{{ form_widget(form.administradorWeb) }}Administrador de la Web
+					</p>
+
+					<p>
+						&nbsp;
+					</p>
+
+					<div class="clearfix"></div>
+
+					<div class="enviar">
+						<a href="javascript:void(0)" class="siguiente-formulario" referencia="segundo" actual="primero">Siguiente</a>
+					</div>
+
+					<div class="clearfix"></div>
+
+				</div>
+
+				<div class="formnuevo ocultar">
+
+					<h2 > Registrar nuevo espacio (2/5)</h2>
+					<p >
+						&nbsp;
+					</p>
+					<p>
+						Rellena los siguientes datos para registrar del nuevo espacio:
+					</p>
+
+					<p>
+						&nbsp;
+					</p>
+
+					{{ form_widget(form.nombre, { 'attr': {'class': 'formstyle','title': 'Nombre del Espacio (Max 20 carácteres)'} }) }}
+
+					<div class="clearfix"></div>
+
+					{{ form_widget(form.descripcionGeneral, { 'attr': {'title': 'Descripción general'} }) }}
+
+					<p>
+						Pertenece a la sede:
+					</p>
+
+					{{ form_widget(form.sede, { 'attr': {'class': 'formstyle'} }) }}
+
+					<p>
+						Provincia
+					</p>
+					<select required="required" class="formstyle" id="form_provincia">
+						{%for element in provincias%}
+						<option value="{{element.id}}" {%if idProvincia ==element.id%}selected=""{%endif%}>{{element.nombre}}</option>
+						{%endfor%}
+					</select>
+
+					<p>
+						Localidad
+					</p>
+					{{ form_widget(form.localidad, { 'attr': {'class': 'formstyle'} }) }}
+
+					<p>
+						&nbsp;
+					</p>
+					<p style="float:left">
+						Añadir Imágenes
+					</p>
+					{{ form_widget(form.file, { 'attr': {'class': 'formstyle','accept':'image/*'} }) }}
+
+					<div class="clearfix"></div>
+					<!--<div class="enviar">
+					+
+					</div>
+					<div class="clearfix"></div>
+					<p style="float:left">
+					Añadir Planos Jpeg
+					</p>
+					<div class="enviar">
+					Buscar imagen ...
+					</div>
+					<div class="clearfix"></div>
+					<div class="enviar">
+					+
+					</div>-->
+					<div class="clearfix"></div>
+					{{ form_widget(form.enlaceVideo, { 'attr': {'class': 'formstyle','title': 'Añadir enlace a Video'} }) }}
+
+					<!--
+					<div class="clearfix"></div>
+					<div class="enviar">
+					+
+					</div>-->
+					<div class="clearfix"></div>
+
+					<p>
+						&nbsp;
+					</p>
+					<p>
+						&nbsp;
+					</p>
+					<div class="clearfix"></div>
+
+					<div class="enviar">
+						<a href="javascript:void(0)" class="siguiente-formulario" referencia="tercero" actual="segundo">Siguiente</a>
+					</div>
+					<div class="enviar">
+						<a href="javascript:void(0)" class="anterior-formulario" referencia="primero" actual="segundo">Anterior</a>
+					</div>
+
+					<div class="clearfix"></div>
+				</div>
+
+				<div class="formnuevo ocultar">
+
+					<h2 > Registrar nuevo espacio (3/5)</h2>
+					<p>
+						&nbsp;
+					</p>
+
+					<p>
+						<strong>Detalles del espacio :</strong>
+					</p>
+
+					<p>
+						Superficie  (m2)
+					</p>
+					{{ form_widget(form.superficie, { 'attr': {'class': 'formstyle','title':'Superficie  (m2)','min':'0','step':'1','value':'0'} }) }}
+					<p>
+						Ancho Mínimo Libre (m)
+					</p>
+					{{ form_widget(form.anchoMinimoLibre, { 'attr': {'class': 'formstyle','title':'Ancho Mínimo Libre (m)','min':'0','step':'1','value':'0'} }) }}
+					<p>
+						Largo Mínimo Libre (m)
+					</p>
+					{{ form_widget(form.largoMinimoLibre, { 'attr': {'class': 'formstyle','title':'Largo Mínimo Libre (m)','min':'0','step':'1','value':'0'} }) }}
+					<p>
+						Altura Mínima Libre (m)
+					</p>
+					{{ form_widget(form.alturaMinimaLibre, { 'attr': {'class': 'formstyle','title':'Altura Mínima Libre (m)','min':'0','step':'1','value':'0'} }) }}
+
+					<p>
+						&nbsp;
+					</p>
+					<p>
+						<strong>Permite las siguientes configuraciones:</strong>
+					</p>
+					<p class="left">
+						{{ form_widget(form.modoAula) }}
+						<strong> Modo Aula (Sillas)</strong>
+					<p class="right">
+						hasta
+						{{ form_widget(form.modoAulaCapacidad, { 'attr': {'class': 'formstyle3','title':'...','min':'0','step':'1','value':'0'} }) }}
+						personas
+					</p>
+
+					<p class="left">
+						{{ form_widget(form.modoBanquete) }}
+						<strong> Modo Banquete</strong>
+					<p class="right">
+						hasta
+						{{ form_widget(form.modoBanqueteCapacidad, { 'attr': {'class': 'formstyle3','title':'...','min':'0','step':'1','value':'0'} }) }}
+						personas
+					</p>
+
+					<p class="left">
+						{{ form_widget(form.modoCocktail) }}
+						<strong> Modo Cocktail</strong>
+					<p class="right">
+						hasta
+						{{ form_widget(form.modoCocktailCapacidad, { 'attr': {'class': 'formstyle3','title':'...','min':'0','step':'1','value':'0'} }) }}
+						personas
+					</p>
+
+					<p class="left">
+						{{ form_widget(form.modoEscenario) }}
+						<strong> Modo Escenario</strong>
+					<p class="right">
+						hasta
+						{{ form_widget(form.modoEscenarioCapacidad, { 'attr': {'class': 'formstyle3','title':'...','min':'0','step':'1','value':'0'} }) }}
+						personas
+					</p>
+
+					<p class="left">
+						{{ form_widget(form.modoExposicion) }}
+						<strong> Modo Exposición</strong>
+					<p class="right">
+						hasta
+						{{ form_widget(form.modoExposicionCapacidad, { 'attr': {'class': 'formstyle3','title':'...','min':'0','step':'1','value':'0'} }) }}
+						personas
+					</p>
+
+					<p>
+						&nbsp;
+					</p>
+					<p>
+						&nbsp;
+					</p>
+					<p>
+						<strong>El espacio tiene:</strong>
+					</p>
+
+					<p style="float:left; width:200px;">
+						{{ form_widget(form.jardineria) }}
+						Jardín
+					</p>
+
+					</br>
+					<p style="float:left; width:200px;">
+						{{ form_widget(form.pilaresSueltos) }}
+						Pilares sueltos
+					</p>
+					</br>
+					<p style="float:left; width:270px;">
+						{{ form_widget(form.entradaAseosMovilidadReducida) }}
+						Entrada y aseos movilidad reducida
+					</p>
+					</br>
+					<p style="float:left;width:200px;">
+						{{ form_widget(form.ventanasExterior) }}
+						Ventanas al exterior
+					</p>
+					</br>
+					<p style="float:left; width:200px;">
+						{{ form_widget(form.ventanasPatioInterior) }}
+						Ventanas al patio interior
+					</p>
+					</br>
+					<p style="float:left; width:280px;">
+						{{ form_widget(form.posibilidadOscurecerSala) }}
+						Posibilidad de oscurecer la sala
+					</p>
+					<p>
+						&nbsp;
+					</p>
+					<p>
+						&nbsp;
+					</p>
+
+					{{ form_widget(form.otrasCaracteristicas, { 'attr': {'class': 'formstyle','title':'Otros...'} }) }}
+					</br>
+
+					<div class="clearfix"></div>
+
+					<div class="clearfix"></div>
+					<p>
+						&nbsp;
+					</p>
+
+					<div class="enviar">
+						<a href="javascript:void(0)" class="siguiente-formulario" referencia="cuarto" actual="tercero">Siguiente</a>
+					</div>
+					<div class="enviar">
+						<a href="javascript:void(0)" class="anterior-formulario" referencia="segundo" actual="tercero">Anterior</a>
+					</div>
+
+					<div id="error"></div>
+					<div class="clearfix"></div>
+				</div>
+
+				<div class="formnuevo ocultar">
+
+					<h2 > Registrar nuevo espacio (4/5)</h2>
+					<p >
+						&nbsp;
+					</p>
+					<p>
+						<strong>Equipamiento incluido:</strong> (si no es gratuito, <a href="#">regístralo</a> </br>con su precio como servicio adjunto al de la sede).
+					</p>
+					<p>
+						&nbsp;
+					</p>
+
+					<div class="clearfix"></div>
+
+					<p>
+						{{ form_widget(form.proyectorPantallaSala) }} Proyector y pantalla de sala
+					</p>
+
+					<p >
+						{{ form_widget(form.microfonoAltavoces) }}  Micrófono y altavoces
+					</p>
+
+					<p>
+						{{ form_widget(form.videocamara) }} Videocámara
+					</p>
+
+					<p>
+						&nbsp;
+					</p>
+
+					<p>
+						{{ form_widget(form.wifi) }} WiFi
+					</p>
+
+					<p style="width:200px;">
+						{{ form_widget(form.internetCable) }}Internet por Cable
+					</p>
+
+					<p>
+						&nbsp;
+					</p>
+
+					<p style="width:200px;">
+						{{ form_widget(form.maquinaBebidas) }}
+						Máquina de bebidas
+					</p>
+
+					<p style="width:200px;">
+						{{ form_widget(form.pizarra) }}  Pizarra
+					</p>
+
+					<p style="width:200px;">
+						{{ form_widget(form.conserjeria) }}
+						Conserjería
+					</p>
+
+					<p>
+						&nbsp;
+					</p>
+
+					<p style="width:200px;">
+						{{ form_widget(form.aireAcondicionado) }}  Aire acondicionado
+					</p>
+
+					<p style="width:200px;">
+						{{ form_widget(form.calefaccion) }}
+						Calefacción
+					</p>
+
+					<p>
+						&nbsp;
+					</p>
+
+					{{ form_widget(form.otrosServicios, { 'attr': {'class': 'formstyle','title':'Otros...'} }) }}
+					</br>
+
+					<div class="clearfix"></div>
+					<p>
+						&nbsp;
+					</p>
+
+					<div class="enviar">
+						<a href="javascript:void(0)" class="siguiente-formulario" referencia="quinto" actual="cuarto">Siguiente</a>
+					</div>
+					<div class="enviar">
+						<a href="javascript:void(0)" class="anterior-formulario" referencia="tercero" actual="cuarto">Anterior</a>
+					</div>
+
+					<div id="error"></div>
+					<div class="clearfix"></div>
+				</div>
+
+				<div class="formnuevo ocultar">
+
+					<h2 > Registrar nuevo espacio (5/5)</h2>
+					<p >
+						&nbsp;
+					</p>
+
+					<p>
+						<strong>Detalles de la reserva:</strong>
+					</p>
+
+					<p>
+						{{ form_widget(form.aceptacionReservaAutomatica) }}
+						Aceptación de la reserva automática
+					</p>
+
+					<p >
+						{{ form_widget(form.tiempoMaximoAceptacionReservaAutomatica24h) }}
+						Tiempo máximo de aceptación de reserva 24h
+					</p>
+
+					<p >
+						{{ form_widget(form.tiempoMaximoAceptacionReservaAutomatica48) }}
+						Tiempo máximo de aceptación de reserva 48h
+					</p>
+
+					<p >
+						&nbsp;
+					</p>
+
+					<p >
+						{{ form_widget(form.datosFacturacionPagoDelUsuario) }}
+						Los datos de facturación y pago son los del usuario
+					</p>
+
+					<p >
+						{{ form_widget(form.anadirDatosFacturacionPago) }}
+						<a href="#"> Añadir datos de facturación y pago</a>
+					</p>
+					<p >
+						&nbsp;
+					</p>
+
+					<p>
+						<strong>Señala las actividades permitidas:</strong>
+					</p>
+
+					<p>
+						{{ form_widget(form.todas) }}
+						Todas
+					</p>
+
+					<p >
+						{{ form_widget(form.similaresCentroRealiza) }}
+						Similares a las que el centro ya realiza
+					</p>
+
+					<p >
+						{{ form_widget(form.formacionTeorica) }}
+						Formación Teórica
+					</p>
+
+					<p >
+						{{ form_widget(form.formacionInformatica) }}
+						Formación Informática
+					</p>
+
+					<p >
+						{{ form_widget(form.formacionTaller) }}
+						Formación Taller
+					</p>
+
+					<p >
+						{{ form_widget(form.exposicion) }}
+						Exposición
+					</p>
+
+					<p >
+						{{ form_widget(form.ventaFeria) }}
+						Venta, feria
+					</p>
+
+					<p >
+						{{ form_widget(form.deporte) }}
+						Deporte
+					</p>
+
+					<p >
+						{{ form_widget(form.espectaculo) }}
+						Espectáculo
+					</p>
+
+					<p >
+						{{ form_widget(form.reunionAsamblea) }}
+						Reunión o asamblea
+					</p>
+
+					<p >
+						{{ form_widget(form.boda) }}
+						Boda
+					</p>
+
+					<p >
+						{{ form_widget(form.fiesta) }}
+						Fiesta
+					</p>
+
+					<div class="clearfix"></div>
+
+					<p>
+						&nbsp;
+					</p>
+					<h3 > Precio Euros/hora</h3>
+
+					<p>
+
+						{{ form_widget(form.precioPorHora, { 'attr': {'class': 'formstyle','title':'Precio por Hora (Euros)','min':'0','step':'1','value':'0'} }) }}
+					</p>
+					<p>
+						&nbsp;
+					</p>
+					<div class="clearfix"></div>
+					<p>
+						{{ form_widget(form.aceptoCondicionesUsoPoliticaPrivacidad) }}
+						<a href="#"> Acepto las condiciones de uso y la política de privacidad</a>
+					</p>
+
+					<div class="clearfix"></div>
+
+					<div class="enviar">
+						<a href="javascript:void(0)" class="siguiente-formulario" referencia="envio" actual="quinto">Finalizar</a>
+					</div>
+					<div class="enviar">
+						<a href="javascript:void(0)" class="anterior-formulario" referencia="cuarto" actual="quinto">Anterior</a>
+					</div>
+
+					<div class="clearfix"></div>
+
+				</div>
+
+			</div>
+
+			<div id="oculto" style="display:none">
+
+				{{ form_rest(form) }}
+			</div>
+		</form>
+		<!-- Work Links Section End -->
+		<!-- Last Words Section End-->
+		<div id="sedes" ></div>
+	</div>
+
+</div>
+{%endblock%}

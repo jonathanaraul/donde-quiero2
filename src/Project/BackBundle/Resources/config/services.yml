@@ -1,0 +1,26 @@
+parameters:
+#    project_back.example.class: Project\BackBundle\Example
+
+services:
+#    project_back.example:
+#        class: %project_back.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]
+    project_back.form.type.servicio:
+        class: Project\BackBundle\Form\Type\ServicioType
+        tags:
+            - { name: form.type, alias: servicio }
+
+    project_back.form.type.espacio:
+        class: Project\BackBundle\Form\Type\EspacioType
+        tags:
+            - { name: form.type, alias: espacio }
+
+    project_back.form.type.sede:
+        class: Project\BackBundle\Form\Type\SedeType
+        tags:
+            - { name: form.type, alias: sede }
+
+    project_back.form.type.evento:
+        class: Project\BackBundle\Form\Type\EventoType
+        tags:
+            - { name: form.type, alias: evento }

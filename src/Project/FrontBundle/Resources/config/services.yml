@@ -1,0 +1,7 @@
+parameters:
+#    project_front.example.class: Project\FrontBundle\Example
+
+services:
+#    project_front.example:
+#        class: %project_front.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]

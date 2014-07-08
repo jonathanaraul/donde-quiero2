@@ -1,0 +1,274 @@
+{% extends "ProjectLayoutBundle:Structure:base.html.twig" %}
+{%block scripts%}
+<script type="text/javascript">
+	var direccionEnviarSolicitudBaja = "{{path('proyecto_perfil_enviar_solicitud_baja')}}";
+	var direccionCancelarSolicitudBaja = "{{path('proyecto_perfil_cancelar_solicitud_baja')}}";
+
+</script>
+{%endblock%}
+{%block contenedorbase%}
+<div class="wrapper">
+
+	{% include 'ProjectLayoutBundle:Structure:top.html.twig'  with {'clase': 'gris'}  %}
+
+	<div id="registro">
+		<p>
+			Bienvenido {{user.nombre|title}} {{user.apellido|title}} - <a href="{{ path('fos_user_security_logout') }}">Cerrar Sesión</a>
+		</p>
+	</div>
+
+	<aside id="about" class=" left">
+		<!-- Text Section Start -->
+		<!-- Replace all text with what you want -->
+
+		<div class="perfilimg">
+			<p>
+				<img src="{{ user.getWebPath | apply_filter('perfil') }}"  >
+
+			</p>
+			<p>
+				<a href="{{path('proyecto_perfil_publico')}}">Ver Mi Pérfil Público</a>
+			</p>
+			<p>
+				&nbsp;
+			</p>
+
+			<div class="clearfix"></div>
+			<div class="clearfix"></div>
+
+			<p>
+				<a href="{{path('proyecto_perfil_reservas')}}">Reservas</a>
+			</p>
+
+			<div class="datos">
+				{%if reservas |length >0%}
+				   {%for elemento in reservas%}
+ 
+                {%set color = ''%}
+                {%set nombre = ''%}
+
+                {%if elemento.espacio is not null %}
+                    {%set color = 'verde'%}   
+                    {%set nombre = elemento.espacio.nombre%}    
+                    {%set url = path('project_front_espacio_reservar',{'id':elemento.espacio.id}) %}            
+                {%elseif elemento.sede is not null %}
+                    {%set color = 'amarillo'%}
+                    {%set nombre = elemento.sede.nombre%}
+                    {%set url = path('project_front_sede_reservar',{'id':elemento.sede.id}) %}   
+                {%elseif elemento.servicio is not null%}
+                    {%set color = 'azul'%}
+                    {%set nombre = elemento.servicio.nombre%}
+                    {%set url = path('project_front_servicio_reservar',{'id':elemento.servicio.id}) %}   
+                {%elseif elemento.evento is not null%}
+                    {%set color = 'rosa'%}
+                    {%set nombre = elemento.evento.nombre%}
+                    {%set url = path('project_front_evento_reservar',{'id':elemento.evento.id}) %}   
+                {%endif%}
+
+
+				<p>
+					{{elemento.fechaInicio.format('d/m/Y')}} 
+
+					<a href="{{url}}" class="{{color}}">&nbsp;&nbsp;&nbsp;cod-{{elemento.id}}&nbsp;&nbsp;&nbsp;</a>
+                    
+                    {%if loop.index % 2 == 0%}
+					<span id="circulo" class="verde"> </span>
+					{%endif%}
+
+					<a href="{{url}}"> 
+					{{nombre}}
+				    </a>
+
+				</p>
+				  {%endfor%}
+
+
+				<div class="clearfix"></div>
+				<div class="otras">
+					<p>
+						<a href="{{path('proyecto_perfil_reservas')}}">Todas</a>
+					</p>
+				</div>
+				{%else%}
+				<p>Ud no tiene reservas registradas...</p>
+				{%endif%}
+			</div>
+
+			<div class="clearfix"></div>
+            
+			<p>
+				<a href="{{path('proyecto_perfil_notificaciones')}}">Notificaciones pendientes</a>
+			</p>
+			<div class="datos">
+				{%if notificaciones|length >0%}
+				<div class="datos">
+				
+				{%for elemento in notificaciones%}
+ 
+                {%set color = ''%}
+                {%set nombre = ''%}
+
+                {%if elemento.espacio is not null %}
+                    {%set color = 'verde'%}   
+                    {%set nombre = elemento.espacio.nombre%}    
+                    {%set url = path('project_front_espacio_reservar',{'id':elemento.espacio.id}) %}            
+                {%elseif elemento.sede is not null %}
+                    {%set color = 'amarillo'%}
+                    {%set nombre = elemento.sede.nombre%}
+                    {%set url = path('project_front_sede_reservar',{'id':elemento.sede.id}) %}   
+                {%elseif elemento.servicio is not null%}
+                    {%set color = 'azul'%}
+                    {%set nombre = elemento.servicio.nombre%}
+                    {%set url = path('project_front_servicio_reservar',{'id':elemento.servicio.id}) %}   
+                {%elseif elemento.evento is not null%}
+                    {%set color = 'rosa'%}
+                    {%set nombre = elemento.evento.nombre%}
+                    {%set url = path('project_front_evento_reservar',{'id':elemento.evento.id}) %}   
+                {%endif%}
+				<p>
+					{{elemento.fechaInicio.format('d/m/Y')}} 
+
+					<a href="{{url}}" class="{{color}}">&nbsp;&nbsp;&nbsp;cod-{{elemento.id}}&nbsp;&nbsp;&nbsp;</a>
+                    
+                    {%if loop.index % 2 == 0%}
+					<span id="circulo" class="verde"> </span>
+					{%endif%}
+
+					<a href="{{url}}"> 
+					{{nombre}}
+				    </a>
+
+				</p>
+				{%endfor%} 
+                   {#
+					<p>
+						dd/mm/aa <a href="espaciogestion.html" class="verde">Cod-Solicitud</a><span id="circulo" class="verde"> </span><a href="espacioact.html"> Espacio Coam. </a>
+					</p>
+					<p>
+						dd/mm/aa <a href="espaciogestion.html" class="verde">Cod-Solicitud</a><a href="espacioact.html"> Espacio Coam. </a>
+					</p>
+					<p>
+						dd/mm/aa <a href="reservas.html" class="azul">Cod-Solicitud</a><a href="servicio.html"> Fotografia . </a>
+					</p>
+					<p>
+						dd/mm/aa <a href="espaciogestion.html" class="verde">Cod-Solicitud</a><a href="espacioact.html"> Espacio Coam. </a>
+					</p>
+                      #}
+				</div>
+				<div class="clearfix"></div>
+				<div class="otras">
+					<p>
+						<a href="{{path('proyecto_perfil_notificaciones')}}">Todas</a>
+					</p>
+				</div>
+				{%else%}
+				<p>Ud no tiene notificaciones pendientes...</p>
+				{%endif%}
+			</div>
+			<div class="clearfix"></div>
+
+			
+
+		</div>
+
+		<div class="clearfix"></div>
+
+	</aside>
+	<aside class="right">
+		<div class="sede" style="margin-top:1%;" >
+			<h3>{{user.nombre|title}} {{user.apellido|title}}</h3>
+			<ul>
+				<li class="izquierda">
+					<h4> {{user.profesion|title}}</h4>
+				</li>
+				<li class="derecha">
+					<h4> {{localidad.nombre|title}}, {{user.pais|title}}</h4>
+				</li>
+			</ul>
+			<!--Category-->
+			<div class="clearfix"></div>
+			<p>
+				{{user.descripcion}}
+			</p>
+			<div class="clearfix"></div>
+			<p>
+				<input name="condiciones" type="checkbox" {%if user.eventos%}checked{%endif%} >
+				Disponible para organizar eventos
+			</p>
+			<div class="clearfix"></div>
+			<h4> Información de Contacto</h4>
+			<div class="datos">
+				<p>
+					Teléfono: {{user.telefono}}
+				</p>
+				<p>
+					E-mail: {{user.email}}
+				</p>
+				<div class="clearfix"></div>
+				<div class="otras">
+					<h4><a href="#{#{{path('proyecto_perfil_editar')}}#}">Editar datos personales</a></h4>
+				</div>
+			</div>
+			<div class="clearfix"></div>
+			<h4 style="margin-top:1%">Información de Facturación</h4>
+			<div class="datos">
+				{%if facturacion is null%}
+				<p>
+					Nombre de Empresa:
+				</p>
+				<p>
+					CIF:
+				</p>
+				<p>
+					Dirección de Facturación:
+				</p>
+				<p>
+					Número de Cuenta:
+				</p>
+				<p>
+					&nbsp;
+				</p>
+				<p>
+					Número de Tarjeta de Crédito :
+				</p>
+				<p>
+					Caducidad:
+				</p>
+				<p>
+					Código:
+				</p>
+				{%else%}
+				<p>
+					Nombre de Empresa: {{facturacion.empresa}}
+				</p>
+				<p>
+					CIF: {{facturacion.identificador}}
+				</p>
+				<p>
+					Dirección de Facturación: {{facturacion.direccion}}
+				</p>
+				
+				{%endif%}
+
+				<div class="clearfix"></div>
+				<div class="otras">
+					<h4><a href="{{path('proyecto_perfil_facturacion')}}">Editar datos de facturación</a></h4>
+				</div>
+			</div>
+
+			<div class="clearfix"></div>
+			<h4> Dar de baja de Este perfil.</h4>
+			<div class="datos" id="datos-razon-baja">
+				<p>
+					<textarea name="message" title="Describa la razón por la que quiere dar de baja este perfil" id="razonSolicitudBaja">{%if retiro is not null%}{{retiro.razon}}{%endif%}</textarea>
+</p>				<div class="clearfix"></div>
+				<div class="otras">
+					<h4> {%if retiro is null%} <a href="javascript:void(0)" id="enviarSolicitudBaja" >Enviar Solicitud de Baja</a> {%else%} <a href="javascript:void(0)" id="cancelarSolicitudBaja" >Cancelar solicitud de baja</a> {%endif%} </h4>
+				</div>
+			</div>
+
+		</div>
+	</aside>
+	<div class="clearfix" ></div>
+</div>
+{%endblock%} 

@@ -1,0 +1,30 @@
+      <div id="top" class="{{clase}}">
+       <div id="logo"><!-- Logo image -->
+          <nav class="iconos">	<!-- Navigation Start -->
+            <ul>
+              <li> <a href="{{path('project_front_espacio_grupal')}}"><img class="icon" 
+                {%if clase =='verde'%}
+                src="{{ asset('sistema/images/icons/espaciosact.png')}}"
+                {%else%}
+                src="{{ asset('sistema/images/icons/espacios.png')}}"
+                {%endif%}
+                width="30" height="30" title="Espacios"></a></li>
+              <li> <a href="{{path('project_front_evento_grupal')}}"><img class="icon" src="{{ asset('sistema/images/icons/eventos.png')}}" width="30" height="30" title="Eventos" ></a></li>
+              <li ><a href="{{path('project_front_servicio_grupal')}}"><img class="icon" src="{{ asset('sistema/images/icons/servicios.png')}}" width="30" height="30" title="Servicios"></a></li>
+              <li > <a href="{{path('project_front_sede_grupal')}}" ><img class="icon" src="{{ asset('sistema/images/icons/centros.png')}}" width="30" height="30" title="Sedes"></a></li> 
+            </ul>      
+          </nav>
+          <a href="{{path('project_front_homepage')}}" title="Inicio"> 
+            <h1 id="logotitle"  > donde<spam class="donde">quiero</spam> </h1>
+          </a>
+        </div>
+        <nav class="redes">	<!-- Navigation Start -->
+          <ul>     
+            <li> <a href="#footer"><img class="icon" src="{{ asset('sistema/images/icons/contacto.png')}}" height="26" title="contacto"></a></li>
+            <li style="margin-right:2px"><a href="ayuda.html"><img class="icon" src="{{ asset('sistema/images/icons/ayuda.png')}}" height="26" title="twitter"></a></li>
+            <li > <a href="http://facebook.com"><img class="icon" src="{{ asset('sistema/images/icons/facebook.png')}}" width="26" height="26" title="facebook"></a></li>
+            <li><a href="http://twitter.com"><img class="icon" src="{{ asset('sistema/images/icons/twitter.png')}}" width="26" height="26" title="twitter"></a></li>
+            <li><a href="https://es.linkedin.com/"><img class="icon" src="{{ asset('sistema/images/icons/linkenin.png')}}" width="26" height="26" title="linkendin"></a></li>     
+          </ul>      
+        </nav>	<!-- Navigation End --> 
+      </div><!--/top-->
