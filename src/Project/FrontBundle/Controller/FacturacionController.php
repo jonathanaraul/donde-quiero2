@@ -12,10 +12,10 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use JMS\SecurityExtraBundle\Annotation\Secure;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
-use Proyecto\PrincipalBundle\Entity\User;
-use Proyecto\PrincipalBundle\Entity\Provincia;
-use Proyecto\PrincipalBundle\Entity\Localidad;
-use Proyecto\PrincipalBundle\Entity\Facturacion;
+use Project\UserBundle\Entity\User;
+use Project\BackBundle\Entity\Provincia;
+use Project\BackBundle\Entity\Localidad;
+use Project\BackBundle\Entity\Facturacion;
 
 
 class FacturacionController extends Controller {
@@ -24,7 +24,7 @@ class FacturacionController extends Controller {
 		
 		$user = UtilitiesAPI::getActiveUser($this);
 		$id = $user->getId();
-		$url = $this -> generateUrl('proyecto_perfil_facturacion');
+		$url = $this -> generateUrl('project_front_perfil_facturacion');
 
 		return FacturacionController::procesar($id ,$url,$user, $request,$this);
 	}
@@ -32,12 +32,12 @@ class FacturacionController extends Controller {
 	public static function procesar($id ,$url,$user,Request $request,$class) {
 
 
-		$object = $class -> getDoctrine() -> getRepository('ProyectoPrincipalBundle:Facturacion') -> findOneByUser($id);
+		$object = $class -> getDoctrine() -> getRepository('ProjectBackBundle:Facturacion') -> findOneByUser($id);
 		if($object==null)$id=null;
 		else $id=$object->getId();
 
 		if($id == null )$object = new Facturacion();
-        $localidad =  $class -> getDoctrine() -> getRepository('ProyectoPrincipalBundle:Localidad') -> find($user->getIdLocalidad());
+        $localidad =  $class -> getDoctrine() -> getRepository('ProjectBackBundle:Localidad') -> find($user->getIdLocalidad());
 
 		$object->setLocalidad($localidad);
 		
@@ -49,7 +49,7 @@ class FacturacionController extends Controller {
 		$em = $class->getDoctrine()->getManager();
 		$query = $em->createQuery(
 		    'SELECT p.id,p.nombre
-		    FROM ProyectoPrincipalBundle:Provincia p
+		    FROM ProjectBackBundle:Provincia p
 		    ORDER BY p.nombre ASC'
 		);
 		$provincias = $query->getResult();
@@ -59,7 +59,7 @@ class FacturacionController extends Controller {
             ->add('identificador', 'text')
             ->add('direccion', 'textarea')
             ->add('localidad', 'entity', array(
-			    'class' => 'ProyectoPrincipalBundle:Localidad',
+			    'class' => 'ProjectBackBundle:Localidad',
 			    'property' => 'nombre',
 			    'query_builder' => function(EntityRepository $er)use ( $idProvinciaDefecto ) {
 
@@ -90,14 +90,14 @@ class FacturacionController extends Controller {
     			$em->persist($object);}
     			$em->flush();
 
-    			 return  $class->redirect($class->generateUrl('proyecto_perfil_privado'));
+    			 return  $class->redirect($class->generateUrl('project_front_perfil_privado'));
 	        }
 	        	
 	    }
 
         $secondArray = array('form' => $form->createView(),'url'=>$url,'provincias'=>$provincias,'idProvinciaDefecto'=>$idProvinciaDefecto);
 		$array = array_merge($firstArray, $secondArray);
-		return $class -> render('ProyectoPrincipalBundle:Default:facturacion.html.twig', $array);
+		return $class -> render('ProjectFrontBundle:Default:facturacion.html.twig', $array);
 	}
 	
 	

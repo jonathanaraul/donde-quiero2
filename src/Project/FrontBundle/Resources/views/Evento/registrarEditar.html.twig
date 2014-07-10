@@ -1,7 +1,7 @@
 {% extends "ProjectLayoutBundle:Structure:base.html.twig" %}
 {%block scripts%}
 <script type="text/javascript" src="{{ asset('sistema/scripts/registrar-editar-evento.js')}}"></script>
-<script type="text/javascript">var direccionBuscarCiudad = "{{path('proyecto_users_buscar_ciudad')}}";</script>
+<script type="text/javascript">var direccionBuscarCiudad = "{{path('project_front_users_buscar_ciudad')}}";</script>
 
 {%endblock%}
 
@@ -103,7 +103,7 @@
 					</p>
 					<select required="required" class="formstyle" id="form_provincia">
 						{%for element in provincias%}
-						<option value="{{element.id}}" {%if idProvincia ==element.id%}selected=""{%endif%}>{{element.nombre}}</option>
+						<option value="{{element.id}}" {%if loop.index0 == 0%}selected=""{%endif%}>{{element.nombre}}</option>
 						{%endfor%}
 					</select>
 

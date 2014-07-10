@@ -64,7 +64,7 @@ jQuery("#fos_user_registration_form_marketing").live("change", function() {
  
 $('#formProvincia').live("change", function() {
 
-	var data = 'provincia='+$(this).val();	 
+	var data = 'valor='+$(this).val();	 
 	$('#fos_user_registration_form_idLocalidad').find('option').remove().end();
 	$('#fos_user_registration_form_idLocalidad').css('border','1px solid red');
 

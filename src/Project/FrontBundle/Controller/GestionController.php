@@ -8,15 +8,15 @@ use Symfony\Component\HttpFoundation\Request;
 use Ob\HighchartsBundle\Highcharts\Highchart;
 use Doctrine\ORM\EntityRepository;
 
-use Proyecto\PrincipalBundle\Entity\User;
-use Proyecto\PrincipalBundle\Entity\Espacio;
-use Proyecto\PrincipalBundle\Entity\Servicio;
-use Proyecto\PrincipalBundle\Entity\Evento;
-use Proyecto\PrincipalBundle\Entity\Sede;
-use Proyecto\PrincipalBundle\Entity\Reserva;
-use Proyecto\PrincipalBundle\Entity\Localidad;
-use Proyecto\PrincipalBundle\Entity\Confirmacion;
-use Proyecto\PrincipalBundle\Entity\ConfirmacionElemento;
+use Project\UserBundle\Entity\User;
+use Project\BackBundle\Entity\Espacio;
+use Project\BackBundle\Entity\Servicio;
+use Project\BackBundle\Entity\Evento;
+use Project\BackBundle\Entity\Sede;
+use Project\BackBundle\Entity\Reserva;
+use Project\BackBundle\Entity\Localidad;
+use Project\BackBundle\Entity\Confirmacion;
+use Project\BackBundle\Entity\ConfirmacionElemento;
 
 
 class GestionController extends Controller {
@@ -174,7 +174,7 @@ class GestionController extends Controller {
         $ob->series($series);
         
         //WIDGET
-        $url = $this -> generateUrl('proyecto_perfil_reservas');
+        $url = $this -> generateUrl('project_front_perfil_reservas');
         //$form = null;       
         $filtros = null;
         $filtros['pagado'] = array(0=> 'Pagado',1 => 'Si', 2 => 'No');
@@ -189,7 +189,7 @@ class GestionController extends Controller {
 
         $data = new Reserva();
         $form = $this -> createFormBuilder($data) 
-        -> setAction($this->generateUrl('proyecto_principal_gestion'))
+        -> setAction($this->generateUrl('project_back_dashboard'))
         -> setMethod('POST')
         -> add('user', 'entity', array(
             'class' => 'ProjectUserBundle:User',
@@ -298,7 +298,7 @@ class GestionController extends Controller {
         $gestion['mensaje'] = 'Aqui ud podra estudiar la variacion de los ingresos y las reservas en DondeQuiero';
         $gestion['grafica'] = 'Confirmaciones';
         $gestion['widget'] = 'Reservas';
-        $gestion['urlCrear'] = $this -> generateUrl('proyecto_perfil_reservas');
+        $gestion['urlCrear'] = $this -> generateUrl('project_front_perfil_reservas');
 
 		$secondArray = array('chart' => $ob,'pagination' => $pagination, 'color'=>'verdeazul','gestion'=>$gestion);
         $secondArray['form'] =  $form -> createView();
@@ -358,7 +358,7 @@ class GestionController extends Controller {
 
         $data = new User();
         $form = $this -> createFormBuilder($data) 
-        -> setAction($this->generateUrl('proyecto_principal_gestion_usuarios'))
+        -> setAction($this->generateUrl('project_back_dashboard_usuarios'))
         -> setMethod('POST')
         -> add('username', 'text', array('required' => false)) 
         -> add('email', 'text', array('required' => false)) 
@@ -442,7 +442,7 @@ class GestionController extends Controller {
         $gestion['mensaje'] = 'Aqui ud podra estudiar y acceder a los usuarios de DondeQuiero';
         $gestion['grafica'] = 'Registros de usuarios';
         $gestion['widget'] = 'Usuarios';
-        $gestion['urlCrear'] = $this -> generateUrl('proyecto_perfil_crearcuenta');
+        $gestion['urlCrear'] = $this -> generateUrl('fos_user_registration_register');
 
         $secondArray = array('chart' => $ob,'pagination' => $pagination, 'color'=>'rojo','gestion'=>$gestion);
         $secondArray['form'] =  $form -> createView();
@@ -501,7 +501,7 @@ class GestionController extends Controller {
 
         $data = new Espacio();
         $form = $this -> createFormBuilder($data) 
-        -> setAction($this->generateUrl('proyecto_principal_gestion_espacios'))
+        -> setAction($this->generateUrl('project_back_dashboard_espacios'))
         -> setMethod('POST')
         -> add('nombre', 'text', array('required' => false)) 
         //-> add('email', 'text', array('required' => false)) 
@@ -601,7 +601,7 @@ class GestionController extends Controller {
             10/*limit per page*/
         );
         
-        $gestion['urlCrear'] = $this -> generateUrl('proyecto_principal_espacio_registrar');
+        $gestion['urlCrear'] = $this -> generateUrl('project_front_espacio_registrar');
         $gestion['titulo'] = 'Administración de espacios';
         $gestion['mensaje'] = 'Aqui ud podra estudiar y acceder a los espacios de DondeQuiero';
         $gestion['grafica'] = 'Registros de espacios';
@@ -668,7 +668,7 @@ class GestionController extends Controller {
 
         $data = new Evento();
         $form = $this -> createFormBuilder($data) 
-        -> setAction($this->generateUrl('proyecto_principal_gestion_eventos'))
+        -> setAction($this->generateUrl('project_back_dashboard_eventos'))
         -> setMethod('POST')
         -> add('nombre', 'text', array('required' => false)) 
         //-> add('email', 'text', array('required' => false)) 
@@ -768,7 +768,7 @@ class GestionController extends Controller {
             10/*limit per page*/
         );
         
-        $gestion['urlCrear'] = $this -> generateUrl('proyecto_principal_evento_registrar');
+        $gestion['urlCrear'] = $this -> generateUrl('project_front_evento_registrar');
         $gestion['titulo'] = 'Administración de eventos';
         $gestion['mensaje'] = 'Aqui ud podra estudiar y acceder a los eventos de DondeQuiero';
         $gestion['grafica'] = 'Registros de eventos';
@@ -835,7 +835,7 @@ class GestionController extends Controller {
 
         $data = new Servicio();
         $form = $this -> createFormBuilder($data) 
-        -> setAction($this->generateUrl('proyecto_principal_gestion_servicios'))
+        -> setAction($this->generateUrl('project_back_dashboard_servicios'))
         -> setMethod('POST')
         -> add('nombre', 'text', array('required' => false)) 
         //-> add('email', 'text', array('required' => false)) 
@@ -925,7 +925,7 @@ class GestionController extends Controller {
             10/*limit per page*/
         );
         
-        $gestion['urlCrear'] = $this -> generateUrl('proyecto_principal_servicio_registrar');
+        $gestion['urlCrear'] = $this -> generateUrl('project_front_servicio_registrar');
         $gestion['titulo'] = 'Administración de servicios';
         $gestion['mensaje'] = 'Aqui ud podra estudiar y acceder a los servicios de DondeQuiero';
         $gestion['grafica'] = 'Registros de servicios';
@@ -989,7 +989,7 @@ class GestionController extends Controller {
 
         $data = new Sede();
         $form = $this -> createFormBuilder($data) 
-        -> setAction($this->generateUrl('proyecto_principal_gestion_sedes'))
+        -> setAction($this->generateUrl('project_back_dashboard_sedes'))
         -> setMethod('POST')
         -> add('nombre', 'text', array('required' => false)) 
         //-> add('email', 'text', array('required' => false)) 
@@ -1089,7 +1089,7 @@ class GestionController extends Controller {
             10/*limit per page*/
         );
         
-        $gestion['urlCrear'] = $this -> generateUrl('proyecto_principal_sede_registrar');
+        $gestion['urlCrear'] = $this -> generateUrl('project_front_sede_registrar');
         $gestion['titulo'] = 'Administración de sedes';
         $gestion['mensaje'] = 'Aqui ud podra estudiar y acceder a las sedes de DondeQuiero';
         $gestion['grafica'] = 'Registros de sedes';

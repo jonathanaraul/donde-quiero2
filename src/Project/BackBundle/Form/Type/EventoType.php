@@ -6,11 +6,13 @@ namespace Project\BackBundle\Form\Type;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Doctrine\ORM\EntityRepository;
 
 class EventoType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        $parametro = 1;
         $builder
         ->add('propietarioEmpleado', 'checkbox',array('required'  => false))
         ->add('agenteComercial', 'checkbox',array('required'  => false))

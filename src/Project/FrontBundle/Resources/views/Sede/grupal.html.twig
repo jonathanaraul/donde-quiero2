@@ -1,10 +1,10 @@
-{% extends "::base.html.twig" %}
+{% extends "ProjectLayoutBundle:Structure:base.html.twig" %}
 
 {%block contenedorbase%}
 <div class="wrapper">
 
-	{% include '::top.html.twig'  with {'clase': 'amarillo'} %}
-	{% include '::sesion.html.twig'  with {'datos': datos} %}
+	{% include 'ProjectLayoutBundle:Structure:top.html.twig'  with {'clase': 'amarillo'} %}
+	{% include 'ProjectLayoutBundle:Structure:sesion.html.twig'  with {'datos': datos} %}
 	<div id="destacados">
 		<h2 > Destacados </h2>
 		<div class="clearfix"></div>

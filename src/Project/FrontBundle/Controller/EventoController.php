@@ -11,11 +11,13 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use JMS\SecurityExtraBundle\Annotation\Secure;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
-use Proyecto\PrincipalBundle\Entity\User;
-use Proyecto\PrincipalBundle\Entity\Evento;
-use Proyecto\PrincipalBundle\Entity\Reserva;
-use Proyecto\PrincipalBundle\Entity\Confirmacion;
-use Proyecto\PrincipalBundle\Entity\ConfirmacionElemento;
+use Project\UserBundle\Entity\User;
+use Project\BackBundle\Entity\Evento;
+use Project\BackBundle\Entity\Reserva;
+use Project\BackBundle\Entity\Confirmacion;
+use Project\BackBundle\Entity\ConfirmacionElemento;
+
+use  Project\BackBundle\Form\Type\EventoType;
 
 class EventoController extends Controller {
 
@@ -44,7 +46,7 @@ class EventoController extends Controller {
 
 	public function registrarAction(Request $request) {
 		$id = null;
-		$url = $this -> generateUrl('proyecto_principal_evento_registrar');
+		$url = $this -> generateUrl('project_front_evento_registrar');
 
 		return EventoController::registrarEditar($id ,$url, $request,$this);
 	}
@@ -58,12 +60,12 @@ class EventoController extends Controller {
             $titulo = '¡Error 404...!';
             $mensaje = 'Estimado(a) '.ucfirst($user ->getNombre()) . ' '.ucfirst($user ->getApellido()) .' ud no tiene derechos para realizar esta edición.';
             $tituloBoton = 'Ir al inicio';
-            $direccionBoton = $this->generateUrl('proyecto_principal_homepage');
+            $direccionBoton = $this->generateUrl('project_front_homepage');
             $array = array('titulo' => $titulo, 'mensaje' => $mensaje, 'tituloBoton'=>$tituloBoton, 'direccionBoton'=>$direccionBoton );
             return $this -> render('ProjectFrontBundle:Default:mensaje.html.twig', $array);
         }
 
-		$url = $this -> generateUrl('proyecto_principal_evento_editar',array('id' => $id));
+		$url = $this -> generateUrl('project_front_evento_editar',array('id' => $id));
 
 		return EventoController::registrarEditar($id ,$url,$request, $this);
 
@@ -80,17 +82,28 @@ class EventoController extends Controller {
 		$idProvincia = $user->getProvincia()->getId();
 
 		$parametro = $user->getProvincia()->getId();
-        $localidad =  $class -> getDoctrine() -> getRepository('ProjectBackBundle:Localidad') -> find($user->getIdLocalidad());
+        //$localidad =  $class -> getDoctrine() -> getRepository('ProjectBackBundle:Localidad') -> find($user->getIdLocalidad());
+		//$object->setLocalidad($localidad);
 
-		$object->setLocalidad($localidad);
-
-        $form = $class->createForm('evento', $object);
+        $form = $class->createForm(new EventoType(), $object);
 
 	    if ($request->isMethod('POST')) {
 
         	$form->bind($request);
 
-        	if ($form->isValid()) {
+            $prueba = false;
+            if($object->getLocalidad()== null){
+                $data = $request->request->all();
+
+                $idLocalidad = intval($data['evento']['localidad']);
+
+                $localidad =  $class -> getDoctrine() -> getRepository('ProjectBackBundle:Localidad') -> find($idLocalidad);
+                $object->setLocalidad($localidad);
+                $prueba = true;
+            
+                //$objeto = $this -> getDoctrine() -> getRepository('ProjectUserBundle:MarketingValor') -> find($marketingValor);
+            }
+            if ($form->isValid() || $prueba==true) {
 
 
 	        	$em = $class->getDoctrine()->getManager();
@@ -139,7 +152,7 @@ class EventoController extends Controller {
                 $em->persist($reserva);
                 $em->flush();
 
-                return $class->redirect($class->generateUrl('proyecto_principal_evento_individual',array('id' => $object ->getId())));
+                return $class->redirect($class->generateUrl('project_front_evento_individual',array('id' => $object ->getId())));
 
     		}
 	

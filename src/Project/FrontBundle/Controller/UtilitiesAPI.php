@@ -63,7 +63,7 @@ class UtilitiesAPI extends Controller {
 
 	public static function getMenu($seccion, $this) {
 		$menu = array('seccion' => $seccion);
-		// = $this->getDoctrine()->getRepository('ProyectoPrincipalBundle:Sistema')->find(1);
+		// 
 
 		/*
 		 * Añadir exception de no encontrar parameters

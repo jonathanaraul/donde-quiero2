@@ -5,7 +5,7 @@
 {% block fos_user_content %}
 <div class="wrapper">
 
-	{% include '::top.html.twig'  with {'clase': 'gris'}  %}
+	{% include 'ProjectLayoutBundle:Structure:top.html.twig'  with {'clase': 'gris'}  %}
 	<!-- Text Section End -->
 
 	<header>
@@ -14,7 +14,7 @@
 
 		<p>{{'registration.confirmed'|trans({'%username%': user.username})}}</p>
 
-		<p>Ahora <a href="{{ path('proyecto_principal_direccionador') }}">haz clic aquí</a> para continuar</p>
+		<p>Ahora <a href="{{ path('project_front_direccionador') }}">haz clic aquí</a> para continuar</p>
 
 	</header>
 

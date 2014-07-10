@@ -11,8 +11,8 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use JMS\SecurityExtraBundle\Annotation\Secure;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
-use Proyecto\PrincipalBundle\Entity\User;
-use Proyecto\PrincipalBundle\Entity\Sede;
+use Project\UserBundle\Entity\User;
+use Project\BackBundle\Entity\Sede;
 
 class SedeController extends Controller {
 
@@ -41,7 +41,7 @@ class SedeController extends Controller {
 
 	public function registrarAction(Request $request) {
 		$id = null;
-		$url = $this -> generateUrl('proyecto_principal_sede_registrar');
+		$url = $this -> generateUrl('project_front_sede_registrar');
 
 		return SedeController::registrarEditar($id ,$url, $request,$this);
 	}
@@ -49,7 +49,7 @@ class SedeController extends Controller {
 
 		$user = UtilitiesAPI::getActiveUser($this);
 		$id = $user->getId();
-		$url = $this -> generateUrl('proyecto_principal_sede_editar');
+		$url = $this -> generateUrl('project_front_sede_editar');
 
 		return SedeController::registrarEditar($id ,$url,$request, $this);
 
@@ -68,7 +68,7 @@ class SedeController extends Controller {
 		$parametro = $user->getProvincia()->getId();
         $localidad =  $class -> getDoctrine() -> getRepository('ProjectBackBundle:Localidad') -> find($user->getIdLocalidad());
 
-		$object->setLocalidad($localidad);
+		//$object->setLocalidad($localidad);
 		$object->setLatitud($localidad->getLatitud());
 		$object->setLongitud($localidad->getLongitud());
 		$latitud=$localidad->getLatitud();
@@ -167,8 +167,15 @@ class SedeController extends Controller {
 
         	$form->bind($request);
 
-        	if ($form->isValid()) {
-
+            $prueba = false;
+            if($object->getLocalidad()== null){
+                $data = $request->request->all();
+                $idLocalidad = intval($data['form']['localidad']);
+                $localidad =  $class -> getDoctrine() -> getRepository('ProjectBackBundle:Localidad') -> find($idLocalidad);
+                $object->setLocalidad($localidad);
+                $prueba = true;
+            }
+            if ($form->isValid() || $prueba==true) {
 
 	        	$em = $class->getDoctrine()->getManager();
 	        	
@@ -191,7 +198,8 @@ class SedeController extends Controller {
                 $em->flush();
 
 
-				return $class->redirect($class->generateUrl('proyecto_principal_homepage'));
+				//return $class->redirect($class->generateUrl('project_front_homepage'));
+                return $class->redirect($class->generateUrl('project_front_sede_individual',array('id' => $object ->getId())));
 
     		}
 	
@@ -261,8 +269,8 @@ class SedeController extends Controller {
         $parametros = array('accesibilidad'=>$accesibilidad,'tipoSede'=>$tipoSede,'precioHora'=>$precioHora,'actividades'=>$actividades,'modo'=>$modo,'localidad'=>$localidad);
         //echo 'el indice es'.$indice;
         //exit;
-        $arreglo = SedeController::consultaBusqueda($parametros,$paginacion,$proveedor,$cliente,$idRelacionado);
-
+        //$arreglo = SedeController::consultaBusqueda($parametros,$paginacion,$proveedor,$cliente,$idRelacionado);
+$arreglo = SedeController::consultaBusqueda($parametros);
 
 
         $respuesta = new response(json_encode(array('arreglo' => $arreglo)));
@@ -286,8 +294,8 @@ class SedeController extends Controller {
 
     $modoA = "";
     $modoB = "";
-    $tieneWhere = false;
-    $tieneWhereTotales = false;
+    $tieneWhere = true;
+    $tieneWhereTotales = true;
 
     if($parametros!=null){
 

@@ -11,11 +11,11 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use JMS\SecurityExtraBundle\Annotation\Secure;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
-use Proyecto\PrincipalBundle\Entity\User;
-use Proyecto\PrincipalBundle\Entity\Espacio;
-use Proyecto\PrincipalBundle\Entity\Reserva;
-use Proyecto\PrincipalBundle\Entity\Confirmacion;
-use Proyecto\PrincipalBundle\Entity\ConfirmacionElemento;
+use Project\UserBundle\Entity\User;
+use Project\BackBundle\Entity\Espacio;
+use Project\BackBundle\Entity\Reserva;
+use Project\BackBundle\Entity\Confirmacion;
+use Project\BackBundle\Entity\ConfirmacionElemento;
 
 class EspacioController extends Controller {
 
@@ -44,7 +44,7 @@ class EspacioController extends Controller {
 
 	public function registrarAction(Request $request) {
 		$id = null;
-		$url = $this -> generateUrl('proyecto_principal_espacio_registrar');
+		$url = $this -> generateUrl('project_front_espacio_registrar');
 
 		return EspacioController::registrarEditar($id ,$url, $request,$this);
 	}
@@ -58,11 +58,11 @@ class EspacioController extends Controller {
             $titulo = '¡Error 404...!';
             $mensaje = 'Estimado(a) '.ucfirst($user ->getNombre()) . ' '.ucfirst($user ->getApellido()) .' ud no tiene derechos para realizar esta edición.';
             $tituloBoton = 'Ir al inicio';
-            $direccionBoton = $this->generateUrl('proyecto_principal_homepage');
+            $direccionBoton = $this->generateUrl('project_front_homepage');
             $array = array('titulo' => $titulo, 'mensaje' => $mensaje, 'tituloBoton'=>$tituloBoton, 'direccionBoton'=>$direccionBoton );
             return $this -> render('ProjectFrontBundle:Default:mensaje.html.twig', $array);
         }
-		$url = $this -> generateUrl('proyecto_principal_espacio_editar',array('id' => $id));
+		$url = $this -> generateUrl('project_front_espacio_editar',array('id' => $id));
 
 		return EspacioController::registrarEditar($id ,$url,$request, $this);
 
@@ -84,7 +84,7 @@ class EspacioController extends Controller {
 		$parametro = $user->getProvincia()->getId();
         $localidad =  $class -> getDoctrine() -> getRepository('ProjectBackBundle:Localidad') -> find($user->getIdLocalidad());
 
-		$object->setLocalidad($localidad);
+		//$object->setLocalidad($localidad);
 
 
         $form = $class->createFormBuilder($object)
@@ -182,7 +182,16 @@ class EspacioController extends Controller {
 
         	$form->bind($request);
 
-        	if ($form->isValid()) {
+            $prueba = false;
+            if($object->getLocalidad()== null){
+                $data = $request->request->all();
+                $idLocalidad = intval($data['form']['localidad']);
+                $localidad =  $class -> getDoctrine() -> getRepository('ProjectBackBundle:Localidad') -> find($idLocalidad);
+                $object->setLocalidad($localidad);
+                $prueba = true;
+            }
+            if ($form->isValid() || $prueba==true) {
+
 
 
 	        	$em = $class->getDoctrine()->getManager();
@@ -207,7 +216,7 @@ class EspacioController extends Controller {
     			$em->persist($object);
 				$em->flush();
 
-				return $class->redirect($class->generateUrl('proyecto_principal_espacio_individual',array('id' => $object ->getId())));
+				return $class->redirect($class->generateUrl('project_front_espacio_individual',array('id' => $object ->getId())));
 
     		}
 	
@@ -307,8 +316,8 @@ class EspacioController extends Controller {
 
         $arreglo = EspacioController::consultaBusqueda($numResults,$indice,$parametros,$paginacion,$proveedor,$cliente,$idRelacionado);
 
-        $htmlElementos = $this -> renderView('ProjectBackBundle:Espacio:elementos.html.twig', array('elementos'=>$arreglo['elementos']) );
-        $htmlPaginacion = $this -> renderView('ProjectBackBundle:Espacio:paginacion.html.twig', array('dataPaginacion'=>$arreglo['dataPaginacion']));
+        $htmlElementos = $this -> renderView('ProjectFrontBundle:Espacio:elementos.html.twig', array('elementos'=>$arreglo['elementos']) );
+        $htmlPaginacion = $this -> renderView('ProjectFrontBundle:Espacio:paginacion.html.twig', array('dataPaginacion'=>$arreglo['dataPaginacion']));
 
         $respuesta = new response(json_encode(array('htmlElementos' => $htmlElementos,'htmlPaginacion' =>$htmlPaginacion)));
         $respuesta -> headers -> set('content_type', 'aplication/json');

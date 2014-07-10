@@ -12,10 +12,10 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use JMS\SecurityExtraBundle\Annotation\Secure;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
-use Proyecto\PrincipalBundle\Entity\User;
-use Proyecto\PrincipalBundle\Entity\Provincia;
-use Proyecto\PrincipalBundle\Entity\Localidad;
-use Proyecto\PrincipalBundle\Entity\Retiro;
+use Project\UserBundle\Entity\User;
+use Project\BackBundle\Entity\Provincia;
+use Project\BackBundle\Entity\Localidad;
+use Project\BackBundle\Entity\Retiro;
 
 
 class PerfilController extends Controller {
@@ -75,7 +75,7 @@ class PerfilController extends Controller {
 		$secondArray = array('user'=>$user,'facturacion'=>$facturacion,'retiro'=>$retiro,'reservas'=>$reservas,'notificaciones'=>$notificaciones,'localidad'=>$localidad );
 
 		$array = array_merge($firstArray, $secondArray);
-		return $this -> render('ProjectBackBundle:Perfil:privado.html.twig', $array);
+		return $this -> render('ProjectFrontBundle:Perfil:privado.html.twig', $array);
 	}
 	public function notificacionesAction(){
 		$firstArray = UtilitiesAPI::getDefaultContent($this);
@@ -122,7 +122,7 @@ class PerfilController extends Controller {
         $secondArray = array('activas'=>$activas,'pasadas'=>$pasadas,'user'=>$user);
         $secondArray['sedes']     = HelpersController::getSedes(true,false,$idUser,$this);//caso especial mapas javascript
 		$array = array_merge($firstArray, $secondArray);
-        return $this -> render('ProjectBackBundle:Perfil:notificaciones.html.twig', $array);
+        return $this -> render('ProjectFrontBundle:Perfil:notificaciones.html.twig', $array);
 	}
 	public function reservasAction(){
 		$firstArray = UtilitiesAPI::getDefaultContent($this);
@@ -167,7 +167,7 @@ class PerfilController extends Controller {
         $secondArray['sedes']     = HelpersController::getSedes(false,true,$idUser,$this);//caso especial mapas javascript
 		$array = array_merge($firstArray, $secondArray);
 
-		return $this -> render('ProjectBackBundle:Perfil:reservas.html.twig', $array);
+		return $this -> render('ProjectFrontBundle:Perfil:reservas.html.twig', $array);
 	}
     public function notificacionReservaAction(){
         $peticion = $this -> getRequest();
@@ -204,20 +204,20 @@ class PerfilController extends Controller {
 		$secondArray = array('user'=>$user,'localidad'=>$localidad);
 
 		$array = array_merge($firstArray, $secondArray);
-		return $this -> render('ProjectBackBundle:Perfil:publico.html.twig', $array);
+		return $this -> render('ProjectFrontBundle:Perfil:publico.html.twig', $array);
 	}
 	public function editarAction(Request $request) {
 
 		$user = UtilitiesAPI::getActiveUser($this);
 		$id = $user->getId();
-		$url = $this -> generateUrl('proyecto_perfil_editar');
+		$url = $this -> generateUrl('fos_user_profile_edit');
 
 		return PerfilController::procesar($id ,$url,$request, $this);
 
 	}
 	public function crearCuentaAction(Request $request) {
 		$id = null;
-		$url = $this -> generateUrl('proyecto_perfil_crearcuenta');
+		$url = $this -> generateUrl('fos_user_registration_register');
 
 		return PerfilController::procesar($id ,$url, $request,$this);
 	}
@@ -311,13 +311,13 @@ class PerfilController extends Controller {
     				$titulo = '¡Registro completado...!';
     				$mensaje = 'Estimado(a) '.ucfirst($object ->getNombre()) . ' '.ucfirst($object ->getApellido()) .' su registro en DONDE-QUIERO, ha sido completado con éxito, lo invitamos a iniciar sesión con su nueva cuenta.';
     				$tituloBoton = 'Iniciar sesión';
-    				$direccionBoton = $class->generateUrl('proyecto_principal_acceso');
+    				$direccionBoton = $class->generateUrl('fos_user_security_login');
     			}
     			else{
     				$titulo = '¡Perfil actualizado...!';
     				$mensaje = 'Estimado(a) '.ucfirst($object ->getNombre()) . ' '.ucfirst($object ->getApellido()) .' su perfil ha sido actualizado con éxito.';
     				$tituloBoton = 'Perfil privado';
-    				$direccionBoton = $class->generateUrl('proyecto_perfil_privado');
+    				$direccionBoton = $class->generateUrl('fos_user_profile_show');
 
     			}
 
@@ -329,7 +329,7 @@ class PerfilController extends Controller {
 
         $secondArray = array('form' => $form->createView(),'url'=>$url,'accion'=> $accion);
 		$array = array_merge($firstArray, $secondArray);
-		return $class -> render('ProjectBackBundle:Default:registro.html.twig', $array);
+		return $class -> render('ProjectFrontBundle:Default:registro.html.twig', $array);
 	}
 	
 	public function enviarSolicitudBajaAction() {

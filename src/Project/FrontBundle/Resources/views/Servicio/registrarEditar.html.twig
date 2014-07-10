@@ -1,14 +1,14 @@
-{% extends "::base.html.twig" %}
+{% extends "ProjectLayoutBundle:Structure:base.html.twig" %}
 {%block scripts%}
 <script type="text/javascript" src="{{ asset('sistema/scripts/registrar-editar-servicio.js')}}"></script>
-<script type="text/javascript">var direccionBuscarCiudad = "{{path('proyecto_users_buscar_ciudad')}}";</script>
+<script type="text/javascript">var direccionBuscarCiudad = "{{path('project_front_users_buscar_ciudad')}}";</script>
 
 {%endblock%}
 
 {%block contenedorbase%}
 <div class="wrapper">
 
-	{% include '::top.html.twig'  with {'clase': 'azul'}  %}
+	{% include 'ProjectLayoutBundle:Structure:top.html.twig'  with {'clase': 'azul'}  %}
 
 	<div class="azul work mostrar" id="work-primero"  >
 		<div class="aviso"   >

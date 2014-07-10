@@ -7,11 +7,11 @@ use Symfony\Component\Security\Core\SecurityContext;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 
-use Proyecto\PrincipalBundle\Entity\User;
-use Proyecto\PrincipalBundle\Entity\Espacio;
-use Proyecto\PrincipalBundle\Entity\Reserva;
-use Proyecto\PrincipalBundle\Entity\Confirmacion;
-use Proyecto\PrincipalBundle\Entity\ConfirmacionElemento;
+use Project\UserBundle\Entity\User;
+use Project\BackBundle\Entity\Espacio;
+use Project\BackBundle\Entity\Reserva;
+use Project\BackBundle\Entity\Confirmacion;
+use Project\BackBundle\Entity\ConfirmacionElemento;
 
 
 class PagoController extends Controller {
@@ -20,7 +20,7 @@ class PagoController extends Controller {
     public function aprobadoAction($id) {
         $firstArray = UtilitiesAPI::getDefaultContent($this);
 
-        $object = $this -> getDoctrine() -> getRepository('ProyectoPrincipalBundle:Confirmacion') -> find($id);
+        $object = $this -> getDoctrine() -> getRepository('ProjectBackBundle:Confirmacion') -> find($id);
 
         $object->setPagado(true);
         $object->setCancelado(false);       
@@ -31,19 +31,19 @@ class PagoController extends Controller {
 
         $titulo = '¡Reserva exitosa!';
         $mensaje = 'Su reserva fue procesada con éxito...';
-        $direccionBoton = $this -> generateUrl('proyecto_principal_homepage');
+        $direccionBoton = $this -> generateUrl('project_front_homepage');
         $tituloBoton = 'Regresar al home';
 
         $secondArray = array('titulo'=>$titulo,'mensaje'=>$mensaje,'direccionBoton'=>$direccionBoton,'tituloBoton'=>$tituloBoton);
 
         $array = array_merge($firstArray, $secondArray);
-        return $this -> render('ProyectoPrincipalBundle:Default:mensaje.html.twig', $array);
+        return $this -> render('ProjectFrontBundle:Default:mensaje.html.twig', $array);
     }
 
     public function canceladoAction($id) {
         $firstArray = UtilitiesAPI::getDefaultContent($this);
 
-        $object = $this -> getDoctrine() -> getRepository('ProyectoPrincipalBundle:Confirmacion') -> find($id);
+        $object = $this -> getDoctrine() -> getRepository('ProjectBackBundle:Confirmacion') -> find($id);
 
         $object->setPagado(false);
         $object->setCancelado(true);       
@@ -54,14 +54,14 @@ class PagoController extends Controller {
 
         $titulo = '¡Reserva cancelada!';
         $mensaje = 'Su reserva fue cancelada, de igual modo ud podrá realizar el pago cuando lo desee...';
-        $direccionBoton = $this -> generateUrl('proyecto_principal_homepage');
+        $direccionBoton = $this -> generateUrl('project_front_homepage');
         $tituloBoton = 'Regresar al home';
 
         $secondArray = array('titulo'=>$titulo,'mensaje'=>$mensaje,'direccionBoton'=>$direccionBoton,'tituloBoton'=>$tituloBoton);
 
 
         $array = array_merge($firstArray, $secondArray);
-        return $this -> render('ProyectoPrincipalBundle:Default:mensaje.html.twig', $array);
+        return $this -> render('ProjectFrontBundle:Default:mensaje.html.twig', $array);
     }
 
     public function procesarReservaAction() {
@@ -85,8 +85,8 @@ class PagoController extends Controller {
         $em = $class->getDoctrine()->getManager();
 
         $dql =  'SELECT o1
-                 FROM ProyectoPrincipalBundle:Reserva o1, 
-                      ProyectoPrincipalBundle:'.ucfirst(  $arreglo['tipo'] ).' o2
+                 FROM ProjectBackBundle:Reserva o1, 
+                      ProjectBackBundle:'.ucfirst(  $arreglo['tipo'] ).' o2
                  WHERE o1.'.strtolower ( $arreglo['tipo'] ).' = o2.id AND
                        o1.user = :idUser AND
                        o2.id = :idTipo AND
@@ -125,19 +125,19 @@ class PagoController extends Controller {
         $auxiliar = null;
 
         if($arreglo['tipo']=='espacio'){
-            $auxiliar = $class -> getDoctrine() -> getRepository('ProyectoPrincipalBundle:Espacio') -> find($arreglo['idTipo']);
+            $auxiliar = $class -> getDoctrine() -> getRepository('ProjectBackBundle:Espacio') -> find($arreglo['idTipo']);
             $object -> setEspacio( $auxiliar );
         }
         else if($arreglo['tipo']=='servicio'){
-            $auxiliar = $class -> getDoctrine() -> getRepository('ProyectoPrincipalBundle:Servicio') -> find($arreglo['idTipo']);
+            $auxiliar = $class -> getDoctrine() -> getRepository('ProjectBackBundle:Servicio') -> find($arreglo['idTipo']);
             $object -> setServicio( $auxiliar );
         }
         else if($arreglo['tipo']=='sede'){
-            $auxiliar = $class -> getDoctrine() -> getRepository('ProyectoPrincipalBundle:Sede') -> find($arreglo['idTipo']);
+            $auxiliar = $class -> getDoctrine() -> getRepository('ProjectBackBundle:Sede') -> find($arreglo['idTipo']);
             $object -> setSede( $auxiliar );
         }
         else if($arreglo['tipo']=='evento'){
-            $auxiliar = $class -> getDoctrine() -> getRepository('ProyectoPrincipalBundle:Evento') -> find($arreglo['idTipo']);
+            $auxiliar = $class -> getDoctrine() -> getRepository('ProjectBackBundle:Evento') -> find($arreglo['idTipo']);
             $object -> setEvento( $auxiliar );
         }
 
@@ -161,8 +161,8 @@ class PagoController extends Controller {
 
 
         $dql =  'SELECT o1
-                 FROM ProyectoPrincipalBundle:Reserva o1, 
-                      ProyectoPrincipalBundle:'.$tipo.' o2
+                 FROM ProjectBackBundle:Reserva o1, 
+                      ProjectBackBundle:'.$tipo.' o2
                  WHERE o1.'.strtolower ( $tipo ).' = o2.id AND
                        o1.user = :idUser AND
                        o2.id = :idTipo';
@@ -175,8 +175,8 @@ class PagoController extends Controller {
         for ($i=0; $i < count($reservas) ; $i++) { 
 
             $dql =  'SELECT o1
-            FROM ProyectoPrincipalBundle:ConfirmacionElemento o1, 
-            ProyectoPrincipalBundle:Reserva o2
+            FROM ProjectBackBundle:ConfirmacionElemento o1, 
+            ProjectBackBundle:Reserva o2
             WHERE o1.reserva = o2.id AND
             o2.id = :id';
 
@@ -219,27 +219,27 @@ class PagoController extends Controller {
 
 
         if($arreglo['tipo']=='espacio'){
-            $auxiliar = $this -> getDoctrine() -> getRepository('ProyectoPrincipalBundle:Espacio') -> find($arreglo['idTipo']);
+            $auxiliar = $this -> getDoctrine() -> getRepository('ProjectBackBundle:Espacio') -> find($arreglo['idTipo']);
             $object -> setEspacio( $auxiliar );
         }
         else if($arreglo['tipo']=='servicio'){
-            $auxiliar = $this -> getDoctrine() -> getRepository('ProyectoPrincipalBundle:Servicio') -> find($arreglo['idTipo']);
+            $auxiliar = $this -> getDoctrine() -> getRepository('ProjectBackBundle:Servicio') -> find($arreglo['idTipo']);
             $object -> setServicio( $auxiliar );
         }
         else if($arreglo['tipo']=='sede'){
-            $auxiliar = $this -> getDoctrine() -> getRepository('ProyectoPrincipalBundle:Sede') -> find($arreglo['idTipo']);
+            $auxiliar = $this -> getDoctrine() -> getRepository('ProjectBackBundle:Sede') -> find($arreglo['idTipo']);
             $object -> setSede( $auxiliar );
         }
         else if($arreglo['tipo']=='evento'){
-            $auxiliar = $this -> getDoctrine() -> getRepository('ProyectoPrincipalBundle:Evento') -> find($arreglo['idTipo']);
+            $auxiliar = $this -> getDoctrine() -> getRepository('ProjectBackBundle:Evento') -> find($arreglo['idTipo']);
             $object -> setEvento( $auxiliar );
         }
 
         $em -> persist($object);
         $em -> flush();
 
-        $url =  $this -> generateUrl('proyecto_principal_pago_cancelado',array('id' => $object->getId()));
-        $url =  $this -> generateUrl('proyecto_principal_pago_aprobado',array('id' => $object->getId()));
+        $url =  $this -> generateUrl('project_front_pago_cancelado',array('id' => $object->getId()));
+        $url =  $this -> generateUrl('project_front_pago_aprobado',array('id' => $object->getId()));
 
 
         $cantidadReservas = intval($arreglo['cantidadReservas']);
@@ -247,7 +247,7 @@ class PagoController extends Controller {
         for ($i=0; $i < $cantidadReservas ; $i++) { 
         
             $auxiliar = intval($arreglo['reserva_'.($i+1)]);
-            $reserva = $this -> getDoctrine() -> getRepository('ProyectoPrincipalBundle:Reserva') -> find($auxiliar);
+            $reserva = $this -> getDoctrine() -> getRepository('ProjectBackBundle:Reserva') -> find($auxiliar);
             $element = new ConfirmacionElemento();
             $element -> setConfirmacion( $object );
             $element -> setReserva( $reserva );

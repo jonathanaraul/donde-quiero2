@@ -98,21 +98,29 @@ function ejecutaValidaciones(nivel) {
 $("#form_provincia").live("change", function() {
 	
 
-	var data = 'provincia='+$("#form_provincia").val();	 
+	var data = 'valor='+$("#form_provincia").val();	 
 	$('#form_localidad').find('option').remove().end();
+
 	$.post(direccionBuscarCiudad, data, function(respuesta) {
 		var respuesta = JSON.parse(respuesta);
 
-		for (var i = 0; i < respuesta['localidades'].length; i++) {
-			
-			$('#form_localidad').append($('<option>', { 
-		        value: respuesta['localidades'][i]['id'],
-		        text : respuesta['localidades'][i]['nombre']
-		    }));
-		};
+		var newOptions = respuesta.elementos;
+		var select = jQuery('#form_localidad');
+		if(select.prop) {
+			var options = select.prop('options');
+		}
+		else {
+			var options = select.attr('options');
+		}
+		$('option', select).remove();
+
+		$.each(newOptions, function(val, text) {
+			options[options.length] = new Option(text, val);
+		});
+		//$('#fos_user_registration_form_idLocalidad').css('border','none');
 
 
-	                                                         });
+	});
 	return false;     
                                        }
                   );

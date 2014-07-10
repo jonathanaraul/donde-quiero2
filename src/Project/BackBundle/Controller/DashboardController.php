@@ -173,7 +173,7 @@ class DashboardController extends Controller {
         $ob->series($series);
         
         //WIDGET
-        $url = $this -> generateUrl('Project_perfil_reservas');
+        $url = $this -> generateUrl('project_front_perfil_reservas');
         //$form = null;       
         $filtros = null;
         $filtros['pagado'] = array(0=> 'Pagado',1 => 'Si', 2 => 'No');
@@ -188,7 +188,7 @@ class DashboardController extends Controller {
 
         $data = new Reserva();
         $form = $this -> createFormBuilder($data) 
-        -> setAction($this->generateUrl('Project_Back_Default'))
+        -> setAction($this->generateUrl('project_back_dashboard'))
         -> setMethod('POST')
         -> add('user', 'entity', array(
             'class' => 'ProjectUserBundle:User',
@@ -297,7 +297,7 @@ class DashboardController extends Controller {
         $dashboard['mensaje'] = 'Aqui ud podra estudiar la variacion de los ingresos y las reservas en DondeQuiero';
         $dashboard['grafica'] = 'Confirmaciones';
         $dashboard['widget'] = 'Reservas';
-        $dashboard['urlCrear'] = $this -> generateUrl('Project_perfil_reservas');
+        $dashboard['urlCrear'] = $this -> generateUrl('project_front_perfil_reservas');
 
 		$secondArray = array('chart' => $ob,'pagination' => $pagination, 'color'=>'verdeazul','dashboard'=>$dashboard);
         $secondArray['form'] =  $form -> createView();
@@ -357,7 +357,7 @@ class DashboardController extends Controller {
 
         $data = new User();
         $form = $this -> createFormBuilder($data) 
-        -> setAction($this->generateUrl('Project_Back_Default_usuarios'))
+        -> setAction($this->generateUrl('project_back_dashboard_usuarios'))
         -> setMethod('POST')
         -> add('username', 'text', array('required' => false)) 
         -> add('email', 'text', array('required' => false)) 
@@ -441,7 +441,7 @@ class DashboardController extends Controller {
         $dashboard['mensaje'] = 'Aqui ud podra estudiar y acceder a los usuarios de DondeQuiero';
         $dashboard['grafica'] = 'Registros de usuarios';
         $dashboard['widget'] = 'Usuarios';
-        $dashboard['urlCrear'] = $this -> generateUrl('Project_perfil_crearcuenta');
+        $dashboard['urlCrear'] = $this -> generateUrl('fos_user_registration_register');
 
         $secondArray = array('chart' => $ob,'pagination' => $pagination, 'color'=>'rojo','dashboard'=>$dashboard);
         $secondArray['form'] =  $form -> createView();
@@ -500,7 +500,7 @@ class DashboardController extends Controller {
 
         $data = new Espacio();
         $form = $this -> createFormBuilder($data) 
-        -> setAction($this->generateUrl('Project_Back_Default_espacios'))
+        -> setAction($this->generateUrl('project_back_dashboard_espacios'))
         -> setMethod('POST')
         -> add('nombre', 'text', array('required' => false)) 
         //-> add('email', 'text', array('required' => false)) 
@@ -600,7 +600,7 @@ class DashboardController extends Controller {
             10/*limit per page*/
         );
         
-        $dashboard['urlCrear'] = $this -> generateUrl('Project_Back_espacio_registrar');
+        $dashboard['urlCrear'] = $this -> generateUrl('project_front_espacio_registrar');
         $dashboard['titulo'] = 'Administración de espacios';
         $dashboard['mensaje'] = 'Aqui ud podra estudiar y acceder a los espacios de DondeQuiero';
         $dashboard['grafica'] = 'Registros de espacios';
@@ -667,7 +667,7 @@ class DashboardController extends Controller {
 
         $data = new Evento();
         $form = $this -> createFormBuilder($data) 
-        -> setAction($this->generateUrl('Project_Back_Default_eventos'))
+        -> setAction($this->generateUrl('project_back_dashboard_eventos'))
         -> setMethod('POST')
         -> add('nombre', 'text', array('required' => false)) 
         //-> add('email', 'text', array('required' => false)) 
@@ -767,7 +767,7 @@ class DashboardController extends Controller {
             10/*limit per page*/
         );
         
-        $dashboard['urlCrear'] = $this -> generateUrl('Project_Back_evento_registrar');
+        $dashboard['urlCrear'] = $this -> generateUrl('project_front_evento_registrar');
         $dashboard['titulo'] = 'Administración de eventos';
         $dashboard['mensaje'] = 'Aqui ud podra estudiar y acceder a los eventos de DondeQuiero';
         $dashboard['grafica'] = 'Registros de eventos';
@@ -834,7 +834,7 @@ class DashboardController extends Controller {
 
         $data = new Servicio();
         $form = $this -> createFormBuilder($data) 
-        -> setAction($this->generateUrl('Project_Back_Default_servicios'))
+        -> setAction($this->generateUrl('project_back_dashboard_servicios'))
         -> setMethod('POST')
         -> add('nombre', 'text', array('required' => false)) 
         //-> add('email', 'text', array('required' => false)) 
@@ -924,7 +924,7 @@ class DashboardController extends Controller {
             10/*limit per page*/
         );
         
-        $dashboard['urlCrear'] = $this -> generateUrl('Project_Back_servicio_registrar');
+        $dashboard['urlCrear'] = $this -> generateUrl('project_front_servicio_registrar');
         $dashboard['titulo'] = 'Administración de servicios';
         $dashboard['mensaje'] = 'Aqui ud podra estudiar y acceder a los servicios de DondeQuiero';
         $dashboard['grafica'] = 'Registros de servicios';
@@ -988,7 +988,7 @@ class DashboardController extends Controller {
 
         $data = new Sede();
         $form = $this -> createFormBuilder($data) 
-        -> setAction($this->generateUrl('Project_Back_Default_sedes'))
+        -> setAction($this->generateUrl('project_back_dashboard_sedes'))
         -> setMethod('POST')
         -> add('nombre', 'text', array('required' => false)) 
         //-> add('email', 'text', array('required' => false)) 
@@ -1088,7 +1088,7 @@ class DashboardController extends Controller {
             10/*limit per page*/
         );
         
-        $dashboard['urlCrear'] = $this -> generateUrl('Project_Back_sede_registrar');
+        $dashboard['urlCrear'] = $this -> generateUrl('project_front_sede_registrar');
         $dashboard['titulo'] = 'Administración de sedes';
         $dashboard['mensaje'] = 'Aqui ud podra estudiar y acceder a las sedes de DondeQuiero';
         $dashboard['grafica'] = 'Registros de sedes';

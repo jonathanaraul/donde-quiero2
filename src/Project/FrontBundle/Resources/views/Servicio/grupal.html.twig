@@ -1,10 +1,10 @@
-{% extends "::base.html.twig" %}
+{% extends "ProjectLayoutBundle:Structure:base.html.twig" %}
 
 {%block contenedorbase%}
 <div class="wrapper">
 
-	{% include '::top.html.twig'  with {'clase': 'azul'}  %}
-	{% include '::sesion.html.twig'  with {'datos': datos} %}
+	{% include 'ProjectLayoutBundle:Structure:top.html.twig'  with {'clase': 'azul'}  %}
+	{% include 'ProjectLayoutBundle:Structure:sesion.html.twig'  with {'datos': datos} %}
 
 	{% render controller('ProjectFrontBundle:Servicio:destacados', { 'numResults': 4 }) %}
 	{% render controller('ProjectFrontBundle:Servicio:widget', {  'titulo':'Servicios','numResults': 16,'paginacion':true,'proveedor':false,'cliente':false,'idRelacionado':0 }) %}

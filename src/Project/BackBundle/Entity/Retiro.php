@@ -101,10 +101,10 @@ class Retiro
     /**
      * Set user
      *
-     * @param \Project\BackBundle\Entity\User $user
+     * @param \Project\UserBundle\Entity\User $user
      * @return Retiro
      */
-    public function setUser(\Project\BackBundle\Entity\User $user)
+    public function setUser(\Project\UserBundle\Entity\User $user)
     {
         $this->user = $user;
     
@@ -114,7 +114,7 @@ class Retiro
     /**
      * Get user
      *
-     * @return \Project\BackBundle\Entity\User 
+     * @return \Project\UserBundle\Entity\User 
      */
     public function getUser()
     {

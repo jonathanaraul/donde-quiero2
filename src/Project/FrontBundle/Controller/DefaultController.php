@@ -23,10 +23,10 @@ class DefaultController extends Controller {
         $em = $this->getDoctrine()->getManager();
         $url = '';
 
-        if (false === $this->get('security.context')->isGranted('ROLE_ADMIN')) $url = 'proyecto_perfil_privado';
-		else $url = 'proyecto_principal_gestion';
+        if (false === $this->get('security.context')->isGranted('ROLE_ADMIN')) $url = 'project_front_perfil_privado';
+		else $url = 'project_back_dashboard';
 
-		if($user->isEnabled()===false)$url = 'proyecto_principal_suspendida';
+		if($user->isEnabled()===false)$url = 'project_front_suspendida';
 
         return $this->redirect($this->generateUrl($url));
 	}
@@ -39,7 +39,7 @@ class DefaultController extends Controller {
     	$titulo = '¡Su cuenta fue suspendida...!';
     	$mensaje = 'Estimado(a) '.ucfirst($user ->getNombre()) . ' '.ucfirst($user ->getApellido()) .' su cuenta fue suspendida en DONDE-QUIERO, lamentamos la situación.';
     	$tituloBoton = 'Ir al inicio';
-    	$direccionBoton = $this->generateUrl('proyecto_principal_homepage');
+    	$direccionBoton = $this->generateUrl('project_front_homepage');
     	$array = array('titulo' => $titulo, 'mensaje' => $mensaje, 'tituloBoton'=>$tituloBoton, 'direccionBoton'=>$direccionBoton );
     	
     	$session->invalidate();

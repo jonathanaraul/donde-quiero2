@@ -288,684 +288,6 @@ class Evento
     private $temp;
 
 
-    /**
-     * Get id
-     *
-     * @return integer 
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    /**
-     * Set propietarioEmpleado
-     *
-     * @param boolean $propietarioEmpleado
-     * @return Evento
-     */
-    public function setPropietarioEmpleado($propietarioEmpleado)
-    {
-        $this->propietarioEmpleado = $propietarioEmpleado;
-    
-        return $this;
-    }
-
-    /**
-     * Get propietarioEmpleado
-     *
-     * @return boolean 
-     */
-    public function getPropietarioEmpleado()
-    {
-        return $this->propietarioEmpleado;
-    }
-
-    /**
-     * Set agenteComercial
-     *
-     * @param boolean $agenteComercial
-     * @return Evento
-     */
-    public function setAgenteComercial($agenteComercial)
-    {
-        $this->agenteComercial = $agenteComercial;
-    
-        return $this;
-    }
-
-    /**
-     * Get agenteComercial
-     *
-     * @return boolean 
-     */
-    public function getAgenteComercial()
-    {
-        return $this->agenteComercial;
-    }
-
-    /**
-     * Set administradorWeb
-     *
-     * @param boolean $administradorWeb
-     * @return Evento
-     */
-    public function setAdministradorWeb($administradorWeb)
-    {
-        $this->administradorWeb = $administradorWeb;
-    
-        return $this;
-    }
-
-    /**
-     * Get administradorWeb
-     *
-     * @return boolean 
-     */
-    public function getAdministradorWeb()
-    {
-        return $this->administradorWeb;
-    }
-
-    /**
-     * Set fechaRegistro
-     *
-     * @param \DateTime $fechaRegistro
-     * @return Evento
-     */
-    public function setFechaRegistro($fechaRegistro)
-    {
-        $this->fechaRegistro = $fechaRegistro;
-    
-        return $this;
-    }
-
-    /**
-     * Get fechaRegistro
-     *
-     * @return \DateTime 
-     */
-    public function getFechaRegistro()
-    {
-        return $this->fechaRegistro;
-    }
-
-    /**
-     * Set nombre
-     *
-     * @param string $nombre
-     * @return Evento
-     */
-    public function setNombre($nombre)
-    {
-        $this->nombre = $nombre;
-    
-        return $this;
-    }
-
-    /**
-     * Get nombre
-     *
-     * @return string 
-     */
-    public function getNombre()
-    {
-        return $this->nombre;
-    }
-
-    /**
-     * Set duracionTotal
-     *
-     * @param string $duracionTotal
-     * @return Evento
-     */
-    public function setDuracionTotal($duracionTotal)
-    {
-        $this->duracionTotal = $duracionTotal;
-    
-        return $this;
-    }
-
-    /**
-     * Get duracionTotal
-     *
-     * @return string 
-     */
-    public function getDuracionTotal()
-    {
-        return $this->duracionTotal;
-    }
-
-    /**
-     * Set descripcionGeneral
-     *
-     * @param string $descripcionGeneral
-     * @return Evento
-     */
-    public function setDescripcionGeneral($descripcionGeneral)
-    {
-        $this->descripcionGeneral = $descripcionGeneral;
-    
-        return $this;
-    }
-
-    /**
-     * Get descripcionGeneral
-     *
-     * @return string 
-     */
-    public function getDescripcionGeneral()
-    {
-        return $this->descripcionGeneral;
-    }
-
-    /**
-     * Set enlaceVideo
-     *
-     * @param string $enlaceVideo
-     * @return Evento
-     */
-    public function setEnlaceVideo($enlaceVideo)
-    {
-        $this->enlaceVideo = $enlaceVideo;
-    
-        return $this;
-    }
-
-    /**
-     * Get enlaceVideo
-     *
-     * @return string 
-     */
-    public function getEnlaceVideo()
-    {
-        return $this->enlaceVideo;
-    }
-
-    /**
-     * Set aceptacionReservaAutomatica
-     *
-     * @param boolean $aceptacionReservaAutomatica
-     * @return Evento
-     */
-    public function setAceptacionReservaAutomatica($aceptacionReservaAutomatica)
-    {
-        $this->aceptacionReservaAutomatica = $aceptacionReservaAutomatica;
-    
-        return $this;
-    }
-
-    /**
-     * Get aceptacionReservaAutomatica
-     *
-     * @return boolean 
-     */
-    public function getAceptacionReservaAutomatica()
-    {
-        return $this->aceptacionReservaAutomatica;
-    }
-
-    /**
-     * Set tiempoMaximoAceptacionReservaAutomatica24h
-     *
-     * @param boolean $tiempoMaximoAceptacionReservaAutomatica24h
-     * @return Evento
-     */
-    public function setTiempoMaximoAceptacionReservaAutomatica24h($tiempoMaximoAceptacionReservaAutomatica24h)
-    {
-        $this->tiempoMaximoAceptacionReservaAutomatica24h = $tiempoMaximoAceptacionReservaAutomatica24h;
-    
-        return $this;
-    }
-
-    /**
-     * Get tiempoMaximoAceptacionReservaAutomatica24h
-     *
-     * @return boolean 
-     */
-    public function getTiempoMaximoAceptacionReservaAutomatica24h()
-    {
-        return $this->tiempoMaximoAceptacionReservaAutomatica24h;
-    }
-
-    /**
-     * Set tiempoMaximoAceptacionReservaAutomatica48
-     *
-     * @param boolean $tiempoMaximoAceptacionReservaAutomatica48
-     * @return Evento
-     */
-    public function setTiempoMaximoAceptacionReservaAutomatica48($tiempoMaximoAceptacionReservaAutomatica48)
-    {
-        $this->tiempoMaximoAceptacionReservaAutomatica48 = $tiempoMaximoAceptacionReservaAutomatica48;
-    
-        return $this;
-    }
-
-    /**
-     * Get tiempoMaximoAceptacionReservaAutomatica48
-     *
-     * @return boolean 
-     */
-    public function getTiempoMaximoAceptacionReservaAutomatica48()
-    {
-        return $this->tiempoMaximoAceptacionReservaAutomatica48;
-    }
-
-    /**
-     * Set datosFacturacionPagoDelUsuario
-     *
-     * @param boolean $datosFacturacionPagoDelUsuario
-     * @return Evento
-     */
-    public function setDatosFacturacionPagoDelUsuario($datosFacturacionPagoDelUsuario)
-    {
-        $this->datosFacturacionPagoDelUsuario = $datosFacturacionPagoDelUsuario;
-    
-        return $this;
-    }
-
-    /**
-     * Get datosFacturacionPagoDelUsuario
-     *
-     * @return boolean 
-     */
-    public function getDatosFacturacionPagoDelUsuario()
-    {
-        return $this->datosFacturacionPagoDelUsuario;
-    }
-
-    /**
-     * Set anadirDatosFacturacionPago
-     *
-     * @param boolean $anadirDatosFacturacionPago
-     * @return Evento
-     */
-    public function setAnadirDatosFacturacionPago($anadirDatosFacturacionPago)
-    {
-        $this->anadirDatosFacturacionPago = $anadirDatosFacturacionPago;
-    
-        return $this;
-    }
-
-    /**
-     * Get anadirDatosFacturacionPago
-     *
-     * @return boolean 
-     */
-    public function getAnadirDatosFacturacionPago()
-    {
-        return $this->anadirDatosFacturacionPago;
-    }
-
-    /**
-     * Set todas
-     *
-     * @param boolean $todas
-     * @return Evento
-     */
-    public function setTodas($todas)
-    {
-        $this->todas = $todas;
-    
-        return $this;
-    }
-
-    /**
-     * Get todas
-     *
-     * @return boolean 
-     */
-    public function getTodas()
-    {
-        return $this->todas;
-    }
-
-    /**
-     * Set formacionTeorica
-     *
-     * @param boolean $formacionTeorica
-     * @return Evento
-     */
-    public function setFormacionTeorica($formacionTeorica)
-    {
-        $this->formacionTeorica = $formacionTeorica;
-    
-        return $this;
-    }
-
-    /**
-     * Get formacionTeorica
-     *
-     * @return boolean 
-     */
-    public function getFormacionTeorica()
-    {
-        return $this->formacionTeorica;
-    }
-
-    /**
-     * Set formacionInformatica
-     *
-     * @param boolean $formacionInformatica
-     * @return Evento
-     */
-    public function setFormacionInformatica($formacionInformatica)
-    {
-        $this->formacionInformatica = $formacionInformatica;
-    
-        return $this;
-    }
-
-    /**
-     * Get formacionInformatica
-     *
-     * @return boolean 
-     */
-    public function getFormacionInformatica()
-    {
-        return $this->formacionInformatica;
-    }
-
-    /**
-     * Set formacionTaller
-     *
-     * @param boolean $formacionTaller
-     * @return Evento
-     */
-    public function setFormacionTaller($formacionTaller)
-    {
-        $this->formacionTaller = $formacionTaller;
-    
-        return $this;
-    }
-
-    /**
-     * Get formacionTaller
-     *
-     * @return boolean 
-     */
-    public function getFormacionTaller()
-    {
-        return $this->formacionTaller;
-    }
-
-    /**
-     * Set exposicion
-     *
-     * @param boolean $exposicion
-     * @return Evento
-     */
-    public function setExposicion($exposicion)
-    {
-        $this->exposicion = $exposicion;
-    
-        return $this;
-    }
-
-    /**
-     * Get exposicion
-     *
-     * @return boolean 
-     */
-    public function getExposicion()
-    {
-        return $this->exposicion;
-    }
-
-    /**
-     * Set ventaFeria
-     *
-     * @param boolean $ventaFeria
-     * @return Evento
-     */
-    public function setVentaFeria($ventaFeria)
-    {
-        $this->ventaFeria = $ventaFeria;
-    
-        return $this;
-    }
-
-    /**
-     * Get ventaFeria
-     *
-     * @return boolean 
-     */
-    public function getVentaFeria()
-    {
-        return $this->ventaFeria;
-    }
-
-    /**
-     * Set deporte
-     *
-     * @param boolean $deporte
-     * @return Evento
-     */
-    public function setDeporte($deporte)
-    {
-        $this->deporte = $deporte;
-    
-        return $this;
-    }
-
-    /**
-     * Get deporte
-     *
-     * @return boolean 
-     */
-    public function getDeporte()
-    {
-        return $this->deporte;
-    }
-
-    /**
-     * Set espectaculo
-     *
-     * @param boolean $espectaculo
-     * @return Evento
-     */
-    public function setEspectaculo($espectaculo)
-    {
-        $this->espectaculo = $espectaculo;
-    
-        return $this;
-    }
-
-    /**
-     * Get espectaculo
-     *
-     * @return boolean 
-     */
-    public function getEspectaculo()
-    {
-        return $this->espectaculo;
-    }
-
-    /**
-     * Set reunionAsamblea
-     *
-     * @param boolean $reunionAsamblea
-     * @return Evento
-     */
-    public function setReunionAsamblea($reunionAsamblea)
-    {
-        $this->reunionAsamblea = $reunionAsamblea;
-    
-        return $this;
-    }
-
-    /**
-     * Get reunionAsamblea
-     *
-     * @return boolean 
-     */
-    public function getReunionAsamblea()
-    {
-        return $this->reunionAsamblea;
-    }
-
-    /**
-     * Set boda
-     *
-     * @param boolean $boda
-     * @return Evento
-     */
-    public function setBoda($boda)
-    {
-        $this->boda = $boda;
-    
-        return $this;
-    }
-
-    /**
-     * Get boda
-     *
-     * @return boolean 
-     */
-    public function getBoda()
-    {
-        return $this->boda;
-    }
-
-    /**
-     * Set fiesta
-     *
-     * @param boolean $fiesta
-     * @return Evento
-     */
-    public function setFiesta($fiesta)
-    {
-        $this->fiesta = $fiesta;
-    
-        return $this;
-    }
-
-    /**
-     * Get fiesta
-     *
-     * @return boolean 
-     */
-    public function getFiesta()
-    {
-        return $this->fiesta;
-    }
-
-    /**
-     * Set jardineria
-     *
-     * @param boolean $jardineria
-     * @return Evento
-     */
-    public function setJardineria($jardineria)
-    {
-        $this->jardineria = $jardineria;
-    
-        return $this;
-    }
-
-    /**
-     * Get jardineria
-     *
-     * @return boolean 
-     */
-    public function getJardineria()
-    {
-        return $this->jardineria;
-    }
-
-    /**
-     * Set aceptoCondicionesUsoPoliticaPrivacidad
-     *
-     * @param boolean $aceptoCondicionesUsoPoliticaPrivacidad
-     * @return Evento
-     */
-    public function setAceptoCondicionesUsoPoliticaPrivacidad($aceptoCondicionesUsoPoliticaPrivacidad)
-    {
-        $this->aceptoCondicionesUsoPoliticaPrivacidad = $aceptoCondicionesUsoPoliticaPrivacidad;
-    
-        return $this;
-    }
-
-    /**
-     * Get aceptoCondicionesUsoPoliticaPrivacidad
-     *
-     * @return boolean 
-     */
-    public function getAceptoCondicionesUsoPoliticaPrivacidad()
-    {
-        return $this->aceptoCondicionesUsoPoliticaPrivacidad;
-    }
-
-    /**
-     * Set precio
-     *
-     * @param float $precio
-     * @return Evento
-     */
-    public function setPrecio($precio)
-    {
-        $this->precio = $precio;
-    
-        return $this;
-    }
-
-    /**
-     * Get precio
-     *
-     * @return float 
-     */
-    public function getPrecio()
-    {
-        return $this->precio;
-    }
-
-    /**
-     * Set path
-     *
-     * @param string $path
-     * @return Evento
-     */
-    public function setPath($path)
-    {
-        $this->path = $path;
-    
-        return $this;
-    }
-
-    /**
-     * Get path
-     *
-     * @return string 
-     */
-    public function getPath()
-    {
-        return $this->path;
-    }
-
-
-    /**
-     * Set localidad
-     *
-     * @param \Project\BackBundle\Entity\Localidad $localidad
-     * @return Evento
-     */
-    public function setLocalidad(\Project\BackBundle\Entity\Localidad $localidad)
-    {
-        $this->localidad = $localidad;
-    
-        return $this;
-    }
-
-    /**
-     * Get localidad
-     *
-     * @return \Project\BackBundle\Entity\Localidad 
-     */
-    public function getLocalidad()
-    {
-        return $this->localidad;
-    }
-
 
   /**
      * Sets file.
@@ -1072,72 +394,105 @@ class Evento
 
 
     /**
-     * Set destacado
+     * Get id
      *
-     * @param boolean $destacado
-     * @return Evento
+     * @return integer 
      */
-    public function setDestacado($destacado)
+    public function getId()
     {
-        $this->destacado = $destacado;
-    
-        return $this;
+        return $this->id;
     }
 
     /**
-     * Get destacado
+     * Set propietarioEmpleado
      *
-     * @return boolean 
-     */
-    public function getDestacado()
-    {
-        return $this->destacado;
-    }
-
-    /**
-     * Set estado
-     *
-     * @param boolean $estado
+     * @param boolean $propietarioEmpleado
      * @return Evento
      */
-    public function setEstado($estado)
+    public function setPropietarioEmpleado($propietarioEmpleado)
     {
-        $this->estado = $estado;
+        $this->propietarioEmpleado = $propietarioEmpleado;
 
         return $this;
     }
 
     /**
-     * Get estado
+     * Get propietarioEmpleado
      *
      * @return boolean 
      */
-    public function getEstado()
+    public function getPropietarioEmpleado()
     {
-        return $this->estado;
+        return $this->propietarioEmpleado;
     }
 
     /**
-     * Set suspendido
+     * Set agenteComercial
      *
-     * @param boolean $suspendido
+     * @param boolean $agenteComercial
      * @return Evento
      */
-    public function setSuspendido($suspendido)
+    public function setAgenteComercial($agenteComercial)
     {
-        $this->suspendido = $suspendido;
+        $this->agenteComercial = $agenteComercial;
 
         return $this;
     }
 
     /**
-     * Get suspendido
+     * Get agenteComercial
      *
      * @return boolean 
      */
-    public function getSuspendido()
+    public function getAgenteComercial()
     {
-        return $this->suspendido;
+        return $this->agenteComercial;
+    }
+
+    /**
+     * Set administradorWeb
+     *
+     * @param boolean $administradorWeb
+     * @return Evento
+     */
+    public function setAdministradorWeb($administradorWeb)
+    {
+        $this->administradorWeb = $administradorWeb;
+
+        return $this;
+    }
+
+    /**
+     * Get administradorWeb
+     *
+     * @return boolean 
+     */
+    public function getAdministradorWeb()
+    {
+        return $this->administradorWeb;
+    }
+
+    /**
+     * Set fechaRegistro
+     *
+     * @param \DateTime $fechaRegistro
+     * @return Evento
+     */
+    public function setFechaRegistro($fechaRegistro)
+    {
+        $this->fechaRegistro = $fechaRegistro;
+
+        return $this;
+    }
+
+    /**
+     * Get fechaRegistro
+     *
+     * @return \DateTime 
+     */
+    public function getFechaRegistro()
+    {
+        return $this->fechaRegistro;
     }
 
     /**
@@ -1207,6 +562,121 @@ class Evento
     public function getHoraFinalizacion()
     {
         return $this->horaFinalizacion;
+    }
+
+    /**
+     * Set nombre
+     *
+     * @param string $nombre
+     * @return Evento
+     */
+    public function setNombre($nombre)
+    {
+        $this->nombre = $nombre;
+
+        return $this;
+    }
+
+    /**
+     * Get nombre
+     *
+     * @return string 
+     */
+    public function getNombre()
+    {
+        return $this->nombre;
+    }
+
+    /**
+     * Set duracionTotal
+     *
+     * @param string $duracionTotal
+     * @return Evento
+     */
+    public function setDuracionTotal($duracionTotal)
+    {
+        $this->duracionTotal = $duracionTotal;
+
+        return $this;
+    }
+
+    /**
+     * Get duracionTotal
+     *
+     * @return string 
+     */
+    public function getDuracionTotal()
+    {
+        return $this->duracionTotal;
+    }
+
+    /**
+     * Set descripcionGeneral
+     *
+     * @param string $descripcionGeneral
+     * @return Evento
+     */
+    public function setDescripcionGeneral($descripcionGeneral)
+    {
+        $this->descripcionGeneral = $descripcionGeneral;
+
+        return $this;
+    }
+
+    /**
+     * Get descripcionGeneral
+     *
+     * @return string 
+     */
+    public function getDescripcionGeneral()
+    {
+        return $this->descripcionGeneral;
+    }
+
+    /**
+     * Set enlaceVideo
+     *
+     * @param string $enlaceVideo
+     * @return Evento
+     */
+    public function setEnlaceVideo($enlaceVideo)
+    {
+        $this->enlaceVideo = $enlaceVideo;
+
+        return $this;
+    }
+
+    /**
+     * Get enlaceVideo
+     *
+     * @return string 
+     */
+    public function getEnlaceVideo()
+    {
+        return $this->enlaceVideo;
+    }
+
+    /**
+     * Set esPrivado
+     *
+     * @param boolean $esPrivado
+     * @return Evento
+     */
+    public function setEsPrivado($esPrivado)
+    {
+        $this->esPrivado = $esPrivado;
+
+        return $this;
+    }
+
+    /**
+     * Get esPrivado
+     *
+     * @return boolean 
+     */
+    public function getEsPrivado()
+    {
+        return $this->esPrivado;
     }
 
     /**
@@ -1462,54 +932,533 @@ class Evento
         return $this->modoExposicionCapacidad;
     }
 
-
-
     /**
-     * Set esPrivado
+     * Set aceptacionReservaAutomatica
      *
-     * @param boolean $esPrivado
+     * @param boolean $aceptacionReservaAutomatica
      * @return Evento
      */
-    public function setEsPrivado($esPrivado)
+    public function setAceptacionReservaAutomatica($aceptacionReservaAutomatica)
     {
-        $this->esPrivado = $esPrivado;
+        $this->aceptacionReservaAutomatica = $aceptacionReservaAutomatica;
 
         return $this;
     }
 
     /**
-     * Get esPrivado
+     * Get aceptacionReservaAutomatica
      *
      * @return boolean 
      */
-    public function getEsPrivado()
+    public function getAceptacionReservaAutomatica()
     {
-        return $this->esPrivado;
+        return $this->aceptacionReservaAutomatica;
     }
 
-
-
     /**
-     * Set espacio
+     * Set tiempoMaximoAceptacionReservaAutomatica24h
      *
-     * @param \Project\BackBundle\Entity\Espacio $espacio
+     * @param boolean $tiempoMaximoAceptacionReservaAutomatica24h
      * @return Evento
      */
-    public function setEspacio(\Project\BackBundle\Entity\Espacio $espacio = null)
+    public function setTiempoMaximoAceptacionReservaAutomatica24h($tiempoMaximoAceptacionReservaAutomatica24h)
     {
-        $this->espacio = $espacio;
+        $this->tiempoMaximoAceptacionReservaAutomatica24h = $tiempoMaximoAceptacionReservaAutomatica24h;
 
         return $this;
     }
 
     /**
-     * Get espacio
+     * Get tiempoMaximoAceptacionReservaAutomatica24h
      *
-     * @return \Project\BackBundle\Entity\Espacio 
+     * @return boolean 
      */
-    public function getEspacio()
+    public function getTiempoMaximoAceptacionReservaAutomatica24h()
     {
-        return $this->espacio;
+        return $this->tiempoMaximoAceptacionReservaAutomatica24h;
+    }
+
+    /**
+     * Set tiempoMaximoAceptacionReservaAutomatica48
+     *
+     * @param boolean $tiempoMaximoAceptacionReservaAutomatica48
+     * @return Evento
+     */
+    public function setTiempoMaximoAceptacionReservaAutomatica48($tiempoMaximoAceptacionReservaAutomatica48)
+    {
+        $this->tiempoMaximoAceptacionReservaAutomatica48 = $tiempoMaximoAceptacionReservaAutomatica48;
+
+        return $this;
+    }
+
+    /**
+     * Get tiempoMaximoAceptacionReservaAutomatica48
+     *
+     * @return boolean 
+     */
+    public function getTiempoMaximoAceptacionReservaAutomatica48()
+    {
+        return $this->tiempoMaximoAceptacionReservaAutomatica48;
+    }
+
+    /**
+     * Set datosFacturacionPagoDelUsuario
+     *
+     * @param boolean $datosFacturacionPagoDelUsuario
+     * @return Evento
+     */
+    public function setDatosFacturacionPagoDelUsuario($datosFacturacionPagoDelUsuario)
+    {
+        $this->datosFacturacionPagoDelUsuario = $datosFacturacionPagoDelUsuario;
+
+        return $this;
+    }
+
+    /**
+     * Get datosFacturacionPagoDelUsuario
+     *
+     * @return boolean 
+     */
+    public function getDatosFacturacionPagoDelUsuario()
+    {
+        return $this->datosFacturacionPagoDelUsuario;
+    }
+
+    /**
+     * Set anadirDatosFacturacionPago
+     *
+     * @param boolean $anadirDatosFacturacionPago
+     * @return Evento
+     */
+    public function setAnadirDatosFacturacionPago($anadirDatosFacturacionPago)
+    {
+        $this->anadirDatosFacturacionPago = $anadirDatosFacturacionPago;
+
+        return $this;
+    }
+
+    /**
+     * Get anadirDatosFacturacionPago
+     *
+     * @return boolean 
+     */
+    public function getAnadirDatosFacturacionPago()
+    {
+        return $this->anadirDatosFacturacionPago;
+    }
+
+    /**
+     * Set todas
+     *
+     * @param boolean $todas
+     * @return Evento
+     */
+    public function setTodas($todas)
+    {
+        $this->todas = $todas;
+
+        return $this;
+    }
+
+    /**
+     * Get todas
+     *
+     * @return boolean 
+     */
+    public function getTodas()
+    {
+        return $this->todas;
+    }
+
+    /**
+     * Set formacionTeorica
+     *
+     * @param boolean $formacionTeorica
+     * @return Evento
+     */
+    public function setFormacionTeorica($formacionTeorica)
+    {
+        $this->formacionTeorica = $formacionTeorica;
+
+        return $this;
+    }
+
+    /**
+     * Get formacionTeorica
+     *
+     * @return boolean 
+     */
+    public function getFormacionTeorica()
+    {
+        return $this->formacionTeorica;
+    }
+
+    /**
+     * Set formacionInformatica
+     *
+     * @param boolean $formacionInformatica
+     * @return Evento
+     */
+    public function setFormacionInformatica($formacionInformatica)
+    {
+        $this->formacionInformatica = $formacionInformatica;
+
+        return $this;
+    }
+
+    /**
+     * Get formacionInformatica
+     *
+     * @return boolean 
+     */
+    public function getFormacionInformatica()
+    {
+        return $this->formacionInformatica;
+    }
+
+    /**
+     * Set formacionTaller
+     *
+     * @param boolean $formacionTaller
+     * @return Evento
+     */
+    public function setFormacionTaller($formacionTaller)
+    {
+        $this->formacionTaller = $formacionTaller;
+
+        return $this;
+    }
+
+    /**
+     * Get formacionTaller
+     *
+     * @return boolean 
+     */
+    public function getFormacionTaller()
+    {
+        return $this->formacionTaller;
+    }
+
+    /**
+     * Set exposicion
+     *
+     * @param boolean $exposicion
+     * @return Evento
+     */
+    public function setExposicion($exposicion)
+    {
+        $this->exposicion = $exposicion;
+
+        return $this;
+    }
+
+    /**
+     * Get exposicion
+     *
+     * @return boolean 
+     */
+    public function getExposicion()
+    {
+        return $this->exposicion;
+    }
+
+    /**
+     * Set ventaFeria
+     *
+     * @param boolean $ventaFeria
+     * @return Evento
+     */
+    public function setVentaFeria($ventaFeria)
+    {
+        $this->ventaFeria = $ventaFeria;
+
+        return $this;
+    }
+
+    /**
+     * Get ventaFeria
+     *
+     * @return boolean 
+     */
+    public function getVentaFeria()
+    {
+        return $this->ventaFeria;
+    }
+
+    /**
+     * Set deporte
+     *
+     * @param boolean $deporte
+     * @return Evento
+     */
+    public function setDeporte($deporte)
+    {
+        $this->deporte = $deporte;
+
+        return $this;
+    }
+
+    /**
+     * Get deporte
+     *
+     * @return boolean 
+     */
+    public function getDeporte()
+    {
+        return $this->deporte;
+    }
+
+    /**
+     * Set espectaculo
+     *
+     * @param boolean $espectaculo
+     * @return Evento
+     */
+    public function setEspectaculo($espectaculo)
+    {
+        $this->espectaculo = $espectaculo;
+
+        return $this;
+    }
+
+    /**
+     * Get espectaculo
+     *
+     * @return boolean 
+     */
+    public function getEspectaculo()
+    {
+        return $this->espectaculo;
+    }
+
+    /**
+     * Set reunionAsamblea
+     *
+     * @param boolean $reunionAsamblea
+     * @return Evento
+     */
+    public function setReunionAsamblea($reunionAsamblea)
+    {
+        $this->reunionAsamblea = $reunionAsamblea;
+
+        return $this;
+    }
+
+    /**
+     * Get reunionAsamblea
+     *
+     * @return boolean 
+     */
+    public function getReunionAsamblea()
+    {
+        return $this->reunionAsamblea;
+    }
+
+    /**
+     * Set boda
+     *
+     * @param boolean $boda
+     * @return Evento
+     */
+    public function setBoda($boda)
+    {
+        $this->boda = $boda;
+
+        return $this;
+    }
+
+    /**
+     * Get boda
+     *
+     * @return boolean 
+     */
+    public function getBoda()
+    {
+        return $this->boda;
+    }
+
+    /**
+     * Set fiesta
+     *
+     * @param boolean $fiesta
+     * @return Evento
+     */
+    public function setFiesta($fiesta)
+    {
+        $this->fiesta = $fiesta;
+
+        return $this;
+    }
+
+    /**
+     * Get fiesta
+     *
+     * @return boolean 
+     */
+    public function getFiesta()
+    {
+        return $this->fiesta;
+    }
+
+    /**
+     * Set jardineria
+     *
+     * @param boolean $jardineria
+     * @return Evento
+     */
+    public function setJardineria($jardineria)
+    {
+        $this->jardineria = $jardineria;
+
+        return $this;
+    }
+
+    /**
+     * Get jardineria
+     *
+     * @return boolean 
+     */
+    public function getJardineria()
+    {
+        return $this->jardineria;
+    }
+
+    /**
+     * Set aceptoCondicionesUsoPoliticaPrivacidad
+     *
+     * @param boolean $aceptoCondicionesUsoPoliticaPrivacidad
+     * @return Evento
+     */
+    public function setAceptoCondicionesUsoPoliticaPrivacidad($aceptoCondicionesUsoPoliticaPrivacidad)
+    {
+        $this->aceptoCondicionesUsoPoliticaPrivacidad = $aceptoCondicionesUsoPoliticaPrivacidad;
+
+        return $this;
+    }
+
+    /**
+     * Get aceptoCondicionesUsoPoliticaPrivacidad
+     *
+     * @return boolean 
+     */
+    public function getAceptoCondicionesUsoPoliticaPrivacidad()
+    {
+        return $this->aceptoCondicionesUsoPoliticaPrivacidad;
+    }
+
+    /**
+     * Set precio
+     *
+     * @param float $precio
+     * @return Evento
+     */
+    public function setPrecio($precio)
+    {
+        $this->precio = $precio;
+
+        return $this;
+    }
+
+    /**
+     * Get precio
+     *
+     * @return float 
+     */
+    public function getPrecio()
+    {
+        return $this->precio;
+    }
+
+    /**
+     * Set destacado
+     *
+     * @param boolean $destacado
+     * @return Evento
+     */
+    public function setDestacado($destacado)
+    {
+        $this->destacado = $destacado;
+
+        return $this;
+    }
+
+    /**
+     * Get destacado
+     *
+     * @return boolean 
+     */
+    public function getDestacado()
+    {
+        return $this->destacado;
+    }
+
+    /**
+     * Set estado
+     *
+     * @param boolean $estado
+     * @return Evento
+     */
+    public function setEstado($estado)
+    {
+        $this->estado = $estado;
+
+        return $this;
+    }
+
+    /**
+     * Get estado
+     *
+     * @return boolean 
+     */
+    public function getEstado()
+    {
+        return $this->estado;
+    }
+
+    /**
+     * Set suspendido
+     *
+     * @param boolean $suspendido
+     * @return Evento
+     */
+    public function setSuspendido($suspendido)
+    {
+        $this->suspendido = $suspendido;
+
+        return $this;
+    }
+
+    /**
+     * Get suspendido
+     *
+     * @return boolean 
+     */
+    public function getSuspendido()
+    {
+        return $this->suspendido;
+    }
+
+    /**
+     * Set path
+     *
+     * @param string $path
+     * @return Evento
+     */
+    public function setPath($path)
+    {
+        $this->path = $path;
+
+        return $this;
+    }
+
+    /**
+     * Get path
+     *
+     * @return string 
+     */
+    public function getPath()
+    {
+        return $this->path;
     }
 
     /**
@@ -1533,5 +1482,51 @@ class Evento
     public function getUser()
     {
         return $this->user;
+    }
+
+    /**
+     * Set localidad
+     *
+     * @param Localidad $localidad
+     * @return Evento
+     */
+    public function setLocalidad(Localidad $localidad)
+    {
+        $this->localidad = $localidad;
+
+        return $this;
+    }
+
+    /**
+     * Get localidad
+     *
+     * @return Localidad 
+     */
+    public function getLocalidad()
+    {
+        return $this->localidad;
+    }
+
+    /**
+     * Set espacio
+     *
+     * @param Espacio $espacio
+     * @return Evento
+     */
+    public function setEspacio(Espacio $espacio = null)
+    {
+        $this->espacio = $espacio;
+
+        return $this;
+    }
+
+    /**
+     * Get espacio
+     *
+     * @return Espacio 
+     */
+    public function getEspacio()
+    {
+        return $this->espacio;
     }
 }

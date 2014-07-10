@@ -11,11 +11,11 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use JMS\SecurityExtraBundle\Annotation\Secure;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
-use Proyecto\PrincipalBundle\Entity\User;
-use Proyecto\PrincipalBundle\Entity\Servicio;
-use Proyecto\PrincipalBundle\Entity\Reserva;
-use Proyecto\PrincipalBundle\Entity\Confirmacion;
-use Proyecto\PrincipalBundle\Entity\ConfirmacionElemento;
+use Project\UserBundle\Entity\User;
+use Project\BackBundle\Entity\Servicio;
+use Project\BackBundle\Entity\Reserva;
+use Project\BackBundle\Entity\Confirmacion;
+use Project\BackBundle\Entity\ConfirmacionElemento;
 
 class ServicioController extends Controller {
 
@@ -44,7 +44,7 @@ class ServicioController extends Controller {
 
 	public function registrarAction(Request $request) {
 		$id = null;
-		$url = $this -> generateUrl('proyecto_principal_servicio_registrar');
+		$url = $this -> generateUrl('project_front_servicio_registrar');
 
 		return ServicioController::registrarEditar($id ,$url, $request,$this);
 	}
@@ -58,11 +58,11 @@ class ServicioController extends Controller {
             $titulo = '¡Error 404...!';
             $mensaje = 'Estimado(a) '.ucfirst($user ->getNombre()) . ' '.ucfirst($user ->getApellido()) .' ud no tiene derechos para realizar esta edición.';
             $tituloBoton = 'Ir al inicio';
-            $direccionBoton = $this->generateUrl('proyecto_principal_homepage');
+            $direccionBoton = $this->generateUrl('project_front_homepage');
             $array = array('titulo' => $titulo, 'mensaje' => $mensaje, 'tituloBoton'=>$tituloBoton, 'direccionBoton'=>$direccionBoton );
             return $this -> render('ProjectFrontBundle:Default:mensaje.html.twig', $array);
         }
-		$url = $this -> generateUrl('proyecto_principal_servicio_editar',array('id' => $id));
+		$url = $this -> generateUrl('project_front_servicio_editar',array('id' => $id));
 
 		return ServicioController::registrarEditar($id ,$url,$request, $this);
 
@@ -193,7 +193,7 @@ class ServicioController extends Controller {
                 $em->persist($object);
                 $em->flush();
 
-                return $class->redirect($class->generateUrl('proyecto_principal_servicio_individual',array('id' => $object ->getId())));
+                return $class->redirect($class->generateUrl('project_front_servicio_individual',array('id' => $object ->getId())));
 
     		}
 	
@@ -301,8 +301,8 @@ class ServicioController extends Controller {
 
     $modoA = "";
     $modoB = "";
-    $tieneWhere = false;
-    $tieneWhereTotales = false;
+    $tieneWhere = true;
+    $tieneWhereTotales = true;
 
     if($parametros!=null){
         

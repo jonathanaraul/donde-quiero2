@@ -6,7 +6,7 @@
 <script type="text/javascript" src="{{ asset('sistema/scripts/perfil.js')}}"></script>
 
 <script type="text/javascript">
-	var direccionNotiticacionReserva = "{{path('proyecto_perfil_notificacion_reserva')}}";
+	var direccionNotiticacionReserva = "{{path('project_front_perfil_notificacion_reserva')}}";
 </script>
 
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCUY1Omfl_gVZyliOZWXKUYaLG3O0JIleI&sensor=false"></script>
@@ -60,7 +60,7 @@ google.maps.event.addDomListener(window, 'load', initialize);
 			<p><img src="{{ asset(''~ user.getWebPath ~'') }}" width="400" height="300">
 			</p>
 			<p>
-				<a href="{{path('proyecto_perfil_privado')}}">Volver</a>
+				<a href="{{path('project_front_perfil_privado')}}">Volver</a>
 			</p>
 			<p>
 				&nbsp;

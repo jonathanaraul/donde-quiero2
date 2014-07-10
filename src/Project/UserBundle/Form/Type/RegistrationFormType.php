@@ -10,6 +10,12 @@ use Doctrine\ORM\EntityRepository;
 
 class RegistrationFormType extends BaseType
 {
+
+    public function getName()
+    {
+        return 'project_user_registration';
+    }
+    
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         parent::buildForm($builder, $options);
@@ -108,8 +114,5 @@ $builder->add('aceptoCondiciones');
 
     }
 
-    public function getName()
-    {
-        return 'project_user_registration';
-    }
+
 }

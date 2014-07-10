@@ -12,9 +12,9 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use JMS\SecurityExtraBundle\Annotation\Secure;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
-use Proyecto\PrincipalBundle\Entity\User;
-use Proyecto\PrincipalBundle\Entity\Provincia;
-use Proyecto\PrincipalBundle\Entity\Localidad;
+use Project\UserBundle\Entity\User;
+use Project\BackBundle\Entity\Provincia;
+use Project\BackBundle\Entity\Localidad;
 
 
 class UsersController extends Controller {
@@ -25,12 +25,11 @@ class UsersController extends Controller {
 		$post = $peticion -> request;
 
 		$provincia = intval($post -> get("valor"));
-		echo'la provincia es'.$provincia;exit;
 		
 		$em = $this->getDoctrine()->getManager();
 		$query = $em->createQuery(
 		    'SELECT p.id,p.nombre
-		    FROM ProyectoPrincipalBundle:Localidad p
+		    FROM ProjectBackBundle:Localidad p
 		    WHERE p.provincia = :provincia
 		    ORDER BY p.nombre ASC'
 		)->setParameter('provincia', $provincia);
@@ -78,7 +77,7 @@ class UsersController extends Controller {
             ->add('descripcion', 'textarea')
             ->add('pais', 'text')
             ->add('provincia', 'entity', array(
-			    'class' => 'ProyectoPrincipalBundle:Provincia',
+			    'class' => 'ProjectBackBundle:Provincia',
 			    'property' => 'nombre',
 			    'query_builder' => function(EntityRepository $er) {
 			        return $er->createQueryBuilder('u')
@@ -86,7 +85,7 @@ class UsersController extends Controller {
 			    },
 			))
             ->add('localidad', 'entity', array(
-			    'class' => 'ProyectoPrincipalBundle:Localidad',
+			    'class' => 'ProjectBackBundle:Localidad',
 			    'property' => 'nombre',
 			    'query_builder' => function(EntityRepository $er) {
 			        return $er->createQueryBuilder('u')
@@ -127,13 +126,13 @@ class UsersController extends Controller {
     			$direccionBoton = $this->generateUrl('proyecto_principal_acceso');
     			$array = array('titulo' => $titulo, 'mensaje' => $mensaje, 'tituloBoton'=>$tituloBoton, 'direccionBoton'=>$direccionBoton );
 
-    			return $this -> render('ProyectoPrincipalBundle:Default:mensaje.html.twig', $array);
+    			return $this -> render('ProjectFrontBundle:Default:mensaje.html.twig', $array);
 	        }
 	    }
 
         $secondArray = array('form' => $form->createView());
 		$array = array_merge($firstArray, $secondArray);
-		return $this -> render('ProyectoPrincipalBundle:Default:registro.html.twig', $array);
+		return $this -> render('ProjectFrontBundle:Default:registro.html.twig', $array);
 	}
 	public function accesoAction() {
 
@@ -152,7 +151,7 @@ class UsersController extends Controller {
 		$secondArray = array('ultimo_nombreusuario' => $sesion -> get(SecurityContext::LAST_USERNAME), 'error' => $error);
 
 		$array = array_merge($firstArray, $secondArray);
-		return $this -> render('ProyectoPrincipalBundle:Default:acceso.html.twig', $array);
+		return $this -> render('ProjectFrontBundle:Default:acceso.html.twig', $array);
 
 
 	}
@@ -161,7 +160,7 @@ class UsersController extends Controller {
 		$secondArray = array();
 
 		$array = array_merge($firstArray, $secondArray);
-		return $this -> render('ProyectoPrincipalBundle:Default:registro-con-ajax.html.twig', $array);
+		return $this -> render('ProjectFrontBundle:Default:registro-con-ajax.html.twig', $array);
 	}
 
 	public function cuentaGuardarAction() {

@@ -1,4 +1,4 @@
-{% extends "::base.html.twig" %}
+{% extends "ProjectLayoutBundle:Structure:base.html.twig" %}
 
 {%block scripts%}
 
@@ -16,8 +16,8 @@ var direccionConfirmacionGuardar = "{{path('project_front_pago_confirmacion_guar
 {%block contenedorbase%}
 <div class="wrapper">
 
-	{% include '::top.html.twig'  with {'clase': 'azul'}  %}
-	{% include '::sesion.html.twig'  with {'datos': datos} %}
+	{% include 'ProjectLayoutBundle:Structure:top.html.twig'  with {'clase': 'azul'}  %}
+	{% include 'ProjectLayoutBundle:Structure:sesion.html.twig'  with {'datos': datos} %}
 
 	<div id="work">
 		<div >

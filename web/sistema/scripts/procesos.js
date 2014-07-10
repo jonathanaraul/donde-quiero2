@@ -123,11 +123,11 @@ $("#boton-formulario-mensaje").live("click", function() {
 
 	//console.log(data);
 });
-
+/*
 $("#form_provincia").live("change", function() {
 	
 
-	var data = 'provincia='+$("#form_provincia").val();	 
+	var data = 'valor='+$("#form_provincia").val();	 
 	$('#form_localidad').find('option').remove().end();
 	$.post(direccionBuscarCiudad, data, function(respuesta) {
 		var respuesta = JSON.parse(respuesta);
@@ -145,7 +145,7 @@ $("#form_provincia").live("change", function() {
 	return false;     
                                        }
                   );
-
+*/
 
 
 
