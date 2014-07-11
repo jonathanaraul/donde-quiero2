@@ -41,8 +41,11 @@
 	<div class="buscador">
 		{{ form_widget(form.localidad, { 'attr': {'class': 'formstyle selectBusqueda'} }) }}
 	</div>
-	<div class="buscador">
+	{#<div class="buscador">
 		{{ form_widget(form.user, { 'attr': {'class': 'formstyle selectBusqueda'} }) }}
+	</div>#}
+	<div class="buscador">
+		{{ form_widget(form.destacado, { 'attr': {'class': 'formstyle selectBusqueda'} }) }}
 	</div>
 	<div class="añadir">
 		<ul>
@@ -54,9 +57,7 @@
 			</li>
 		</ul>
 	</div>
-	<div class="buscador">
-		{{ form_widget(form.destacado, { 'attr': {'class': 'formstyle selectBusqueda'} }) }}
-	</div>
+
 	<div class="buscador">
 		{{ form_widget(form.estado, { 'attr': {'class': 'formstyle selectBusqueda'} }) }}
 	</div>

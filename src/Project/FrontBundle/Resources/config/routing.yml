@@ -134,9 +134,9 @@ project_front_sede_confirmacion:
     defaults: { _controller: ProjectFrontBundle:Sede:confirmacion,id: '1' }
 
 
-project_front_users_buscar_ciudad:
-    pattern:  /users/buscarCiudad
-    defaults: { _controller: ProjectFrontBundle:Users:buscarCiudad }
+project_front_helpers_buscar_ciudad:
+    pattern:  /helpers/buscarCiudad
+    defaults: { _controller: ProjectFrontBundle:Helpers:buscarCiudad }
     requirements:
       _method: POST
 

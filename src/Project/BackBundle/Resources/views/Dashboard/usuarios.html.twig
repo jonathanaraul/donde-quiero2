@@ -41,9 +41,9 @@
 	<div class="buscador">
 		{{ form_widget(form.email, { 'attr': {'class': 'input-gestion','placeholder':'Correo'} }) }}
 	</div>
-	<div class="buscador">
+	{#<div class="buscador">
 		{{ form_widget(form.localidad, { 'attr': {'class': 'formstyle selectBusqueda'} }) }}
-	</div>
+	</div>#}
 	<div class="añadir">
 		<ul>
 			<li>
@@ -55,12 +55,12 @@
 		</ul>
 	</div>
 
-	<div class="buscador">
+	{#<div class="buscador">
 		{{ form_widget(form.estado, { 'attr': {'class': 'formstyle selectBusqueda'} }) }}
 	</div>
 	<div class="buscador">
         {{ form_widget(form.rol, { 'attr': {'class': 'formstyle selectBusqueda'} }) }}
-	</div>
+	</div>#}
 
 	<div class="clearfix"></div>
 	<div style="margin-top: 9px;">
@@ -72,10 +72,10 @@
 				<td class="t-titulo t-azul" ><a href="javascript:void(0)">Foto</a></td>
 				<td class="t-titulo t-azul">{{ knp_pagination_sortable(pagination, 'Usuario', 'o.username') }}</td>
 				<td class="t-titulo t-azul">{{ knp_pagination_sortable(pagination, 'Correo', 'o.email') }}</td>
-				<td class="t-titulo t-azul">{{ knp_pagination_sortable(pagination, 'Localidad', 'o.localidad') }}</td>
+				{#<td class="t-titulo t-azul">{{ knp_pagination_sortable(pagination, 'Localidad', 'o.idLocalidad') }}</td>#}
 				<td class="t-titulo t-azul">{{ knp_pagination_sortable(pagination, 'Fecha Registro', 'o.fechaRegistro') }}</td>
-				<td class="t-titulo t-azul">{{ knp_pagination_sortable(pagination, 'Estado', 'o.estado') }}</td>
-				<td class="t-titulo t-azul">{{ knp_pagination_sortable(pagination, 'Rol', 'o.rol') }}</td>
+				<td class="t-titulo t-azul">{{ knp_pagination_sortable(pagination, 'Estado', 'o.enabled') }}</td>
+				{#<td class="t-titulo t-azul">{{ knp_pagination_sortable(pagination, 'Rol', 'o.rol') }}</td>#}
 			</tr>
 			{% for element in pagination %}
 			<tr {% if loop.index is odd %}style="background-color: #F1F1F0;"{% endif %}>
@@ -83,10 +83,10 @@
 				<td class="gestion-imagen">{%if element.path is not null%}<img src="{{ element.getWebPath | apply_filter('gestion') }}">{%endif%}</td>
 				<td>{{ element.username }}</td>
 				<td>{{ element.email }}</td>
-				<td>{{ element.localidad.nombre }}</td>
+				{#<td>{{ element.localidad.nombre }}</td>#}
 				<td>{{ element.fechaRegistro.format('d/m/Y') }}</td>
-				<td class="funcionGestion" tipo="usuario" tarea="estado" identificador="{{ element.id }}">{%if element.estado %}Activo{%else%}Inactivo{%endif%}</td>
-				<td class="funcionGestion" tipo="usuario" tarea="rol"  identificador="{{ element.id }}">{%if element.rol %}Administrador{%else%}Usuario{%endif%}</td>
+				<td class="funcionGestion" tipo="usuario" tarea="estado" identificador="{{ element.id }}">{%if element.enabled %}Activo{%else%}Inactivo{%endif%}</td>
+				{#<td class="funcionGestion" tipo="usuario" tarea="rol"  identificador="{{ element.id }}">{%if element.rol %}Administrador{%else%}Usuario{%endif%}</td>#}
 			</tr>
 			{%endfor%}
 		</table>

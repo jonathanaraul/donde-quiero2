@@ -60,7 +60,7 @@ class ServicioController extends Controller {
             $tituloBoton = 'Ir al inicio';
             $direccionBoton = $this->generateUrl('project_front_homepage');
             $array = array('titulo' => $titulo, 'mensaje' => $mensaje, 'tituloBoton'=>$tituloBoton, 'direccionBoton'=>$direccionBoton );
-            return $this -> render('ProjectFrontBundle:Default:mensaje.html.twig', $array);
+            return $this -> render('ProjectLayoutBundle:Helpers:mensaje.html.twig', $array);
         }
 		$url = $this -> generateUrl('project_front_servicio_editar',array('id' => $id));
 

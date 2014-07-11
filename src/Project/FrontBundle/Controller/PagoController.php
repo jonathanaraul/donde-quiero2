@@ -37,7 +37,7 @@ class PagoController extends Controller {
         $secondArray = array('titulo'=>$titulo,'mensaje'=>$mensaje,'direccionBoton'=>$direccionBoton,'tituloBoton'=>$tituloBoton);
 
         $array = array_merge($firstArray, $secondArray);
-        return $this -> render('ProjectFrontBundle:Default:mensaje.html.twig', $array);
+        return $this -> render('ProjectLayoutBundle:Helpers:mensaje.html.twig', $array);
     }
 
     public function canceladoAction($id) {
@@ -61,7 +61,7 @@ class PagoController extends Controller {
 
 
         $array = array_merge($firstArray, $secondArray);
-        return $this -> render('ProjectFrontBundle:Default:mensaje.html.twig', $array);
+        return $this -> render('ProjectLayoutBundle:Helpers:mensaje.html.twig', $array);
     }
 
     public function procesarReservaAction() {
@@ -106,7 +106,9 @@ class PagoController extends Controller {
         $object -> setNumeroReservacion($arreglo['numeroReservacion']);
         $object -> setUser($user);
         $object -> setPagado(false);
+        $object -> setAprobado(false);
         $object -> setCancelado(false);
+        $object -> setOculto(false);
 
         $todoDia = false;
         if($arreglo['todoDia']=='true')$todoDia = true;
@@ -216,6 +218,7 @@ class PagoController extends Controller {
         $object -> setUser(UtilitiesAPI::getActiveUser($this));
         $object -> setPagado(false);
         $object -> setCancelado(false);
+        $object -> setFechaRegistro(new \DateTime());
 
 
         if($arreglo['tipo']=='espacio'){

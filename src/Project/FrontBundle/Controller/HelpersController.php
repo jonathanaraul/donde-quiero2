@@ -11,10 +11,41 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use JMS\SecurityExtraBundle\Annotation\Secure;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
+use Project\UserBundle\Entity\User;
+use Project\BackBundle\Entity\Provincia;
+use Project\BackBundle\Entity\Localidad;
 
 
 class HelpersController extends Controller
 {
+
+    public function buscarCiudadAction() {
+        $peticion = $this -> getRequest();
+        $doctrine = $this -> getDoctrine();
+        $post = $peticion -> request;
+
+        $provincia = intval($post -> get("valor"));
+        
+        $em = $this->getDoctrine()->getManager();
+        $query = $em->createQuery(
+            'SELECT p.id,p.nombre
+            FROM ProjectBackBundle:Localidad p
+            WHERE p.provincia = :provincia
+            ORDER BY p.nombre ASC'
+        )->setParameter('provincia', $provincia);
+
+        $elementos = $query->getResult();
+        $arreglo = array();
+
+        for ($i=0; $i < count($elementos) ; $i++) { 
+             $arreglo[$elementos[$i]['id']] = $elementos[$i]['nombre'];
+        }
+
+        $respuesta = new response(json_encode(array('elementos' => $arreglo)));
+        $respuesta -> headers -> set('content_type', 'aplication/json');
+        return $respuesta;
+    }
+    
     public function funcionAction() {
         $peticion = $this -> getRequest();
         $doctrine = $this -> getDoctrine();

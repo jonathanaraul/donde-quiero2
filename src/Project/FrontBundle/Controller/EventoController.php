@@ -62,7 +62,7 @@ class EventoController extends Controller {
             $tituloBoton = 'Ir al inicio';
             $direccionBoton = $this->generateUrl('project_front_homepage');
             $array = array('titulo' => $titulo, 'mensaje' => $mensaje, 'tituloBoton'=>$tituloBoton, 'direccionBoton'=>$direccionBoton );
-            return $this -> render('ProjectFrontBundle:Default:mensaje.html.twig', $array);
+            return $this -> render('ProjectLayoutBundle:Helpers:mensaje.html.twig', $array);
         }
 
 		$url = $this -> generateUrl('project_front_evento_editar',array('id' => $id));
@@ -458,7 +458,7 @@ class EventoController extends Controller {
         $user = UtilitiesAPI::getActiveUser($this);
         $idUser = $user->getId();
 
-        $dql =  'SELECT o1.id,o1.fechaInicio, o1.fechaFin, o2.precioPorHora
+        $dql =  'SELECT o1.id,o1.fechaInicio, o1.fechaFin, o2.precio precioPorHora
                  FROM ProjectBackBundle:Reserva o1, 
                       ProjectBackBundle:Evento o2
                  WHERE o1.evento = o2.id AND
@@ -494,7 +494,7 @@ class EventoController extends Controller {
 
             $total['horas'] += $data[$i]['horas'];
 
-            $data[$i]['precio'] = $data[$i]['horas'] * $reservas[$i]['precioPorHora'];
+            $data[$i]['precio'] = $data[$i]['horas'];// * $reservas[$i]['precioPorHora'];
 
             $total['precio'] += $data[$i]['precio'];
 

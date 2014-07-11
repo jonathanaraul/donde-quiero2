@@ -43,7 +43,7 @@ class DefaultController extends Controller {
     	$array = array('titulo' => $titulo, 'mensaje' => $mensaje, 'tituloBoton'=>$tituloBoton, 'direccionBoton'=>$direccionBoton );
     	
     	$session->invalidate();
-    	return $this -> render('ProjectFrontBundle:Default:mensaje.html.twig', $array);
+    	return $this -> render('ProjectLayoutBundle:Helpers:mensaje.html.twig', $array);
     }
 	public function indexAction() {
 		//HelpersController::eliminaHuerfanos($this);

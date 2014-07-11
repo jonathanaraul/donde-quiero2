@@ -8,6 +8,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Ob\HighchartsBundle\Highcharts\Highchart;
 use Doctrine\ORM\EntityRepository;
 
+use Project\UserBundle\Entity\User;
 use Project\BackBundle\Entity\Espacio;
 use Project\BackBundle\Entity\Servicio;
 use Project\BackBundle\Entity\Evento;
@@ -84,22 +85,28 @@ class DashboardController extends Controller {
         return array('dql' => $dql, 'tieneWhere'=>$tieneWhere);
 
     } 
-    public static function dqlArreglo($EntidadExtraer,$endidadRelacionada,$idProhibido, $class){
+    public static function dqlArreglo($entidadExtraer,$endidadRelacionada,$idProhibido, $class){
         $em = $class->getDoctrine()->getManager();
 
         /////////////////////USUARIOS///////////////////////////////////////////////////////
+        $espacioNombre1 = 'ProjectBackBundle';
+        if($entidadExtraer=='User'){
+            $espacioNombre1 = 'ProjectUserBundle';
+        }
+        $espacioNombre2 = 'ProjectBackBundle';
+        if($endidadRelacionada=='User'){
+            $espacioNombre2 = 'ProjectUserBundle';
+        }
+
         $dql =  'SELECT distinct o1
-                 FROM ProjectBackBundle:'.$EntidadExtraer.' o1, ProjectBackBundle:'.$endidadRelacionada.' o2
-                 WHERE o2.'.strtolower($EntidadExtraer).' = o1.id
+                 FROM '.$espacioNombre1.':'.$entidadExtraer.' o1, '.$espacioNombre2.':'.$endidadRelacionada.' o2
+                 WHERE o2.'.strtolower($entidadExtraer).' = o1.id
                  ORDER BY o1.nombre ASC';
 
         $query = $em->createQuery( $dql );
-
         $arreglo = $query->getResult();
 
-       // var_dump($arregloUsuarios);exit;
-
-        $auxiliar = $class -> getDoctrine() -> getRepository('ProjectBackBundle:'.$EntidadExtraer) -> find($idProhibido);
+        $auxiliar = $class -> getDoctrine() -> getRepository($espacioNombre1.':'.$entidadExtraer) -> find($idProhibido);
         $auxiliar = array( $auxiliar );
         for ($i=0; $i <count($arreglo) ; $i++) { 
             $auxiliar[$i+1] =$arreglo[$i];
@@ -109,7 +116,7 @@ class DashboardController extends Controller {
         return $arreglo;
 
     } 
-    public static function dqlArregloDoble($EntidadExtraer,$idProhibido1,$idProhibido2, $class){
+   /* public static function dqlArregloDoble($EntidadExtraer,$idProhibido1,$idProhibido2, $class){
         $em = $class->getDoctrine()->getManager();
 
         /////////////////////USUARIOS///////////////////////////////////////////////////////
@@ -133,7 +140,7 @@ class DashboardController extends Controller {
 
         return $arreglo;
 
-    } 
+    } */
 	public function ingresosAction(Request $request) {
 
 		$firstArray = UtilitiesAPI::getDefaultContent($this);
@@ -186,11 +193,13 @@ class DashboardController extends Controller {
         $arregloEventos = DashboardController::dqlArreglo('Evento','Reserva',103, $this);
         $arregloServicios = DashboardController::dqlArreglo('Servicio','Reserva',103, $this);
 
+        //var_dump($arregloEspacios);exit;
+
         $data = new Reserva();
         $form = $this -> createFormBuilder($data) 
         -> setAction($this->generateUrl('project_back_dashboard'))
         -> setMethod('POST')
-        -> add('user', 'entity', array(
+        /*-> add('user', 'entity', array(
             'class' => 'ProjectUserBundle:User',
             'choices' => $arregloUsuarios,
             'property' => 'nombre',
@@ -215,7 +224,7 @@ class DashboardController extends Controller {
             'choices' => $arregloEventos,
             'property' => 'nombre',
             ))
-        -> add('pagado', 'choice', array('choices' => $filtros['pagado'], 'required' => true, ))
+        -> add('pagado', 'choice', array('choices' => $filtros['pagado'], 'required' => true, ))*/
         -> getForm();
 
 
@@ -316,7 +325,7 @@ class DashboardController extends Controller {
 
         
         $connection = $em->getConnection();
-        $sql ="SELECT MONTH( o1.fechaRegistro ) AS mes, COUNT( o1.id ) AS cantidad FROM  user o1  where o1.id != 39  GROUP BY MONTH( o1.fechaRegistro )";
+        $sql ="SELECT MONTH( o1.fechaRegistro ) AS mes, COUNT( o1.id ) AS cantidad FROM  fos_user o1  where o1.id != 39  GROUP BY MONTH( o1.fechaRegistro )";
         $statement = $connection->prepare($sql);
         $statement->execute();
         $results = $statement->fetchAll();
@@ -353,7 +362,7 @@ class DashboardController extends Controller {
         $filtros['estado'] = array(0=> 'Estado',1 => 'Activo', 2 => 'Inactivo');
         $filtros['rol'] = array(0=> 'Rol',1 => 'Administrador', 2 => 'Usuario');
 
-        $arregloLocalidades = DashboardController::dqlArreglo('Localidad','User',8175, $this);
+        //$arregloLocalidades = DashboardController::dqlArreglo('Localidad','User',8175, $this);
 
         $data = new User();
         $form = $this -> createFormBuilder($data) 
@@ -361,13 +370,13 @@ class DashboardController extends Controller {
         -> setMethod('POST')
         -> add('username', 'text', array('required' => false)) 
         -> add('email', 'text', array('required' => false)) 
-        -> add('localidad', 'entity', array(
+        /*-> add('localidad', 'entity', array(
             'class' => 'ProjectBackBundle:Localidad',
             'choices' => $arregloLocalidades,
             'property' => 'nombre',
-            ))
-        -> add('estado', 'choice', array('choices' => $filtros['estado'], 'required' => true, ))
-        -> add('rol', 'choice', array('choices' => $filtros['rol'], 'required' => true, ))
+            ))*/
+        //-> add('estado', 'choice', array('choices' => $filtros['estado'], 'required' => true, ))
+        //-> add('rol', 'choice', array('choices' => $filtros['rol'], 'required' => true, ))
         -> getForm();
 
 
@@ -378,11 +387,11 @@ class DashboardController extends Controller {
             $dql = "SELECT o FROM ProjectUserBundle:User o WHERE o.id != 39 ";
             $tieneWhere = true;
             
-            if($data -> getLocalidad()->getId()!=8175){
+            /*if($data -> getLocalidad()->getId()!=8175){
             $filtroResultado = DashboardController::dqlFiltro('objeto',$dql,$data -> getLocalidad(),'localidad',$tieneWhere, $this);
             $dql =  $filtroResultado['dql'];
             $tieneWhere =  $filtroResultado['tieneWhere'];
-            }
+            }*/
 
             $filtroResultado = DashboardController::dqlFiltro('texto',$dql,$data -> getUsername(),'username',$tieneWhere, $this);
             $dql =  $filtroResultado['dql'];
@@ -392,38 +401,38 @@ class DashboardController extends Controller {
             $dql =  $filtroResultado['dql'];
             $tieneWhere =  $filtroResultado['tieneWhere'];
 
-            $filtroResultado = DashboardController::dqlFiltro('booleano',$dql,$data -> getEstado(),'estado',$tieneWhere, $this);
+            /*$filtroResultado = DashboardController::dqlFiltro('booleano',$dql,$data -> getEstado(),'estado',$tieneWhere, $this);
             $dql =  $filtroResultado['dql'];
-            $tieneWhere =  $filtroResultado['tieneWhere'];
+            $tieneWhere =  $filtroResultado['tieneWhere'];*/
 
-            $filtroResultado = DashboardController::dqlFiltro('booleano',$dql,$data -> getRol(),'rol',$tieneWhere, $this);
+            /*$filtroResultado = DashboardController::dqlFiltro('booleano',$dql,$data -> getRol(),'rol',$tieneWhere, $this);
             $dql =  $filtroResultado['dql'];
-            $tieneWhere =  $filtroResultado['tieneWhere'];
+            $tieneWhere =  $filtroResultado['tieneWhere'];*/
             
             $dql .= ' ORDER BY o.id  ASC  ';
             $query = $em -> createQuery($dql);
             
-            if (!($data -> getLocalidad()==null) && $data -> getLocalidad()->getId()!=8175) {
+            /*if (!($data -> getLocalidad()==null) && $data -> getLocalidad()->getId()!=8175) {
                 $query -> setParameter('localidad',$data -> getLocalidad()->getId());
-            }
+            }*/
             if (!(trim($data -> getUsername()) == false)) {
                 $query -> setParameter('username', '%'.$data -> getUsername().'%');
             }
             if (!(trim($data -> getEmail()) == false)) {
                 $query -> setParameter('email', '%'.$data -> getEmail().'%');
             }
-            if (is_numeric ($data -> getEstado()) && intval($data -> getEstado())>0) {
+            /*if (is_numeric ($data -> getEstado()) && intval($data -> getEstado())>0) {
                 $estado = intval($data -> getEstado());
                 if($estado == 2) $estado =0;
                 else if($estado == 1) $estado= 1;
                 $query -> setParameter('estado', $estado);
-            }
-            if (is_numeric ($data -> getRol()) && intval($data -> getRol())>0) {
+            }*/
+            /*if (is_numeric ($data -> getRol()) && intval($data -> getRol())>0) {
                 $rol = intval($data -> getRol());
                 if($rol == 2) $rol =0;
                 else if($rol == 1) $rol= 1;
                 $query -> setParameter('rol', $rol);
-            }
+            }*/
         }
         else {
             $dql = "SELECT o FROM ProjectUserBundle:User o  WHERE o.id != 39 ORDER BY o.id  ASC ";
@@ -498,6 +507,8 @@ class DashboardController extends Controller {
         $arregloLocalidades = DashboardController::dqlArreglo('Localidad','Espacio',8175, $this);
         $arregloUsuarios = DashboardController::dqlArreglo('User','Espacio',39, $this);
 
+
+
         $data = new Espacio();
         $form = $this -> createFormBuilder($data) 
         -> setAction($this->generateUrl('project_back_dashboard_espacios'))
@@ -509,11 +520,11 @@ class DashboardController extends Controller {
             'choices' => $arregloLocalidades,
             'property' => 'nombre',
             ))
-        -> add('user', 'entity', array(
+        /*-> add('user', 'entity', array(
             'class' => 'ProjectUserBundle:User',
             'choices' => $arregloUsuarios,
             'property' => 'nombre',
-            ))
+            ))*/
         -> add('estado', 'choice', array('choices' => $filtros['estado'], 'required' => true, ))
         -> add('suspendido', 'choice', array('choices' => $filtros['suspendido'], 'required' => true, ))
         -> add('destacado', 'choice', array('choices' => $filtros['destacado'], 'required' => true, ))
@@ -532,11 +543,11 @@ class DashboardController extends Controller {
             $dql =  $filtroResultado['dql'];
             $tieneWhere =  $filtroResultado['tieneWhere'];
             }
-            if($data -> getUser()->getId()!=39){
+            /*if($data -> getUser()->getId()!=39){
             $filtroResultado = DashboardController::dqlFiltro('objeto',$dql,$data -> getUser(),'user',$tieneWhere, $this);
             $dql =  $filtroResultado['dql'];
             $tieneWhere =  $filtroResultado['tieneWhere'];
-            }
+            }*/
 
             $filtroResultado = DashboardController::dqlFiltro('texto',$dql,$data -> getNombre(),'nombre',$tieneWhere, $this);
             $dql =  $filtroResultado['dql'];
@@ -561,9 +572,9 @@ class DashboardController extends Controller {
             if (!($data -> getLocalidad()==null) && $data -> getLocalidad()->getId()!=8175) {
                 $query -> setParameter('localidad',$data -> getLocalidad()->getId());
             }
-            if (!($data -> getUser()==null) && $data -> getUser()->getId()!=39) {
+            /*if (!($data -> getUser()==null) && $data -> getUser()->getId()!=39) {
                 $query -> setParameter('user',$data -> getUser()->getId());
-            }
+            }*/
             if (!(trim($data -> getNombre()) == false)) {
                 $query -> setParameter('nombre', '%'.$data -> getNombre().'%');
             }
@@ -678,7 +689,7 @@ class DashboardController extends Controller {
             ))
         -> add('user', 'entity', array(
             'class' => 'ProjectUserBundle:User',
-            'choices' => $arregloUsuarios,
+            //'choices' => $arregloUsuarios,
             'property' => 'nombre',
             ))
         -> add('estado', 'choice', array('choices' => $filtros['estado'], 'required' => true, ))
@@ -841,7 +852,7 @@ class DashboardController extends Controller {
 
         -> add('user', 'entity', array(
             'class' => 'ProjectUserBundle:User',
-            'choices' => $arregloUsuarios,
+            //'choices' => $arregloUsuarios,
             'property' => 'nombre',
             ))
         -> add('estado', 'choice', array('choices' => $filtros['estado'], 'required' => true, ))
@@ -999,7 +1010,7 @@ class DashboardController extends Controller {
             ))
         -> add('user', 'entity', array(
             'class' => 'ProjectUserBundle:User',
-            'choices' => $arregloUsuarios,
+            //'choices' => $arregloUsuarios,
             'property' => 'nombre',
             ))
         -> add('estado', 'choice', array('choices' => $filtros['estado'], 'required' => true, ))
