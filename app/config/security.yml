@@ -26,4 +26,4 @@ security:
         - { path: ^/usuarios/.*, roles: ROLE_USER }
         - { path: ^/registrar/.*, roles: ROLE_USER }
         - { path: ^/reservar/.*, roles: ROLE_USER }
-        # { path: ^/gestion/, role: ROLE_ADMIN }
+        - { path: ^/usereliminar/.*, role: ROLE_ADMIN }

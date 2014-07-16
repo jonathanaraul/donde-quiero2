@@ -62,7 +62,7 @@ class RegistrationController extends BaseController
                 $event = new FormEvent($form, $request);
                 $dispatcher->dispatch(FOSUserEvents::REGISTRATION_SUCCESS, $event);
 
-                $user-> addRole( 2 );
+                $user-> addRole( 'ROLE_USER' );
                 $userManager->updateUser($user);
                 //DefaultController::usuarioRegistroMarketing($user);
 

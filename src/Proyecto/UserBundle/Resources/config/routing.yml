@@ -1,9 +1,0 @@
-proyecto_user_homepage:
-    pattern:  /hello/{name}
-    defaults: { _controller: ProyectoUserBundle:Default:index }
-
-proyecto_user_registro_localidad:
-    pattern:  /registro/localidad
-    defaults: { _controller: ProyectoUserBundle:Default:localidad}
-    requirements:
-      _method: POST

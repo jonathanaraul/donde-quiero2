@@ -56,4 +56,16 @@ class DefaultController extends Controller
         
         return $this -> render('ProjectLayoutBundle:Helpers:mensaje.html.twig', $array);
     }
+    public function eliminarAction($id)
+    {
+        exit;
+        $em = $this->getDoctrine()->getManager();
+        $object = $this -> getDoctrine() -> getRepository('ProjectUserBundle:User') -> find($id);
+        $nombre = $object->getNombre();
+        $em->remove($object);
+        $em->flush();
+        echo'usuario removido '.$nombre;exit;
+
+        return $this->render('ProjectUserBundle:Default:index.html.twig', array('name' => $name));
+    }
 }

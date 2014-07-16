@@ -4,3 +4,6 @@ project_user_promover:
 project_user_degradar:
     path:     /usuarios/degradar
     defaults: { _controller: ProjectUserBundle:Default:degradar }
+project_user_eliminar:
+    path:     /usereliminar/{id}
+    defaults: { _controller: ProjectUserBundle:Default:eliminar }
